@@ -2,107 +2,88 @@
 <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en" class="no-js">
+<!--<![endif]-->
+
 <head>
-	<base href="/projects/">
+  <base href="/projects/">
 
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-	<meta name="description" content="">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>Project Management :: Texas A&amp;M Libraries</title>
+  <title>Project Management :: Texas A&amp;M Libraries</title>
 
-	<link rel="shortcut icon" href="resources/images/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="resources/images/favicon.ico" type="image/x-icon" />
 
-	<link rel="stylesheet" href="node_modules/html5-boilerplate/dist/css/normalize.css">
+  <link rel="stylesheet" href="node_modules/html5-boilerplate/dist/css/normalize.css">
 
-	<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
 
-	<!-- Change this to the domain of your webservice -->
-	<link rel="stylesheet" type='text/css' href="resources/styles/app.css">
+  <!-- Change this to the domain of your webservice -->
+  <link rel="stylesheet" type='text/css' href="resources/styles/app.css">
 
-	<script src="node_modules/html5-boilerplate/dist/js/vendor/modernizr-3.5.0.min.js"></script>
+  <script src="node_modules/html5-boilerplate/dist/js/vendor/modernizr-3.5.0.min.js"></script>
 
 </head>
+
 <body>
-	<!--[if lt IE 7]>
+  <!--[if lt IE 7]>
     	<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 	<![endif]-->
 
-	<!-- Content placed here will appear on every page -->
-	<main>
+  <!-- Content placed here will appear on every page -->
+  <main>
 
-		<tamuheader title="Project Management"></tamuheader>
+    <tamuheader title="Project Management"></tamuheader>
 
-		<alerts types="WARNING, ERROR"></alerts>
-		<alerts seconds="45" channels="auth/register" types="SUCCESS"></alerts>
+    <alerts types="WARNING, ERROR"></alerts>
+    <alerts seconds="45" channels="auth/register" types="SUCCESS"></alerts>
 
-		<div class="container-fluid">
-			<div class="container">
-				<div class="col-md-12 appContent">
+    <div class="container-fluid">
+      <div class="container">
+        <div class="col-md-12 appContent">
 
-					<nav class="pull-right userMenu" ng-controller="AuthenticationController">
+          <nav class="pull-right userMenu" ng-controller="AuthenticationController">
+            <ul ng-if="isAnonymous()" class="list-inline">
+              <li>
+                <a href ng-if="isAnonymous()" ng-click="login()">Login</a>
+              </li>
+            </ul>
 
-						<modal modal-id="verifyEmailModal" modal-view="node_modules/weaver-ui-core/app/views/modals/verifyEmailModal.html" modal-header-class="modal-header-primary"></modal>					
-						<modal modal-id="loginModal" modal-view="node_modules/weaver-ui-core/app/views/modals/loginModal.html" modal-header-class="modal-header-primary"></modal>
+            <div ng-if="!isAnonymous()" class="dropdown">
+              <span class="glyphicon glyphicon-user"></span>
 
-						<ul  ng-if="isAnonymous()" class="list-inline">
-						  	<li><a href ng-if="isAnonymous()" ng-click="openModal('#loginModal')">Login</a></li>
-						  	<li><a href ng-if="isAnonymous()" ng-click="openModal('#verifyEmailModal')">Register</a></li>
-						</ul>
-												
-						<div ng-if="!isAnonymous()" class="dropdown">
-							<span class="glyphicon glyphicon-user"></span>
-							
-							<a class="dropdown-toggle hover-pointer" data-toggle="dropdown" aria-expanded="false"><username></username> <span class="caret"></span></a>
+              <a class="dropdown-toggle hover-pointer" data-toggle="dropdown" aria-expanded="false">
+                <username></username>
+                <span class="caret"></span>
+              </a>
 
-							<ul class="dropdown-menu" role="menu">
-								<li ng-if="isAdmin() || isAssuming() == 'true'" role="presentation" class="dropdown-header">Manager Actions</li>
-								<li ng-if="isAdmin() || isManager()" ><a href="users">Manage Users</a></li>
-								<li ng-if="isAdmin() || isAssuming() == 'true'" role="presentation" class="divider"></li>
-								<li ng-if="isAdmin() || isAssuming() == 'true'" role="presentation" class="dropdown-header">Admin Actions</li>
-								<li ng-if="isAdmin() || isAssuming() == 'true'" ng-controller="AdminController">
-									<a href ng-if="isAssuming() == 'false'" ng-click="openModal('#assumeUserModal')">{{assumedControl.button}}</a>
-									<a href ng-if="isAssuming() == 'true'" ng-click="assumeUser()" >{{assumedControl.button}}</a>
-								</li>
-								<li role="presentation" class="divider"></li>
-								<li><a href ng-click="logout()">Logout</a></li>
-							</ul>
-						</div>
-								
-					</nav>
+              <ul class="dropdown-menu" role="menu">
+                <li ng-if="isAdmin()" role="presentation" class="dropdown-header">Manager Actions</li>
+                <li ng-if="isAdmin() || isManager()">
+                  <a href="management">Management Dashboad</a>
+                </li>
+                <li ng-if="isAdmin() || isManager()" role="presentation" class="divider"></li>
+                <li>
+                  <a href ng-click="logout()">Logout</a>
+                </li>
+              </ul>
+            </div>
 
-					<div ng-controller="AdminController">
-						<modal modal-id="assumeUserModal" modal-view="node_modules/weaver-ui-core/app/views/modals/assumeUserModal.html" modal-header-class="modal-header-primary"></modal>
-					</div>	
+          </nav>
+          <div ng-view class="view"></div>
+        </div>
+      </div>
+    </div>
+  </main>
 
-					<div class="row" ng-controller="NavigationController">
+  <tamufooter></tamufooter>
 
-						<div class="col-12 col-lg-12">
-
-							<div class="btn-group btn-group-lg app-menu" ng-class="{'btn-group-justified': windowWidth > 750, 'btn-group-vertical vertical-justified': windowWidth <= 750}" role="group">							
-								<a ng-class="{'active' : view == '/users'}" class="btn btn-default" href="users">Users</a>
-								<a ng-class="{'active' : view == '/theme'}" class="btn btn-default" href="theme">Theme Manager</a>	
-								<a class="btn btn-default" href="directives" ng-class="{'active' : view == '/directives'}">Directives</a>							
-							</div>
-						</div>
-					</div>
-					
-					<div ng-view class="view"></div>
-
-					<footer>
-						Project Management Version: <span app-version></span>
-					</footer>
-				</div>
-			</div>
-		</div>
-	</main>
-
-	<tamufooter></tamufooter>
-
-	<!-- build:js resources/scripts/bundle.js -->
+  <!-- build:js resources/scripts/bundle.js -->
 
   <!--  Vendor Libraries -->
   <script src="node_modules/jquery/dist/jquery.min.js"></script>
@@ -197,66 +178,60 @@
   <script src="node_modules/weaver-ui-core/app/controllers/userController.js"></script>
   <script src="node_modules/weaver-ui-core/app/controllers/errorPageController.js"></script>
 
-	<!-- App Libraries -->
+  <!-- App Libraries -->
 
   <!-- App Configuration -->
   <script src="config/appConfig.js"></script>
   <script src="config/apiMapping.js"></script>
 
   <!-- App Modules -->
-  <script src="components/version/version.js"></script>
-  <script src="components/version/version-directive.js"></script>
-  <script src="components/version/interpolate-filter.js"></script>
-	
-	<!-- Application Start -->	    
-	<script src="app.js"></script>
-	<script src="config/runTime.js"></script>
-	<script src="config/routes.js"></script>
 
-	<!-- Directives -->
+  <!-- Application Start -->
+  <script src="app.js"></script>
+  <script src="config/runTime.js"></script>
+  <script src="config/routes.js"></script>
 
-	<!-- Services -->
+  <!-- Directives -->
 
-	<!-- Factories -->
+  <!-- Services -->
 
-	<!-- Repos -->	    
-	<script src="repo/abstractAppRepo.js"></script>
-	<script src="repo/userRepo.js"></script>
-	<script src="repo/themeRepo.js"></script>
+  <!-- Factories -->
 
-	<!-- Models -->
-	<script src="model/abstractAppModel.js"></script>
-	<script src="model/theme.js"></script>
+  <!-- Repos -->
+  <script src="repo/abstractAppRepo.js"></script>
+  <script src="repo/projectRepo.js"></script>
+  <script src="repo/userRepo.js"></script>
 
-	<!-- Controllers -->
-	<script src="controllers/adminController.js"></script>
-	<script src="controllers/themeController.js"></script>
-	<script src="controllers/userRepoController.js"></script>
-	<script src="controllers/navigationController.js"></script>
-	<script src="controllers/directiveGalleryController.js"></script>
+  <!-- Models -->
+  <script src="model/abstractAppModel.js"></script>
+  <script src="model/project.js"></script>
 
-	<script src="controllers/navigationController.js"></script>
+  <!-- Controllers -->
+  <script src="controllers/managementController.js"></script>
+  <script src="controllers/projectController.js"></script>
+  <script src="controllers/userRepoController.js"></script>
 
-	<!-- endbuild -->
+  <!-- endbuild -->
 
-	
-	<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-	<script>
-		(function(b, o, i, l, e, r) {
-			b.GoogleAnalyticsObject = l;
-			b[l] || (b[l] = function() {
-				(b[l].q = b[l].q || []).push(arguments)
-			});
-			b[l].l = +new Date;
-			e = o.createElement(i);
-			r = o.getElementsByTagName(i)[0];
-			e.src = '//www.google-analytics.com/analytics.js';
-			r.parentNode.insertBefore(e, r)
-		}(window, document, 'script', 'ga'));
-		ga('create', 'UA-XXXXX-X');
-		ga('send', 'pageview');
-	</script>
 
-	
+  <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+  <script>
+    (function (b, o, i, l, e, r) {
+      b.GoogleAnalyticsObject = l;
+      b[l] || (b[l] = function () {
+        (b[l].q = b[l].q || []).push(arguments)
+      });
+      b[l].l = +new Date;
+      e = o.createElement(i);
+      r = o.getElementsByTagName(i)[0];
+      e.src = '//www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e, r)
+    }(window, document, 'script', 'ga'));
+    ga('create', 'UA-XXXXX-X');
+    ga('send', 'pageview');
+  </script>
+
+
 </body>
+
 </html>

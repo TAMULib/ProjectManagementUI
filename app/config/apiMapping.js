@@ -1,39 +1,17 @@
 // CONVENTION: must match model name, case sensitive
 var apiMapping = {
-	Theme: {
+	Project: {
+		validations: true,
+		lazy: true,
 		all: {
 			'endpoint': '/private/queue',
-			'controller': 'theme',
-			'method': 'all'
+			'controller': 'project',
+			'method': '',
+			'httpMethod': 'GET'
 		},
 		listen: {
 			'endpoint': '/channel',
-			'controller': 'theme'
-		},
-		create: {
-			'endpoint': '/private/queue',
-			'controller': 'theme',
-			'method': 'add-theme'
-		},
-		remove: {
-			'endpoint': '/private/queue',
-			'controller': 'theme',
-			'method': 'remove-theme'
-		},
-		activate: {
-			'endpoint': '/private/queue',
-			'controller': 'theme',
-			'method': 'activate-theme'
-		},
-		update: {
-			'endpoint': '/private/queue',
-			'controller': 'theme',
-			'method': 'update'
-		},
-		updateThemeProperty: {
-			'endpoint': '/private/queue',
-			'controller': 'theme',
-			'method': 'update-property'
+			'controller': 'project'
 		}
 	},
 	User: {

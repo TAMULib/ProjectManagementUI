@@ -1,0 +1,20 @@
+<div class="management-table" ng-controller="ProjectController">
+
+  <button class="btn btn-default view-action-button" ng-click="openModal('#addProjectModal')">Add a Project</button>
+  <hr />
+
+  <table ng-table="tableParams" show-filter="false" class="table table-bordered table-striped project-table">
+    <tr ng-repeat="project in projects track by project.id">
+      <td title="'Project'">{{project.name}}</td>
+      <td class="actions-column" title="'Actions'">
+        <span class="glyphicon glyphicon-pencil" title="edit" ng-click="editProject(project)"></span>
+        <span class="glyphicon glyphicon-time" title="schedule" ng-click="editSchedule(project)"></span>
+        <span class="glyphicon glyphicon-trash" title="delete" ng-click="confirmDelete(project)"></span>
+      </td>
+    </tr>
+  </table>
+
+  <modal modal-id="addProjectModal" modal-view="views/modals/addProjectModal.html" modal-header-class="modal-header-primary" wvr-modal-backdrop="static"></modal>
+  <modal modal-id="deleteProjectModal" modal-view="views/modals/deleteProjectModal.html" modal-header-class="modal-header-danger" wvr-modal-backdrop="static"></modal>
+  <modal modal-id="editProjectModal" modal-view="views/modals/editProjectModal.html" modal-header-class="modal-header-primary" wvr-modal-backdrop="static"></modal>
+</div>
