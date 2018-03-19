@@ -1,6 +1,6 @@
 var appConfig = { 
 
-		'version': 'TAMU UI Seed',
+		'version': '1.0.0',
 
 		'allowAnonymous': true,
 

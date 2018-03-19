@@ -1,9 +1,9 @@
 {
-  "name": "weaver-ui-seed",
+  "name": "project-management",
   "private": true,
   "version": "2.0.0",
-  "description": "An example user interface using the Weaver-UI-Core",
-  "repository": "https://github.com/TAMULib/Weaver-UI-Seed.git",
+  "description": "A UI for managing projects",
+  "repository": "https://github.com/TAMULib/ProjectManagementUI.git",
   "license": "MIT",
   "scripts": {
     "prestart": "npm install -g grunt-cli",

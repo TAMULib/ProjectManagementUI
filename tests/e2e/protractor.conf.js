@@ -1,6 +1,6 @@
 exports.config = {
 	seleniumAddress: 'http://localhost:4444/wd/hub',
-	baseUrl: 'http://localhost/weaver-ui-seed/',
+	baseUrl: 'http://localhost/projects/',
 	specs: [
 		'index-spec.js',
 		'auth-spec.js',
