@@ -1,0 +1,25 @@
+<div class="modal-header {{attr.modalHeaderClass}}">
+  <button type="button" class="close modal-close" aria-label="Close" ng-click="cancelCreateProject()"><span aria-hidden="true">&times;</span></button>
+  <h4 class="modal-title">Create Project</h4>
+</div>
+
+<form name="projectForms.create" ng-submit="createProject()" novalidate class="project-forms-create">
+
+  <validationmessage results="projectForms.getResults()"></validationmessage>
+
+  <div class="modal-body">
+    <validatedinput
+      model="projectToCreate"
+      property="name"
+      label="Name"
+      placeholder="Name of the Project"
+      form="forms.create"
+      validations="projectForms.validations"
+      results="projectForms.getResults()">
+    </validatedinput>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn" ng-click="cancelCreateProject()">Cancel</button>
+    <button type="submit" class="btn btn-success">Create</button>
+  </div>
+</form>

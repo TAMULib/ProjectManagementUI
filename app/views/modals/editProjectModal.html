@@ -1,0 +1,27 @@
+<div class="modal-header {{attr.modalHeaderClass}}">
+  <button type="button" class="close modal-close" aria-label="Close" ng-click="cancelEditProject()"><span aria-hidden="true">&times;</span></button>
+  <h4 class="modal-title">Edit Project</h4>
+</div>
+
+<form name="projectForms.edit" ng-submit="updateProject()" novalidate>
+
+  <validationmessage results="projectForms.getResults()"></validationmessage>
+
+  <div class="modal-body"> 
+    <validatedinput
+      model="projectToEdit"
+      property="name"
+      label="Name"
+      placeholder="Name of the Project"
+      form="projectForms.edit"
+      validations="projectForms.validations"
+      results="projectForms.getResults()"
+      autocomplete="off">
+    </validatedinput>
+  </div> 
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="cancelEditProject()">Cancel</button>
+    <button type="submit" class="btn btn-success" ng-disabled="!projectForms.edit.$dirty||projectForms.edit.$invalid">Edit</button>
+  </div>
+</form>
+    

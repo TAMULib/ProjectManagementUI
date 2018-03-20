@@ -1,7 +1,8 @@
 var app = angular.module('app', 
 [
 	'ngRoute',
-	'ngSanitize'
+	'ngSanitize',
+	'ngTable'
 ]);
 
 app.model = core.model;
