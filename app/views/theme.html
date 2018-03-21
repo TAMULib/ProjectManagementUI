@@ -3,21 +3,22 @@
 	<div ng-if="!isAdmin()" class="row" ng-include src="'views/restrictedAccess.html'" ></div>
 	<h2>Update Theme</h2>
 	<div class="col-md-4">
-		<div ng-repeat="theme in themes.list">
+		<div ng-repeat="theme in themes track by theme.id">
 			<form>
 				<h4>
 					{{theme.name}}
 					<span ng-if="theme.active">(Active)</span>
 					<a ng-if="theme.active && refreshable" href="#" ng-click="refreshPage()">(Refresh Page)</span>
-					<a ng-if="!theme.active" href="#" ng-click="activateTheme(theme.id)">(Activate)</a>
+					<a ng-if="!theme.active" href="#" ng-click="activateTheme(theme)">(Activate)</a>
+					<span ng-if="theme.active != true" class="glyphicon glyphicon-trash toggle-href text-danger pull-right" ng-click="removeTheme(theme)"></span>					
 				</h4>
-				<div class="input-group" ng-repeat="property in theme.properties">
+				<div class="input-group" ng-repeat="property in theme.themeProperties track by property.id">
   					<span class="input-group-addon">
-						<label for="{{property.propertyName.name}}">{{property.propertyName.name}}</label>
+						<label for="{{property.themePropertyName.name}}">{{property.themePropertyName.name}}</label>
 					</span>
-					<input class="form-control" type="text" name="{{property.propertyName.name}}" ng-model="property.value" />
+					<input class="form-control" type="text" name="{{property.themePropertyName.name}}" ng-model="property.value" />
 					<span class="input-group-btn">
-						<button type="button" class="btn btn-default" ng-click="updateThemeProperty(theme,property.id,property.value)">Save</button>
+						<button type="button" class="btn btn-default" ng-click="updateThemeProperty(theme, property.id, property.value)">Save</button>
 					</span>
 				</div>
 			</form>
@@ -28,7 +29,7 @@
 			<div class="input-group">
 				<input class="form-control" type="text" name="new-theme-name" ng-model="newTheme.name" placeholder="Theme Name" />
 				<span class="input-group-btn">
-					<button type="button" class="btn btn-default" ng-click="addTheme(newTheme)">Add Theme</button>
+					<button type="button" class="btn btn-default" ng-click="addTheme()">Add Theme</button>
 				</span>
 			</div>
 		</form>

@@ -4,9 +4,11 @@ var appConfig = {
 
 		'allowAnonymous': true,
 
+		'anonymousRole': 'ROLE_ANONYMOUS',
+
 		// Set this to the webService if mocking AuthService
 		
-		'authService': 'https://labs.library.tamu.edu/authservice-dev',
+		'authService': '',
 		'webService': '', 
 		
 		'storageType': 'session',

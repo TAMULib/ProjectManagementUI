@@ -21,7 +21,10 @@ app.config(function($routeProvider) {
 			templateUrl: 'views/directive-demo/directives.html',
 			controller: 'DirectiveGalleryController',
 			reloadOnSearch: false
-		}).		
+		}).
+		when('/home', {
+			redirectTo: '/'
+		}).
 		when('/', {
 			templateUrl: 'views/home.html'
 		}).
