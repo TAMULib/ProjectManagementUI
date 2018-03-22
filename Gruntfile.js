@@ -84,10 +84,6 @@ module.exports = function (grunt) {
 									'<%= build.app %>/config/appConfig.js',
 									'<%= build.app %>/config/apiMapping.js',
 
-									'<%= build.app %>/components/version/version.js',
-									'<%= build.app %>/components/version/version-directive.js',
-									'<%= build.app %>/components/version/interpolate-filter.js',
-
 									'node_modules/weaver-ui-core/app/core.js',
 									'node_modules/weaver-ui-core/app/setup.js',
 									'node_modules/weaver-ui-core/app/config/coreRuntime.js',
