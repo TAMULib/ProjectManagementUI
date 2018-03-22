@@ -1,4 +1,4 @@
-app.controller('ProjectController', function ($controller, $scope, NgTableParams, ApiResponseActions, Project, ProjectRepo) {
+app.controller('ProjectController', function ($controller, $scope, $rootScope, NgTableParams, ApiResponseActions, Project, ProjectRepo) {
 
   angular.extend(this, $controller('AbstractController', {$scope: $scope}));
 
@@ -19,11 +19,10 @@ app.controller('ProjectController', function ($controller, $scope, NgTableParams
   $scope.resetProjectForms = function() {
     ProjectRepo.clearValidationResults();
     for (var key in $scope.projectForms) {
-      if (!$scope.projectForms[key] !== undefined && !$scope.projectForms[key].$pristine && $scope.projectForms[key].$setPristine) {
+      if ($scope.projectForms[key] !== undefined && !$scope.projectForms[key].$pristine && $scope.projectForms[key].$setPristine) {
         $scope.projectForms[key].$setPristine();
       }
     }
-    delete $scope.projectToTest;
     $scope.closeModal();
   };
 
