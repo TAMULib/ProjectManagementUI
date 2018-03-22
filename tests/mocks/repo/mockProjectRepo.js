@@ -39,6 +39,8 @@ angular.module('mock.projectRepo', []).service('ProjectRepo', function($q) {
     return defer.promise;
   };
 
+  ProjectRepo.delete = function(project) {};
+
   ProjectRepo.getAll = function () {
     var defer = $q.defer();
     defer.resolve(ProjectRepo.list);

@@ -137,11 +137,54 @@ describe('controller: ProjectController', function() {
       scope.$apply();
 
       expect(scope.cancelEditProject).toHaveBeenCalled();
-      expect(Project.dirty).toHaveBeenCalled();
+      expect(Project.dirty).toHaveBeenCalledWith(true);
       expect(Project.save).toHaveBeenCalled();
     });
 
+    it('cancelEditProject should clear out projectToEdit and call resetProjectForms', function() {
+      spyOn(scope, 'resetProjectForms');
+      scope.projectToEdit = Project;
+      scope.cancelEditProject();
 
+      expect(scope.projectToEdit).toEqual({});
+      expect(scope.resetProjectForms).toHaveBeenCalled();
+    });
+
+    it('confirmDeleteProject should set the projectToDelete and open the modal', function() {
+      spyOn(scope, 'openModal');
+      scope.confirmDeleteProject(mockProjects[0]);
+
+      expect(scope.openModal).toHaveBeenCalled();
+      expect(scope.projectToDelete).toEqual(mockProjects[0]);
+    });
+
+    it('cancelDeleteProject should clear projectToDelete and close the modal', function() {
+      spyOn(scope, 'closeModal');
+      scope.projectToDelete = mockProjects[0];
+      scope.cancelDeleteProject();
+
+      expect(scope.closeModal).toHaveBeenCalled();
+      expect(scope.projectToDelete).toEqual({});
+    });
+
+    it('deleteProject should call the repo delete method and then call cancelDeleteProject when successful', function() {
+      scope.projectToDelete = Project;
+      deferred = $q.defer();
+      spyOn(ProjectRepo, 'delete').and.returnValue(deferred.promise);
+      spyOn(scope, 'cancelDeleteProject');
+      scope.deleteProject(Project);
+      deferred.resolve({
+        body: angular.toJson({
+          meta: {
+            status: "SUCCESS"
+          }
+        })
+      });
+      scope.$apply();
+
+      expect(ProjectRepo.delete).toHaveBeenCalledWith(Project);
+      expect(scope.cancelDeleteProject).toHaveBeenCalled();
+    });
 
   });
 
