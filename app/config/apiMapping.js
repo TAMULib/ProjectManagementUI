@@ -6,31 +6,31 @@ var apiMapping = {
     channel: '/channel/project',
     all: {
       'endpoint': '/private/queue',
-      'controller': 'project',
+      'controller': 'projects',
       'method': '',
       'httpMethod': 'GET'
     },
     create: {
       'endpoint': '/private/queue',
-      'controller': 'project',
+      'controller': 'projects',
       'method': '',
       'httpMethod': 'POST'
     },
     update: {
       'endpoint': '/private/queue',
-      'controller': 'project',
+      'controller': 'projects',
       'method': '',
       'httpMethod': 'PUT'
     },
     remove: {
       'endpoint': '/private/queue',
-      'controller': 'project',
+      'controller': 'projects',
       'method': '',
       'httpMethod': 'DELETE'
     },
-		listen: {
+    listen: {
       'endpoint': '/channel',
-      'controller': 'project'
+      'controller': 'projects'
     }
   },
   User: {
