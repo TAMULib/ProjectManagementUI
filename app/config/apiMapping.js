@@ -87,5 +87,15 @@ var apiMapping = {
       'endpoint': '/channel',
       'controller': 'version-management-software'
     }
+  },
+  VersionProject: {
+      all: {
+          'endpoint': '/private/queue',
+          'controller': 'projects'
+      },
+      getByScopeId: {
+          'endpoint': '/private/queue',
+          'controller': 'projects'
+      }
   }
 };

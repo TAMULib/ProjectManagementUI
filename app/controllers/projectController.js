@@ -1,15 +1,14 @@
-app.controller('ProjectController', function ($controller, $scope, $rootScope, NgTableParams, ApiResponseActions, Project, ProjectRepo) {
+app.controller('ProjectController', function ($controller, $scope, $rootScope, NgTableParams, ApiResponseActions, Project, ProjectRepo, VersionManagementSoftwareRepo, VersionProjectService) {
 
   angular.extend(this, $controller('AbstractController', {$scope: $scope}));
 
-  $scope.projectRepo = ProjectRepo;
-
   $scope.projects = ProjectRepo.getAll();
+
+  $scope.vmses = VersionManagementSoftwareRepo.getAll();
 
   $scope.projectToCreate = ProjectRepo.getScaffold();
 
   $scope.projectToDelete = {};
-  $scope.projectToEdit = {};
 
   $scope.projectForms = {
     validations: ProjectRepo.getValidations(),
@@ -92,6 +91,37 @@ app.controller('ProjectController', function ($controller, $scope, $rootScope, N
       }
     });
   };
+
+  $scope.vmsVersionProjects = {};
+
+  VersionManagementSoftwareRepo.ready().then(function() {
+    for(var i in $scope.vmses) {
+      var vms = $scope.vmses[i];
+      VersionProjectService.getAll(vms.id).then(function(versionProjects) {
+        $scope.vmsVersionProjects[vms.id] = versionProjects;
+      });
+    }
+  });
+
+  $scope.getVmsVersionProjects = function(vmsId) {
+    return $scope.vmsVersionProjects[vmsId];
+  };
+
+  $scope.getVmsVersionProjects = function(vmsId) {
+    return $scope.vmsVersionProjects[vmsId];
+  };
+
+  $scope.getVersionProject = function (project) {
+    if (project.scopeId && project.versionManagementSoftware && !project.versionProject) {
+        project.versionProject = {};
+        VersionProjectService.getByScopeId(project.versionManagementSoftware.id, project.scopeId).then(function (versionProject) {
+            angular.extend(project, {
+              versionProject: versionProject
+            });
+        });
+    }
+    return project.versionProject;
+};
 
   ProjectRepo.ready().then(function () {
     buildTable();

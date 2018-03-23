@@ -17,6 +17,21 @@
       validations="projectForms.validations"
       results="projectForms.getResults()">
     </validatedinput>
+
+    <div class="form-group">
+      <label for="vms">Associate Version Management Software</label>
+      <select class="form-control" ng-options="vms.name for vms in vmses" ng-model="projectToCreate.versionManagementSoftware" name="vms">
+        <option value="" selected>None</option>
+     </select>
+    </div>
+
+    <div class="form-group" ng-if="projectToCreate.versionManagementSoftware">
+      <label for="vms">Associate Version Project</label>
+      <select class="form-control" ng-options="vp.scopeId as vp.name for vp in getVmsVersionProjects(projectToCreate.versionManagementSoftware.id)" ng-model="projectToCreate.scopeId" name="vms">
+        <option value="" selected>None</option>
+     </select>
+    </div>
+
   </div>
   <div class="modal-footer">
     <button type="button" class="btn" ng-click="cancelCreateProject()">Cancel</button>
