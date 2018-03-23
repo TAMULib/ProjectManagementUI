@@ -29,7 +29,7 @@
 
     <div class="form-group" ng-if="projectToEdit.versionManagementSoftware">
       <label for="vms">Associate Version Project</label>
-      <select class="form-control" ng-options="vp.scopeId as vp.name for vp in getVmsVersionProjects(projectToEdit.versionManagementSoftware.id)" ng-model="projectToEdit.scopeId" name="vms">
+      <select class="form-control" ng-options="vp.scopeId as vp.name for vp in getVmsVersionProjects(projectToEdit.versionManagementSoftware.id) | orderBy:'name'" ng-model="projectToEdit.scopeId" name="vms">
         <option value="" selected>None</option>
      </select>
     </div>
