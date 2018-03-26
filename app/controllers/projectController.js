@@ -2,6 +2,8 @@ app.controller('ProjectController', function ($controller, $scope, $rootScope, N
 
   angular.extend(this, $controller('AbstractController', {$scope: $scope}));
 
+  $scope.vmses = VersionManagementSoftwareRepo.getAll();
+
   $scope.projects = ProjectRepo.getAll();
 
   $scope.projectToCreate = ProjectRepo.getScaffold();
@@ -93,7 +95,6 @@ app.controller('ProjectController', function ($controller, $scope, $rootScope, N
   $scope.vmsVersionProjects = {};
 
   VersionManagementSoftwareRepo.ready().then(function() {
-    $scope.vmses = VersionManagementSoftwareRepo.getAll();
     for(var i in $scope.vmses) {
       if(i !== 'visibleColumnCount') {
         var vms = $scope.vmses[i];
