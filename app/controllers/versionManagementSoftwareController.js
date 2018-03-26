@@ -1,4 +1,4 @@
-app.controller('VersionManagementSoftwareController', function ($controller, $scope, ApiResponseActions, NgTableParams, VersionManagementSoftwareRepo) {
+app.controller('VersionManagementSoftwareController', function ($controller, $scope, $filter, ApiResponseActions, NgTableParams, VersionManagementSoftware, VersionManagementSoftwareRepo) {
 
   angular.extend(this, $controller('AbstractController', {$scope: $scope}));
 
@@ -6,8 +6,12 @@ app.controller('VersionManagementSoftwareController', function ($controller, $sc
 
   $scope.vmsToCreate = VersionManagementSoftwareRepo.getScaffold();
 
-  $scope.vmsToEdit = {};
+  $scope.vmsToEdit = new VersionManagementSoftware();
   $scope.vmsToDelete = {};
+
+  VersionManagementSoftwareRepo.getTypes().then(function(types) {
+    $scope.serviceTypes = types;
+  });
 
   $scope.vmsForms = {
     validations: VersionManagementSoftwareRepo.getValidations(),
@@ -40,7 +44,8 @@ app.controller('VersionManagementSoftwareController', function ($controller, $sc
   };
 
   $scope.editVms = function(vms) {
-    $scope.vmsToEdit = vms;
+    angular.extend($scope.vmsToEdit, vms);
+    $scope.updateType(vms.type);
     $scope.openModal('#editVmsModal');
   };
 
@@ -88,6 +93,15 @@ app.controller('VersionManagementSoftwareController', function ($controller, $sc
       getData: function(params) {
         return $scope.vmses;
       }
+    });
+  };
+
+  $scope.updateType = function(type) {
+    if (type === '') {
+      return;
+    }
+    VersionManagementSoftwareRepo.getTypeScaffolding(type).then(function(settings) {
+      $scope.typeSettings = settings;
     });
   };
 

@@ -86,6 +86,18 @@ var apiMapping = {
     listen: {
       'endpoint': '/channel',
       'controller': 'version-management-software'
+    },
+    types: {
+      'endpoint': '/channel',
+      'controller': 'version-management-software',
+      'method': 'types/',
+      'httpMethod': 'GET'
+    },
+    scaffolding: {
+      'endpoint': '/channel',
+      'controller': 'version-management-software',
+      'method': 'scaffolding/:type/',
+      'httpMethod': 'GET'
     }
   }
 };
