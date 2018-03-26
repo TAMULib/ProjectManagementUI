@@ -4,9 +4,9 @@
 </div>
 
 <form name="vmsForms.create" ng-submit="createVms()" novalidate class="vms-forms-create">
-  
-  <validationmessage results="vmsForms.getResults()"></validationmessage>
 
+  <validationmessage results="vmsForms.getResults()"></validationmessage>
+  
   <div class="modal-body">
     <validatedinput
       model="vmsToCreate"
@@ -17,9 +17,25 @@
       validations="vmsForms.validations"
       results="vmsForms.getResults()">
     </validatedinput>
+
     <validatedselect
-    >
+      change="updateType(vmsToCreate.type)"
+      options="serviceTypes"
+      optionvalue="value"
+      optionproperty="gloss"
+      model="vmsToCreate"
+      property="type"
+      label="Type"
+      form="vmsForms.create"
+      validations="vmsForms.validations"
+      results="vmsForms.getResults()">
     </validatedselect>
+
+    <vms-form
+      ng-if="vmsToCreate.type"
+      management-settings="typeSettings"
+      model="vmsToCreate">
+    </vms-form>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn" ng-click="cancelCreateVms()">Cancel</button>
