@@ -4,8 +4,6 @@ app.controller('ProjectController', function ($controller, $scope, $rootScope, N
 
   $scope.projects = ProjectRepo.getAll();
 
-  $scope.vmses = VersionManagementSoftwareRepo.getAll();
-
   $scope.projectToCreate = ProjectRepo.getScaffold();
 
   $scope.projectToDelete = {};
@@ -95,11 +93,14 @@ app.controller('ProjectController', function ($controller, $scope, $rootScope, N
   $scope.vmsVersionProjects = {};
 
   VersionManagementSoftwareRepo.ready().then(function() {
+    $scope.vmses = VersionManagementSoftwareRepo.getAll();
     for(var i in $scope.vmses) {
-      var vms = $scope.vmses[i];
-      VersionProjectService.getAll(vms.id).then(function(versionProjects) {
-        $scope.vmsVersionProjects[vms.id] = versionProjects;
-      });
+      if(i !== 'visibleColumnCount') {
+        var vms = $scope.vmses[i];
+        VersionProjectService.getAll(vms.id).then(function(versionProjects) {
+          $scope.vmsVersionProjects[vms.id] = versionProjects;
+        });
+      }
     }
   });
 
