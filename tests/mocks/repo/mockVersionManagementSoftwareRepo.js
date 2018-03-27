@@ -1,4 +1,4 @@
-var mockProjects = [
+var mockVersionManagementSoftware = [
   {
     "id": 1,
     "name": "Test 1"
@@ -13,9 +13,9 @@ var mockProjects = [
   }
 ];
 
-angular.module('mock.projectRepo', []).service('ProjectRepo', function($q) {
+angular.module('mock.versionManagementSoftwareRepo', []).service('VersionManagementSoftwareRepo', function($q) {
 
-  this.list = mockProjects;
+  this.list = mockVersionManagementSoftware;
 
   this.create = function(project) {
     var defer = $q.defer();

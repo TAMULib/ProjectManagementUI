@@ -54,5 +54,48 @@ var apiMapping = {
       'controller': 'user',
       'method': 'update'
     }
+  },
+  VersionManagementSoftware: {
+    validations: true,
+    lazy: true,
+    channel: '/channel/version-management-software',
+    all: {
+      'endpoint': '/private/queue',
+      'controller': 'version-management-software',
+      'method': '',
+      'httpMethod': 'GET'
+    },
+    create: {
+      'endpoint': '/private/queue',
+      'controller': 'version-management-software',
+      'method': '',
+      'httpMethod': 'POST'
+    },
+    update: {
+      'endpoint': '/private/queue',
+      'controller': 'version-management-software',
+      'method': '',
+      'httpMethod': 'PUT'
+    },
+    remove: {
+      'endpoint': '/private/queue',
+      'controller': 'version-management-software',
+      'method': '',
+      'httpMethod': 'DELETE'
+    },
+    listen: {
+      'endpoint': '/channel',
+      'controller': 'version-management-software'
+    }
+  },
+  VersionProject: {
+      all: {
+          'endpoint': '/private/queue',
+          'controller': 'projects'
+      },
+      getByScopeId: {
+          'endpoint': '/private/queue',
+          'controller': 'projects'
+      }
   }
 };

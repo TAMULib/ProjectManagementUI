@@ -18,6 +18,22 @@
       results="projectForms.getResults()"
       autocomplete="off">
     </validatedinput>
+
+    <div class="form-group">
+      <label for="vms">Associate Version Management Software</label>
+      <select class="form-control" ng-model="projectToEdit.versionManagementSoftware" name="vms">
+        <option value="" ng-selected="projectToEdit.versionManagementSoftware === undefined">None</option>
+        <option value=""  ng-repeat="vms in vmses" ng-value="vms" ng-selected="projectToEdit.versionManagementSoftware.id === vms.id">{{vms.name}}</option>
+     </select>
+    </div>
+
+    <div class="form-group" ng-if="projectToEdit.versionManagementSoftware">
+      <label for="vms">Associate Version Project</label>
+      <select class="form-control" ng-options="vp.scopeId as vp.name for vp in getVmsVersionProjects(projectToEdit.versionManagementSoftware.id) | orderBy:'name'" ng-model="projectToEdit.scopeId" name="vms">
+        <option value="" selected>None</option>
+     </select>
+    </div>
+
   </div> 
   <div class="modal-footer">
     <button type="button" class="btn btn-default" ng-click="cancelEditProject()">Cancel</button>

@@ -1,0 +1,28 @@
+<div class="modal-header {{attr.modalHeaderClass}}">
+  <button type="button" class="close modal-close" aria-label="Close" ng-click="cancelCreateVms()"><span aria-hidden="true">&times;</span></button>
+  <h4 class="modal-title">Create Version Management Software</h4>
+</div>
+
+<form name="vmsForms.create" ng-submit="createVms()" novalidate class="vms-forms-create">
+  
+  <validationmessage results="vmsForms.getResults()"></validationmessage>
+
+  <div class="modal-body">
+    <validatedinput
+      model="vmsToCreate"
+      property="name"
+      label="Name"
+      placeholder="Name of the Version Management Software"
+      form="vmsForms.create"
+      validations="vmsForms.validations"
+      results="vmsForms.getResults()">
+    </validatedinput>
+    <validatedselect
+    >
+    </validatedselect>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn" ng-click="cancelCreateVms()">Cancel</button>
+    <button type="submit" class="btn btn-success">Create</button>
+  </div>
+</form>

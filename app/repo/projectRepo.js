@@ -1,4 +1,4 @@
-app.repo("ProjectRepo", function ProjectRepo($timeout) {
+app.repo("ProjectRepo", function ProjectRepo() {
 
   var projectRepo = this;
 
