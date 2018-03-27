@@ -99,5 +99,15 @@ var apiMapping = {
       'method': 'scaffolding/:type/',
       'httpMethod': 'GET'
     }
+  },
+  VersionProject: {
+      all: {
+          'endpoint': '/private/queue',
+          'controller': 'projects'
+      },
+      getByScopeId: {
+          'endpoint': '/private/queue',
+          'controller': 'projects'
+      }
   }
 };

@@ -14,24 +14,23 @@ var mockProjects = [
 ];
 
 angular.module('mock.projectRepo', []).service('ProjectRepo', function($q) {
-  var ProjectRepo = this;
 
-  ProjectRepo.list = mockProjects;
+  this.list = mockProjects;
 
-  ProjectRepo.create = function(project) {
+  this.create = function(project) {
     var defer = $q.defer();
-    project.id = ProjectRepo.list.length + 1;
-    ProjectRepo.list.push(project);
+    project.id = this.list.length + 1;
+    this.list.push(project);
     defer.resolve(project);
     return defer.promise;
   };
 
-  ProjectRepo.update = function(project) {
+  this.update = function(project) {
     var defer = $q.defer();
-    for (var i in ProjectRepo.list) {
-      if (ProjectRepo.list[i].id === project.id) {
-        angular.extend(ProjectRepo.list[i], project);
-        project = ProjectRepo.list[i];
+    for (var i in this.list) {
+      if (this.list[i].id === project.id) {
+        angular.extend(this.list[i], project);
+        project = this.list[i];
         break;
       }
     }
@@ -39,33 +38,33 @@ angular.module('mock.projectRepo', []).service('ProjectRepo', function($q) {
     return defer.promise;
   };
 
-  ProjectRepo.delete = function(project) {};
+  this.delete = function(project) {};
 
-  ProjectRepo.getAll = function () {
+  this.getAll = function () {
     var defer = $q.defer();
-    defer.resolve(ProjectRepo.list);
+    defer.resolve(this.list);
     return defer.promise;
   };
 
-  ProjectRepo.findById = function(id) {
-    for(var i in ProjectRepo.list) {
-      if(ProjectRepo.list[i].id === id) {
-        return ProjectRepo.list[i];
+  this.findById = function(id) {
+    for(var i in this.list) {
+      if(this.list[i].id === id) {
+        return this.list[i];
       }
     }
   };
 
-  ProjectRepo.ready = function () {
+  this.ready = function () {
     var defer = $q.defer();
     defer.resolve();
     return defer.promise;
   };
 
-  ProjectRepo.scaffold = {
+  this.scaffold = {
     "name": ""
   };
 
-  ProjectRepo.getScaffold = function(defaults) {
+  this.getScaffold = function(defaults) {
     if(!defaults) defaults = {};
     return angular.copy(angular.extend(this.scaffold, defaults));
   };
@@ -81,18 +80,17 @@ angular.module('mock.projectRepo', []).service('ProjectRepo', function($q) {
       }
     };
 
-  ProjectRepo.getValidations = function() {
+    this.getValidations = function() {
     return validations;
   };
 
-  ProjectRepo.clearValidationResults = function() {
+  this.clearValidationResults = function() {
 
   };
 
-  ProjectRepo.listen = function() {
+  this.listen = function() {
 
   };
 
-  return ProjectRepo;
-
+  return this;
 });

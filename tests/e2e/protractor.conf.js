@@ -4,8 +4,7 @@ exports.config = {
 	specs: [
 		'index-spec.js',
 		'auth-spec.js',
-		'users-spec.js',
-		'theme-spec.js'
+		'users-spec.js'
 	],
 	rootElement : 'body',
 	multiCapabilities: [{
