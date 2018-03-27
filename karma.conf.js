@@ -107,6 +107,8 @@ module.exports = function (config) {
 
       'app/directives/**/*.js',
 
+      'app/filters/**/*.js',
+
       'app/services/**/*.js',
 
       'app/model/**/*.js',

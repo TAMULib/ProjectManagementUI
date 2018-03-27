@@ -1,4 +1,4 @@
-app.controller('VersionManagementSoftwareController', function ($controller, $scope, $filter, ApiResponseActions, NgTableParams, VersionManagementSoftware, VersionManagementSoftwareRepo) {
+app.controller('VersionManagementSoftwareController', function ($controller, $scope, $filter, $rootScope, ApiResponseActions, NgTableParams, VersionManagementSoftware, VersionManagementSoftwareRepo) {
 
   angular.extend(this, $controller('AbstractController', {$scope: $scope}));
 
@@ -6,7 +6,7 @@ app.controller('VersionManagementSoftwareController', function ($controller, $sc
 
   $scope.vmsToCreate = VersionManagementSoftwareRepo.getScaffold();
 
-  $scope.vmsToEdit = new VersionManagementSoftware();
+  $scope.vmsToEdit = {};
   $scope.vmsToDelete = {};
 
   VersionManagementSoftwareRepo.getTypes().then(function(types) {
@@ -39,12 +39,12 @@ app.controller('VersionManagementSoftwareController', function ($controller, $sc
   };
 
   $scope.cancelCreateVms = function() {
-    angular.extend($scope.vmsToCreate, VersionManagementSoftwareRepo.getScaffold());
+    $scope.vmsToCreate = VersionManagementSoftwareRepo.getScaffold();
     $scope.resetVmsForms();
   };
 
   $scope.editVms = function(vms) {
-    angular.extend($scope.vmsToEdit, vms);
+    $scope.vmsToEdit = angular.copy(vms);
     $scope.updateType(vms.type);
     $scope.openModal('#editVmsModal');
   };
@@ -58,7 +58,6 @@ app.controller('VersionManagementSoftwareController', function ($controller, $sc
 
   $scope.cancelEditVms = function() {
     $scope.vmsToEdit.refresh();
-    $scope.vmsToEdit = {};
     $scope.resetVmsForms();
   };
 
@@ -80,6 +79,15 @@ app.controller('VersionManagementSoftwareController', function ($controller, $sc
     });
   };
 
+  $scope.updateType = function(type) {
+    if (type === '') {
+      return;
+    }
+    VersionManagementSoftwareRepo.getTypeScaffolding(type).then(function(settings) {
+      $scope.typeSettings = settings;
+    });
+  };
+
   var buildTable = function () {
     var allVmses = VersionManagementSoftwareRepo.getAll();
     $scope.tableParams = new NgTableParams({
@@ -93,15 +101,6 @@ app.controller('VersionManagementSoftwareController', function ($controller, $sc
       getData: function(params) {
         return $scope.vmses;
       }
-    });
-  };
-
-  $scope.updateType = function(type) {
-    if (type === '') {
-      return;
-    }
-    VersionManagementSoftwareRepo.getTypeScaffolding(type).then(function(settings) {
-      $scope.typeSettings = settings;
     });
   };
 
