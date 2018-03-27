@@ -45,7 +45,6 @@ app.controller('VersionManagementSoftwareController', function ($controller, $sc
 
   $scope.editVms = function(vms) {
     $scope.vmsToEdit = angular.copy(vms);
-    $scope.updateType(vms.type);
     $scope.openModal('#editVmsModal');
   };
 
