@@ -79,13 +79,13 @@ app.controller('VersionManagementSoftwareController', function ($controller, $sc
     });
   };
 
-  $scope.updateType = function(type) {
-    if (type === '') {
-      return;
+  $scope.typeSettings = function(type) {
+    for(var i in $scope.serviceTypes) {
+      if($scope.serviceTypes[i].value === type) {
+        return $scope.serviceTypes[i].scaffold;
+      }
     }
-    VersionManagementSoftwareRepo.getTypeScaffolding(type).then(function(settings) {
-      $scope.typeSettings = settings;
-    });
+    return [];
   };
 
   var buildTable = function () {

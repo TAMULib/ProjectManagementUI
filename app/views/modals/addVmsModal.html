@@ -19,7 +19,6 @@
     </validatedinput>
 
     <validatedselect
-      change="updateType(vmsToCreate.type)"
       options="serviceTypes"
       optionvalue="value"
       optionproperty="gloss"
@@ -33,7 +32,7 @@
 
     <vms-form
       ng-if="vmsToCreate.type"
-      management-settings="typeSettings"
+      management-settings="typeSettings(vmsToCreate.type)"
       model="vmsToCreate">
     </vms-form>
   </div>

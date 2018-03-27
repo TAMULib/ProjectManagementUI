@@ -6,7 +6,14 @@
   <table ng-table="tableParams" show-filter="false" class="table table-bordered table-striped vms-table">
     <tr ng-repeat="vms in $data track by vms.id">
       <td title="'Version Management Software'">{{vms.name}}</td>
-      <td title="'Settings'">{{vms}}</td>
+      <td title="'Settings'">
+        <ul class="list-unstyled">
+          <li ng-repeat="setting in typeSettings(vms.type) | filter:{visible:true}">
+            <label>{{setting.gloss}}:</label>
+            <span>&nbsp{{vms.settings[setting.key]}}</span>
+          </li>
+        </ul>
+      </td>
       <td class="actions-column" title="'Actions'">
         <span class="glyphicon glyphicon-pencil" title="edit" ng-click="editVms(vms)"></span>
         <span class="glyphicon glyphicon-trash" title="delete" ng-click="confirmDeleteVms(vms)"></span>
