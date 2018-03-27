@@ -2,7 +2,7 @@
 app.config(function ($routeProvider) {
   $routeProvider.
     when('/management', {
-      redirectTo: '/management/users',
+      redirectTo: '/management/projects',
       access: ["ROLE_ADMIN", "ROLE_MANGER"]
     }).
     when('/management/:tab', {
