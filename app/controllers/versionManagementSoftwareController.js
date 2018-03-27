@@ -1,4 +1,4 @@
-app.controller('VersionManagementSoftwareController', function ($controller, $scope, ApiResponseActions, NgTableParams, VersionManagementSoftwareRepo) {
+app.controller('VersionManagementSoftwareController', function ($controller, $scope, $filter, $rootScope, ApiResponseActions, NgTableParams, VersionManagementSoftware, VersionManagementSoftwareRepo) {
 
   angular.extend(this, $controller('AbstractController', {$scope: $scope}));
 
@@ -8,6 +8,10 @@ app.controller('VersionManagementSoftwareController', function ($controller, $sc
 
   $scope.vmsToEdit = {};
   $scope.vmsToDelete = {};
+
+  VersionManagementSoftwareRepo.getTypes().then(function(types) {
+    $scope.serviceTypes = types;
+  });
 
   $scope.vmsForms = {
     validations: VersionManagementSoftwareRepo.getValidations(),
@@ -35,12 +39,13 @@ app.controller('VersionManagementSoftwareController', function ($controller, $sc
   };
 
   $scope.cancelCreateVms = function() {
-    angular.extend($scope.vmsToCreate, VersionManagementSoftwareRepo.getScaffold());
+    $scope.vmsToCreate = VersionManagementSoftwareRepo.getScaffold();
     $scope.resetVmsForms();
   };
 
   $scope.editVms = function(vms) {
-    $scope.vmsToEdit = vms;
+    $scope.vmsToEdit = angular.copy(vms);
+    $scope.updateType(vms.type);
     $scope.openModal('#editVmsModal');
   };
 
@@ -53,7 +58,6 @@ app.controller('VersionManagementSoftwareController', function ($controller, $sc
 
   $scope.cancelEditVms = function() {
     $scope.vmsToEdit.refresh();
-    $scope.vmsToEdit = {};
     $scope.resetVmsForms();
   };
 
@@ -72,6 +76,15 @@ app.controller('VersionManagementSoftwareController', function ($controller, $sc
       if (angular.fromJson(res.body).meta.status === 'SUCCESS') {
         $scope.cancelDeleteVms();
       }
+    });
+  };
+
+  $scope.updateType = function(type) {
+    if (type === '') {
+      return;
+    }
+    VersionManagementSoftwareRepo.getTypeScaffolding(type).then(function(settings) {
+      $scope.typeSettings = settings;
     });
   };
 

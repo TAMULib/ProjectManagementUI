@@ -2,10 +2,11 @@
 
   <button class="btn btn-default view-action-button" ng-click="openModal('#addVmsModal')">Add a Version Management Software</button>
   <hr />
-
+  
   <table ng-table="tableParams" show-filter="false" class="table table-bordered table-striped vms-table">
     <tr ng-repeat="vms in $data track by vms.id">
       <td title="'Version Management Software'">{{vms.name}}</td>
+      <td title="'Settings'">{{vms}}</td>
       <td class="actions-column" title="'Actions'">
         <span class="glyphicon glyphicon-pencil" title="edit" ng-click="editVms(vms)"></span>
         <span class="glyphicon glyphicon-trash" title="delete" ng-click="confirmDeleteVms(vms)"></span>

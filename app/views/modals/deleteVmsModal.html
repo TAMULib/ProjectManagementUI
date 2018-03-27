@@ -1,0 +1,14 @@
+<form name="vmsForm.delete" ng-submit="deleteVms(vmsToDelete)" novalidate>
+    <div class="modal-header {{attr.modalHeaderClass}}">
+      <button type="button" class="close modal-close" aria-label="Close" ng-click="cancelDeleteVms()"><span aria-hidden="true">&times;</span></button>
+      <h4 class="modal-title">Confirm Removal</h4>
+    </div>
+    <div class="modal-body">
+      <h3>Are you sure you want to remove:</h3>
+      <p>{{vmsToDelete.name}}</p>
+    </div>     
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" ng-click="cancelDeleteVms()">Cancel</button>
+      <button type="submit" class="btn btn-danger">Confirm</button>
+    </div>
+</form>  

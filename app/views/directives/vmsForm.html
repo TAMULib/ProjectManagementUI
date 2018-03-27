@@ -1,0 +1,9 @@
+<div ng-repeat="(setting, type) in managementSettings" class=form-group>
+  <label for="{{setting}}-input">{{setting | capitalCase}}</label>
+  <input
+    class="form-control"
+    id="{{setting}}"
+    type="{{setting === 'password' ? 'password' : 'text'}}"
+    ng-model="model.settings[setting]"
+    placeholder="{{setting | capitalCase}} for Version Management Software"/>
+</div>
