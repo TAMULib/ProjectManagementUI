@@ -94,13 +94,16 @@ app.controller('ProjectController', function ($controller, $scope, $rootScope, N
 
   $scope.vmsVersionProjects = {};
 
+  var getVmsById = function(id) {
+    VersionProjectService.getAll(id).then(function(versionProjects) {
+      $scope.vmsVersionProjects[id] = versionProjects;
+    });
+  };
+
   VersionManagementSoftwareRepo.ready().then(function() {
     for(var i in $scope.vmses) {
       if(i !== 'visibleColumnCount') {
-        var vms = $scope.vmses[i];
-        VersionProjectService.getAll(vms.id).then(function(versionProjects) {
-          $scope.vmsVersionProjects[vms.id] = versionProjects;
-        });
+        getVmsById($scope.vmses[i].id);
       }
     }
   });
