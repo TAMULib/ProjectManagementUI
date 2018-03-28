@@ -29,8 +29,8 @@ app.repo("VersionManagementSoftwareRepo", function VersionManagementSoftwareRepo
           }
         }).then(function(res) {
           var apiRes = angular.fromJson(res.body);
-          if (apiRes.meta.status === 'SUCCESS'){
-            resolve(apiRes.payload['HashMap']);
+          if (apiRes.meta.status === 'SUCCESS') {
+            resolve(apiRes.payload['ArrayList<Setting>']);
           } else {
             reject();
           }

@@ -69,10 +69,6 @@ describe('controller: VersionManagementSoftwareController', function() {
       expect(scope.deleteVms).toBeDefined();
       expect(typeof scope.deleteVms).toEqual('function');
     });
-    it('updateType should be defined', function() {
-      expect(scope.updateType).toBeDefined();
-      expect(typeof scope.updateType).toEqual('function');
-    });
   });
 
   describe('Do the scope methods work as expected', function() {
@@ -142,17 +138,7 @@ describe('controller: VersionManagementSoftwareController', function() {
     });
 
     it('editVms should set the vmsToEdit and open the modal', function() {
-      var versionOneScaffolding = {
-          password: 'String',
-          url: 'String',
-          name: 'String'
-      };
-      deferred = $q.defer();
-      deferred.resolve(versionOneScaffolding);
-      scope.$apply();
-
       spyOn(scope, 'openModal');
-      spyOn(VersionManagementSoftwareRepo, 'getTypeScaffolding').and.returnValue(deferred.promise);
       scope.editVms(mockVmses[0]);
 
       expect(scope.vmsToEdit).toEqual(mockVmses[0]);
@@ -217,24 +203,6 @@ describe('controller: VersionManagementSoftwareController', function() {
 
       expect(VersionManagementSoftwareRepo.delete).toHaveBeenCalledWith(VersionManagementSoftware);
       expect(scope.cancelDeleteVms).toHaveBeenCalled();
-    });
-
-    it('updateType should update type settings', function() {
-      var versionOneScaffolding = {
-        password: 'String',
-        url: 'String',
-        name: 'String'
-      };
-      deferred = $q.defer();
-      deferred.resolve(versionOneScaffolding);
-      spyOn(VersionManagementSoftwareRepo, 'getTypeScaffolding').and.returnValue(deferred.promise);
-      scope.updateType('VERSION_ONE');
-      scope.$apply();
-
-
-      expect(VersionManagementSoftwareRepo.getTypeScaffolding).toHaveBeenCalled();
-      expect(scope.typeSettings).toEqual(versionOneScaffolding);
-
     });
 
   });
