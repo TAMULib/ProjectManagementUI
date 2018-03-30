@@ -1,9 +1,8 @@
-angular.module('mock.project', []).service('Project', function($q) {
-  var Project = this;
+angular.module('mock.project', []).service('Project', function ($q) {
 
-  this.save = function() {};
-  this.dirty = function(bool) {};
-  this.refresh = function() {};
+    this.save = function () {};
+    this.dirty = function (dirty) {};
+    this.refresh = function () {};
 
-  return Project;
+    return this;
 });

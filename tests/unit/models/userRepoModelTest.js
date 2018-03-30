@@ -1,10 +1,7 @@
-describe('model: UserRepo', function() {
-	
-	var UserRepo, WsApi;
-	
-	beforeEach(module('core'));
+describe('model: UserRepo', function () {
 
-	beforeEach(module('app'));
-	
-	
+    beforeEach(module('core'));
+
+    beforeEach(module('app'));
+
 });
