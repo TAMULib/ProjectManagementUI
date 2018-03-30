@@ -1,16 +1,15 @@
-describe('model: AssumedControl', function() {
-	
-	var AssumedControl;
+describe('model: AssumedControl', function () {
 
-	beforeEach(module('core'));
+    var AssumedControl;
 
-	beforeEach(module('app'));
-	
-	beforeEach(module('AssumedControl'));
-			
-	beforeEach(inject(function(_AssumedControl_) {
-		AssumedControl = _AssumedControl_;
- 
+    beforeEach(module('core'));
+
+    beforeEach(module('app'));
+
+    beforeEach(module('AssumedControl'));
+
+    beforeEach(inject(function (_AssumedControl_) {
+        AssumedControl = _AssumedControl_;
     }));
 
 });

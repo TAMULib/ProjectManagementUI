@@ -1,44 +1,42 @@
 app.repo("VersionManagementSoftwareRepo", function VersionManagementSoftwareRepo($q, WsApi) {
 
-  var vmsRepo = this;
+    this.scaffold = {
+        name: '',
+        type: ''
+    };
 
-  vmsRepo.scaffold = {
-    name: '',
-    type: ''
-  };
-
-  vmsRepo.getTypes = function() {
-    return $q(function(resolve, reject) {
-      WsApi.fetch(apiMapping.VersionManagementSoftware.types).then(function(res) {
-        var apiRes = angular.fromJson(res.body);
-        if (apiRes.meta.status === 'SUCCESS') {
-          resolve(apiRes.payload['ArrayList<HashMap>']);
-        } else {
-          reject();
-        }
-      });
-    });
-  };
-
-  vmsRepo.getTypeScaffolding = function(type) {
-    return $q(function(resolve, reject) {
-      if (type !== undefined) {
-        WsApi.fetch(apiMapping.VersionManagementSoftware.scaffolding, {
-          pathValues: {
-          type: type
-          }
-        }).then(function(res) {
-          var apiRes = angular.fromJson(res.body);
-          if (apiRes.meta.status === 'SUCCESS') {
-            resolve(apiRes.payload['ArrayList<Setting>']);
-          } else {
-            reject();
-          }
+    this.getTypes = function () {
+        return $q(function (resolve, reject) {
+            WsApi.fetch(apiMapping.VersionManagementSoftware.types).then(function (res) {
+                var apiRes = angular.fromJson(res.body);
+                if (apiRes.meta.status === 'SUCCESS') {
+                    resolve(apiRes.payload['ArrayList<HashMap>']);
+                } else {
+                    reject();
+                }
+            });
         });
-      }
-    });
-  };
+    };
 
-  return vmsRepo;
+    this.getTypeScaffolding = function (type) {
+        return $q(function (resolve, reject) {
+            if (type !== undefined) {
+                WsApi.fetch(apiMapping.VersionManagementSoftware.scaffolding, {
+                    pathValues: {
+                        type: type
+                    }
+                }).then(function (res) {
+                    var apiRes = angular.fromJson(res.body);
+                    if (apiRes.meta.status === 'SUCCESS') {
+                        resolve(apiRes.payload['ArrayList<Setting>']);
+                    } else {
+                        reject();
+                    }
+                });
+            }
+        });
+    };
+
+    return this;
 
 });
