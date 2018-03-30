@@ -6,6 +6,8 @@ $linkColor: #337ab7;
 @import "node_modules/weaver-ui-core/app/resources/styles/sass/main";
 @import "node_modules/weaver-ui-core/app/resources/styles/sass/theme-base";
 
+@import "directives/all";
+
 main {
   display: block;
   height: auto;

@@ -1,0 +1,98 @@
+header {
+    div.tamu-header-nav-bar {
+      background-color: #3c0000;
+      border: 0;
+    }
+  
+    div.tamu-header-title-bar {
+      background-color: #500000;
+      border: 0;
+      border-top: 1px solid #8d8d8d;
+      border-radius: 0;
+      padding: 20px 0;
+      margin-bottom: 0;
+    }
+  
+    .tamu-header-title {
+      font-family: 'Lato', sans-serif;
+      font-size: 30px;
+      font-style: normal;
+      font-variant: normal;
+      color: white;
+    }
+  
+    .tamu-header-title a {
+      color: white;
+      text-decoration: none;
+    }
+  
+    .tamu-header-title a:hover {
+      color: white;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  
+    .tamu-header-brand {
+      margin-top: 0;
+    }
+  
+    .tamu-header-brand-text {
+      margin-left: 10px;
+      font-family: 'Lato', sans-serif;
+      font-size: 18px;
+      font-style: normal;
+      font-variant: normal;
+      color: white;
+    }
+    @media only screen and (max-width: 520px) {
+      .tamu-header-display {
+        display: none;
+      }
+  
+      .tamu-header-display-mobile {
+        display: inline;
+      }
+    }
+    @media only screen and (max-width: 767px) {
+      .tamu-header-title {
+        padding-left: 15px;
+      }
+    }
+    @media only screen and (min-width: 520px) {
+      .tamu-header-display {
+        display: inline;
+      }
+  
+      .tamu-header-display-mobile {
+        display: none;
+      }
+    }
+  
+    .navbar-default .navbar-nav > li > a {
+      color: white;
+    }
+  
+    .navbar-static-top {
+      margin-bottom: 0;
+    }
+  
+    .navbar-brand {
+      padding-top: 10px;
+    }
+  
+    .navbar-header a:hover {
+      text-decoration: none;
+    }
+  
+    .navbar-header li:hover {
+      background-color: black;
+  
+      a span {
+        color: white;
+      }
+    }
+  
+    .navbar-header b {
+      color: white;
+    }
+  }
