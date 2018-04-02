@@ -7,6 +7,7 @@ $linkColor: #337ab7;
 @import "node_modules/weaver-ui-core/app/resources/styles/sass/theme-base";
 
 @import "directives/all";
+@import "management/all";
 
 main {
   display: block;
@@ -21,7 +22,7 @@ main footer {
 }
 
 .appContent {
-  padding-top: 25px;
+  padding-top: 10px;
 }
 
 .error-page {
