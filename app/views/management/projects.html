@@ -4,7 +4,7 @@
   <hr />
 
   <table ng-table="tableParams" show-filter="false" class="table table-bordered table-striped project-table">
-    <tr ng-repeat="project in $data track by project.id">
+    <tr ng-repeat="project in $data | orderBy: 'name'">
       <td title="'Project'">{{project.name}}</td>
       <td title="'Version Management Software'">{{project.versionManagementSoftware.name}}</td>
       <td title="'Version Project'">{{getVersionProject(project).name}}</td>

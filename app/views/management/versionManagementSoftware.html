@@ -4,7 +4,7 @@
   <hr />
   
   <table ng-table="tableParams" show-filter="false" class="table table-bordered table-striped vms-table">
-    <tr ng-repeat="vms in $data track by vms.id">
+    <tr ng-repeat="vms in $data | orderBy: 'name'">
       <td title="'Version Management Software'">{{vms.name}}</td>
       <td title="'Settings'">
         <ul class="list-unstyled">
