@@ -28,6 +28,8 @@
 
   <script src="node_modules/html5-boilerplate/dist/js/vendor/modernizr-3.5.0.min.js"></script>
 
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+
 </head>
 
 <body>
@@ -38,7 +40,7 @@
   <!-- Content placed here will appear on every page -->
   <main>
 
-    <tamuheader title="Project Management"></tamuheader>
+    <custom-header title="Project Management" home="/projects/" login="login()" anonymous="isAnonymous()"></custom-header>
 
     <alerts types="WARNING, ERROR"></alerts>
     <alerts seconds="45" channels="auth/register" types="SUCCESS"></alerts>
@@ -192,6 +194,7 @@
   <script src="config/routes.js"></script>
 
   <!-- Directives -->
+  <script src="directives/customHeaderDirective.js"></script>
   <script src="directives/vmsFormDirective.js"></script>
 
   <!-- Services -->

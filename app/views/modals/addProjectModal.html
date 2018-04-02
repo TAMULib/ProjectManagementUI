@@ -4,7 +4,7 @@
 </div>
 
 <form name="projectForms.create" ng-submit="createProject()" novalidate class="project-forms-create">
-  
+
   <validationmessage results="projectForms.getResults()"></validationmessage>
 
   <div class="modal-body">
@@ -13,9 +13,9 @@
       property="name"
       label="Name"
       placeholder="Name of the Project"
-      form="forms.create"
+      form="projectForms.create"
       validations="projectForms.validations"
-      results="projectForms.getResults()">
+      results="projectRepo.getResults()">
     </validatedinput>
 
     <div class="form-group">
@@ -34,7 +34,7 @@
 
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn" ng-click="cancelCreateProject()">Cancel</button>
-    <button type="submit" class="btn btn-success">Create</button>
+    <button type="button" class="btn btn-default" ng-click="cancelCreateProject()">Cancel</button>
+    <button type="submit" class="btn btn-success" ng-disabled="projectForms.create.$invalid">Create</button>
   </div>
 </form>
