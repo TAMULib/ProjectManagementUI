@@ -1,0 +1,9 @@
+<div ng-repeat="setting in managementSettings" class=form-group>
+  <label for="{{setting.key}}-input">{{setting.gloss}}</label>
+  <input
+    class="form-control"
+    id="{{setting.key}}"
+    type="{{setting.key === 'password' ? 'password' : 'text'}}"
+    ng-model="model.settings[setting.key]"
+    placeholder="{{setting.gloss}} for Version Management Software"/>
+</div>

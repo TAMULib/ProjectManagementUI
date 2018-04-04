@@ -28,17 +28,19 @@
 
   <script src="node_modules/html5-boilerplate/dist/js/vendor/modernizr-3.5.0.min.js"></script>
 
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+
 </head>
 
 <body>
   <!--[if lt IE 7]>
-    	<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-	<![endif]-->
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
 
   <!-- Content placed here will appear on every page -->
   <main>
 
-    <tamuheader title="Project Management"></tamuheader>
+    <custom-header title="Project Management" home="/projects/" login="login()" anonymous="isAnonymous()"></custom-header>
 
     <alerts types="WARNING, ERROR"></alerts>
     <alerts seconds="45" channels="auth/register" types="SUCCESS"></alerts>
@@ -192,24 +194,32 @@
   <script src="config/routes.js"></script>
 
   <!-- Directives -->
+  <script src="directives/customHeaderDirective.js"></script>
+  <script src="directives/vmsFormDirective.js"></script>
 
   <!-- Services -->
+  <script src="services/versionProjectService.js"></script>
 
   <!-- Factories -->
+
+  <!-- Filters -->
 
   <!-- Repos -->
   <script src="repo/abstractAppRepo.js"></script>
   <script src="repo/projectRepo.js"></script>
   <script src="repo/userRepo.js"></script>
+  <script src="repo/versionManagementSoftwareRepo.js"></script>
 
   <!-- Models -->
   <script src="model/abstractAppModel.js"></script>
   <script src="model/project.js"></script>
+  <script src="model/versionManagementSoftware.js"></script>
 
   <!-- Controllers -->
   <script src="controllers/managementController.js"></script>
   <script src="controllers/projectController.js"></script>
   <script src="controllers/userRepoController.js"></script>
+  <script src="controllers/versionManagementSoftwareController.js"></script>
 
   <!-- endbuild -->
 
@@ -230,7 +240,6 @@
     ga('create', 'UA-XXXXX-X');
     ga('send', 'pageview');
   </script>
-
 
 </body>
 

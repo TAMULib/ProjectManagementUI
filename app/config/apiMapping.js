@@ -1,58 +1,113 @@
 // CONVENTION: must match model name, case sensitive
 var apiMapping = {
-  Project: {
-    validations: true,
-    lazy: true,
-    channel: '/channel/project',
-    all: {
-      'endpoint': '/private/queue',
-      'controller': 'projects',
-      'method': '',
-      'httpMethod': 'GET'
+    Project: {
+        validations: true,
+        lazy: true,
+        channel: '/channel/projects',
+        all: {
+            'endpoint': '/private/queue',
+            'controller': 'projects',
+            'method': '',
+            'httpMethod': 'GET'
+        },
+        create: {
+            'endpoint': '/private/queue',
+            'controller': 'projects',
+            'method': '',
+            'httpMethod': 'POST'
+        },
+        update: {
+            'endpoint': '/private/queue',
+            'controller': 'projects',
+            'method': '',
+            'httpMethod': 'PUT'
+        },
+        remove: {
+            'endpoint': '/private/queue',
+            'controller': 'projects',
+            'method': '',
+            'httpMethod': 'DELETE'
+        },
+        listen: {
+            'endpoint': '/channel',
+            'controller': 'projects'
+        }
     },
-    create: {
-      'endpoint': '/private/queue',
-      'controller': 'projects',
-      'method': '',
-      'httpMethod': 'POST'
+    User: {
+        lazy: true,
+        channel: '/channel/users',
+        instantiate: {
+            'endpoint': '/private/queue',
+            'controller': 'users',
+            'method': 'credentials'
+        },
+        all: {
+            'endpoint': '/private/queue',
+            'controller': 'users'
+        },
+        listen: {
+            'endpoint': '/channel',
+            'controller': 'users'
+        },
+        update: {
+            'endpoint': '/private/queue',
+            'controller': 'users',
+            'method': 'update'
+        }
     },
-    update: {
-      'endpoint': '/private/queue',
-      'controller': 'projects',
-      'method': '',
-      'httpMethod': 'PUT'
+    VersionManagementSoftware: {
+        validations: true,
+        lazy: true,
+        channel: '/channel/version-management-software',
+        all: {
+            'endpoint': '/private/queue',
+            'controller': 'version-management-software',
+            'method': '',
+            'httpMethod': 'GET'
+        },
+        create: {
+            'endpoint': '/private/queue',
+            'controller': 'version-management-software',
+            'method': '',
+            'httpMethod': 'POST'
+        },
+        update: {
+            'endpoint': '/private/queue',
+            'controller': 'version-management-software',
+            'method': '',
+            'httpMethod': 'PUT'
+        },
+        remove: {
+            'endpoint': '/private/queue',
+            'controller': 'version-management-software',
+            'method': '',
+            'httpMethod': 'DELETE'
+        },
+        listen: {
+            'endpoint': '/channel',
+            'controller': 'version-management-software'
+        },
+        types: {
+            'endpoint': '/channel',
+            'controller': 'version-management-software',
+            'method': 'types/',
+            'httpMethod': 'GET'
+        },
+        scaffolding: {
+            'endpoint': '/channel',
+            'controller': 'version-management-software',
+            'method': 'scaffolding/:type/',
+            'httpMethod': 'GET'
+        }
     },
-    remove: {
-      'endpoint': '/private/queue',
-      'controller': 'projects',
-      'method': '',
-      'httpMethod': 'DELETE'
-    },
-    listen: {
-      'endpoint': '/channel',
-      'controller': 'projects'
+    VersionProject: {
+        all: {
+            'endpoint': '/private/queue',
+            'controller': 'projects'
+        },
+        getByScopeId: {
+            'endpoint': '/private/queue',
+            'controller': 'projects'
+        }
     }
-  },
-  User: {
-    lazy: true,
-    instantiate: {
-      'endpoint': '/private/queue',
-      'controller': 'user',
-      'method': 'credentials'
-    },
-    all: {
-      'endpoint': '/private/queue',
-      'controller': 'user',
-      'method': 'all'
-    },
-    listen: {
-      'endpoint': '/channel',
-      'controller': 'user'
-    },
-    update: {
-      'endpoint': '/private/queue',
-      'controller': 'user',
-      'method': 'update'
-    }
-  }
 };

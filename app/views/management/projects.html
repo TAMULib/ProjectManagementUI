@@ -4,9 +4,12 @@
   <hr />
 
   <table ng-table="tableParams" show-filter="false" class="table table-bordered table-striped project-table">
-    <tr ng-repeat="project in $data track by project.id">
+    <tr ng-repeat="project in $data | orderBy: 'name'">
       <td title="'Project'">{{project.name}}</td>
-      <td class="actions-column" title="'Actions'">
+      <td title="'Version Management Software'">{{project.versionManagementSoftware.name}}</td>
+      <td title="'Version Project'">{{getVersionProject(project).name}}</td>
+      <td title="'Scope Id'">{{project.scopeId}}</td>
+      <td class="actions-column text-center" title="'Actions'">
         <span class="glyphicon glyphicon-pencil" title="edit" ng-click="editProject(project)"></span>
         <span class="glyphicon glyphicon-trash" title="delete" ng-click="confirmDeleteProject(project)"></span>
       </td>

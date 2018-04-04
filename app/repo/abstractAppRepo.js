@@ -1,13 +1,12 @@
 app.service("AbstractAppRepo", function () {
 
-	return function AbstractAppRepo() {
+    return function AbstractAppRepo() {
 
-		this.getScaffold = function(defaults) {
-			if(!defaults) defaults = {};
-			return angular.copy(angular.extend(this.scaffold, defaults));
-		};
+        this.getScaffold = function (defaults) {
+            return angular.copy(angular.extend(this.scaffold, defaults ? deafults : {}));
+        };
 
-		return this;
-	};
+        return this;
+    };
 
 });

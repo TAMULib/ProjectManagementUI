@@ -1,5 +1,5 @@
 <IfModule mod_rewrite.c>
-	RewriteEngine On
+    RewriteEngine On
     RewriteBase /projects/
     RewriteCond %{HTTP:X-Requested-With} !XMLHttpRequest$
     RewriteCond %{REQUEST_FILENAME} !-f

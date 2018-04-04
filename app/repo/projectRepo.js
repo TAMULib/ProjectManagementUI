@@ -1,11 +1,9 @@
-app.repo("ProjectRepo", function ProjectRepo($timeout) {
+app.repo("ProjectRepo", function ProjectRepo() {
 
-  var projectRepo = this;
+    this.scaffold = {
+        name: ''
+    };
 
-  projectRepo.scaffold = {
-    name: ''
-  };
-
-  return projectRepo;
+    return this;
 
 });
