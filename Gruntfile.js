@@ -206,8 +206,7 @@ module.exports = function (grunt) {
 			coveralls: {
 				options: {
 					debug: true,
-					coverageDir: 'app/',
-					dryRun: true
+					coverageDir: 'app/'
 				}
 			}
 
