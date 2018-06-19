@@ -6,7 +6,7 @@
   "repository": "https://github.com/TAMULib/ProjectManagementUI.git",
   "license": "MIT",
   "scripts": {
-    "postinstall": "grunt",
+    "prestart": "npm install -g grunt-cli",
     "pretest": "npm install",
     "test": "karma start karma.conf.js",
     "test-single-run": "karma start karma.conf.js  --single-run",
