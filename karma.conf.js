@@ -5,7 +5,8 @@ module.exports = function (config) {
             "app/**/*.js": "coverage",
             '**/*.html': ['ng-html2js']
         },
-        reporters: ['coverage'],
+
+        reporters: ['progress', 'coverage'],
 
         basePath: './',
 
@@ -30,9 +31,6 @@ module.exports = function (config) {
 
             'node_modules/ng-table/bundles/ng-table.min.js',
 
-            'node_modules/tinymce/tinymce.min.js',
-            'node_modules/angular-ui-tinymce/dist/tinymce.min.js',
-
             'node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js',
 
 
@@ -47,8 +45,6 @@ module.exports = function (config) {
 
             'app/config/appConfig.js',
             'app/config/apiMapping.js',
-
-            'app/components/**/*.js',
 
             'node_modules/weaver-ui-core/app/core.js',
 
@@ -109,8 +105,6 @@ module.exports = function (config) {
             'app/controllers/**/*.js',
 
             'app/directives/**/*.js',
-
-            'app/filters/**/*.js',
 
             'app/services/**/*.js',
 
