@@ -1,8 +1,8 @@
-<div class="management-table" ng-controller="VersionManagementSoftwareController">
+<div class="management-table" ng-controller="RemoteProjectManagerController">
 
-  <button class="btn btn-default view-action-button" ng-click="openModal('#addVmsModal')">Add a Version Management Software</button>
+  <button class="btn btn-default view-action-button" ng-click="openModal('#addRemoteProjectManagerModal')">Add a Version Management Software</button>
   <hr />
-  
+
   <table ng-table="tableParams" show-filter="false" class="table table-bordered table-striped vms-table">
     <tr ng-repeat="vms in $data | orderBy: 'name'">
       <td title="'Version Management Software'">{{vms.name}}</td>
@@ -15,13 +15,16 @@
         </ul>
       </td>
       <td class="actions-column text-center" title="'Actions'">
-        <span class="glyphicon glyphicon-pencil" title="edit" ng-click="editVms(vms)"></span>
-        <span class="glyphicon glyphicon-trash" title="delete" ng-click="confirmDeleteVms(vms)"></span>
+        <span class="glyphicon glyphicon-pencil" title="edit" ng-click="editRemoteProjectManager(vms)"></span>
+        <span class="glyphicon glyphicon-trash" title="delete" ng-click="confirmDeleteRemoteProjectManager(vms)"></span>
       </td>
     </tr>
   </table>
 
-  <modal modal-id="addVmsModal" modal-view="views/modals/addVmsModal.html" modal-header-class="modal-header-primary" wvr-modal-backdrop="static"></modal>
-  <modal modal-id="deleteVmsModal" modal-view="views/modals/deleteVmsModal.html" modal-header-class="modal-header-danger" wvr-modal-backdrop="static"></modal>
-  <modal modal-id="editVmsModal" modal-view="views/modals/editVmsModal.html" modal-header-class="modal-header-primary" wvr-modal-backdrop="static"></modal>
+  <modal modal-id="addRemoteProjectManagerModal" modal-view="views/modals/addRemoteProjectManagerModal.html" modal-header-class="modal-header-primary"
+    wvr-modal-backdrop="static"></modal>
+  <modal modal-id="deleteRemoteProjectManagerModal" modal-view="views/modals/deleteRemoteProjectManagerModal.html" modal-header-class="modal-header-danger"
+    wvr-modal-backdrop="static"></modal>
+  <modal modal-id="editRemoteProjectManagerModal" modal-view="views/modals/editRemoteProjectManagerModal.html" modal-header-class="modal-header-primary"
+    wvr-modal-backdrop="static"></modal>
 </div>

@@ -1,4 +1,4 @@
-app.service('VersionProjectService', function ($q, WsApi) {
+app.service('RemoteProjectService', function ($q, WsApi) {
 
     this.getAll = function (vmsId) {
         angular.extend(apiMapping.VersionProject.all, {

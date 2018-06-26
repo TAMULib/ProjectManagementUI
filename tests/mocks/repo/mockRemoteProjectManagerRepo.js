@@ -1,4 +1,4 @@
-var mockRemoteProjectManageres = [{
+var mockRemoteProjectManagers = [{
         "id": 1,
         "name": "Test 1",
         "type": "VERSION_ONE",
@@ -34,7 +34,7 @@ angular.module('mock.remoteProjectManagerRepo', []).service('RemoteProjectManage
 
     this.scaffold = {};
 
-    this.list = mockRemoteProjectManageres;
+    this.list = mockRemoteProjectManagers;
 
     this.getAll = function () {
         var defer = $q.defer();

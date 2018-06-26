@@ -1,22 +1,22 @@
 describe('controller: ProjectController', function () {
 
-    var scope, controller, ProjectRepo, VersionManagementSoftwareRepo;
+    var scope, controller, ProjectRepo, RemoteProjectManagerRepo;
 
     beforeEach(module('core'));
     beforeEach(module('app'));
     beforeEach(module('app/views/modals/addProjectModal.html'));
     beforeEach(module('mock.project'));
     beforeEach(module('mock.projectRepo'));
-    beforeEach(module('mock.versionManagementSoftwareRepo'));
-    beforeEach(module('mock.versionProjectService'));
+    beforeEach(module('mock.remoteProjectManagerRepo'));
+    beforeEach(module('mock.remoteProjectService'));
 
-    beforeEach(inject(function ($controller, $rootScope, $templateCache, _$compile_, _$q_, _$templateRequest_, _ModalService_, _Project_, _ProjectRepo_, _VersionManagementSoftwareRepo_, _VersionProjectService_) {
+    beforeEach(inject(function ($controller, $rootScope, $templateCache, _$compile_, _$q_, _$templateRequest_, _ModalService_, _Project_, _ProjectRepo_, _RemoteProjectManagerRepo_, _RemoteProjectService_) {
         installPromiseMatchers();
         scope = $rootScope.$new();
         Project = _Project_;
         ProjectRepo = _ProjectRepo_;
-        VersionManagementSoftwareRepo = _VersionManagementSoftwareRepo_;
-        VersionProjectService = _VersionProjectService_;
+        RemoteProjectManagerRepo = _RemoteProjectManagerRepo_;
+        RemoteProjectService = _RemoteProjectService_;
         $compile = _$compile_;
         $q = _$q_;
         cache = $templateCache;
@@ -27,8 +27,8 @@ describe('controller: ProjectController', function () {
             ModalService: _ModalService_,
             Project: _Project_,
             ProjectRepo: _ProjectRepo_,
-            VersionManagementSoftwareRepo: _VersionManagementSoftwareRepo_,
-            VersionProjectService: _VersionProjectService_
+            RemoteProjectManagerRepo: _RemoteProjectManagerRepo_,
+            RemoteProjectService: _RemoteProjectService_
         });
     }));
 

@@ -1,81 +1,81 @@
-app.controller('VersionManagementSoftwareController', function ($controller, $scope, $filter, $rootScope, ApiResponseActions, NgTableParams, VersionManagementSoftware, VersionManagementSoftwareRepo) {
+app.controller('RemoteProjectManagerController', function ($controller, $scope, $filter, $rootScope, ApiResponseActions, NgTableParams, RemoteProjectManager, RemoteProjectManagerRepo) {
 
     angular.extend(this, $controller('AbstractController', {
         $scope: $scope
     }));
 
-    $scope.vmses = VersionManagementSoftwareRepo.getAll();
+    $scope.vmses = RemoteProjectManagerRepo.getAll();
 
-    $scope.vmsToCreate = VersionManagementSoftwareRepo.getScaffold();
+    $scope.vmsToCreate = RemoteProjectManagerRepo.getScaffold();
 
     $scope.vmsToEdit = {};
     $scope.vmsToDelete = {};
 
-    VersionManagementSoftwareRepo.getTypes().then(function (types) {
+    RemoteProjectManagerRepo.getTypes().then(function (types) {
         $scope.serviceTypes = types;
     });
 
-    $scope.vmsForms = {
-        validations: VersionManagementSoftwareRepo.getValidations(),
-        getResults: VersionManagementSoftwareRepo.getValidationResults
+    $scope.remoteProjectManagerForms = {
+        validations: RemoteProjectManagerRepo.getValidations(),
+        getResults: RemoteProjectManagerRepo.getValidationResults
     };
 
-    $scope.resetVmsForms = function () {
-        VersionManagementSoftwareRepo.clearValidationResults();
-        for (var key in $scope.vmsForms) {
-            if ($scope.vmsForms[key] !== undefined && !$scope.vmsForms[key].$pristine && $scope.vmsForms[key].$setPristine) {
-                $scope.vmsForms[key].$setPristine();
+    $scope.resetRemoteProjectManagerForms = function () {
+        RemoteProjectManagerRepo.clearValidationResults();
+        for (var key in $scope.remoteProjectManagerForms) {
+            if ($scope.remoteProjectManagerForms[key] !== undefined && !$scope.remoteProjectManagerForms[key].$pristine && $scope.remoteProjectManagerForms[key].$setPristine) {
+                $scope.remoteProjectManagerForms[key].$setPristine();
             }
         }
         $scope.closeModal();
     };
 
-    $scope.resetVmsForms();
+    $scope.resetRemoteProjectManagerForms();
 
-    $scope.createVms = function () {
-        VersionManagementSoftwareRepo.create($scope.vmsToCreate).then(function (res) {
+    $scope.createRemoteProjectManager = function () {
+        RemoteProjectManagerRepo.create($scope.vmsToCreate).then(function (res) {
             if (angular.fromJson(res.body).meta.status === 'SUCCESS') {
-                $scope.cancelCreateVms();
+                $scope.cancelCreateRemoteProjectManager();
             }
         });
     };
 
-    $scope.cancelCreateVms = function () {
-        $scope.vmsToCreate = VersionManagementSoftwareRepo.getScaffold();
-        $scope.resetVmsForms();
+    $scope.cancelCreateRemoteProjectManager = function () {
+        $scope.vmsToCreate = RemoteProjectManagerRepo.getScaffold();
+        $scope.resetRemoteProjectManagerForms();
     };
 
-    $scope.editVms = function (vms) {
+    $scope.editRemoteProjectManager = function (vms) {
         $scope.vmsToEdit = angular.copy(vms);
-        $scope.openModal('#editVmsModal');
+        $scope.openModal('#editRemoteProjectManagerModal');
     };
 
-    $scope.updateVms = function () {
+    $scope.updateRemoteProjectManager = function () {
         $scope.vmsToEdit.dirty(true);
         $scope.vmsToEdit.save().then(function () {
-            $scope.cancelEditVms();
+            $scope.cancelEditRemoteProjectManager();
         });
     };
 
-    $scope.cancelEditVms = function () {
+    $scope.cancelEditRemoteProjectManager = function () {
         $scope.vmsToEdit.refresh();
-        $scope.resetVmsForms();
+        $scope.resetRemoteProjectManagerForms();
     };
 
-    $scope.confirmDeleteVms = function (vms) {
+    $scope.confirmDeleteRemoteProjectManager = function (vms) {
         $scope.vmsToDelete = vms;
-        $scope.openModal('#deleteVmsModal');
+        $scope.openModal('#deleteRemoteProjectManagerModal');
     };
 
-    $scope.cancelDeleteVms = function () {
+    $scope.cancelDeleteRemoteProjectManager = function () {
         $scope.vmsToDelete = {};
         $scope.closeModal();
     };
 
-    $scope.deleteVms = function (vms) {
-        VersionManagementSoftwareRepo.delete(vms).then(function (res) {
+    $scope.deleteRemoteProjectManager = function (vms) {
+        RemoteProjectManagerRepo.delete(vms).then(function (res) {
             if (angular.fromJson(res.body).meta.status === 'SUCCESS') {
-                $scope.cancelDeleteVms();
+                $scope.cancelDeleteRemoteProjectManager();
             }
         });
     };
@@ -90,9 +90,9 @@ app.controller('VersionManagementSoftwareController', function ($controller, $sc
     };
 
     var buildTable = function () {
-        var allVmses = VersionManagementSoftwareRepo.getAll();
+        var allRemoteProjectManageres = RemoteProjectManagerRepo.getAll();
         $scope.tableParams = new NgTableParams({
-            count: allVmses.length,
+            count: allRemoteProjectManageres.length,
             sorting: {
                 name: 'ASC'
             }
@@ -105,11 +105,11 @@ app.controller('VersionManagementSoftwareController', function ($controller, $sc
         });
     };
 
-    VersionManagementSoftwareRepo.ready().then(function () {
+    RemoteProjectManagerRepo.ready().then(function () {
         buildTable();
     });
 
-    VersionManagementSoftwareRepo.listen([ApiResponseActions.CREATE, ApiResponseActions.DELETE, ApiResponseActions.UPDATE], function (arg) {
+    RemoteProjectManagerRepo.listen([ApiResponseActions.CREATE, ApiResponseActions.DELETE, ApiResponseActions.UPDATE], function (arg) {
         buildTable();
     });
 
