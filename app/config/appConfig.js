@@ -8,8 +8,8 @@ var appConfig = {
 
   // Set this to the webService if mocking AuthService
 
-  'authService': 'http://labs.library.tamu.edu/auth3',
-  'webService': 'http://janus.evans.tamu.edu:9002',
+  'authService': 'https://labs.library.tamu.edu/auth3',
+  'webService': 'http://localhost:9002',
 
   'storageType': 'session',
 
