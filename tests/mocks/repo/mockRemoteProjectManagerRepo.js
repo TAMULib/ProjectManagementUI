@@ -61,11 +61,11 @@ angular.module('mock.remoteProjectManagerRepo', []).service('RemoteProjectManage
         return defer.promise;
     };
 
-    this.create = function (vms) {
+    this.create = function (remoteProjectManager) {
         var defer = $q.defer();
-        vms.id = this.list.length + 1;
-        this.list.push(vms);
-        defer.resolve(vms);
+        remoteProjectManager.id = this.list.length + 1;
+        this.list.push(remoteProjectManager);
+        defer.resolve(remoteProjectManager);
         return defer.promise;
     };
 

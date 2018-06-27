@@ -15,16 +15,17 @@
     </validatedinput>
 
     <div class="form-group">
-      <label for="vms">Associate Version Management Software</label>
-      <select class="form-control" ng-options="vms.name for vms in vmses" ng-model="projectToCreate.remoteProjectManager" name="vms">
+      <label for="remoteProjectManager">Associate Version Management Software</label>
+      <select class="form-control" ng-options="remoteProjectManager.name for remoteProjectManager in remoteProjectManagers" ng-model="projectToCreate.remoteProjectManager"
+        name="remoteProjectManager">
         <option value="" selected>None</option>
       </select>
     </div>
 
     <div class="form-group" ng-if="projectToCreate.remoteProjectManager">
-      <label for="vms">Associate Version Project</label>
+      <label for="remoteProjectManager">Associate Version Project</label>
       <select class="form-control" ng-options="vp.scopeId as vp.name for vp in getRemoteProjectManagerVersionProjects(projectToCreate.remoteProjectManager.id) | orderBy:'name'"
-        ng-model="projectToCreate.scopeId" name="vms">
+        ng-model="projectToCreate.scopeId" name="remoteProjectManager">
         <option value="" selected>None</option>
       </select>
     </div>

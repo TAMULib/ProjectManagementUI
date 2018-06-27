@@ -4,7 +4,7 @@ app.controller('ProjectController', function ($controller, $scope, $rootScope, N
         $scope: $scope
     }));
 
-    $scope.vmses = RemoteProjectManagerRepo.getAll();
+    $scope.remoteProjectManagers = RemoteProjectManagerRepo.getAll();
 
     $scope.projects = ProjectRepo.getAll();
 
@@ -94,28 +94,28 @@ app.controller('ProjectController', function ($controller, $scope, $rootScope, N
         });
     };
 
-    $scope.vmsVersionProjects = {};
+    $scope.remoteProjects = {};
 
     var getRemoteProjectManagerById = function (id) {
-        RemoteProjectService.getAll(id).then(function (versionProjects) {
-            $scope.vmsVersionProjects[id] = versionProjects;
+        RemoteProjectService.getAll(id).then(function (remoteProjects) {
+            $scope.remoteProjects[id] = remoteProjects;
         });
     };
 
     RemoteProjectManagerRepo.ready().then(function () {
-        for (var i in $scope.vmses) {
+        for (var i in $scope.remoteProjectManagers) {
             if (i !== 'visibleColumnCount') {
-                getRemoteProjectManagerById($scope.vmses[i].id);
+                getRemoteProjectManagerById($scope.remoteProjectManagers[i].id);
             }
         }
     });
 
-    $scope.getRemoteProjectManagerVersionProjects = function (vmsId) {
-        return $scope.vmsVersionProjects[vmsId];
+    $scope.getRemoteProjectManagerVersionProjects = function (remoteProjectManagerId) {
+        return $scope.remoteProjects[remoteProjectManagerId];
     };
 
-    $scope.getRemoteProjectManagerVersionProjects = function (vmsId) {
-        return $scope.vmsVersionProjects[vmsId];
+    $scope.getRemoteProjectManagerVersionProjects = function (remoteProjectManagerId) {
+        return $scope.remoteProjects[remoteProjectManagerId];
     };
 
     $scope.getVersionProject = function (project) {

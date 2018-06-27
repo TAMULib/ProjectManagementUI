@@ -4,7 +4,7 @@ app.controller('RemoteProjectManagerController', function ($controller, $scope, 
         $scope: $scope
     }));
 
-    $scope.vmses = RemoteProjectManagerRepo.getAll();
+    $scope.remoteProjectManagers = RemoteProjectManagerRepo.getAll();
 
     $scope.vmsToCreate = RemoteProjectManagerRepo.getScaffold();
 
@@ -45,8 +45,8 @@ app.controller('RemoteProjectManagerController', function ($controller, $scope, 
         $scope.resetRemoteProjectManagerForms();
     };
 
-    $scope.editRemoteProjectManager = function (vms) {
-        $scope.vmsToEdit = angular.copy(vms);
+    $scope.editRemoteProjectManager = function (remoteProjectManager) {
+        $scope.vmsToEdit = angular.copy(remoteProjectManager);
         $scope.openModal('#editRemoteProjectManagerModal');
     };
 
@@ -62,8 +62,8 @@ app.controller('RemoteProjectManagerController', function ($controller, $scope, 
         $scope.resetRemoteProjectManagerForms();
     };
 
-    $scope.confirmDeleteRemoteProjectManager = function (vms) {
-        $scope.vmsToDelete = vms;
+    $scope.confirmDeleteRemoteProjectManager = function (remoteProjectManager) {
+        $scope.vmsToDelete = remoteProjectManager;
         $scope.openModal('#deleteRemoteProjectManagerModal');
     };
 
@@ -72,8 +72,8 @@ app.controller('RemoteProjectManagerController', function ($controller, $scope, 
         $scope.closeModal();
     };
 
-    $scope.deleteRemoteProjectManager = function (vms) {
-        RemoteProjectManagerRepo.delete(vms).then(function (res) {
+    $scope.deleteRemoteProjectManager = function (remoteProjectManager) {
+        RemoteProjectManagerRepo.delete(remoteProjectManager).then(function (res) {
             if (angular.fromJson(res.body).meta.status === 'SUCCESS') {
                 $scope.cancelDeleteRemoteProjectManager();
             }
@@ -100,7 +100,7 @@ app.controller('RemoteProjectManagerController', function ($controller, $scope, 
             counts: [],
             total: 0,
             getData: function (params) {
-                return $scope.vmses;
+                return $scope.remoteProjectManagers;
             }
         });
     };

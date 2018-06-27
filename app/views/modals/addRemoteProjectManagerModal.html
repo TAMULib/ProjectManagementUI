@@ -5,7 +5,7 @@
   <h4 class="modal-title">Create Version Management Software</h4>
 </div>
 
-<form name="remoteProjectManagerForms.create" ng-submit="createRemoteProjectManager()" novalidate class="vms-forms-create">
+<form name="remoteProjectManagerForms.create" ng-submit="createRemoteProjectManager()" novalidate class="remoteProjectManager-forms-create">
 
   <validationmessage results="remoteProjectManagerForms.getResults()"></validationmessage>
 
@@ -18,8 +18,8 @@
       form="remoteProjectManagerForms.create" validations="remoteProjectManagerForms.validations" results="remoteProjectManagerForms.getResults()">
     </validatedselect>
 
-    <vms-form ng-if="vmsToCreate.type" management-settings="typeSettings(vmsToCreate.type)" model="vmsToCreate">
-    </vms-form>
+    <remoteProjectManager-form ng-if="vmsToCreate.type" management-settings="typeSettings(vmsToCreate.type)" model="vmsToCreate">
+    </remoteProjectManager-form>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-default" ng-click="cancelCreateRemoteProjectManager()">Cancel</button>

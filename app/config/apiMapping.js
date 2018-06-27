@@ -100,7 +100,7 @@ var apiMapping = {
             'httpMethod': 'GET'
         }
     },
-    VersionProject: {
+    RemoteProject: {
         all: {
             'endpoint': '/private/queue',
             'controller': 'projects'

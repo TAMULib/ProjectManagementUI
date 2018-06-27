@@ -18,8 +18,8 @@
       form="remoteProjectManagerForms.edit" validations="remoteProjectManagerForms.validations" results="remoteProjectManagerForms.getResults()">
     </validatedselect>
 
-    <vms-form ng-if="vmsToEdit.type" management-settings="typeSettings(vmsToEdit.type)" model="vmsToEdit">
-    </vms-form>
+    <remoteProjectManager-form ng-if="vmsToEdit.type" management-settings="typeSettings(vmsToEdit.type)" model="vmsToEdit">
+    </remoteProjectManager-form>
   </div>
 
   <div class="modal-footer">
