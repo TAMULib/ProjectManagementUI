@@ -9,7 +9,7 @@ app.config(function ($routeProvider) {
         access: ["ROLE_ADMIN", "ROLE_MANGER"]
     }).
     when('/projects', {
-        templateUrl: '/views/management/projects.html',
+        templateUrl: 'views/management/projects.html',
         access: ["ROLE_ADMIN", "ROLE_MANGER"]
     }).
     when('/home', {
