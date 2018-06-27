@@ -9,7 +9,7 @@ var appConfig = {
   // Set this to the webService if mocking AuthService
 
   'authService': 'https://labs.library.tamu.edu/auth3',
-  'webService': 'http://localhost:9002',
+  'webService': 'http://localhost:9001',
 
   'storageType': 'session',
 
@@ -35,4 +35,5 @@ var appConfig = {
   // otherwise set to null or false
 
   'mockRole': null
+
 };
