@@ -118,7 +118,7 @@ app.controller('ProjectController', function ($controller, $scope, $rootScope, N
         return $scope.remoteProjects[remoteProjectManagerId];
     };
 
-    $scope.getVersionProject = function (project) {
+    $scope.getRemoteProject = function (project) {
         if (project.scopeId && project.remoteProjectManager && !project.versionProject) {
             project.versionProject = {};
             RemoteProjectService.getByScopeId(project.remoteProjectManager.id, project.scopeId).then(function (versionProject) {

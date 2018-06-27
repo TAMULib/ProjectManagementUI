@@ -10,15 +10,16 @@
   <validationmessage results="remoteProjectManagerForms.getResults()"></validationmessage>
 
   <div class="modal-body">
-    <validatedinput model="vmsToEdit" property="name" label="Name" placeholder="Name of the Version Management Software" form="remoteProjectManagerForms.edit"
-      validations="remoteProjectManagerForms.validations" results="remoteProjectManagerForms.getResults()">
+    <validatedinput model="remoteProjectManagerToEdit" property="name" label="Name" placeholder="Name of the Version Management Software"
+      form="remoteProjectManagerForms.edit" validations="remoteProjectManagerForms.validations" results="remoteProjectManagerForms.getResults()">
     </validatedinput>
 
-    <validatedselect options="serviceTypes" optionvalue="value" optionproperty="gloss" model="vmsToEdit" property="type" label="Type"
-      form="remoteProjectManagerForms.edit" validations="remoteProjectManagerForms.validations" results="remoteProjectManagerForms.getResults()">
+    <validatedselect options="serviceTypes" optionvalue="value" optionproperty="gloss" model="remoteProjectManagerToEdit" property="type"
+      label="Type" form="remoteProjectManagerForms.edit" validations="remoteProjectManagerForms.validations" results="remoteProjectManagerForms.getResults()">
     </validatedselect>
 
-    <remoteProjectManager-form ng-if="vmsToEdit.type" management-settings="typeSettings(vmsToEdit.type)" model="vmsToEdit">
+    <remoteProjectManager-form ng-if="remoteProjectManagerToEdit.type" management-settings="typeSettings(remoteProjectManagerToEdit.type)"
+      model="remoteProjectManagerToEdit">
     </remoteProjectManager-form>
   </div>
 

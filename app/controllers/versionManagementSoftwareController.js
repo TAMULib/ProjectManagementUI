@@ -6,10 +6,10 @@ app.controller('RemoteProjectManagerController', function ($controller, $scope, 
 
     $scope.remoteProjectManagers = RemoteProjectManagerRepo.getAll();
 
-    $scope.vmsToCreate = RemoteProjectManagerRepo.getScaffold();
+    $scope.remoteProjectManagerToCreate = RemoteProjectManagerRepo.getScaffold();
 
-    $scope.vmsToEdit = {};
-    $scope.vmsToDelete = {};
+    $scope.remoteProjectManagerToEdit = {};
+    $scope.remoteProjectManagerToDelete = {};
 
     RemoteProjectManagerRepo.getTypes().then(function (types) {
         $scope.serviceTypes = types;
@@ -33,7 +33,7 @@ app.controller('RemoteProjectManagerController', function ($controller, $scope, 
     $scope.resetRemoteProjectManagerForms();
 
     $scope.createRemoteProjectManager = function () {
-        RemoteProjectManagerRepo.create($scope.vmsToCreate).then(function (res) {
+        RemoteProjectManagerRepo.create($scope.remoteProjectManagerToCreate).then(function (res) {
             if (angular.fromJson(res.body).meta.status === 'SUCCESS') {
                 $scope.cancelCreateRemoteProjectManager();
             }
@@ -41,34 +41,34 @@ app.controller('RemoteProjectManagerController', function ($controller, $scope, 
     };
 
     $scope.cancelCreateRemoteProjectManager = function () {
-        $scope.vmsToCreate = RemoteProjectManagerRepo.getScaffold();
+        $scope.remoteProjectManagerToCreate = RemoteProjectManagerRepo.getScaffold();
         $scope.resetRemoteProjectManagerForms();
     };
 
     $scope.editRemoteProjectManager = function (remoteProjectManager) {
-        $scope.vmsToEdit = angular.copy(remoteProjectManager);
+        $scope.remoteProjectManagerToEdit = angular.copy(remoteProjectManager);
         $scope.openModal('#editRemoteProjectManagerModal');
     };
 
     $scope.updateRemoteProjectManager = function () {
-        $scope.vmsToEdit.dirty(true);
-        $scope.vmsToEdit.save().then(function () {
+        $scope.remoteProjectManagerToEdit.dirty(true);
+        $scope.remoteProjectManagerToEdit.save().then(function () {
             $scope.cancelEditRemoteProjectManager();
         });
     };
 
     $scope.cancelEditRemoteProjectManager = function () {
-        $scope.vmsToEdit.refresh();
+        $scope.remoteProjectManagerToEdit.refresh();
         $scope.resetRemoteProjectManagerForms();
     };
 
     $scope.confirmDeleteRemoteProjectManager = function (remoteProjectManager) {
-        $scope.vmsToDelete = remoteProjectManager;
+        $scope.remoteProjectManagerToDelete = remoteProjectManager;
         $scope.openModal('#deleteRemoteProjectManagerModal');
     };
 
     $scope.cancelDeleteRemoteProjectManager = function () {
-        $scope.vmsToDelete = {};
+        $scope.remoteProjectManagerToDelete = {};
         $scope.closeModal();
     };
 

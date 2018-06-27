@@ -10,15 +10,16 @@
   <validationmessage results="remoteProjectManagerForms.getResults()"></validationmessage>
 
   <div class="modal-body">
-    <validatedinput model="vmsToCreate" property="name" label="Name" placeholder="Name of the Version Management Software" form="remoteProjectManagerForms.create"
-      validations="remoteProjectManagerForms.validations" results="remoteProjectManagerForms.getResults()">
+    <validatedinput model="remoteProjectManagerToCreate" property="name" label="Name" placeholder="Name of the Version Management Software"
+      form="remoteProjectManagerForms.create" validations="remoteProjectManagerForms.validations" results="remoteProjectManagerForms.getResults()">
     </validatedinput>
 
-    <validatedselect options="serviceTypes" optionvalue="value" optionproperty="gloss" model="vmsToCreate" property="type" label="Type"
-      form="remoteProjectManagerForms.create" validations="remoteProjectManagerForms.validations" results="remoteProjectManagerForms.getResults()">
+    <validatedselect options="serviceTypes" optionvalue="value" optionproperty="gloss" model="remoteProjectManagerToCreate" property="type"
+      label="Type" form="remoteProjectManagerForms.create" validations="remoteProjectManagerForms.validations" results="remoteProjectManagerForms.getResults()">
     </validatedselect>
 
-    <remoteProjectManager-form ng-if="vmsToCreate.type" management-settings="typeSettings(vmsToCreate.type)" model="vmsToCreate">
+    <remoteProjectManager-form ng-if="remoteProjectManagerToCreate.type" management-settings="typeSettings(remoteProjectManagerToCreate.type)"
+      model="remoteProjectManagerToCreate">
     </remoteProjectManager-form>
   </div>
   <div class="modal-footer">
