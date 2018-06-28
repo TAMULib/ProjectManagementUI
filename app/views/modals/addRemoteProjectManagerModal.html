@@ -1,0 +1,29 @@
+<div class="modal-header {{attr.modalHeaderClass}}">
+  <button type="button" class="close modal-close" aria-label="Close" ng-click="cancelCreateRemoteProjectManager()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <h4 class="modal-title">Create Version Management Software</h4>
+</div>
+
+<form name="remoteProjectManagerForms.create" ng-submit="createRemoteProjectManager()" novalidate class="remoteProjectManager-forms-create">
+
+  <validationmessage results="remoteProjectManagerForms.getResults()"></validationmessage>
+
+  <div class="modal-body">
+    <validatedinput model="remoteProjectManagerToCreate" property="name" label="Name" placeholder="Name of the Version Management Software"
+      form="remoteProjectManagerForms.create" validations="remoteProjectManagerForms.validations" results="remoteProjectManagerForms.getResults()">
+    </validatedinput>
+
+    <validatedselect options="serviceTypes" optionvalue="value" optionproperty="gloss" model="remoteProjectManagerToCreate" property="type"
+      label="Type" form="remoteProjectManagerForms.create" validations="remoteProjectManagerForms.validations" results="remoteProjectManagerForms.getResults()">
+    </validatedselect>
+
+    <remoteProjectManager-form ng-if="remoteProjectManagerToCreate.type" management-settings="typeSettings(remoteProjectManagerToCreate.type)"
+      model="remoteProjectManagerToCreate">
+    </remoteProjectManager-form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="cancelCreateRemoteProjectManager()">Cancel</button>
+    <button type="submit" class="btn btn-success" ng-disabled="remoteProjectManagerForms.create.$invalid">Create</button>
+  </div>
+</form>
