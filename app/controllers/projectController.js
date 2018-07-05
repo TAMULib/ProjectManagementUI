@@ -1,10 +1,10 @@
-app.controller('ProjectController', function ($controller, $scope, $rootScope, NgTableParams, ApiResponseActions, Project, ProjectRepo, VersionManagementSoftwareRepo, VersionProjectService) {
+app.controller('ProjectController', function ($controller, $scope, $rootScope, NgTableParams, ApiResponseActions, Project, ProjectRepo, RemoteProjectManagerRepo, RemoteProjectService) {
 
     angular.extend(this, $controller('AbstractController', {
         $scope: $scope
     }));
 
-    $scope.vmses = VersionManagementSoftwareRepo.getAll();
+    $scope.remoteProjectManagers = RemoteProjectManagerRepo.getAll();
 
     $scope.projects = ProjectRepo.getAll();
 
@@ -94,34 +94,34 @@ app.controller('ProjectController', function ($controller, $scope, $rootScope, N
         });
     };
 
-    $scope.vmsVersionProjects = {};
+    $scope.remoteProjects = {};
 
-    var getVmsById = function (id) {
-        VersionProjectService.getAll(id).then(function (versionProjects) {
-            $scope.vmsVersionProjects[id] = versionProjects;
+    var getRemoteProjectManagerById = function (id) {
+        RemoteProjectService.getAll(id).then(function (remoteProjects) {
+            $scope.remoteProjects[id] = remoteProjects;
         });
     };
 
-    VersionManagementSoftwareRepo.ready().then(function () {
-        for (var i in $scope.vmses) {
+    RemoteProjectManagerRepo.ready().then(function () {
+        for (var i in $scope.remoteProjectManagers) {
             if (i !== 'visibleColumnCount') {
-                getVmsById($scope.vmses[i].id);
+                getRemoteProjectManagerById($scope.remoteProjectManagers[i].id);
             }
         }
     });
 
-    $scope.getVmsVersionProjects = function (vmsId) {
-        return $scope.vmsVersionProjects[vmsId];
+    $scope.getRemoteProjectManagerVersionProjects = function (remoteProjectManagerId) {
+        return $scope.remoteProjects[remoteProjectManagerId];
     };
 
-    $scope.getVmsVersionProjects = function (vmsId) {
-        return $scope.vmsVersionProjects[vmsId];
+    $scope.getRemoteProjectManagerVersionProjects = function (remoteProjectManagerId) {
+        return $scope.remoteProjects[remoteProjectManagerId];
     };
 
-    $scope.getVersionProject = function (project) {
-        if (project.scopeId && project.versionManagementSoftware && !project.versionProject) {
+    $scope.getRemoteProject = function (project) {
+        if (project.scopeId && project.remoteProjectManager && !project.versionProject) {
             project.versionProject = {};
-            VersionProjectService.getByScopeId(project.versionManagementSoftware.id, project.scopeId).then(function (versionProject) {
+            RemoteProjectService.getByScopeId(project.remoteProjectManager.id, project.scopeId).then(function (versionProject) {
                 angular.extend(project, {
                     versionProject: versionProject
                 });

@@ -46,9 +46,9 @@
     <alerts seconds="45" channels="auth/register" types="SUCCESS"></alerts>
 
     <div class="container-fluid">
-      <div class="container">
-        <div class="col-md-12 appContent">
+      <div class="col-md-12 appContent">
 
+        <div class="container">
           <nav class="pull-right userMenu" ng-controller="AuthenticationController">
             <ul ng-if="isAnonymous()" class="list-inline">
               <li>
@@ -77,8 +77,8 @@
             </div>
 
           </nav>
-          <div ng-view class="view"></div>
         </div>
+        <div ng-view class="view"></div>
       </div>
     </div>
   </main>
@@ -195,10 +195,11 @@
 
   <!-- Directives -->
   <script src="directives/customHeaderDirective.js"></script>
-  <script src="directives/vmsFormDirective.js"></script>
+  <script src="directives/remoteProjectManagerFormDirective.js"></script>
 
   <!-- Services -->
-  <script src="services/versionProjectService.js"></script>
+  <script src="services/remoteProjectService.js"></script>
+  <script src="services/activeSprintsService.js"></script>
 
   <!-- Factories -->
 
@@ -208,18 +209,21 @@
   <script src="repo/abstractAppRepo.js"></script>
   <script src="repo/projectRepo.js"></script>
   <script src="repo/userRepo.js"></script>
-  <script src="repo/versionManagementSoftwareRepo.js"></script>
+  <script src="repo/remoteProjectManagerRepo.js"></script>
+  <script src="repo/statusRepo.js"></script>
 
   <!-- Models -->
   <script src="model/abstractAppModel.js"></script>
   <script src="model/project.js"></script>
-  <script src="model/versionManagementSoftware.js"></script>
+  <script src="model/remoteProjectManager.js"></script>
+  <script src="model/status.js"></script>
 
   <!-- Controllers -->
   <script src="controllers/managementController.js"></script>
   <script src="controllers/projectController.js"></script>
   <script src="controllers/userRepoController.js"></script>
-  <script src="controllers/versionManagementSoftwareController.js"></script>
+  <script src="controllers/remoteProjectManagerController.js"></script>
+  <script src="controllers/activeSprintsController.js"></script>
 
   <!-- endbuild -->
 
