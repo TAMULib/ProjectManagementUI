@@ -1,5 +1,16 @@
-app.model("Project", function Project() {
+app.model("Project", function Project(RemoteProjectService) {
     return function Project() {
-        return this;
+
+        var project = this;
+
+        project.before(function () {
+            RemoteProjectService.getByScopeId(project.remoteProjectManager.id, project.scopeId).then(function (remoteProject) {
+                angular.extend(project, {
+                    remoteProject: remoteProject
+                });
+            });
+        });
+
+        return project;
     };
 });

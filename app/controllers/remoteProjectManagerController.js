@@ -35,12 +35,12 @@ app.controller('RemoteProjectManagerController', function ($controller, $scope, 
     $scope.createRemoteProjectManager = function () {
         RemoteProjectManagerRepo.create($scope.remoteProjectManagerToCreate).then(function (res) {
             if (angular.fromJson(res.body).meta.status === 'SUCCESS') {
-                $scope.cancelCreateRemoteProjectManager();
+                $scope.resetCreateRemoteProjectManager();
             }
         });
     };
 
-    $scope.cancelCreateRemoteProjectManager = function () {
+    $scope.resetCreateRemoteProjectManager = function () {
         $scope.remoteProjectManagerToCreate = RemoteProjectManagerRepo.getScaffold();
         $scope.resetRemoteProjectManagerForms();
     };

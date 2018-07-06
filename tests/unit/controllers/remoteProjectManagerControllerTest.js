@@ -41,9 +41,9 @@ describe('controller: RemoteProjectManagerController', function () {
             expect(scope.createRemoteProjectManager).toBeDefined();
             expect(typeof scope.createRemoteProjectManager).toEqual('function');
         });
-        it('cancelCreateRemoteProjectManager should be defined', function () {
-            expect(scope.cancelCreateRemoteProjectManager).toBeDefined();
-            expect(typeof scope.cancelCreateRemoteProjectManager).toEqual('function');
+        it('resetCreateRemoteProjectManager should be defined', function () {
+            expect(scope.resetCreateRemoteProjectManager).toBeDefined();
+            expect(typeof scope.resetCreateRemoteProjectManager).toEqual('function');
         });
         it('editRemoteProjectManager should be defined', function () {
             expect(scope.editRemoteProjectManager).toBeDefined();
@@ -106,7 +106,7 @@ describe('controller: RemoteProjectManagerController', function () {
             expect(RemoteProjectManagerRepo.findById(newRemoteProjectManager.id)).toEqual(newRemoteProjectManager);
         });
 
-        it('cancelCreateRemoteProjectManager should call resetRemoteProjectManagerForms() and clear out the fields', function () {
+        it('resetCreateRemoteProjectManager should call resetRemoteProjectManagerForms() and clear out the fields', function () {
             var newRemoteProjectManager = {
                 "id": 4,
                 "name": "Test 4",
@@ -131,7 +131,7 @@ describe('controller: RemoteProjectManagerController', function () {
             spyOn(RemoteProjectManagerRepo, 'getScaffold').and.returnValue(scaffold);
 
             scope.remoteProjectManagerToCreate = newRemoteProjectManager;
-            scope.cancelCreateRemoteProjectManager();
+            scope.resetCreateRemoteProjectManager();
 
             expect(scope.remoteProjectManagerToCreate.name).toEqual('');
             expect(scope.resetRemoteProjectManagerForms).toHaveBeenCalled();

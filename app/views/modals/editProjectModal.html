@@ -24,7 +24,7 @@
 
     <div class="form-group" ng-if="projectToEdit.remoteProjectManager">
       <label for="remoteProjectManager">Associate Version Project</label>
-      <select class="form-control" ng-options="vp.scopeId as vp.name for vp in getRemoteProjectManagerVersionProjects(projectToEdit.remoteProjectManager.id) | orderBy:'name'"
+      <select class="form-control" ng-options="vp.scopeId as vp.name for vp in getRemoteProjectManagerRemoteProjects(projectToEdit.remoteProjectManager.id) | orderBy:'name'"
         ng-model="projectToEdit.scopeId" name="remoteProjectManager">
         <option value="" selected>None</option>
       </select>

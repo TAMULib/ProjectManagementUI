@@ -1,10 +1,8 @@
-app.controller('ProjectController', function ($controller, $scope, $rootScope, NgTableParams, ApiResponseActions, Project, ProjectRepo, RemoteProjectManagerRepo, RemoteProjectService) {
+app.controller('ProjectController', function ($controller, $scope, NgTableParams, ApiResponseActions, ProjectRepo, RemoteProjectManagerRepo, RemoteProjectService, UserService) {
 
     angular.extend(this, $controller('AbstractController', {
         $scope: $scope
     }));
-
-    $scope.remoteProjectManagers = RemoteProjectManagerRepo.getAll();
 
     $scope.projects = ProjectRepo.getAll();
 
@@ -32,12 +30,12 @@ app.controller('ProjectController', function ($controller, $scope, $rootScope, N
     $scope.createProject = function () {
         ProjectRepo.create($scope.projectToCreate).then(function (res) {
             if (angular.fromJson(res.body).meta.status === 'SUCCESS') {
-                $scope.cancelCreateProject();
+                $scope.resetCreateProject();
             }
         });
     };
 
-    $scope.cancelCreateProject = function () {
+    $scope.resetCreateProject = function () {
         angular.extend($scope.projectToCreate, ProjectRepo.getScaffold());
         $scope.resetProjectForms();
     };
@@ -78,10 +76,37 @@ app.controller('ProjectController', function ($controller, $scope, $rootScope, N
         });
     };
 
+    UserService.userEvents().then(null, null, function () {
+        $scope.remoteProjectManagers = RemoteProjectManagerRepo.getAll();
+
+        $scope.remoteProjects = {};
+
+        $scope.getRemoteProjectManagerRemoteProjects = function (remoteProjectManagerId) {
+            return $scope.remoteProjects[remoteProjectManagerId];
+        };
+
+        $scope.getRemoteProjectManagerRemoteProjects = function (remoteProjectManagerId) {
+            return $scope.remoteProjects[remoteProjectManagerId];
+        };
+
+        var getRemoteProjectManagerById = function (id) {
+            RemoteProjectService.getAll(id).then(function (remoteProjects) {
+                $scope.remoteProjects[id] = remoteProjects;
+            });
+        };
+
+        RemoteProjectManagerRepo.ready().then(function () {
+            for (var i in $scope.remoteProjectManagers) {
+                if (i !== 'visibleColumnCount') {
+                    getRemoteProjectManagerById($scope.remoteProjectManagers[i].id);
+                }
+            }
+        });
+    });
+
     var buildTable = function () {
-        var allProjects = ProjectRepo.getAll();
         $scope.tableParams = new NgTableParams({
-            count: allProjects.length,
+            count: $scope.projects.length,
             sorting: {
                 name: 'asc'
             }
@@ -92,42 +117,6 @@ app.controller('ProjectController', function ($controller, $scope, $rootScope, N
                 return $scope.projects;
             }
         });
-    };
-
-    $scope.remoteProjects = {};
-
-    var getRemoteProjectManagerById = function (id) {
-        RemoteProjectService.getAll(id).then(function (remoteProjects) {
-            $scope.remoteProjects[id] = remoteProjects;
-        });
-    };
-
-    RemoteProjectManagerRepo.ready().then(function () {
-        for (var i in $scope.remoteProjectManagers) {
-            if (i !== 'visibleColumnCount') {
-                getRemoteProjectManagerById($scope.remoteProjectManagers[i].id);
-            }
-        }
-    });
-
-    $scope.getRemoteProjectManagerVersionProjects = function (remoteProjectManagerId) {
-        return $scope.remoteProjects[remoteProjectManagerId];
-    };
-
-    $scope.getRemoteProjectManagerVersionProjects = function (remoteProjectManagerId) {
-        return $scope.remoteProjects[remoteProjectManagerId];
-    };
-
-    $scope.getRemoteProject = function (project) {
-        if (project.scopeId && project.remoteProjectManager && !project.versionProject) {
-            project.versionProject = {};
-            RemoteProjectService.getByScopeId(project.remoteProjectManager.id, project.scopeId).then(function (versionProject) {
-                angular.extend(project, {
-                    versionProject: versionProject
-                });
-            });
-        }
-        return project.versionProject;
     };
 
     ProjectRepo.ready().then(function () {

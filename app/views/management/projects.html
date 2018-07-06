@@ -7,7 +7,7 @@
     <tr ng-repeat="project in $data | orderBy: 'name'">
       <td title="'Project'">{{project.name}}</td>
       <td title="'Remote Project Manager'">{{project.remoteProjectManager.name}}</td>
-      <td title="'Remote Project'">{{getRemoteProject(project).name}}</td>
+      <td title="'Remote Project'">{{project.remoteProject.name}}</td>
       <td title="'Scope Id'">{{project.scopeId}}</td>
       <td class="actions-column text-center" title="'Actions'">
         <span class="glyphicon glyphicon-pencil" title="edit" ng-click="editProject(project)"></span>

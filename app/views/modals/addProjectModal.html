@@ -1,5 +1,5 @@
 <div class="modal-header {{attr.modalHeaderClass}}">
-  <button type="button" class="close modal-close" aria-label="Close" ng-click="cancelCreateProject()">
+  <button type="button" class="close modal-close" aria-label="Close" ng-click="resetCreateProject()">
     <span aria-hidden="true">&times;</span>
   </button>
   <h4 class="modal-title">Create Project</h4>
@@ -24,7 +24,7 @@
 
     <div class="form-group" ng-if="projectToCreate.remoteProjectManager">
       <label for="remoteProjectManager">Associate Version Project</label>
-      <select class="form-control" ng-options="vp.scopeId as vp.name for vp in getRemoteProjectManagerVersionProjects(projectToCreate.remoteProjectManager.id) | orderBy:'name'"
+      <select class="form-control" ng-options="vp.scopeId as vp.name for vp in getRemoteProjectManagerRemoteProjects(projectToCreate.remoteProjectManager.id) | orderBy:'name'"
         ng-model="projectToCreate.scopeId" name="remoteProjectManager">
         <option value="" selected>None</option>
       </select>
@@ -32,7 +32,7 @@
 
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-default" ng-click="cancelCreateProject()">Cancel</button>
+    <button type="button" class="btn btn-default" ng-click="resetCreateProject()">Cancel</button>
     <button type="submit" class="btn btn-success" ng-disabled="projectForms.create.$invalid">Create</button>
   </div>
 </form>

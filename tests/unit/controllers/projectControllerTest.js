@@ -47,9 +47,9 @@ describe('controller: ProjectController', function () {
             expect(scope.createProject).toBeDefined();
             expect(typeof scope.createProject).toEqual('function');
         });
-        it('cancelCreateProject should be defined', function () {
-            expect(scope.cancelCreateProject).toBeDefined();
-            expect(typeof scope.cancelCreateProject).toEqual('function');
+        it('resetCreateProject should be defined', function () {
+            expect(scope.resetCreateProject).toBeDefined();
+            expect(typeof scope.resetCreateProject).toEqual('function');
         });
         it('editProject should be defined', function () {
             expect(scope.editProject).toBeDefined();
@@ -105,7 +105,7 @@ describe('controller: ProjectController', function () {
             expect(ProjectRepo.findById(newProject.id)).toEqual(newProject);
         });
 
-        it('cancelCreateProject should call resetProjectForms() and clear out the name field', function () {
+        it('resetCreateProject should call resetProjectForms() and clear out the name field', function () {
             spyOn(scope, 'resetProjectForms');
             var length = mockProjects.length + 1;
             var newProject = {
@@ -118,7 +118,7 @@ describe('controller: ProjectController', function () {
             scope.$digest();
             var form = scope.projectForms.create;
             form.$setDirty();
-            scope.cancelCreateProject();
+            scope.resetCreateProject();
 
             expect(scope.projectToCreate.name).toEqual('');
             expect(scope.resetProjectForms).toHaveBeenCalled();
