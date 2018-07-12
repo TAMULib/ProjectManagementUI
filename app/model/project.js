@@ -4,11 +4,13 @@ app.model("Project", function Project(RemoteProjectService) {
         var project = this;
 
         project.before(function () {
-            RemoteProjectService.getByScopeId(project.remoteProjectManager.id, project.scopeId).then(function (remoteProject) {
-                angular.extend(project, {
-                    remoteProject: remoteProject
+            if (project.remoteProjectManager && project.scopeId) {
+                RemoteProjectService.getByScopeId(project.remoteProjectManager.id, project.scopeId).then(function (remoteProject) {
+                    angular.extend(project, {
+                        remoteProject: remoteProject
+                    });
                 });
-            });
+            }
         });
 
         return project;

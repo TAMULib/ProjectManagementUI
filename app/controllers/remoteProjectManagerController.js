@@ -4,7 +4,7 @@ app.controller('RemoteProjectManagerController', function ($controller, $scope, 
         $scope: $scope
     }));
 
-    $scope.remoteProjectManagers = RemoteProjectManagerRepo.getAll();
+    var remoteProjectManagers = RemoteProjectManagerRepo.getAll();
 
     $scope.remoteProjectManagerToCreate = RemoteProjectManagerRepo.getScaffold();
 
@@ -90,9 +90,8 @@ app.controller('RemoteProjectManagerController', function ($controller, $scope, 
     };
 
     var buildTable = function () {
-        var allRemoteProjectManageres = RemoteProjectManagerRepo.getAll();
         $scope.tableParams = new NgTableParams({
-            count: allRemoteProjectManageres.length,
+            count: RemoteProjectManagerRepo.getAll().length,
             sorting: {
                 name: 'ASC'
             }
@@ -100,7 +99,7 @@ app.controller('RemoteProjectManagerController', function ($controller, $scope, 
             counts: [],
             total: 0,
             getData: function (params) {
-                return $scope.remoteProjectManagers;
+                return remoteProjectManagers;
             }
         });
     };

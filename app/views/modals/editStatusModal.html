@@ -1,0 +1,42 @@
+<div class="modal-header {{attr.modalHeaderClass}}">
+  <button type="button" class="close modal-close" aria-label="Close" ng-click="cancelEditStatus()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <h4 class="modal-title">Edit Status</h4>
+</div>
+
+<form name="statusForms.edit" ng-submit="updateStatus()" novalidate>
+
+  <validationmessage results="statusForms.getResults()"></validationmessage>
+
+  <div class="modal-body">
+    <validatedinput model="statusToEdit" property="identifier" label="Identifier" placeholder="Identifier of the Status" form="statusForms.edit"
+      validations="statusForms.validations" results="statusForms.getResults()" autocomplete="off">
+    </validatedinput>
+
+    <div class="form-group">
+      <label for="mapping">Mapping</label>
+      <div style="margin-bottom: 4px" class="input-group" ng-repeat="match in statusToEdit.mapping track by $index">
+
+        <input name="mapping" type="text" class="form-control" ng-model="statusToEdit.mapping[$index]" />
+
+        <span ng-if="$last" class="input-group-addon toggle-href">
+          <span class="glyphicon glyphicon-plus" ng-click="statusToEdit.mapping.push('')"></span>
+        </span>
+
+        <span ng-if="!$last" class="input-group-addon toggle-href">
+          <span class="glyphicon glyphicon-minus" ng-click="statusToEdit.mapping.splice($index, 1)"></span>
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="cancelEditStatus()">Cancel</button>
+    <button type="submit" class="btn btn-success" ng-disabled="!statusForms.edit.$dirty||statusForms.edit.$invalid">Update</button>
+  </div>
+
+</form>

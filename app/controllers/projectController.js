@@ -4,7 +4,7 @@ app.controller('ProjectController', function ($controller, $scope, NgTableParams
         $scope: $scope
     }));
 
-    $scope.projects = ProjectRepo.getAll();
+    var projects = ProjectRepo.getAll();
 
     $scope.projectToCreate = ProjectRepo.getScaffold();
 
@@ -106,7 +106,7 @@ app.controller('ProjectController', function ($controller, $scope, NgTableParams
 
     var buildTable = function () {
         $scope.tableParams = new NgTableParams({
-            count: $scope.projects.length,
+            count: ProjectRepo.getAll().length,
             sorting: {
                 name: 'asc'
             }
@@ -114,7 +114,7 @@ app.controller('ProjectController', function ($controller, $scope, NgTableParams
             counts: [],
             total: 0,
             getData: function (params) {
-                return $scope.projects;
+                return projects;
             }
         });
     };

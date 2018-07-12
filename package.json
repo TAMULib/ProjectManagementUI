@@ -1,6 +1,6 @@
 {
   "name": "project-management",
-  "private": true,
+  "private": false,
   "version": "1.0.0",
   "description": "A UI for managing projects",
   "repository": "https://github.com/TAMULib/ProjectManagementUI.git",
