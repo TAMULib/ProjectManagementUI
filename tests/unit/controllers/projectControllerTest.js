@@ -1,6 +1,6 @@
 describe('controller: ProjectController', function () {
 
-    var scope, controller, ProjectRepo, RemoteProjectManagerRepo;
+    var scope, controller, ProjectRepo;
 
     beforeEach(module('core'));
     beforeEach(module('app'));
@@ -9,14 +9,16 @@ describe('controller: ProjectController', function () {
     beforeEach(module('mock.projectRepo'));
     beforeEach(module('mock.remoteProjectManagerRepo'));
     beforeEach(module('mock.remoteProjectService'));
+    beforeEach(module('mock.userService'));
 
-    beforeEach(inject(function ($controller, $rootScope, $templateCache, _$compile_, _$q_, _$templateRequest_, _ModalService_, _Project_, _ProjectRepo_, _RemoteProjectManagerRepo_, _RemoteProjectService_) {
+    beforeEach(inject(function ($controller, $rootScope, $templateCache, _$compile_, _$q_, _$templateRequest_, _ModalService_, _Project_, _ProjectRepo_, _RemoteProjectManagerRepo_, _RemoteProjectService_, _UserService_) {
         installPromiseMatchers();
         scope = $rootScope.$new();
         Project = _Project_;
         ProjectRepo = _ProjectRepo_;
         RemoteProjectManagerRepo = _RemoteProjectManagerRepo_;
         RemoteProjectService = _RemoteProjectService_;
+        UserService = _UserService_;
         $compile = _$compile_;
         $q = _$q_;
         cache = $templateCache;
@@ -28,7 +30,8 @@ describe('controller: ProjectController', function () {
             Project: _Project_,
             ProjectRepo: _ProjectRepo_,
             RemoteProjectManagerRepo: _RemoteProjectManagerRepo_,
-            RemoteProjectService: _RemoteProjectService_
+            RemoteProjectService: _RemoteProjectService_,
+            UserService: _UserService_
         });
     }));
 

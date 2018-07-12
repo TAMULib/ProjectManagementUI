@@ -84,7 +84,7 @@ app.controller('StatusController', function ($controller, $scope, ApiResponseAct
         status.mapping.splice(i, 1);
       }
     }
-  }
+  };
 
   var buildTable = function () {
     $scope.tableParams = new NgTableParams({

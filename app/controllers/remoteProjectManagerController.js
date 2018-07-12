@@ -1,4 +1,4 @@
-app.controller('RemoteProjectManagerController', function ($controller, $scope, $filter, $rootScope, ApiResponseActions, NgTableParams, RemoteProjectManager, RemoteProjectManagerRepo) {
+app.controller('RemoteProjectManagerController', function ($controller, $scope, ApiResponseActions, NgTableParams, RemoteProjectManagerRepo) {
 
     angular.extend(this, $controller('AbstractController', {
         $scope: $scope

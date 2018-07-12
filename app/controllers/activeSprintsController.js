@@ -1,4 +1,4 @@
-app.controller('ActiveSprintsController', function ($controller, $route, $sce, $scope, ActiveSprintsService, StatusRepo) {
+app.controller('ActiveSprintsController', function ($controller, $sce, $scope, ActiveSprintsService, StatusRepo) {
 
   angular.extend(this, $controller('AbstractController', {
     $scope: $scope
