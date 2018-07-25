@@ -10,6 +10,7 @@
   <validationmessage results="statusForms.getResults()"></validationmessage>
 
   <div class="modal-body">
+
     <validatedinput model="statusToEdit" property="identifier" label="Identifier" placeholder="Identifier of the Status" form="statusForms.edit"
       validations="statusForms.validations" results="statusForms.getResults()" autocomplete="off">
     </validatedinput>
@@ -20,12 +21,12 @@
 
         <input name="mapping" type="text" class="form-control" ng-model="statusToEdit.mapping[$index]" />
 
-        <span ng-if="$last" class="input-group-addon toggle-href">
-          <span class="glyphicon glyphicon-plus" ng-click="statusToEdit.mapping.push('')"></span>
+        <span ng-if="$last" class="input-group-addon toggle-href" ng-click="addMatch(statusToEdit)">
+          <span class="glyphicon glyphicon-plus"></span>
         </span>
 
-        <span ng-if="!$last" class="input-group-addon toggle-href">
-          <span class="glyphicon glyphicon-minus" ng-click="statusToEdit.mapping.splice($index, 1)"></span>
+        <span ng-if="!$last" class="input-group-addon toggle-href" ng-click="removeMatch(statusToEdit, $index)">
+          <span class="glyphicon glyphicon-minus"></span>
         </span>
 
       </div>

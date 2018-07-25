@@ -10,6 +10,7 @@
   <validationmessage results="statusForms.getResults()"></validationmessage>
 
   <div class="modal-body">
+
     <validatedinput model="statusToCreate" property="identifier" label="Identifier" placeholder="Identifier of the Status" form="statusForms.create"
       validations="statusForms.validations" results="statusRepo.getResults()">
     </validatedinput>
@@ -18,14 +19,14 @@
       <label for="mapping">Mapping</label>
       <div style="margin-bottom: 4px" class="input-group" ng-repeat="match in statusToCreate.mapping track by $index">
 
-        <input name="mapping" type="text" class="form-control" ng-model="match" />
+        <input name="mapping" type="text" class="form-control" ng-model="statusToCreate.mapping[$index]" />
 
-        <span ng-if="$last" class="input-group-addon toggle-href">
-          <span class="glyphicon glyphicon-plus" ng-click="statusToCreate.mapping.push('')"></span>
+        <span ng-if="$last" class="input-group-addon toggle-href" ng-click="addMatch(statusToCreate)">
+          <span class="glyphicon glyphicon-plus"></span>
         </span>
 
-        <span ng-if="!$last" class="input-group-addon toggle-href">
-          <span class="glyphicon glyphicon-minus" ng-click="statusToCreate.mapping.splice($index, 1)"></span>
+        <span ng-if="!$last" class="input-group-addon toggle-href" ng-click="removeMatch(statusToCreate, $index)">
+          <span class="glyphicon glyphicon-minus"></span>
         </span>
 
       </div>

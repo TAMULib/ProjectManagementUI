@@ -1,11 +1,11 @@
 <div class="management-table" ng-controller="RemoteProjectManagerController">
 
-  <button class="btn btn-default view-action-button" ng-click="openModal('#addRemoteProjectManagerModal')">Add a Version Management Software</button>
+  <button class="btn btn-default view-action-button" ng-click="openModal('#addRemoteProjectManagerModal')">Add a Remote Project Manager</button>
   <hr />
 
   <table ng-table="tableParams" show-filter="false" class="table table-bordered table-striped remoteProjectManager-table">
     <tr ng-repeat="remoteProjectManager in $data | orderBy: 'name'">
-      <td title="'Version Management Software'">{{remoteProjectManager.name}}</td>
+      <td title="'Remote Project Manager'">{{remoteProjectManager.name}}</td>
       <td title="'Settings'">
         <ul class="list-unstyled">
           <li ng-repeat="setting in typeSettings(remoteProjectManager.type) | filter:{visible:true}">
