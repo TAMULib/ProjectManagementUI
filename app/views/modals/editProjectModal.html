@@ -15,7 +15,7 @@
     </validatedinput>
 
     <div class="form-group">
-      <label for="remoteProjectManager">Associate Version Management Software</label>
+      <label for="remoteProjectManager">Associate Remote Project Manager</label>
       <select class="form-control" ng-model="projectToEdit.remoteProjectManager" name="remoteProjectManager">
         <option value="" ng-selected="projectToEdit.remoteProjectManager === undefined">None</option>
         <option value="" ng-repeat="remoteProjectManager in remoteProjectManagers" ng-value="remoteProjectManager" ng-selected="projectToEdit.remoteProjectManager.id === remoteProjectManager.id">{{remoteProjectManager.name}}</option>
