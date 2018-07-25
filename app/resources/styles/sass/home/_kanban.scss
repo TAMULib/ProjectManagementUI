@@ -1,0 +1,36 @@
+@media only screen and (min-width : 992px) {
+  .kanban {
+    display: inline-flex;
+    width: 100%;
+  }
+  
+  .kanban .column {
+    display: inline-block;
+    width: 100%;
+    margin: 4px;
+  }
+}
+
+.kanban-panel {
+  .panel-body {
+    padding: 5px;
+  }
+
+  .kanban-card {
+    margin-bottom: 5px;
+  }
+} 
+
+.popover-title {
+  color: #000;
+  background: #d9edf7;
+}
+
+.popover-content {
+  color: #000;
+}
+
+.avatar {
+  margin-right: 4px;
+}
+

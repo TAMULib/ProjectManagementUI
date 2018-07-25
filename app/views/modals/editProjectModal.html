@@ -1,5 +1,7 @@
 <div class="modal-header {{attr.modalHeaderClass}}">
-  <button type="button" class="close modal-close" aria-label="Close" ng-click="cancelEditProject()"><span aria-hidden="true">&times;</span></button>
+  <button type="button" class="close modal-close" aria-label="Close" ng-click="cancelEditProject()">
+    <span aria-hidden="true">&times;</span>
+  </button>
   <h4 class="modal-title">Edit Project</h4>
 </div>
 
@@ -7,37 +9,30 @@
 
   <validationmessage results="projectForms.getResults()"></validationmessage>
 
-  <div class="modal-body"> 
-    <validatedinput
-      model="projectToEdit"
-      property="name"
-      label="Name"
-      placeholder="Name of the Project"
-      form="projectForms.edit"
-      validations="projectForms.validations"
-      results="projectForms.getResults()"
-      autocomplete="off">
+  <div class="modal-body">
+    <validatedinput model="projectToEdit" property="name" label="Name" placeholder="Name of the Project" form="projectForms.edit"
+      validations="projectForms.validations" results="projectForms.getResults()" autocomplete="off">
     </validatedinput>
 
     <div class="form-group">
-      <label for="vms">Associate Version Management Software</label>
-      <select class="form-control" ng-model="projectToEdit.versionManagementSoftware" name="vms">
-        <option value="" ng-selected="projectToEdit.versionManagementSoftware === undefined">None</option>
-        <option value=""  ng-repeat="vms in vmses" ng-value="vms" ng-selected="projectToEdit.versionManagementSoftware.id === vms.id">{{vms.name}}</option>
-     </select>
+      <label for="remoteProjectManager">Associate Version Management Software</label>
+      <select class="form-control" ng-model="projectToEdit.remoteProjectManager" name="remoteProjectManager">
+        <option value="" ng-selected="projectToEdit.remoteProjectManager === undefined">None</option>
+        <option value="" ng-repeat="remoteProjectManager in remoteProjectManagers" ng-value="remoteProjectManager" ng-selected="projectToEdit.remoteProjectManager.id === remoteProjectManager.id">{{remoteProjectManager.name}}</option>
+      </select>
     </div>
 
-    <div class="form-group" ng-if="projectToEdit.versionManagementSoftware">
-      <label for="vms">Associate Version Project</label>
-      <select class="form-control" ng-options="vp.scopeId as vp.name for vp in getVmsVersionProjects(projectToEdit.versionManagementSoftware.id) | orderBy:'name'" ng-model="projectToEdit.scopeId" name="vms">
+    <div class="form-group" ng-if="projectToEdit.remoteProjectManager">
+      <label for="remoteProjectManager">Associate Version Project</label>
+      <select class="form-control" ng-options="vp.scopeId as vp.name for vp in getRemoteProjectManagerRemoteProjects(projectToEdit.remoteProjectManager.id) | orderBy:'name'"
+        ng-model="projectToEdit.scopeId" name="remoteProjectManager">
         <option value="" selected>None</option>
-     </select>
+      </select>
     </div>
 
-  </div> 
+  </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-default" ng-click="cancelEditProject()">Cancel</button>
     <button type="submit" class="btn btn-success" ng-disabled="!projectForms.edit.$dirty||projectForms.edit.$invalid">Update</button>
   </div>
 </form>
-    

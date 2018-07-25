@@ -1,1 +1,109 @@
-<br/>
+<div>
+
+  <div class="container-fluid">
+
+    <ul class="nav nav-tabs">
+      <li role="presentation" class="active">
+        <a href="#active-sprints" data-toggle="tab">Active Sprints</a>
+      </li>
+      <li role="presentation">
+        <a href="#projects" data-toggle="tab">Projects</a>
+      </li>
+    </ul>
+    <br/>
+    <div class="tab-content clearfix">
+      <div class="tab-pane active" id="active-sprints" ng-controller="ActiveSprintsController">
+
+        <div class="row">
+          <div class="panel panel-default">
+            <div class="panel-heading">Active Sprints</div>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Name</th>
+                  <th>Project</th>
+                  <th>Number of Cards</th>
+                  <th>Total Points</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="sprint in activeSprints" ng-click="select($index)" class="toggle-href" ng-class="{'info': sprint.id === getSelectedSprint().id}">
+                  <td>{{sprint.id}}</td>
+                  <td>{{sprint.name}}</td>
+                  <td>{{sprint.project}}</td>
+                  <td>{{sprint.cards.length}}</td>
+                  <td>{{getSprintEstimateTotal(sprint)}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="panel panel-default">
+            <div class="panel-heading">{{kanbanHeader()}}</div>
+
+            <div class="kanban">
+              <div ng-repeat="status in statuses" class="column">
+                <div class="panel panel-default kanban-panel">
+                  <div class="panel-heading">{{status.identifier}}</div>
+                  <div class="panel-body">
+
+                    <div ng-repeat="card in getSelectedSprint().cards | filter:{'status': status.identifier}" class="panel kanban-card" ng-class="{'panel-primary': card.type === 'Feature', 'panel-danger': card.type === 'Defect'}">
+                      <div class="panel-heading">
+                        <span>{{card.number}}</span>
+                        <span ng-repeat="assignee in card.assignees">
+                          <span class="pull-right avatar" popover-trigger="'mouseenter'" uib-popover="{{assignee.name}}" popover-placement="auto top">
+                            <img src="{{getAvatarUrl(assignee)}}" class="img-circle" alt="Cinque Terre" width="20" height="20">
+                          </span>
+                        </span>
+
+                      </div>
+
+                      <div class="panel-body">
+                        <p>{{card.name}}</p>
+                      </div>
+
+                      <div class="panel-footer clearfix">
+                        <span ng-if="card.description !== 'null'" class="glyphicon glyphicon-eye-open" popover-title="{{card.number}}" popover-trigger="'mouseenter'"
+                          uib-popover-html="getHtmlContent(card.description)" popover-placement="auto bottom"></span>
+                        <span ng-if="card.estimate" class="badge pull-right">{{card.estimate}}</span>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div ng-if="selectedSprint" class="panel-footer clearfix">
+                    <span class="badge pull-right">{{getStatusEstimateTotal(status)}}</span>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-pane" id="projects" ng-controller="ProjectController">
+        <div class="row">
+
+          <table ng-table="tableParams" show-filter="false" class="table table-bordered table-striped project-table">
+            <tr ng-repeat="project in $data | orderBy: '-remoteProject.backlogItemCount'">
+              <td title="'Project'">{{project.name}}</td>
+              <td title="'Remote Project'">{{project.remoteProject.name}}</td>
+              <td title="'Total Backlog Items'">{{project.remoteProject.backlogItemCount}}</td>
+              <td title="'Story Count'">{{project.remoteProject.storyCount}}</td>
+              <td title="'Defect Count'">{{project.remoteProject.defectCount}}</td>
+              <td title="'Request Count'">{{project.remoteProject.requestCount}}</td>
+            </tr>
+          </table>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
