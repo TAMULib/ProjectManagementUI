@@ -2,7 +2,7 @@
   <button type="button" class="close modal-close" aria-label="Close" ng-click="resetCreateRemoteProjectManager()">
     <span aria-hidden="true">&times;</span>
   </button>
-  <h4 class="modal-title">Create Version Management Software</h4>
+  <h4 class="modal-title">Create Remote Project Manager</h4>
 </div>
 
 <form name="remoteProjectManagerForms.create" ng-submit="createRemoteProjectManager()" novalidate class="remoteProjectManager-forms-create">
@@ -10,7 +10,7 @@
   <validationmessage results="remoteProjectManagerForms.getResults()"></validationmessage>
 
   <div class="modal-body">
-    <validatedinput model="remoteProjectManagerToCreate" property="name" label="Name" placeholder="Name of the Version Management Software"
+    <validatedinput model="remoteProjectManagerToCreate" property="name" label="Name" placeholder="Name of the Remote Project Manager"
       form="remoteProjectManagerForms.create" validations="remoteProjectManagerForms.validations" results="remoteProjectManagerForms.getResults()">
     </validatedinput>
 

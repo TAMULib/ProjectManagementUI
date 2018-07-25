@@ -43,6 +43,9 @@ app.controller('StatusController', function ($controller, $scope, ApiResponseAct
 
   $scope.editStatus = function (status) {
     $scope.statusToEdit = status;
+    if ($scope.statusToEdit.mapping.length === 0) {
+      $scope.statusToEdit.mapping.push('');
+    }
     $scope.openModal('#editStatusModal');
   };
 
@@ -52,6 +55,14 @@ app.controller('StatusController', function ($controller, $scope, ApiResponseAct
     $scope.statusToEdit.save().then(function () {
       $scope.cancelEditStatus();
     });
+  };
+
+  $scope.addMatch = function (status) {
+    status.mapping.push('');
+  };
+
+  $scope.removeMatch = function (status, index) {
+    status.mapping.splice(index, 1);
   };
 
   $scope.cancelEditStatus = function () {
