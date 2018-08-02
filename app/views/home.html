@@ -66,8 +66,7 @@
                       </div>
 
                       <div class="panel-footer clearfix">
-                        <span ng-if="card.description !== 'null'" class="glyphicon glyphicon-eye-open" popover-title="{{card.number}}" popover-trigger="'mouseenter'"
-                          uib-popover-html="getHtmlContent(card.description)" popover-placement="auto bottom"></span>
+                        <span ng-if="card.description !== 'null'" class="glyphicon glyphicon-eye-open" popover-title="{{card.number}}" popover-trigger="'mouseenter'" uib-popover-html="getHtmlContent(card.description)" popover-placement="auto bottom"></span>
                         <span ng-if="card.estimate" class="badge pull-right">{{card.estimate}}</span>
                       </div>
                     </div>
@@ -97,6 +96,7 @@
               <td title="'Story Count'">{{project.remoteProject.storyCount}}</td>
               <td title="'Defect Count'">{{project.remoteProject.defectCount}}</td>
               <td title="'Request Count'">{{project.remoteProject.requestCount}}</td>
+              <td title="'Issue Count'">{{project.remoteProject.issueCount}}</td>
             </tr>
           </table>
 
