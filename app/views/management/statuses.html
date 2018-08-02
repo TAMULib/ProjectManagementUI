@@ -3,8 +3,13 @@
   <button class="btn btn-default view-action-button" ng-click="openModal('#addStatusModal')">Add a Status</button>
   <hr />
 
-  <table ng-table="tableParams" show-filter="false" class="table table-bordered table-striped status-table">
-    <tr ng-repeat="status in $data">
+  <table show-filter="false" class="table table-bordered table-striped status-table">
+    <tr>
+      <th>Status</th>
+      <th>Mapping</th>
+      <th class="actions-column text-center">Actions</th>
+    </tr>
+    <tr ng-repeat="status in statuses">
       <td title="'Status'">{{status.identifier}}</td>
       <td title="'Mapping'">{{status.mapping.join(', ')}}</td>
       <td class="actions-column text-center" title="'Actions'">
@@ -14,10 +19,7 @@
     </tr>
   </table>
 
-  <modal modal-id="addStatusModal" modal-view="views/modals/addStatusModal.html" modal-header-class="modal-header-primary"
-    wvr-modal-backdrop="static"></modal>
-  <modal modal-id="deleteStatusModal" modal-view="views/modals/deleteStatusModal.html" modal-header-class="modal-header-danger"
-    wvr-modal-backdrop="static"></modal>
-  <modal modal-id="editStatusModal" modal-view="views/modals/editStatusModal.html" modal-header-class="modal-header-primary"
-    wvr-modal-backdrop="static"></modal>
+  <modal modal-id="addStatusModal" modal-view="views/modals/addStatusModal.html" modal-header-class="modal-header-primary" wvr-modal-backdrop="static"></modal>
+  <modal modal-id="deleteStatusModal" modal-view="views/modals/deleteStatusModal.html" modal-header-class="modal-header-danger" wvr-modal-backdrop="static"></modal>
+  <modal modal-id="editStatusModal" modal-view="views/modals/editStatusModal.html" modal-header-class="modal-header-primary" wvr-modal-backdrop="static"></modal>
 </div>

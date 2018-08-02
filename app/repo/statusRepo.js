@@ -5,5 +5,7 @@ app.repo("StatusRepo", function StatusRepo() {
         mapping: ['']
     };
 
+    console.log(this.getAll());
+
     return this;
 });
