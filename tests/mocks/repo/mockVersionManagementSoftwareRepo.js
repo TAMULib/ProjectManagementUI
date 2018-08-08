@@ -1,4 +1,4 @@
-var mockVmses = [{
+var mockRemoteProjectManageres = [{
         "id": 1,
         "name": "Test 1",
         "type": "VERSION_ONE",
@@ -30,11 +30,11 @@ var mockVmses = [{
     }
 ];
 
-angular.module('mock.versionManagementSoftwareRepo', []).service('VersionManagementSoftwareRepo', function ($q) {
+angular.module('mock.remoteProjectManagerRepo', []).service('RemoteProjectManagerRepo', function ($q) {
 
     this.scaffold = {};
 
-    this.list = mockVmses;
+    this.list = mockRemoteProjectManageres;
 
     this.getAll = function () {
         var defer = $q.defer();
@@ -61,11 +61,11 @@ angular.module('mock.versionManagementSoftwareRepo', []).service('VersionManagem
         return defer.promise;
     };
 
-    this.create = function (vms) {
+    this.create = function (remoteProjectManager) {
         var defer = $q.defer();
-        vms.id = this.list.length + 1;
-        this.list.push(vms);
-        defer.resolve(vms);
+        remoteProjectManager.id = this.list.length + 1;
+        this.list.push(remoteProjectManager);
+        defer.resolve(remoteProjectManager);
         return defer.promise;
     };
 

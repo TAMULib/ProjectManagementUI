@@ -1,5 +1,7 @@
 <div class="modal-header {{attr.modalHeaderClass}}">
-  <button type="button" class="close modal-close" aria-label="Close" ng-click="cancelCreateProject()"><span aria-hidden="true">&times;</span></button>
+  <button type="button" class="close modal-close" aria-label="Close" ng-click="resetCreateProject()">
+    <span aria-hidden="true">&times;</span>
+  </button>
   <h4 class="modal-title">Create Project</h4>
 </div>
 
@@ -8,33 +10,29 @@
   <validationmessage results="projectForms.getResults()"></validationmessage>
 
   <div class="modal-body">
-    <validatedinput
-      model="projectToCreate"
-      property="name"
-      label="Name"
-      placeholder="Name of the Project"
-      form="projectForms.create"
-      validations="projectForms.validations"
-      results="projectRepo.getResults()">
+    <validatedinput model="projectToCreate" property="name" label="Name" placeholder="Name of the Project" form="projectForms.create"
+      validations="projectForms.validations" results="projectRepo.getResults()">
     </validatedinput>
 
     <div class="form-group">
-      <label for="vms">Associate Version Management Software</label>
-      <select class="form-control" ng-options="vms.name for vms in vmses" ng-model="projectToCreate.versionManagementSoftware" name="vms">
+      <label for="remoteProjectManager">Associate Remote Project Manager</label>
+      <select class="form-control" ng-options="remoteProjectManager.name for remoteProjectManager in remoteProjectManagers" ng-model="projectToCreate.remoteProjectManager"
+        name="remoteProjectManager">
         <option value="" selected>None</option>
-     </select>
+      </select>
     </div>
 
-    <div class="form-group" ng-if="projectToCreate.versionManagementSoftware">
-      <label for="vms">Associate Version Project</label>
-      <select class="form-control" ng-options="vp.scopeId as vp.name for vp in getVmsVersionProjects(projectToCreate.versionManagementSoftware.id) | orderBy:'name'" ng-model="projectToCreate.scopeId" name="vms">
+    <div class="form-group" ng-if="projectToCreate.remoteProjectManager">
+      <label for="remoteProjectManager">Associate Version Project</label>
+      <select class="form-control" ng-options="vp.scopeId as vp.name for vp in getRemoteProjectManagerRemoteProjects(projectToCreate.remoteProjectManager.id) | orderBy:'name'"
+        ng-model="projectToCreate.scopeId" name="remoteProjectManager">
         <option value="" selected>None</option>
-     </select>
+      </select>
     </div>
 
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-default" ng-click="cancelCreateProject()">Cancel</button>
+    <button type="button" class="btn btn-default" ng-click="resetCreateProject()">Cancel</button>
     <button type="submit" class="btn btn-success" ng-disabled="projectForms.create.$invalid">Create</button>
   </div>
 </form>

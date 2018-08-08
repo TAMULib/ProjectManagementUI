@@ -6,8 +6,8 @@
   <table ng-table="tableParams" show-filter="false" class="table table-bordered table-striped project-table">
     <tr ng-repeat="project in $data | orderBy: 'name'">
       <td title="'Project'">{{project.name}}</td>
-      <td title="'Version Management Software'">{{project.versionManagementSoftware.name}}</td>
-      <td title="'Version Project'">{{getVersionProject(project).name}}</td>
+      <td title="'Remote Project Manager'">{{project.remoteProjectManager.name}}</td>
+      <td title="'Remote Project'">{{project.remoteProject.name}}</td>
       <td title="'Scope Id'">{{project.scopeId}}</td>
       <td class="actions-column text-center" title="'Actions'">
         <span class="glyphicon glyphicon-pencil" title="edit" ng-click="editProject(project)"></span>
@@ -16,7 +16,10 @@
     </tr>
   </table>
 
-  <modal modal-id="addProjectModal" modal-view="views/modals/addProjectModal.html" modal-header-class="modal-header-primary" wvr-modal-backdrop="static"></modal>
-  <modal modal-id="deleteProjectModal" modal-view="views/modals/deleteProjectModal.html" modal-header-class="modal-header-danger" wvr-modal-backdrop="static"></modal>
-  <modal modal-id="editProjectModal" modal-view="views/modals/editProjectModal.html" modal-header-class="modal-header-primary" wvr-modal-backdrop="static"></modal>
+  <modal modal-id="addProjectModal" modal-view="views/modals/addProjectModal.html" modal-header-class="modal-header-primary"
+    wvr-modal-backdrop="static"></modal>
+  <modal modal-id="deleteProjectModal" modal-view="views/modals/deleteProjectModal.html" modal-header-class="modal-header-danger"
+    wvr-modal-backdrop="static"></modal>
+  <modal modal-id="editProjectModal" modal-view="views/modals/editProjectModal.html" modal-header-class="modal-header-primary"
+    wvr-modal-backdrop="static"></modal>
 </div>

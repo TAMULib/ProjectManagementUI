@@ -1,0 +1,30 @@
+<div class="management-table" ng-controller="RemoteProjectManagerController">
+
+  <button class="btn btn-default view-action-button" ng-click="openModal('#addRemoteProjectManagerModal')">Add a Remote Project Manager</button>
+  <hr />
+
+  <table ng-table="tableParams" show-filter="false" class="table table-bordered table-striped remoteProjectManager-table">
+    <tr ng-repeat="remoteProjectManager in $data | orderBy: 'name'">
+      <td title="'Remote Project Manager'">{{remoteProjectManager.name}}</td>
+      <td title="'Settings'">
+        <ul class="list-unstyled">
+          <li ng-repeat="setting in typeSettings(remoteProjectManager.type) | filter:{visible:true}">
+            <label>{{setting.gloss}}:</label>
+            <span>&nbsp{{remoteProjectManager.settings[setting.key]}}</span>
+          </li>
+        </ul>
+      </td>
+      <td class="actions-column text-center" title="'Actions'">
+        <span class="glyphicon glyphicon-pencil" title="edit" ng-click="editRemoteProjectManager(remoteProjectManager)"></span>
+        <span class="glyphicon glyphicon-trash" title="delete" ng-click="confirmDeleteRemoteProjectManager(remoteProjectManager)"></span>
+      </td>
+    </tr>
+  </table>
+
+  <modal modal-id="addRemoteProjectManagerModal" modal-view="views/modals/addRemoteProjectManagerModal.html" modal-header-class="modal-header-primary"
+    wvr-modal-backdrop="static"></modal>
+  <modal modal-id="deleteRemoteProjectManagerModal" modal-view="views/modals/deleteRemoteProjectManagerModal.html" modal-header-class="modal-header-danger"
+    wvr-modal-backdrop="static"></modal>
+  <modal modal-id="editRemoteProjectManagerModal" modal-view="views/modals/editRemoteProjectManagerModal.html" modal-header-class="modal-header-primary"
+    wvr-modal-backdrop="static"></modal>
+</div>
