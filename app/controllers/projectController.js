@@ -76,7 +76,7 @@ app.controller('ProjectController', function ($controller, $scope, NgTableParams
         });
     };
 
-    UserService.userEvents().then(null, null, function () {
+    if ($scope.isManager() || $scope.isAdmin()) {
         $scope.remoteProjectManagers = RemoteProjectManagerRepo.getAll();
 
         $scope.remoteProjects = {};
@@ -102,7 +102,7 @@ app.controller('ProjectController', function ($controller, $scope, NgTableParams
                 }
             }
         });
-    });
+    }
 
     var buildTable = function () {
         $scope.tableParams = new NgTableParams({
