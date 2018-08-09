@@ -1,4 +1,4 @@
-app.service('ProjectsStatsService', function ($q, WsApi) {
+app.service('ProjectsStatsService', function ($q, ProjectRepo, WsApi) {
 
     var projectsStats = [];
 
@@ -9,6 +9,7 @@ app.service('ProjectsStatsService', function ($q, WsApi) {
         if (apiRes.meta.status === 'SUCCESS') {
             angular.extend(projectsStats, apiRes.payload['ArrayList<ProjectStats>']);
             defer.resolve();
+            ProjectRepo.reset();
         } else {
             console.error(apiRes.meta);
             throw "Unable to retrieve remote projects";

@@ -88,8 +88,16 @@
       <div class="tab-pane" id="projects" ng-controller="ProjectController">
         <div class="row">
 
-          <table ng-table="tableParams" show-filter="false" class="table table-bordered table-striped project-table">
-            <tr ng-repeat="project in $data | orderBy: '-stats.backlogItemCount'">
+          <table class="table table-bordered table-striped project-table">
+            <tr>
+              <th>Project</th>
+              <th>Total Backlog Items</th>
+              <th>Feature Count</th>
+              <th>Defect Count</th>
+              <th>Request Count</th>
+              <th>Issue Count</th>
+            </tr>
+            <tr ng-repeat="project in projects | orderBy: '-stats.backlogItemCount'">
               <td title="'Project'">{{project.name}}</td>
               <td title="'Total Backlog Items'">{{project.stats.backlogItemCount}}</td>
               <td title="'Feature Count'">{{project.stats.featureCount}}</td>

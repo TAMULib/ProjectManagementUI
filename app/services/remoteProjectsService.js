@@ -1,4 +1,4 @@
-app.service('RemoteProjectsService', function ($q, WsApi) {
+app.service('RemoteProjectsService', function ($q, ProjectRepo, WsApi) {
 
     var remoteProjects = {};
 
@@ -12,6 +12,7 @@ app.service('RemoteProjectsService', function ($q, WsApi) {
             }
             angular.extend(remoteProjects, apiRes.payload.HashMap);
             defer.resolve();
+            ProjectRepo.reset();
         } else {
             console.error(apiRes.meta);
             throw "Unable to retrieve remote projects";

@@ -3,8 +3,15 @@
   <button class="btn btn-default view-action-button" ng-click="openModal('#addProjectModal')">Add a Project</button>
   <hr />
 
-  <table ng-table="tableParams" show-filter="false" class="table table-bordered table-striped project-table">
-    <tr ng-repeat="project in $data | orderBy: 'name'">
+  <table class="table table-bordered table-striped project-table">
+    <tr>
+      <th>Project</th>
+      <th>Remote Project Manager</th>
+      <th>Remote Project</th>
+      <th>Scope Id</th>
+      <th class="actions-column text-center">Actions</th>
+    </tr>
+    <tr ng-repeat="project in projects | orderBy: 'name'">
       <td title="'Project'">{{project.name}}</td>
       <td title="'Remote Project Manager'">{{project.remoteProjectManager.name}}</td>
       <td title="'Remote Project'">{{project.remoteProject.name}}</td>
