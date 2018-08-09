@@ -136,21 +136,31 @@ var apiMapping = {
     RemoteProjects: {
         all: {
             'endpoint': '/private/queue',
-            'controller': 'remote-projects'
+            'controller': 'projects/remote'
         },
         listen: {
             'endpoint': '/channel',
-            'controller': 'remote-projects'
+            'controller': 'projects/remote'
+        }
+    },
+    ProjectsStats: {
+        all: {
+            'endpoint': '/private/queue',
+            'controller': 'projects/stats'
+        },
+        listen: {
+            'endpoint': '/channel',
+            'controller': 'projects/stats'
         }
     },
     ActiveSprints: {
         all: {
             'endpoint': '/private/queue',
-            'controller': 'active-sprints'
+            'controller': 'sprints/active'
         },
         listen: {
             'endpoint': '/channel',
-            'controller': 'active-sprints'
+            'controller': 'sprints/active'
         }
     }
 };

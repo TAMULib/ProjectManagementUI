@@ -1,4 +1,4 @@
-app.controller('ProjectController', function ($controller, $scope, NgTableParams, ApiResponseActions, ProjectRepo, RemoteProjectManagerRepo, RemoteProjectService, UserService) {
+app.controller('ProjectController', function ($controller, $scope, NgTableParams, ApiResponseActions, ProjectRepo, RemoteProjectManagerRepo, RemoteProjectsService) {
 
     angular.extend(this, $controller('AbstractController', {
         $scope: $scope
@@ -90,7 +90,7 @@ app.controller('ProjectController', function ($controller, $scope, NgTableParams
         };
 
         var getRemoteProjectManagerById = function (id) {
-            RemoteProjectService.getAll(id).then(function (remoteProjects) {
+            RemoteProjectsService.getAll(id).then(function (remoteProjects) {
                 $scope.remoteProjects[id] = remoteProjects;
             });
         };
