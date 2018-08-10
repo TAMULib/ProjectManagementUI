@@ -88,15 +88,22 @@
       <div class="tab-pane" id="projects" ng-controller="ProjectController">
         <div class="row">
 
-          <table ng-table="tableParams" show-filter="false" class="table table-bordered table-striped project-table">
-            <tr ng-repeat="project in $data | orderBy: '-remoteProject.backlogItemCount'">
+          <table class="table table-bordered table-striped project-table">
+            <tr>
+              <th>Project</th>
+              <th>Total Backlog Items</th>
+              <th>Feature Count</th>
+              <th>Defect Count</th>
+              <th>Request Count</th>
+              <th>Issue Count</th>
+            </tr>
+            <tr ng-repeat="project in projects | orderBy: '-stats.backlogItemCount'">
               <td title="'Project'">{{project.name}}</td>
-              <td title="'Remote Project'">{{project.remoteProject.name}}</td>
-              <td title="'Total Backlog Items'">{{project.remoteProject.backlogItemCount}}</td>
-              <td title="'Story Count'">{{project.remoteProject.storyCount}}</td>
-              <td title="'Defect Count'">{{project.remoteProject.defectCount}}</td>
-              <td title="'Request Count'">{{project.remoteProject.requestCount}}</td>
-              <td title="'Issue Count'">{{project.remoteProject.issueCount}}</td>
+              <td title="'Total Backlog Items'">{{project.stats.backlogItemCount}}</td>
+              <td title="'Feature Count'">{{project.stats.featureCount}}</td>
+              <td title="'Defect Count'">{{project.stats.defectCount}}</td>
+              <td title="'Request Count'">{{project.stats.requestCount}}</td>
+              <td title="'Issue Count'">{{project.stats.issueCount}}</td>
             </tr>
           </table>
 

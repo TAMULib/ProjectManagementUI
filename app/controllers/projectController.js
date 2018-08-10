@@ -1,10 +1,10 @@
-app.controller('ProjectController', function ($controller, $scope, NgTableParams, ApiResponseActions, ProjectRepo, RemoteProjectManagerRepo, RemoteProjectService, UserService) {
+app.controller('ProjectController', function ($controller, $scope, ProjectRepo, RemoteProjectManagerRepo, RemoteProjectsService) {
 
     angular.extend(this, $controller('AbstractController', {
         $scope: $scope
     }));
 
-    var projects = ProjectRepo.getAll();
+    $scope.projects = ProjectRepo.getAll();
 
     $scope.projectToCreate = ProjectRepo.getScaffold();
 
@@ -76,7 +76,7 @@ app.controller('ProjectController', function ($controller, $scope, NgTableParams
         });
     };
 
-    UserService.userEvents().then(null, null, function () {
+    if ($scope.isManager() || $scope.isAdmin()) {
         $scope.remoteProjectManagers = RemoteProjectManagerRepo.getAll();
 
         $scope.remoteProjects = {};
@@ -90,7 +90,7 @@ app.controller('ProjectController', function ($controller, $scope, NgTableParams
         };
 
         var getRemoteProjectManagerById = function (id) {
-            RemoteProjectService.getAll(id).then(function (remoteProjects) {
+            RemoteProjectsService.getAll(id).then(function (remoteProjects) {
                 $scope.remoteProjects[id] = remoteProjects;
             });
         };
@@ -102,29 +102,6 @@ app.controller('ProjectController', function ($controller, $scope, NgTableParams
                 }
             }
         });
-    });
-
-    var buildTable = function () {
-        $scope.tableParams = new NgTableParams({
-            count: ProjectRepo.getAll().length,
-            sorting: {
-                name: 'asc'
-            }
-        }, {
-            counts: [],
-            total: 0,
-            getData: function (params) {
-                return projects;
-            }
-        });
-    };
-
-    ProjectRepo.ready().then(function () {
-        buildTable();
-    });
-
-    ProjectRepo.listen([ApiResponseActions.CREATE, ApiResponseActions.DELETE, ApiResponseActions.UPDATE], function (arg) {
-        buildTable();
-    });
+    }
 
 });

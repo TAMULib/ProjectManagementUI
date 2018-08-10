@@ -10,8 +10,8 @@
   <validationmessage results="projectForms.getResults()"></validationmessage>
 
   <div class="modal-body">
-    <validatedinput model="projectToEdit" property="name" label="Name" placeholder="Name of the Project" form="projectForms.edit"
-      validations="projectForms.validations" results="projectForms.getResults()" autocomplete="off">
+    <validatedinput model="projectToEdit" property="name" label="Name" placeholder="Name of the Project" form="projectForms.edit" validations="projectForms.validations" results="projectForms.getResults()"
+      autocomplete="off">
     </validatedinput>
 
     <div class="form-group">
@@ -24,8 +24,8 @@
 
     <div class="form-group" ng-if="projectToEdit.remoteProjectManager">
       <label for="remoteProjectManager">Associate Version Project</label>
-      <select class="form-control" ng-options="vp.scopeId as vp.name for vp in getRemoteProjectManagerRemoteProjects(projectToEdit.remoteProjectManager.id) | orderBy:'name'"
-        ng-model="projectToEdit.scopeId" name="remoteProjectManager">
+      <select class="form-control" ng-options="vp.scopeId as vp.name for vp in getRemoteProjectManagerRemoteProjects(projectToEdit.remoteProjectManager.id) | orderBy:'name'" ng-model="projectToEdit.scopeId"
+        name="remoteProjectManager">
         <option value="" selected>None</option>
       </select>
     </div>

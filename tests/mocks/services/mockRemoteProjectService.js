@@ -1,4 +1,4 @@
-angular.module('mock.remoteProjectService', []).service('RemoteProjectService', function ($q) {
+angular.module('mock.remoteProjectService', []).service('RemoteProjectsService', function ($q) {
 
     this.getAll = function (remoteProjectManagerId) {
         return $q(function (resolve, reject) {

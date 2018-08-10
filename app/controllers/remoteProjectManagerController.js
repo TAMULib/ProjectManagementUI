@@ -1,10 +1,10 @@
-app.controller('RemoteProjectManagerController', function ($controller, $scope, ApiResponseActions, NgTableParams, RemoteProjectManagerRepo) {
+app.controller('RemoteProjectManagerController', function ($controller, $scope, RemoteProjectManagerRepo) {
 
     angular.extend(this, $controller('AbstractController', {
         $scope: $scope
     }));
 
-    var remoteProjectManagers = RemoteProjectManagerRepo.getAll();
+    $scope.remoteProjectManagers = RemoteProjectManagerRepo.getAll();
 
     $scope.remoteProjectManagerToCreate = RemoteProjectManagerRepo.getScaffold();
 
@@ -88,28 +88,5 @@ app.controller('RemoteProjectManagerController', function ($controller, $scope, 
         }
         return [];
     };
-
-    var buildTable = function () {
-        $scope.tableParams = new NgTableParams({
-            count: RemoteProjectManagerRepo.getAll().length,
-            sorting: {
-                name: 'ASC'
-            }
-        }, {
-            counts: [],
-            total: 0,
-            getData: function (params) {
-                return remoteProjectManagers;
-            }
-        });
-    };
-
-    RemoteProjectManagerRepo.ready().then(function () {
-        buildTable();
-    });
-
-    RemoteProjectManagerRepo.listen([ApiResponseActions.CREATE, ApiResponseActions.DELETE, ApiResponseActions.UPDATE], function (arg) {
-        buildTable();
-    });
 
 });

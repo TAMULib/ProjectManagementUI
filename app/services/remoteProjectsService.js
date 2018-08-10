@@ -1,4 +1,4 @@
-app.service('RemoteProjectService', function ($q, WsApi) {
+app.service('RemoteProjectsService', function ($q, ProjectRepo, WsApi) {
 
     var remoteProjects = {};
 
@@ -12,6 +12,7 @@ app.service('RemoteProjectService', function ($q, WsApi) {
             }
             angular.extend(remoteProjects, apiRes.payload.HashMap);
             defer.resolve();
+            ProjectRepo.reset();
         } else {
             console.error(apiRes.meta);
             throw "Unable to retrieve remote projects";
@@ -29,12 +30,8 @@ app.service('RemoteProjectService', function ($q, WsApi) {
     };
 
     this.getRemoteProjects = function () {
-        return activeSprints;
+        return remoteProjects;
     };
-
-    this.refreshRemoteProjects();
-
-    this.ready = defer.promise;
 
     this.getAll = function (remoteProjectManagerId) {
         return $q(function (resolve, reject) {
@@ -48,12 +45,16 @@ app.service('RemoteProjectService', function ($q, WsApi) {
         return $q(function (resolve, reject) {
             this.ready.then(function () {
                 for (var i in remoteProjects[remoteProjectManagerId]) {
-                    if (remoteProjects[remoteProjectManagerId][i].scopeId === scopeId) {
+                    if (remoteProjects[remoteProjectManagerId][i].id === scopeId) {
                         resolve(remoteProjects[remoteProjectManagerId][i]);
                     }
                 }
             });
         }.bind(this));
     };
+
+    this.refreshRemoteProjects();
+
+    this.ready = defer.promise;
 
 });

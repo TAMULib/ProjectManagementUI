@@ -10,17 +10,16 @@
   <validationmessage results="remoteProjectManagerForms.getResults()"></validationmessage>
 
   <div class="modal-body">
-    <validatedinput model="remoteProjectManagerToCreate" property="name" label="Name" placeholder="Name of the Remote Project Manager"
-      form="remoteProjectManagerForms.create" validations="remoteProjectManagerForms.validations" results="remoteProjectManagerForms.getResults()">
+    <validatedinput model="remoteProjectManagerToCreate" property="name" label="Name" placeholder="Name of the Remote Project Manager" form="remoteProjectManagerForms.create" validations="remoteProjectManagerForms.validations"
+      results="remoteProjectManagerForms.getResults()">
     </validatedinput>
 
-    <validatedselect options="serviceTypes" optionvalue="value" optionproperty="gloss" model="remoteProjectManagerToCreate" property="type"
-      label="Type" form="remoteProjectManagerForms.create" validations="remoteProjectManagerForms.validations" results="remoteProjectManagerForms.getResults()">
+    <validatedselect options="serviceTypes" optionvalue="value" optionproperty="gloss" model="remoteProjectManagerToCreate" property="type" label="Type" form="remoteProjectManagerForms.create" validations="remoteProjectManagerForms.validations"
+      results="remoteProjectManagerForms.getResults()">
     </validatedselect>
 
-    <remoteProjectManager-form ng-if="remoteProjectManagerToCreate.type" management-settings="typeSettings(remoteProjectManagerToCreate.type)"
-      model="remoteProjectManagerToCreate">
-    </remoteProjectManager-form>
+    <remote-project-manager-form ng-if="remoteProjectManagerToCreate.type" management-settings="typeSettings(remoteProjectManagerToCreate.type)" model="remoteProjectManagerToCreate">
+    </remote-project-manager-form>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-default" ng-click="resetCreateRemoteProjectManager()">Cancel</button>

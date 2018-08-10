@@ -10,22 +10,20 @@
   <validationmessage results="projectForms.getResults()"></validationmessage>
 
   <div class="modal-body">
-    <validatedinput model="projectToCreate" property="name" label="Name" placeholder="Name of the Project" form="projectForms.create"
-      validations="projectForms.validations" results="projectRepo.getResults()">
+    <validatedinput model="projectToCreate" property="name" label="Name" placeholder="Name of the Project" form="projectForms.create" validations="projectForms.validations" results="projectRepo.getResults()">
     </validatedinput>
 
     <div class="form-group">
       <label for="remoteProjectManager">Associate Remote Project Manager</label>
-      <select class="form-control" ng-options="remoteProjectManager.name for remoteProjectManager in remoteProjectManagers" ng-model="projectToCreate.remoteProjectManager"
-        name="remoteProjectManager">
+      <select class="form-control" ng-options="remoteProjectManager.name for remoteProjectManager in remoteProjectManagers" ng-model="projectToCreate.remoteProjectManager" name="remoteProjectManager">
         <option value="" selected>None</option>
       </select>
     </div>
 
     <div class="form-group" ng-if="projectToCreate.remoteProjectManager">
       <label for="remoteProjectManager">Associate Version Project</label>
-      <select class="form-control" ng-options="vp.scopeId as vp.name for vp in getRemoteProjectManagerRemoteProjects(projectToCreate.remoteProjectManager.id) | orderBy:'name'"
-        ng-model="projectToCreate.scopeId" name="remoteProjectManager">
+      <select class="form-control" ng-options="vp.scopeId as vp.name for vp in getRemoteProjectManagerRemoteProjects(projectToCreate.remoteProjectManager.id) | orderBy:'name'" ng-model="projectToCreate.scopeId"
+        name="remoteProjectManager">
         <option value="" selected>None</option>
       </select>
     </div>
