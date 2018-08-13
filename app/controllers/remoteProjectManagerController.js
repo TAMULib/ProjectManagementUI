@@ -1,4 +1,4 @@
-app.controller('RemoteProjectManagerController', function ($controller, $scope, RemoteProjectManagerRepo) {
+app.controller('RemoteProjectManagerController', function ($controller, $scope, ApiResponseActions, RemoteProjectManagerRepo) {
 
     angular.extend(this, $controller('AbstractController', {
         $scope: $scope
@@ -13,6 +13,7 @@ app.controller('RemoteProjectManagerController', function ($controller, $scope, 
 
     RemoteProjectManagerRepo.getTypes().then(function (types) {
         $scope.serviceTypes = types;
+        $scope.resetRemoteProjectManagerForms();
     });
 
     $scope.remoteProjectManagerForms = {
@@ -29,8 +30,6 @@ app.controller('RemoteProjectManagerController', function ($controller, $scope, 
         }
         $scope.closeModal();
     };
-
-    $scope.resetRemoteProjectManagerForms();
 
     $scope.createRemoteProjectManager = function () {
         RemoteProjectManagerRepo.create($scope.remoteProjectManagerToCreate).then(function (res) {
@@ -88,5 +87,9 @@ app.controller('RemoteProjectManagerController', function ($controller, $scope, 
         }
         return [];
     };
+
+    RemoteProjectManagerRepo.listen([ApiResponseActions.CREATE, ApiResponseActions.DELETE, ApiResponseActions.UPDATE], function () {
+        $scope.remoteProjectManagers = RemoteProjectManagerRepo.getAll();
+    });
 
 });

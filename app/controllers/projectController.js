@@ -1,4 +1,4 @@
-app.controller('ProjectController', function ($controller, $scope, ProjectRepo, RemoteProjectManagerRepo, RemoteProjectsService) {
+app.controller('ProjectController', function ($controller, $scope, ApiResponseActions, ProjectRepo, RemoteProjectManagerRepo, RemoteProjectsService) {
 
     angular.extend(this, $controller('AbstractController', {
         $scope: $scope
@@ -95,12 +95,19 @@ app.controller('ProjectController', function ($controller, $scope, ProjectRepo, 
             });
         };
 
-        RemoteProjectManagerRepo.ready().then(function () {
+        var enhanceRemoteProjects = function () {
             for (var i in $scope.remoteProjectManagers) {
-                if (i !== 'visibleColumnCount') {
-                    getRemoteProjectManagerById($scope.remoteProjectManagers[i].id);
-                }
+                getRemoteProjectManagerById($scope.remoteProjectManagers[i].id);
             }
+        };
+
+        RemoteProjectManagerRepo.ready().then(function () {
+            enhanceRemoteProjects();
+        });
+
+        RemoteProjectManagerRepo.listen([ApiResponseActions.CREATE, ApiResponseActions.DELETE, ApiResponseActions.UPDATE], function () {
+            $scope.remoteProjectManagers = RemoteProjectManagerRepo.getAll();
+            enhanceRemoteProjects();
         });
     }
 

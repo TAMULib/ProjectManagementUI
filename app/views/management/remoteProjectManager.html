@@ -9,13 +9,13 @@
       <th>Settings</th>
       <th class="actions-column text-center">Actions</th>
     </tr>
-    <tr ng-repeat="remoteProjectManager in remoteProjectManagers | orderBy: 'name'">
+    <tr ng-repeat="remoteProjectManager in remoteProjectManagers">
       <td title="'Remote Project Manager'">{{remoteProjectManager.name}}</td>
       <td title="'Settings'">
         <ul class="list-unstyled">
           <li ng-repeat="setting in typeSettings(remoteProjectManager.type) | filter:{visible:true}">
             <label>{{setting.gloss}}:</label>
-            <span>&nbsp{{remoteProjectManager.settings[setting.key]}}</span>
+            <span>&nbsp;{{remoteProjectManager.settings[setting.key]}}</span>
           </li>
         </ul>
       </td>
