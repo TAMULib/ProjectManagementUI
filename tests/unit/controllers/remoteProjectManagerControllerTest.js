@@ -69,6 +69,10 @@ describe('controller: RemoteProjectManagerController', function () {
             expect(scope.deleteRemoteProjectManager).toBeDefined();
             expect(typeof scope.deleteRemoteProjectManager).toEqual('function');
         });
+        it('typeSettings should be defined', function () {
+            expect(scope.typeSettings).toBeDefined();
+            expect(typeof scope.typeSettings).toEqual('function');
+        });
     });
 
     describe('Do the scope methods work as expected', function () {
@@ -203,6 +207,37 @@ describe('controller: RemoteProjectManagerController', function () {
 
             expect(RemoteProjectManagerRepo.delete).toHaveBeenCalledWith(RemoteProjectManager);
             expect(scope.cancelDeleteRemoteProjectManager).toHaveBeenCalled();
+        });
+
+        it('typeSettings should return appropriate scaffold', function () {
+            var scaffold = [{
+                "type": "text",
+                "key": "url",
+                "gloss": "URL",
+                "visible": true
+            }, {
+                "type": "text",
+                "key": "username",
+                "gloss": "Username",
+                "visible": false
+            }, {
+                "type": "password",
+                "key": "password",
+                "gloss": "Password",
+                "visible": false
+            }, {
+                "type": "password",
+                "key": "token",
+                "gloss": "Token",
+                "visible": false
+            }];
+            scope.serviceTypes = [{
+                "gloss": "Version One",
+                "scaffold": scaffold,
+                "value": "VERSION_ONE"
+            }];
+            var typeSettings = scope.typeSettings('VERSION_ONE');
+            expect(typeSettings).toEqual(scaffold);
         });
 
     });
