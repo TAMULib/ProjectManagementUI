@@ -79,35 +79,14 @@ app.controller('ProjectController', function ($controller, $scope, ApiResponseAc
     if ($scope.isManager() || $scope.isAdmin()) {
         $scope.remoteProjectManagers = RemoteProjectManagerRepo.getAll();
 
-        $scope.remoteProjects = {};
+        $scope.remoteProjects = RemoteProjectsService.getRemoteProjects();
 
         $scope.getRemoteProjectManagerRemoteProjects = function (remoteProjectManagerId) {
             return $scope.remoteProjects[remoteProjectManagerId];
         };
-
-        $scope.getRemoteProjectManagerRemoteProjects = function (remoteProjectManagerId) {
-            return $scope.remoteProjects[remoteProjectManagerId];
-        };
-
-        var getRemoteProjectManagerById = function (id) {
-            RemoteProjectsService.getAll(id).then(function (remoteProjects) {
-                $scope.remoteProjects[id] = remoteProjects;
-            });
-        };
-
-        var enhanceRemoteProjects = function () {
-            for (var i in $scope.remoteProjectManagers) {
-                getRemoteProjectManagerById($scope.remoteProjectManagers[i].id);
-            }
-        };
-
-        RemoteProjectManagerRepo.ready().then(function () {
-            enhanceRemoteProjects();
-        });
 
         RemoteProjectManagerRepo.listen([ApiResponseActions.CREATE, ApiResponseActions.DELETE, ApiResponseActions.UPDATE], function () {
             $scope.remoteProjectManagers = RemoteProjectManagerRepo.getAll();
-            enhanceRemoteProjects();
         });
     }
 
