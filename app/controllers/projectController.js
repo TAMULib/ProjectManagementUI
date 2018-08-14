@@ -1,4 +1,4 @@
-app.controller('ProjectController', function ($controller, $scope, ProjectRepo, RemoteProjectManagerRepo, RemoteProjectsService) {
+app.controller('ProjectController', function ($controller, $scope, ApiResponseActions, ProjectRepo, RemoteProjectManagerRepo, RemoteProjectsService) {
 
     angular.extend(this, $controller('AbstractController', {
         $scope: $scope
@@ -79,28 +79,14 @@ app.controller('ProjectController', function ($controller, $scope, ProjectRepo, 
     if ($scope.isManager() || $scope.isAdmin()) {
         $scope.remoteProjectManagers = RemoteProjectManagerRepo.getAll();
 
-        $scope.remoteProjects = {};
+        $scope.remoteProjects = RemoteProjectsService.getRemoteProjects();
 
         $scope.getRemoteProjectManagerRemoteProjects = function (remoteProjectManagerId) {
             return $scope.remoteProjects[remoteProjectManagerId];
         };
 
-        $scope.getRemoteProjectManagerRemoteProjects = function (remoteProjectManagerId) {
-            return $scope.remoteProjects[remoteProjectManagerId];
-        };
-
-        var getRemoteProjectManagerById = function (id) {
-            RemoteProjectsService.getAll(id).then(function (remoteProjects) {
-                $scope.remoteProjects[id] = remoteProjects;
-            });
-        };
-
-        RemoteProjectManagerRepo.ready().then(function () {
-            for (var i in $scope.remoteProjectManagers) {
-                if (i !== 'visibleColumnCount') {
-                    getRemoteProjectManagerById($scope.remoteProjectManagers[i].id);
-                }
-            }
+        RemoteProjectManagerRepo.listen([ApiResponseActions.CREATE, ApiResponseActions.DELETE, ApiResponseActions.UPDATE], function () {
+            $scope.remoteProjectManagers = RemoteProjectManagerRepo.getAll();
         });
     }
 

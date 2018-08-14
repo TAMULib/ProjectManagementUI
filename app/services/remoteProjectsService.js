@@ -33,14 +33,6 @@ app.service('RemoteProjectsService', function ($q, ProjectRepo, WsApi) {
         return remoteProjects;
     };
 
-    this.getAll = function (remoteProjectManagerId) {
-        return $q(function (resolve, reject) {
-            this.ready.then(function () {
-                resolve(remoteProjects[remoteProjectManagerId]);
-            });
-        }.bind(this));
-    };
-
     this.getByScopeId = function (remoteProjectManagerId, scopeId) {
         return $q(function (resolve, reject) {
             this.ready.then(function () {
