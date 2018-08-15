@@ -97,8 +97,12 @@ app.controller('StatusController', function ($controller, $scope, ApiResponseAct
         }
     };
 
-    StatusRepo.listen([ApiResponseActions.CREATE, ApiResponseActions.DELETE, ApiResponseActions.UPDATE], function (arg) {
-        $scope.statuses = StatusRepo.getAll();
+    StatusRepo.listen([ApiResponseActions.CREATE, ApiResponseActions.DELETE, ApiResponseActions.UPDATE], function () {
+        $scope.statuses.length = 0;
+        var statuses = StatusRepo.getAll();
+        for (var i in statuses) {
+            $scope.statuses.push(statuses[i]);
+        }
     });
 
 });
