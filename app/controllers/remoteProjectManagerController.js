@@ -89,7 +89,11 @@ app.controller('RemoteProjectManagerController', function ($controller, $scope, 
     };
 
     RemoteProjectManagerRepo.listen([ApiResponseActions.CREATE, ApiResponseActions.DELETE, ApiResponseActions.UPDATE], function () {
-        $scope.remoteProjectManagers = RemoteProjectManagerRepo.getAll();
+        $scope.remoteProjectManagers.length = 0;
+        var remoteProjectManagers = RemoteProjectManagerRepo.getAll();
+        for (var i in remoteProjectManagers) {
+            $scope.remoteProjectManagers.push(remoteProjectManagers[i]);
+        }
     });
 
 });
