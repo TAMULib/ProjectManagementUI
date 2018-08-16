@@ -52,8 +52,10 @@ app.controller('StatusController', function ($controller, $scope, ApiResponseAct
     $scope.updateStatus = function () {
         sanatizeMapping($scope.statusToEdit);
         $scope.statusToEdit.dirty(true);
-        $scope.statusToEdit.save().then(function () {
-            $scope.cancelEditStatus();
+        $scope.statusToEdit.save().then(function (res) {
+            if (angular.fromJson(res.body).meta.status === "SUCCESS") {
+                $scope.cancelEditStatus();
+            }
         });
     };
 

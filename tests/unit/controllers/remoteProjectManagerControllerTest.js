@@ -21,7 +21,6 @@ describe('controller: RemoteProjectManagerController', function () {
             $compile: _$compile_,
             $filter: _$filter_,
             ModalService: _ModalService_,
-            RemoteProjectManager: _RemoteProjectManager_,
             RemoteProjectManagerRepo: _RemoteProjectManagerRepo_
         });
     }));
@@ -93,7 +92,6 @@ describe('controller: RemoteProjectManagerController', function () {
         });
 
         it('createRemoteProjectManager should create a new Remote Project Manager', function () {
-            var length = mockRemoteProjectManageres.length + 1;
             var newRemoteProjectManager = {
                 "id": 4,
                 "name": "Test 4",
@@ -149,14 +147,20 @@ describe('controller: RemoteProjectManagerController', function () {
             expect(scope.openModal).toHaveBeenCalled();
         });
 
-        it('updateRemoteProjectManager should call dirty and save on the VMS, and then call cancelEditRemoteProjectManager', function () {
+        it('updateRemoteProjectManager should call dirty and save on the Remote Project Manager, and then call cancelEditRemoteProjectManager', function () {
             spyOn(scope, 'cancelEditRemoteProjectManager');
             spyOn(RemoteProjectManager, 'dirty');
             deferred = $q.defer();
             spyOn(RemoteProjectManager, 'save').and.returnValue(deferred.promise);
             scope.remoteProjectManagerToEdit = RemoteProjectManager;
             scope.updateRemoteProjectManager();
-            deferred.resolve();
+            deferred.resolve({
+                body: angular.toJson({
+                    meta: {
+                        status: "SUCCESS"
+                    }
+                })
+            });
             scope.$apply();
 
             expect(scope.cancelEditRemoteProjectManager).toHaveBeenCalled();
@@ -191,7 +195,7 @@ describe('controller: RemoteProjectManagerController', function () {
         });
 
         it('deleteRemoteProjectManager should call the repo delete method and then call cancelDeleteRemoteProjectManager when successful', function () {
-            scope.remoteProjectManagerToDelete = Project;
+            scope.remoteProjectManagerToDelete = RemoteProjectManager;
             deferred = $q.defer();
             spyOn(RemoteProjectManagerRepo, 'delete').and.returnValue(deferred.promise);
             spyOn(scope, 'cancelDeleteRemoteProjectManager');

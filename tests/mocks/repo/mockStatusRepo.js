@@ -1,8 +1,40 @@
-var mockStatus = [];
+var mockStatuses = [{
+        "id": 1,
+        "identifier": "None",
+        "mapping": [
+            "None",
+            "Future"
+        ]
+    },
+    {
+        "id": 2,
+        "identifier": "None",
+        "mapping": [
+            "None",
+            "Future"
+        ]
+    },
+    {
+        "id": 3,
+        "identifier": "None",
+        "mapping": [
+            "None",
+            "Future"
+        ]
+    },
+    {
+        "id": 4,
+        "identifier": "None",
+        "mapping": [
+            "None",
+            "Future"
+        ]
+    }
+];
 
 angular.module('mock.statusRepo', []).service('StatusRepo', function ($q) {
 
-    this.list = mockStatus;
+    this.list = mockStatuses;
 
     this.create = function (project) {
         var defer = $q.defer();

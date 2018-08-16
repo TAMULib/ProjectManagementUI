@@ -51,8 +51,10 @@ app.controller('RemoteProjectManagerController', function ($controller, $scope, 
 
     $scope.updateRemoteProjectManager = function () {
         $scope.remoteProjectManagerToEdit.dirty(true);
-        $scope.remoteProjectManagerToEdit.save().then(function () {
-            $scope.cancelEditRemoteProjectManager();
+        $scope.remoteProjectManagerToEdit.save().then(function (res) {
+            if (angular.fromJson(res.body).meta.status === "SUCCESS") {
+                $scope.cancelEditRemoteProjectManager();
+            }
         });
     };
 
