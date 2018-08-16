@@ -8,26 +8,23 @@ var mockStatuses = [{
     },
     {
         "id": 2,
-        "identifier": "None",
+        "identifier": "In Progress",
         "mapping": [
-            "None",
-            "Future"
+            "In Progress"
         ]
     },
     {
         "id": 3,
-        "identifier": "None",
+        "identifier": "Done",
         "mapping": [
-            "None",
-            "Future"
+            "Done"
         ]
     },
     {
         "id": 4,
-        "identifier": "None",
+        "identifier": "Accepted",
         "mapping": [
-            "None",
-            "Future"
+            "Accepted"
         ]
     }
 ];

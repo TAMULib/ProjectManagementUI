@@ -1,29 +1,29 @@
 describe('controller: RemoteProjectManagerController', function () {
 
-    var scope, controller;
+    var scope, controller, RemoteProjectManager, RemoteProjectManagerRepo;
 
-    beforeEach(module('core'));
-    beforeEach(module('app'));
-    beforeEach(module('app/views/modals/addRemoteProjectManagerModal.html'));
-    beforeEach(module('mock.remoteProjectManager'));
-    beforeEach(module('mock.remoteProjectManagerRepo'));
-
-    beforeEach(inject(function ($controller, $rootScope, $templateCache, _$compile_, _$filter_, _$q_, _ModalService_, _RemoteProjectManager_, _RemoteProjectManagerRepo_) {
-        installPromiseMatchers();
-        scope = $rootScope.$new();
-        $compile = _$compile_;
-        $q = _$q_;
-        cache = $templateCache;
-        RemoteProjectManager = _RemoteProjectManager_;
-        RemoteProjectManagerRepo = _RemoteProjectManagerRepo_;
-        controller = $controller('RemoteProjectManagerController', {
-            $scope: scope,
-            $compile: _$compile_,
-            $filter: _$filter_,
-            ModalService: _ModalService_,
-            RemoteProjectManagerRepo: _RemoteProjectManagerRepo_
-        });
-    }));
+    beforeEach(function () {
+        module('core');
+        module('app');
+        module('app/views/modals/addRemoteProjectManagerModal.html');
+        module('mock.remoteProjectManager');
+        module('mock.remoteProjectManagerRepo');
+        inject(function ($controller, $rootScope, $templateCache, _$compile_, _$filter_, _$q_, _ModalService_, _RemoteProjectManager_, _RemoteProjectManagerRepo_) {
+            scope = $rootScope.$new();
+            $compile = _$compile_;
+            $q = _$q_;
+            cache = $templateCache;
+            RemoteProjectManager = _RemoteProjectManager_;
+            RemoteProjectManagerRepo = _RemoteProjectManagerRepo_;
+            controller = $controller('RemoteProjectManagerController', {
+                $scope: scope,
+                $compile: _$compile_,
+                $filter: _$filter_,
+                ModalService: _ModalService_,
+                RemoteProjectManagerRepo: _RemoteProjectManagerRepo_
+            });
+        })
+    });
 
     describe('Is the controller defined', function () {
         it('should be defined', function () {

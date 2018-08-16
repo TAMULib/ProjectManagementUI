@@ -2,25 +2,25 @@ describe('controller: StatusController', function () {
 
     var scope, controller, Status, StatusRepo;
 
-    beforeEach(module('core'));
-    beforeEach(module('app'));
-    beforeEach(module('app/views/modals/addStatusModal.html'));
-    beforeEach(module('mock.status'));
-    beforeEach(module('mock.statusRepo'));
-
-    beforeEach(inject(function ($controller, $rootScope, $templateCache, _$compile_, _$q_, _Status_, _StatusRepo_) {
-        installPromiseMatchers();
-        scope = $rootScope.$new();
-        $compile = _$compile_;
-        $q = _$q_;
-        cache = $templateCache;
-        Status = _Status_;
-        StatusRepo = _StatusRepo_;
-        controller = $controller('StatusController', {
-            $scope: scope,
-            StatusRepo: _StatusRepo_
+    beforeEach(function () {
+        module('core');
+        module('app');
+        module('app/views/modals/addStatusModal.html');
+        module('mock.status');
+        module('mock.statusRepo');
+        inject(function ($controller, $rootScope, $templateCache, _$compile_, _$q_, _Status_, _StatusRepo_) {
+            scope = $rootScope.$new();
+            $compile = _$compile_;
+            $q = _$q_;
+            cache = $templateCache;
+            Status = _Status_;
+            StatusRepo = _StatusRepo_;
+            controller = $controller('StatusController', {
+                $scope: scope,
+                StatusRepo: _StatusRepo_
+            });
         });
-    }));
+    });
 
     describe('Is the controller defined', function () {
         it('should be defined', function () {
