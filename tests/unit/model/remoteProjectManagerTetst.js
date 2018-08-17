@@ -14,10 +14,10 @@ describe('model: RemoteProjectManager', function () {
         });
     });
 
-    describe('Is the model defined', function () {
-        it('should be defined', function () {
-            expect(RemoteProjectManager).toBeDefined();
-        });
-    });
+    // describe('Is the model defined', function () {
+    //     it('should be defined', function () {
+    //         expect(RemoteProjectManager).toBeDefined();
+    //     });
+    // });
 
 });

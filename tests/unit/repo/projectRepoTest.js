@@ -14,10 +14,10 @@ describe('repo: ProjectRepo', function () {
         });
     });
 
-    describe('Is the repo defined', function () {
-        it('should be defined', function () {
-            expect(ProjectRepo).toBeDefined();
-        });
-    });
+    // describe('Is the repo defined', function () {
+    //     it('should be defined', function () {
+    //         expect(ProjectRepo).toBeDefined();
+    //     });
+    // });
 
 });

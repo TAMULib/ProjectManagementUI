@@ -14,10 +14,10 @@ describe('repo: UserRepo', function () {
         });
     });
 
-    describe('Is the repo defined', function () {
-        it('should be defined', function () {
-            expect(UserRepo).toBeDefined();
-        });
-    });
+    // describe('Is the repo defined', function () {
+    //     it('should be defined', function () {
+    //         expect(UserRepo).toBeDefined();
+    //     });
+    // });
 
 });

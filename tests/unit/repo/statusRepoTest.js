@@ -14,10 +14,10 @@ describe('repo: StatusRepo', function () {
         });
     });
 
-    describe('Is the repo defined', function () {
-        it('should be defined', function () {
-            expect(StatusRepo).toBeDefined();
-        });
-    });
+    // describe('Is the repo defined', function () {
+    //     it('should be defined', function () {
+    //         expect(StatusRepo).toBeDefined();
+    //     });
+    // });
 
 });
