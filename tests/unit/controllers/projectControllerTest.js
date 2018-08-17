@@ -1,39 +1,36 @@
 describe('controller: ProjectController', function () {
 
-    var scope, controller, ProjectRepo;
+    var scope, controller, Project, ProjectRepo;
 
-    beforeEach(module('core'));
-    beforeEach(module('app'));
-    beforeEach(module('app/views/modals/addProjectModal.html'));
-    beforeEach(module('mock.project'));
-    beforeEach(module('mock.projectRepo'));
-    beforeEach(module('mock.remoteProjectManagerRepo'));
-    beforeEach(module('mock.remoteProjectService'));
-    beforeEach(module('mock.userService'));
-
-    beforeEach(inject(function ($controller, $rootScope, $templateCache, _$compile_, _$q_, _$templateRequest_, _ModalService_, _Project_, _ProjectRepo_, _RemoteProjectManagerRepo_, _RemoteProjectsService_, _UserService_) {
-        installPromiseMatchers();
-        scope = $rootScope.$new();
-        Project = _Project_;
-        ProjectRepo = _ProjectRepo_;
-        RemoteProjectManagerRepo = _RemoteProjectManagerRepo_;
-        RemoteProjectsService = _RemoteProjectsService_;
-        UserService = _UserService_;
-        $compile = _$compile_;
-        $q = _$q_;
-        cache = $templateCache;
-        controller = $controller('ProjectController', {
-            $scope: scope,
-            $compile: _$compile_,
-            $templateRequest: _$templateRequest_,
-            ModalService: _ModalService_,
-            Project: _Project_,
-            ProjectRepo: _ProjectRepo_,
-            RemoteProjectManagerRepo: _RemoteProjectManagerRepo_,
-            RemoteProjectsService: _RemoteProjectsService_,
-            UserService: _UserService_
-        });
-    }));
+    beforeEach(function () {
+        module('core');
+        module('app');
+        module('app/views/modals/addProjectModal.html');
+        module('mock.project');
+        module('mock.projectRepo');
+        module('mock.remoteProjectManagerRepo');
+        module('mock.remoteProjectService');
+        module('mock.userService');
+        inject(function ($controller, $rootScope, $templateCache, _$compile_, _$q_, _$templateRequest_, _ModalService_, _Project_, _ProjectRepo_, _RemoteProjectManagerRepo_, _RemoteProjectsService_, _UserService_) {
+            scope = $rootScope.$new();
+            Project = _Project_;
+            ProjectRepo = _ProjectRepo_;
+            $compile = _$compile_;
+            $q = _$q_;
+            cache = $templateCache;
+            controller = $controller('ProjectController', {
+                $scope: scope,
+                $compile: _$compile_,
+                $templateRequest: _$templateRequest_,
+                ModalService: _ModalService_,
+                Project: _Project_,
+                ProjectRepo: _ProjectRepo_,
+                RemoteProjectManagerRepo: _RemoteProjectManagerRepo_,
+                RemoteProjectsService: _RemoteProjectsService_,
+                UserService: _UserService_
+            });
+        })
+    });
 
     describe('Is the controller defined', function () {
         it('should be defined', function () {

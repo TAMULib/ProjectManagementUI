@@ -53,6 +53,10 @@ angular.module('mock.projectRepo', []).service('ProjectRepo', function ($q) {
         }
     };
 
+    this.reset = function () {
+
+    };
+
     this.ready = function () {
         var defer = $q.defer();
         defer.resolve();
