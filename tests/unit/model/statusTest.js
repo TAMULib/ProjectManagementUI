@@ -14,10 +14,10 @@ describe('model: Status', function () {
         });
     });
 
-    describe('Is the model defined', function () {
-        it('should be defined', function () {
-            expect(Status).toBeDefined();
-        });
-    });
+    // describe('Is the model defined', function () {
+    //     it('should be defined', function () {
+    //         expect(Status).toBeDefined();
+    //     });
+    // });
 
 });

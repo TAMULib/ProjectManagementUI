@@ -14,10 +14,10 @@ describe('model: Project', function () {
         });
     });
 
-    describe('Is the model defined', function () {
-        it('should be defined', function () {
-            expect(Project).toBeDefined();
-        });
-    });
+    // describe('Is the model defined', function () {
+    //     it('should be defined', function () {
+    //         expect(Project).toBeDefined();
+    //     });
+    // });
 
 });

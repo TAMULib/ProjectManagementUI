@@ -14,10 +14,10 @@ describe('repo: RemoteProjectManagerRepo', function () {
         });
     });
 
-    describe('Is the repo defined', function () {
-        it('should be defined', function () {
-            expect(RemoteProjectManagerRepo).toBeDefined();
-        });
-    });
+    // describe('Is the repo defined', function () {
+    //     it('should be defined', function () {
+    //         expect(RemoteProjectManagerRepo).toBeDefined();
+    //     });
+    // });
 
 });

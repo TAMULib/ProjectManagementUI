@@ -40,9 +40,6 @@ module.exports = function (config) {
             'node_modules/weaver-ui-core/app/components/version/version-directive.js',
             'node_modules/weaver-ui-core/app/components/version/interpolate-filter.js',
 
-            "node_modules/jasmine-promise-matchers/dist/jasmine-promise-matchers.js",
-
-
             'app/config/appConfig.js',
             'app/config/apiMapping.js',
 
