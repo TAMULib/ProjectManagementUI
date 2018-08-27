@@ -1,10 +1,8 @@
-app.controller('ProjectController', function ($controller, $scope, $rootScope, NgTableParams, ApiResponseActions, Project, ProjectRepo, VersionManagementSoftwareRepo, VersionProjectService) {
+app.controller('ProjectController', function ($controller, $scope, ApiResponseActions, ProjectRepo, RemoteProjectManagerRepo, RemoteProjectsService) {
 
     angular.extend(this, $controller('AbstractController', {
         $scope: $scope
     }));
-
-    $scope.vmses = VersionManagementSoftwareRepo.getAll();
 
     $scope.projects = ProjectRepo.getAll();
 
@@ -32,12 +30,12 @@ app.controller('ProjectController', function ($controller, $scope, $rootScope, N
     $scope.createProject = function () {
         ProjectRepo.create($scope.projectToCreate).then(function (res) {
             if (angular.fromJson(res.body).meta.status === 'SUCCESS') {
-                $scope.cancelCreateProject();
+                $scope.resetCreateProject();
             }
         });
     };
 
-    $scope.cancelCreateProject = function () {
+    $scope.resetCreateProject = function () {
         angular.extend($scope.projectToCreate, ProjectRepo.getScaffold());
         $scope.resetProjectForms();
     };
@@ -78,64 +76,30 @@ app.controller('ProjectController', function ($controller, $scope, $rootScope, N
         });
     };
 
-    var buildTable = function () {
-        var allProjects = ProjectRepo.getAll();
-        $scope.tableParams = new NgTableParams({
-            count: allProjects.length,
-            sorting: {
-                name: 'asc'
-            }
-        }, {
-            counts: [],
-            total: 0,
-            getData: function (params) {
-                return $scope.projects;
+    if ($scope.isManager() || $scope.isAdmin()) {
+        $scope.remoteProjectManagers = RemoteProjectManagerRepo.getAll();
+
+        $scope.remoteProjects = RemoteProjectsService.getRemoteProjects();
+
+        $scope.getRemoteProjectManagerRemoteProjects = function (remoteProjectManagerId) {
+            return $scope.remoteProjects[remoteProjectManagerId];
+        };
+
+        RemoteProjectManagerRepo.listen([ApiResponseActions.CREATE, ApiResponseActions.DELETE, ApiResponseActions.UPDATE], function () {
+            $scope.remoteProjectManagers.length = 0;
+            var remoteProjectManagers = RemoteProjectManagerRepo.getAll();
+            for (var i in remoteProjectManagers) {
+                $scope.remoteProjectManagers.push(remoteProjectManagers[i]);
             }
         });
-    };
+    }
 
-    $scope.vmsVersionProjects = {};
-
-    var getVmsById = function (id) {
-        VersionProjectService.getAll(id).then(function (versionProjects) {
-            $scope.vmsVersionProjects[id] = versionProjects;
-        });
-    };
-
-    VersionManagementSoftwareRepo.ready().then(function () {
-        for (var i in $scope.vmses) {
-            if (i !== 'visibleColumnCount') {
-                getVmsById($scope.vmses[i].id);
-            }
+    ProjectRepo.listen([ApiResponseActions.CREATE, ApiResponseActions.DELETE, ApiResponseActions.UPDATE], function () {
+        $scope.projects.length = 0;
+        var projects = ProjectRepo.getAll();
+        for (var i in projects) {
+            $scope.projects.push(projects[i]);
         }
-    });
-
-    $scope.getVmsVersionProjects = function (vmsId) {
-        return $scope.vmsVersionProjects[vmsId];
-    };
-
-    $scope.getVmsVersionProjects = function (vmsId) {
-        return $scope.vmsVersionProjects[vmsId];
-    };
-
-    $scope.getVersionProject = function (project) {
-        if (project.scopeId && project.versionManagementSoftware && !project.versionProject) {
-            project.versionProject = {};
-            VersionProjectService.getByScopeId(project.versionManagementSoftware.id, project.scopeId).then(function (versionProject) {
-                angular.extend(project, {
-                    versionProject: versionProject
-                });
-            });
-        }
-        return project.versionProject;
-    };
-
-    ProjectRepo.ready().then(function () {
-        buildTable();
-    });
-
-    ProjectRepo.listen([ApiResponseActions.CREATE, ApiResponseActions.DELETE, ApiResponseActions.UPDATE], function (arg) {
-        buildTable();
     });
 
 });

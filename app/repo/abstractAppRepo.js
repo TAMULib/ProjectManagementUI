@@ -1,4 +1,4 @@
-app.service("AbstractAppRepo", function () {
+app.service("AbstractAppRepo", function AbstractAppRepo() {
 
     return function AbstractAppRepo() {
 

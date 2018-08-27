@@ -1,15 +1,15 @@
-<div class="row">
+<div class="container">
 
-  <div class="row" ng-controller="ManagementController">
+  <div class="row">
 
     <wvr-tabs target="managementView">
       <wvr-tab path="projects" view="views/management/projects.html" label="projects">Projects</wvr-tab>
-      <wvr-tab path="vms" view="views/management/versionManagementSoftware.html" label="vms">Version Management Software</wvr-tab>
+      <wvr-tab path="statuses" view="views/management/statuses.html" label="statuses">Statuses</wvr-tab>
+      <wvr-tab path="remoteProjectManager" view="views/management/remoteProjectManager.html" label="remoteProjectManager">Remote Progect Managers</wvr-tab>
       <wvr-tab path="users" view="views/management/users.html" label="users">Users</wvr-tab>
     </wvr-tabs>
 
-    <wvr-tabview class="management-vew" for="managementView">
-    </wvr-tabview>
+    <wvr-tabview class="management-vew" for="managementView"></wvr-tabview>
 
   </div>
 

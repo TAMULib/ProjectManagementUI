@@ -1,0 +1,41 @@
+<div class="modal-header {{attr.modalHeaderClass}}">
+  <button type="button" class="close modal-close" aria-label="Close" ng-click="resetCreateStatus()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <h4 class="modal-title">Create Status</h4>
+</div>
+
+<form name="statusForms.create" ng-submit="createStatus()" novalidate class="status-forms-create">
+
+  <validationmessage results="statusForms.getResults()"></validationmessage>
+
+  <div class="modal-body">
+
+    <validatedinput model="statusToCreate" property="identifier" label="Identifier" placeholder="Identifier of the Status" form="statusForms.create" validations="statusForms.validations" results="statusRepo.getResults()"></validatedinput>
+
+    <div class="form-group">
+      <label for="mapping">Mapping</label>
+      <div style="margin-bottom: 4px" class="input-group" ng-repeat="match in statusToCreate.mapping track by $index">
+
+        <input name="mapping" type="text" class="form-control" ng-model="statusToCreate.mapping[$index]" />
+
+        <span ng-if="$last" class="input-group-addon toggle-href" ng-click="addMatch(statusToCreate)">
+          <span class="glyphicon glyphicon-plus"></span>
+        </span>
+
+        <span ng-if="!$last" class="input-group-addon toggle-href" ng-click="removeMatch(statusToCreate, $index)">
+          <span class="glyphicon glyphicon-minus"></span>
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="resetCreateStatus()">Cancel</button>
+    <button type="submit" class="btn btn-success" ng-disabled="statusForms.create.$invalid">Create</button>
+  </div>
+
+</form>

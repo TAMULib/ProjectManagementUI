@@ -55,59 +55,112 @@ var apiMapping = {
             'method': 'update'
         }
     },
-    VersionManagementSoftware: {
+    RemoteProjectManager: {
         validations: true,
         lazy: true,
-        channel: '/channel/version-management-software',
+        channel: '/channel/remote-project-manager',
         all: {
             'endpoint': '/private/queue',
-            'controller': 'version-management-software',
+            'controller': 'remote-project-manager',
             'method': '',
             'httpMethod': 'GET'
         },
         create: {
             'endpoint': '/private/queue',
-            'controller': 'version-management-software',
+            'controller': 'remote-project-manager',
             'method': '',
             'httpMethod': 'POST'
         },
         update: {
             'endpoint': '/private/queue',
-            'controller': 'version-management-software',
+            'controller': 'remote-project-manager',
             'method': '',
             'httpMethod': 'PUT'
         },
         remove: {
             'endpoint': '/private/queue',
-            'controller': 'version-management-software',
+            'controller': 'remote-project-manager',
             'method': '',
             'httpMethod': 'DELETE'
         },
         listen: {
             'endpoint': '/channel',
-            'controller': 'version-management-software'
+            'controller': 'remote-project-manager'
         },
         types: {
             'endpoint': '/channel',
-            'controller': 'version-management-software',
+            'controller': 'remote-project-manager',
             'method': 'types/',
             'httpMethod': 'GET'
         },
         scaffolding: {
             'endpoint': '/channel',
-            'controller': 'version-management-software',
+            'controller': 'remote-project-manager',
             'method': 'scaffolding/:type/',
             'httpMethod': 'GET'
         }
     },
-    VersionProject: {
+    Status: {
+        validations: true,
+        lazy: true,
+        channel: '/channel/status',
         all: {
             'endpoint': '/private/queue',
-            'controller': 'projects'
+            'controller': 'status',
+            'method': '',
+            'httpMethod': 'GET'
         },
-        getByScopeId: {
+        create: {
             'endpoint': '/private/queue',
-            'controller': 'projects'
+            'controller': 'status',
+            'method': '',
+            'httpMethod': 'POST'
+        },
+        update: {
+            'endpoint': '/private/queue',
+            'controller': 'status',
+            'method': '',
+            'httpMethod': 'PUT'
+        },
+        remove: {
+            'endpoint': '/private/queue',
+            'controller': 'status',
+            'method': '',
+            'httpMethod': 'DELETE'
+        },
+        listen: {
+            'endpoint': '/channel',
+            'controller': 'status'
+        }
+    },
+    RemoteProjects: {
+        all: {
+            'endpoint': '/private/queue',
+            'controller': 'projects/remote'
+        },
+        listen: {
+            'endpoint': '/channel',
+            'controller': 'projects/remote'
+        }
+    },
+    ProjectsStats: {
+        all: {
+            'endpoint': '/private/queue',
+            'controller': 'projects/stats'
+        },
+        listen: {
+            'endpoint': '/channel',
+            'controller': 'projects/stats'
+        }
+    },
+    ActiveSprints: {
+        all: {
+            'endpoint': '/private/queue',
+            'controller': 'sprints/active'
+        },
+        listen: {
+            'endpoint': '/channel',
+            'controller': 'sprints/active'
         }
     }
 };

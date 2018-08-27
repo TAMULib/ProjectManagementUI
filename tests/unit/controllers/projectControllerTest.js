@@ -1,36 +1,36 @@
 describe('controller: ProjectController', function () {
 
-    var scope, controller, ProjectRepo, VersionManagementSoftwareRepo;
+    var scope, controller, Project, ProjectRepo;
 
-    beforeEach(module('core'));
-    beforeEach(module('app'));
-    beforeEach(module('app/views/modals/addProjectModal.html'));
-    beforeEach(module('mock.project'));
-    beforeEach(module('mock.projectRepo'));
-    beforeEach(module('mock.versionManagementSoftwareRepo'));
-    beforeEach(module('mock.versionProjectService'));
-
-    beforeEach(inject(function ($controller, $rootScope, $templateCache, _$compile_, _$q_, _$templateRequest_, _ModalService_, _Project_, _ProjectRepo_, _VersionManagementSoftwareRepo_, _VersionProjectService_) {
-        installPromiseMatchers();
-        scope = $rootScope.$new();
-        Project = _Project_;
-        ProjectRepo = _ProjectRepo_;
-        VersionManagementSoftwareRepo = _VersionManagementSoftwareRepo_;
-        VersionProjectService = _VersionProjectService_;
-        $compile = _$compile_;
-        $q = _$q_;
-        cache = $templateCache;
-        controller = $controller('ProjectController', {
-            $scope: scope,
-            $compile: _$compile_,
-            $templateRequest: _$templateRequest_,
-            ModalService: _ModalService_,
-            Project: _Project_,
-            ProjectRepo: _ProjectRepo_,
-            VersionManagementSoftwareRepo: _VersionManagementSoftwareRepo_,
-            VersionProjectService: _VersionProjectService_
-        });
-    }));
+    beforeEach(function () {
+        module('core');
+        module('app');
+        module('app/views/modals/addProjectModal.html');
+        module('mock.project');
+        module('mock.projectRepo');
+        module('mock.remoteProjectManagerRepo');
+        module('mock.remoteProjectService');
+        module('mock.userService');
+        inject(function ($controller, $rootScope, $templateCache, _$compile_, _$q_, _$templateRequest_, _ModalService_, _Project_, _ProjectRepo_, _RemoteProjectManagerRepo_, _RemoteProjectsService_, _UserService_) {
+            scope = $rootScope.$new();
+            Project = _Project_;
+            ProjectRepo = _ProjectRepo_;
+            $compile = _$compile_;
+            $q = _$q_;
+            cache = $templateCache;
+            controller = $controller('ProjectController', {
+                $scope: scope,
+                $compile: _$compile_,
+                $templateRequest: _$templateRequest_,
+                ModalService: _ModalService_,
+                Project: _Project_,
+                ProjectRepo: _ProjectRepo_,
+                RemoteProjectManagerRepo: _RemoteProjectManagerRepo_,
+                RemoteProjectsService: _RemoteProjectsService_,
+                UserService: _UserService_
+            });
+        })
+    });
 
     describe('Is the controller defined', function () {
         it('should be defined', function () {
@@ -47,9 +47,9 @@ describe('controller: ProjectController', function () {
             expect(scope.createProject).toBeDefined();
             expect(typeof scope.createProject).toEqual('function');
         });
-        it('cancelCreateProject should be defined', function () {
-            expect(scope.cancelCreateProject).toBeDefined();
-            expect(typeof scope.cancelCreateProject).toEqual('function');
+        it('resetCreateProject should be defined', function () {
+            expect(scope.resetCreateProject).toBeDefined();
+            expect(typeof scope.resetCreateProject).toEqual('function');
         });
         it('editProject should be defined', function () {
             expect(scope.editProject).toBeDefined();
@@ -105,7 +105,7 @@ describe('controller: ProjectController', function () {
             expect(ProjectRepo.findById(newProject.id)).toEqual(newProject);
         });
 
-        it('cancelCreateProject should call resetProjectForms() and clear out the name field', function () {
+        it('resetCreateProject should call resetProjectForms() and clear out the name field', function () {
             spyOn(scope, 'resetProjectForms');
             var length = mockProjects.length + 1;
             var newProject = {
@@ -118,7 +118,7 @@ describe('controller: ProjectController', function () {
             scope.$digest();
             var form = scope.projectForms.create;
             form.$setDirty();
-            scope.cancelCreateProject();
+            scope.resetCreateProject();
 
             expect(scope.projectToCreate.name).toEqual('');
             expect(scope.resetProjectForms).toHaveBeenCalled();
