@@ -80,7 +80,7 @@ describe('controller: StatusController', function () {
 
             var modal = angular.element(cache.get('app/views/modals/addStatusModal.html'));
             modal = $compile(modal)(scope);
-            scope.$digest();
+
             var form = scope.statusForms.create;
             form.$setDirty();
 

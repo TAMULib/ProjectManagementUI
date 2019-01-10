@@ -81,7 +81,7 @@ describe('controller: ProjectController', function () {
         it('resetProjectForms should reset project forms', function () {
             var modal = angular.element(cache.get('app/views/modals/addProjectModal.html'));
             modal = $compile(modal)(scope);
-            scope.$digest();
+
             var form = scope.projectForms.create;
             form.$setDirty();
 
@@ -115,7 +115,7 @@ describe('controller: ProjectController', function () {
             scope.projectToCreate = newProject;
             var modal = angular.element(cache.get('app/views/modals/addProjectModal.html'));
             modal = $compile(modal)(scope);
-            scope.$digest();
+
             var form = scope.projectForms.create;
             form.$setDirty();
             scope.resetCreateProject();

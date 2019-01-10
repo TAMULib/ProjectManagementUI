@@ -79,7 +79,7 @@ describe('controller: RemoteProjectManagerController', function () {
 
             var modal = angular.element(cache.get('app/views/modals/addRemoteProjectManagerModal.html'));
             modal = $compile(modal)(scope);
-            scope.$digest();
+
             var form = scope.remoteProjectManagerForms.create;
             form.$setDirty();
 
