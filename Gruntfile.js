@@ -1,3 +1,5 @@
+var sass = require("node-sass");
+
 module.exports = function (grunt) {
 
 	// Configurable paths
@@ -184,6 +186,7 @@ module.exports = function (grunt) {
 
 		sass: {
 			options: {
+				implementation: sass,
 				sourceMap: false
 			},
 			dist: {

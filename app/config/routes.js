@@ -5,7 +5,7 @@ app.config(function ($routeProvider) {
     }).
     when('/management/:tab', {
         templateUrl: 'views/management.html',
-        access: ["ROLE_ADMIN", "ROLE_MANGER"]
+        access: ["ROLE_ADMIN", "ROLE_MANAGER"]
     }).
     when('/home', {
         redirectTo: '/'
