@@ -65,7 +65,7 @@ app.controller('ActiveSprintsController', function ($controller, $sce, $scope, A
             pannelClass = 'panel-danger';
         }
         return pannelClass;
-    }
+    };
 
     ActiveSprintsService.updated.then(null, null, function () {
         if ($scope.activeSprints.length > 0) {
