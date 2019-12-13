@@ -53,6 +53,10 @@ describe('controller: ActiveSprintsController', function () {
             expect(scope.getSelectedSprint).toBeDefined();
             expect(typeof scope.getSelectedSprint).toEqual('function');
         });
+        it('getPanelClass should be defined', function () {
+            expect(scope.getPanelClass).toBeDefined();
+            expect(typeof scope.getPanelClass).toEqual('function');
+        });
     });
 
     describe('Do the scope methods work as expected', function () {
@@ -94,6 +98,15 @@ describe('controller: ActiveSprintsController', function () {
             scope.select(0);
             var selectedSprint = scope.getSelectedSprint();
             expect(selectedSprint).toEqual(scope.activeSprints[0]);
+        });
+
+        it('getPanelClass should return correct value', function() {
+            var featureClass = scope.getPanelClass('Feature');
+            var defectClass = scope.getPanelClass('Defect');
+            var otherClass = scope.getPanelClass('anything else');
+            expect(featureClass).toEqual('panel-primary');
+            expect(defectClass).toEqual('panel-danger');
+            expect(otherClass).toEqual('panel-default');
         });
     });
 
