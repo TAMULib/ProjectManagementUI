@@ -101,9 +101,9 @@ describe('controller: ActiveSprintsController', function () {
         });
 
         it('getPanelClass should return correct value', function() {
-            var featureClass = scope.getPannelClass('Feature');
-            var defectClass = scope.getPannelClass('Defect');
-            var otherClass = scope.getPannelClass('anything else');
+            var featureClass = scope.getPanelClass('Feature');
+            var defectClass = scope.getPanelClass('Defect');
+            var otherClass = scope.getPanelClass('anything else');
             expect(featureClass).toEqual('panel-primary');
             expect(defectClass).toEqual('panel-danger');
             expect(otherClass).toEqual('panel-default');
