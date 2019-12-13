@@ -30,7 +30,7 @@ var mockRemoteProjectManageres = [{
 }
 ];
 
-angular.module('mock.remoteProjectManagerRepo', []).service('RemoteProjectManagerRepo', function ($q) {
+angular.module("mock.remoteProjectManagerRepo", []).service("RemoteProjectManagerRepo", function ($q) {
 
 this.scaffold = {};
 

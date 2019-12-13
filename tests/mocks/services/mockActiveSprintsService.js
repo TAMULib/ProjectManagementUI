@@ -82,7 +82,7 @@ var mockActiveSprints = [{
   }]
 }];
 
-angular.module('mock.activeSprintsService', []).service('ActiveSprintsService', function ($q) {
+angular.module("mock.activeSprintsService", []).service("ActiveSprintsService", function ($q) {
 
   this.getActiveSprints = function () {
     return mockActiveSprints;

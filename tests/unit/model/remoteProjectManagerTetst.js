@@ -1,11 +1,11 @@
-describe('model: RemoteProjectManager', function () {
+describe("model: RemoteProjectManager", function () {
 
   var RemoteProjectManager;
 
   beforeEach(function () {
-    module('core');
-    module('app');
-    module('mock.wsApi');
+    module("core");
+    module("app");
+    module("mock.wsApi");
     inject(function (_$rootScope_, _$q_, _WsApi_, _RemoteProjectManager_) {
       $rootScope = _$rootScope_;
       $q = _$q_;
@@ -14,8 +14,8 @@ describe('model: RemoteProjectManager', function () {
     });
   });
 
-  // describe('Is the model defined', function () {
-  //   it('should be defined', function () {
+  // describe("Is the model defined", function () {
+  //   it("should be defined", function () {
   //     expect(RemoteProjectManager).toBeDefined();
   //   });
   // });

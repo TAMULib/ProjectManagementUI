@@ -458,7 +458,7 @@ var mockRemoteProjects = {
   }]
 };
 
-angular.module('mock.remoteProjectService', []).service('RemoteProjectsService', function ($q) {
+angular.module("mock.remoteProjectService", []).service("RemoteProjectsService", function ($q) {
 
   this.getRemoteProjects = function () {
     return mockRemoteProjects;

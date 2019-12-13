@@ -1,4 +1,4 @@
-angular.module('mock.status', []).service('Status', function () {
+angular.module("mock.status", []).service("Status", function () {
 
   this.mapping = [];
 

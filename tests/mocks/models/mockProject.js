@@ -1,4 +1,4 @@
-angular.module('mock.project', []).service('Project', function ($q) {
+angular.module("mock.project", []).service("Project", function ($q) {
 
   this.save = function () {};
   this.dirty = function (dirty) {};

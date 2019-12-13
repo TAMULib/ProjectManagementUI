@@ -1,15 +1,15 @@
-describe('controller: UserRepoController', function () {
+describe("controller: UserRepoController", function () {
 
   var scope, controller;
 
   beforeEach(function () {
-    module('core');
-    module('app');
-    module('mock.storageService');
-    module('mock.userService');
+    module("core");
+    module("app");
+    module("mock.storageService");
+    module("mock.userService");
     inject(function ($controller, $rootScope, _StorageService_, _UserService_) {
       scope = $rootScope.$new();
-      controller = $controller('UserRepoController', {
+      controller = $controller("UserRepoController", {
         $scope: scope,
         StorageService: _StorageService_,
         UserService: _UserService_
@@ -17,8 +17,8 @@ describe('controller: UserRepoController', function () {
     });
   });
 
-  describe('Is the controller defined', function () {
-    it('should be defined', function () {
+  describe("Is the controller defined", function () {
+    it("should be defined", function () {
       expect(controller).toBeDefined();
     });
   });

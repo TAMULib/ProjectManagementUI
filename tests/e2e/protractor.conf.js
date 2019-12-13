@@ -1,33 +1,33 @@
 exports.config = {
-  seleniumAddress: 'http://localhost:4444/wd/hub',
-  baseUrl: 'http://localhost/projects/',
+  seleniumAddress: "http://localhost:4444/wd/hub",
+  baseUrl: "http://localhost/projects/",
   specs: [
-    'index-spec.js',
-    'auth-spec.js',
-    'users-spec.js'
+    "index-spec.js",
+    "auth-spec.js",
+    "users-spec.js"
   ],
-  rootElement: 'body',
+  rootElement: "body",
   multiCapabilities: [{
-      browserName: 'chrome',
+      browserName: "chrome",
       shardTestFiles: true,
       maxInstances: 1
     },
     {
-      browserName: 'firefox',
+      browserName: "firefox",
       shardTestFiles: true,
       maxInstances: 1
     }
   ],
   params: {
     admin: {
-      username: '',
-      password: '',
-      uin: ''
+      username: "",
+      password: "",
+      uin: ""
     },
     user: {
-      username: '',
-      password: '',
-      uin: ''
+      username: "",
+      password: "",
+      uin: ""
     }
   }
 };

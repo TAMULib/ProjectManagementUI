@@ -28,6 +28,6 @@ var mockUser3 = {
   "netId": "jsmith"
 };
 
-angular.module('mock.user', []).service('User', function ($q) {
+angular.module("mock.user", []).service("User", function ($q) {
   return this;
 });

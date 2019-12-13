@@ -1,3 +1,3 @@
-angular.module('mock.storageService', []).service('StorageService', function ($q) {
+angular.module("mock.storageService", []).service("StorageService", function ($q) {
 
 });

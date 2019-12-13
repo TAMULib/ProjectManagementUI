@@ -1,4 +1,4 @@
-angular.module('mock.wsApi', []).service('WsApi', function ($q) {
+angular.module("mock.wsApi", []).service("WsApi", function ($q) {
 
   this.fetch = function (apiReq) {
     var defer = $q.defer();

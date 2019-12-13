@@ -456,7 +456,7 @@ var mockProjectsStats = [{
   "backlogItemCount": 18
 }];
 
-angular.module('mock.projectsStatsService', []).service('ProjectsStatsService', function ($q) {
+angular.module("mock.projectsStatsService", []).service("ProjectsStatsService", function ($q) {
 
   this.getProjectsStats = function () {
     return mockProjectsStats;

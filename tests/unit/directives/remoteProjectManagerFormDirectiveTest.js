@@ -1,18 +1,18 @@
-describe('directive: remoteProjectManagerForm', function () {
+describe("directive: remoteProjectManagerForm", function () {
 
   var scope, element;
 
   beforeEach(function () {
-    module('core');
-    module('app');
-    module('views/directives/remoteProjectManagerForm.html');
+    module("core");
+    module("app");
+    module("views/directives/remoteProjectManagerForm.html");
     inject(function ($rootScope, _$compile_) {
       scope = $rootScope.$new();
       $compile = _$compile_;
 
       scope.model = {
-        name: '',
-        type: ''
+        name: "",
+        type: ""
       };
       scope.settings = [{
         "type": "text",
@@ -35,7 +35,7 @@ describe('directive: remoteProjectManagerForm', function () {
         "gloss": "Token",
         "visible": false
       }];
-      element = $compile('<remote-project-manager-form management-settings="settings" model="model"></remote-project-manager-form>')(scope);
+      element = $compile("<remote-project-manager-form management-settings='settings' model='model'></remote-project-manager-form>")(scope);
       scope.$apply();
     });
   });

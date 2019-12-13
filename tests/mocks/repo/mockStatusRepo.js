@@ -29,7 +29,7 @@ var mockStatuses = [{
   }
 ];
 
-angular.module('mock.statusRepo', []).service('StatusRepo', function ($q) {
+angular.module("mock.statusRepo", []).service("StatusRepo", function ($q) {
 
   this.list = mockStatuses;
 

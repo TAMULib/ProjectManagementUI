@@ -1,11 +1,11 @@
-describe('model: Project', function () {
+describe("model: Project", function () {
 
   var Project;
 
   beforeEach(function () {
-    module('core');
-    module('app');
-    module('mock.wsApi');
+    module("core");
+    module("app");
+    module("mock.wsApi");
     inject(function (_$rootScope_, _$q_, _WsApi_, _Project_) {
       $rootScope = _$rootScope_;
       $q = _$q_;
@@ -14,8 +14,8 @@ describe('model: Project', function () {
     });
   });
 
-  // describe('Is the model defined', function () {
-  //   it('should be defined', function () {
+  // describe("Is the model defined", function () {
+  //   it("should be defined", function () {
   //     expect(Project).toBeDefined();
   //   });
   // });

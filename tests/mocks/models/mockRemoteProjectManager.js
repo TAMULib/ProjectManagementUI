@@ -1,4 +1,4 @@
-angular.module('mock.remoteProjectManager', []).service('RemoteProjectManager', function () {
+angular.module("mock.remoteProjectManager", []).service("RemoteProjectManager", function () {
 
   this.save = function () {};
   this.dirty = function (bool) {};
