@@ -5,7 +5,7 @@ describe("controller: RemoteProjectManagerController", function () {
   beforeEach(function () {
     module("core");
     module("app");
-    module("app/views/modals/addRemoteProjectManagerModal.html");
+    module("templates");
     module("mock.remoteProjectManager");
     module("mock.remoteProjectManagerRepo");
     inject(function ($controller, $rootScope, $templateCache, _$compile_, _$filter_, _$q_, _ModalService_, _RemoteProjectManager_, _RemoteProjectManagerRepo_) {
@@ -77,7 +77,7 @@ describe("controller: RemoteProjectManagerController", function () {
   describe("Do the scope methods work as expected", function () {
     it("resetRemoteProjectManagerForms should reset Remote Project Manager forms", function () {
 
-      var modal = angular.element(cache.get("app/views/modals/addRemoteProjectManagerModal.html"));
+      var modal = angular.element(cache.get("views/modals/addRemoteProjectManagerModal.html"));
       modal = $compile(modal)(scope);
 
       var form = scope.remoteProjectManagerForms.create;

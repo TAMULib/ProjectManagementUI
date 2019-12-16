@@ -5,7 +5,7 @@ describe("controller: ProjectController", function () {
   beforeEach(function () {
     module("core");
     module("app");
-    module("app/views/modals/addProjectModal.html");
+    module("templates");
     module("mock.project");
     module("mock.projectRepo");
     module("mock.remoteProjectManagerRepo");
@@ -79,7 +79,7 @@ describe("controller: ProjectController", function () {
 
   describe("Do the scope methods work as expected", function () {
     it("resetProjectForms should reset project forms", function () {
-      var modal = angular.element(cache.get("app/views/modals/addProjectModal.html"));
+      var modal = angular.element(cache.get("views/modals/addProjectModal.html"));
       modal = $compile(modal)(scope);
 
       var form = scope.projectForms.create;
@@ -113,7 +113,7 @@ describe("controller: ProjectController", function () {
         name: "Mock Project 4"
       };
       scope.projectToCreate = newProject;
-      var modal = angular.element(cache.get("app/views/modals/addProjectModal.html"));
+      var modal = angular.element(cache.get("views/modals/addProjectModal.html"));
       modal = $compile(modal)(scope);
 
       var form = scope.projectForms.create;

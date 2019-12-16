@@ -2,8 +2,8 @@ module.exports = function (config) {
   config.set({
 
     preprocessors: {
-      "app/**/*.js": "coverage",
-      "**/*.html": ["ng-html2js"]
+      "app/!(node_modules)/**/*.js": "coverage",
+      "app/views/**/*.html": ["ng-html2js"]
     },
 
     reporters: ["progress", "coverage"],
@@ -97,31 +97,43 @@ module.exports = function (config) {
 
       "app/app.js",
 
+      //"app/components/**/*.js",
+
       "app/config/runTime.js",
 
       "app/controllers/**/*.js",
 
       "app/directives/**/*.js",
 
-      "app/services/**/*.js",
+      "app/filters/**/*.js",
 
       "app/model/**/*.js",
 
       "app/repo/**/*.js",
 
+      "app/services/**/*.js",
+
       "app/views/**/*.html",
+
+      "tests/core/**/*.js",
 
       "tests/mocks/**/*.js",
 
       "tests/unit/**/*.js"
-
     ],
 
     autoWatch: true,
 
     frameworks: ["jasmine"],
 
-    browsers: ['ChromeHeadless', 'Firefox'],
+    browsers: ["Firefox", "Chrome", "ChromeHeadless", "ChromeHeadlessNoSandbox"],
+
+    customLaunchers: {
+      ChromeHeadlessNoSandbox: {
+        base: "ChromeHeadless",
+        flags: ["--no-sandbox"]
+      }
+    },
 
     plugins: [
       "karma-chrome-launcher",
@@ -131,6 +143,16 @@ module.exports = function (config) {
       "karma-junit-reporter",
       "karma-ng-html2js-preprocessor"
     ],
+
+    junitReporter: {
+      outputFile: "test_out/unit.xml",
+      suite: "unit"
+    },
+
+    ngHtml2JsPreprocessor: {
+      stripPrefix: "app/",
+      moduleName: "templates"
+    },
 
     coverageReporter: {
       type: "lcov",

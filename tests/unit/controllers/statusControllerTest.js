@@ -5,7 +5,7 @@ describe("controller: StatusController", function () {
   beforeEach(function () {
     module("core");
     module("app");
-    module("app/views/modals/addStatusModal.html");
+    module("templates");
     module("mock.status");
     module("mock.statusRepo");
     inject(function ($controller, $rootScope, $templateCache, _$compile_, _$q_, _Status_, _StatusRepo_) {
@@ -78,7 +78,7 @@ describe("controller: StatusController", function () {
   describe("Do the scope methods work as expected", function () {
     it("resetStatusForms should reset Status forms", function () {
 
-      var modal = angular.element(cache.get("app/views/modals/addStatusModal.html"));
+      var modal = angular.element(cache.get("views/modals/addStatusModal.html"));
       modal = $compile(modal)(scope);
 
       var form = scope.statusForms.create;
