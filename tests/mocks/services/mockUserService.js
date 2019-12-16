@@ -1,18 +1,46 @@
 angular.module("mock.userService", []).service("UserService", function ($q) {
+  var service = mockService($q, mockUser);
+  var currentUser;
 
-  this.userEvents = function () {
+  service.mockCurrentUser = function(toMock) {
+    delete sessionStorage.role;
+
+    if (toMock === undefined || toMock === null) {
+      currentUser = null;
+    }
+    else {
+      currentUser = service.mockModel(toMock);
+      sessionStorage.role = toMock.role;
+    }
+  };
+
+  service.mockCurrentUser(dataUser1);
+
+  service.fetchUser = function () {
+    delete sessionStorage.role;
+    sessionStorage.role = currentUser.role;
+    return payloadPromise($q.defer(), currentUser);
+  };
+
+  service.getCurrentUser = function () {
+    return currentUser;
+  };
+
+  service.setCurrentUser = function (user) {
+    currentUser = mockModel(user);
+
+    sessionStorage.role = toMock.role;
+  };
+
+  service.userEvents = function () {
     var defer = $q.defer();
-    return defer.promise;
-  }
+    defer.notify("RECEIVED");
+    return payloadPromise(defer);
+  };
 
-  this.getCurrentUser = function () {
-    return {};
-  }
+  service.userReady = function () {
+    return payloadPromise($q.defer(), currentUser);
+  };
 
-  this.userReady = function () {
-    return $q(function (resolve) {
-      resolve();
-    });
-  }
-
+  return service;
 });

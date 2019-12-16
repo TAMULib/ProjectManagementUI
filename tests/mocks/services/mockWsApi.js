@@ -1,50 +1,78 @@
 angular.module("mock.wsApi", []).service("WsApi", function ($q) {
+  var service = mockService($q);
+  var mapping;
+  var fetchResponse;
 
-  this.fetch = function (apiReq) {
-    var defer = $q.defer();
-    if (apiReq === apiMapping.ActiveSprints.all) {
-      defer.resolve({
-        body: angular.toJson({
-          meta: {
-            status: "SUCCESS"
-          },
-          payload: {
-            "ArrayList<Sprint>": mockActiveSprints
-          }
-        })
-      });
+  service.mockFetchResponse = function(data) {
+    if (data === null || data === undefined) {
+      fetchResponse = undefined;
+    } else {
+      // using hasOwnProperty() to support special test cases (such as checks to see if payload is undefined).
+      fetchResponse = {
+        type: data.hasOwnProperty("type") ? data.type : null,
+        payload: data.hasOwnProperty("payload") ? data.payload : {},
+        messageStatus: data.hasOwnProperty("messageStatus") ? data.messageStatus : null,
+        httpStatus: data.hasOwnProperty("httpStatus") ? data.httpStatus : null,
+        valueType: data.hasOwnProperty("valueType") ? data.valueType : null
+      };
     }
-    if (apiReq === apiMapping.ProjectsStats.all) {
-      defer.resolve({
-        body: angular.toJson({
-          meta: {
-            status: "SUCCESS"
-          },
-          payload: {
-            "ArrayList<ProjectStats>": mockProjectsStats
-          }
-        })
-      });
+  };
+
+  service.mockMapping = function(toMock) {
+    mapping = {};
+    for (var key in toMock) {
+      mapping[key] = toMock[key];
     }
-    if (apiReq === apiMapping.RemoteProjects.all) {
-      defer.resolve({
-        body: angular.toJson({
-          meta: {
-            status: "SUCCESS"
-          },
-          payload: {
-            "HashMap": mockRemoteProjects
-          }
-        })
-      });
+  };
+
+  service.fetch = function (apiReq, parameters) {
+    var payload = {};
+
+    if (fetchResponse) {
+      switch (fetchResponse.type) {
+        case "message":
+          return messagePromise($q.defer(), fetchResponse.payload, fetchResponse.messageStatus, fetchResponse.httpStatus);
+        case "value":
+          return valuePromise($q.defer(), fetchResponse.payload, fetchResponse.valueType);
+        case "payload":
+          return payloadPromise($q.defer(), fetchResponse.payload, fetchResponse.messageStatus, fetchResponse.httpStatus);
+        case "data":
+          return dataPromise($q.defer(), fetchResponse.payload, fetchResponse.messageStatus, fetchResponse.httpStatus);
+        case "reject":
+          return rejectPromise($q.defer(), fetchResponse.payload, fetchResponse.messageStatus, fetchResponse.httpStatus);
+        case "failure":
+          return failurePromise($q.defer(), fetchResponse.payload, fetchResponse.messageStatus, fetchResponse.httpStatus);
+      }
+    } else {
+      if (apiReq === apiMapping.ActiveSprints.all) {
+        payload = {
+          "ArrayList<Sprint>": mockActiveSprints
+        };
+      }
+
+      if (apiReq === apiMapping.ProjectsStats.all) {
+        payload = {
+          "ArrayList<ProjectStats>": mockProjectsStats
+        };
+      }
+
+      if (apiReq === apiMapping.RemoteProjects.all) {
+        payload = {
+          "HashMap": mockRemoteProjects
+        };
+      }
     }
-    return defer.promise;
-  }
 
-  this.listen = function (apiReq) {
-    var defer = $q.defer();
-    return defer.promise;
-  }
+    return payloadPromise($q.defer(), payload);
+  };
 
+  service.getMapping = function () {
+    return mapping;
+  };
 
+  service.listen = function (apiReq) {
+    return payloadPromise($q.defer());
+  };
+
+  return service;
 });

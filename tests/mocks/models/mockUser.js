@@ -1,33 +1,60 @@
-var mockUser1 = {
-  "lastName": "Daniels",
-  "firstName": "Jack",
-  "uin": "123456789",
-  "exp": "1425393875282",
-  "email": "aggieJack@library.tamu.edu",
-  "role": "ROLE_ADMIN",
-  "netId": "aggieJack"
+var dataUser1 = {
+  anonymous: false,
+  email: "aggieJack@library.tamu.edu",
+  exp: "1425393875282",
+  firstName: "Jack",
+  lastName: "Daniels",
+  netId: "aggieJack",
+  role: "ROLE_ADMIN",
+  uin: "123456789"
 };
 
-var mockUser2 = {
-  "lastName": "Daniels",
-  "firstName": "Jill",
-  "uin": "987654321",
-  "exp": "1425393875282",
-  "email": "aggieJill@library.tamu.edu",
-  "role": "ROLE_USER",
-  "netId": "aggieJill"
+var dataUser2 = {
+  anonymous: false,
+  email: "aggieJill@library.tamu.edu",
+  exp: "1425393875282",
+  firstName: "Jill",
+  lastName: "Daniels",
+  netId: "aggieJill",
+  role: "ROLE_USER",
+  uin: "987654321"
 };
 
-var mockUser3 = {
-  "lastName": "Smith",
-  "firstName": "Jacob",
-  "uin": "192837465",
-  "exp": "1425393875282",
-  "email": "jsmith@library.tamu.edu",
-  "role": "ROLE_USER",
-  "netId": "jsmith"
+var dataUser3 = {
+  anonymous: false,
+  email: "jsmith@library.tamu.edu",
+  exp: "1425393875282",
+  firstName: "Jacob",
+  lastName: "Smith",
+  netId: "jsmith",
+  role: "ROLE_USER",
+  uin: "192837465"
 };
 
-angular.module("mock.user", []).service("User", function ($q) {
-  return this;
-});
+var mockUser = function($q) {
+  var model = mockModel("User", $q, dataUser1);
+
+  model.anonymous = (sessionStorage.role === appConfig.anonymousRole);
+  model.authDefer = $q.defer();
+
+  model.authenticate = function (registration) {
+    return payloadPromise(model.authDefer);
+  };
+
+  model.logout = function () {
+    model.anonymous = true;
+    model.authDefer = $q.defer();
+  };
+
+  model.register = function (registration) {
+    return payloadPromise($q.defer());
+  };
+
+  model.verifyEmail = function (email) {
+    return true;
+  };
+
+  return model;
+};
+
+angular.module("mock.user", []).service("User", mockUser);
