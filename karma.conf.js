@@ -57,7 +57,7 @@ module.exports = function (config) {
 
       "app/directives/**/*.js",
 
-      "app/filters/**/*.js",
+      //"app/filters/**/*.js",
 
       "app/model/**/*.js",
 
