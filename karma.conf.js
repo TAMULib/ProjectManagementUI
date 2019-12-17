@@ -11,91 +11,41 @@ module.exports = function (config) {
     basePath: "./",
 
     files: [
-
-      "node_modules/jquery/dist/jquery.min.js",
-      "node_modules/bootstrap/dist/js/bootstrap.min.js",
-
-      "node_modules/sockjs-client/dist/sockjs.min.js",
-      "node_modules/stompjs/lib/stomp.min.js",
-
-      "node_modules/angular/angular.min.js",
-
-      "node_modules/angular-route/angular-route.min.js",
-      "node_modules/angular-loader/angular-loader.min.js",
-      "node_modules/angular-sanitize/angular-sanitize.min.js",
-      "node_modules/angular-messages/angular-messages.min.js",
-      "node_modules/angular-mocks/angular-mocks.js",
-
-      "node_modules/ng-file-upload/dist/ng-file-upload-shim.min.js",
-      "node_modules/ng-file-upload/dist/ng-file-upload.min.js",
-
-      "node_modules/jasmine-promise-matchers/dist/jasmine-promise-matchers.js",
-
-      "node_modules/ng-table/bundles/ng-table.min.js",
-
-      "node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js",
-
-
-      "node_modules/weaver-ui-core/app/config/coreConfig.js",
-
-      "node_modules/weaver-ui-core/app/components/version/version.js",
-      "node_modules/weaver-ui-core/app/components/version/version-directive.js",
-      "node_modules/weaver-ui-core/app/components/version/interpolate-filter.js",
-
       "app/config/appConfig.js",
       "app/config/apiMapping.js",
 
-      "node_modules/weaver-ui-core/app/core.js",
+      "app/node_modules/jquery/dist/jquery.js",
+      "app/node_modules/bootstrap/dist/js/bootstrap.js",
 
-      "node_modules/weaver-ui-core/app/setup.js",
-      "node_modules/weaver-ui-core/app/config/coreRuntime.js",
-      "node_modules/weaver-ui-core/app/config/coreAngularConfig.js",
-      "node_modules/weaver-ui-core/app/config/logging.js",
+      "app/node_modules/sockjs-client/dist/sockjs.js",
+      "app/node_modules/stompjs/lib/stomp.js",
 
-      "node_modules/weaver-ui-core/app/constants/apiResponseActions.js",
-      "node_modules/weaver-ui-core/app/constants/httpMethodVerbs.js",
+      "app/node_modules/angular/angular.js",
 
-      "node_modules/weaver-ui-core/app/directives/headerDirective.js",
-      "node_modules/weaver-ui-core/app/directives/footerDirective.js",
-      "node_modules/weaver-ui-core/app/directives/userDirective.js",
-      "node_modules/weaver-ui-core/app/directives/modalDirective.js",
-      "node_modules/weaver-ui-core/app/directives/alertDirective.js",
-      "node_modules/weaver-ui-core/app/directives/accordionDirective.js",
-      "node_modules/weaver-ui-core/app/directives/tabsDirective.js",
+      "app/node_modules/angular-sanitize/angular-sanitize.js",
+      "app/node_modules/angular-route/angular-route.js",
+      "app/node_modules/angular-loader/angular-loader.js",
+      "app/node_modules/angular-messages/angular-messages.js",
+      "app/node_modules/angular-mocks/angular-mocks.js",
 
-      "node_modules/weaver-ui-core/app/directives/tooltipDirective.js",
-      "node_modules/weaver-ui-core/app/directives/validationMessageDirective.js",
-      "node_modules/weaver-ui-core/app/directives/validatedInputDirective.js",
-      "node_modules/weaver-ui-core/app/directives/validatedSelectDirective.js",
-      "node_modules/weaver-ui-core/app/directives/validatedTextAreaDirective.js",
+      "app/node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js",
 
-      "node_modules/weaver-ui-core/app/services/accessControlService.js",
-      "node_modules/weaver-ui-core/app/services/wsService.js",
-      "node_modules/weaver-ui-core/app/services/wsApi.js",
-      "node_modules/weaver-ui-core/app/services/restApi.js",
-      "node_modules/weaver-ui-core/app/services/authService.js",
-      "node_modules/weaver-ui-core/app/services/storageService.js",
-      "node_modules/weaver-ui-core/app/services/utilityService.js",
-      "node_modules/weaver-ui-core/app/services/alertService.js",
-      "node_modules/weaver-ui-core/app/services/validationStore.js",
-      "node_modules/weaver-ui-core/app/services/userService.js",
-      "node_modules/weaver-ui-core/app/services/modalService.js",
-      "node_modules/weaver-ui-core/app/services/modelCache.js",
-      "node_modules/weaver-ui-core/app/services/modelUpdateService.js",
+      "app/node_modules/ng-table/bundles/ng-table.js",
 
-      "node_modules/weaver-ui-core/app/repo/abstractRepo.js",
+      "app/node_modules/ng-file-upload/dist/ng-file-upload-shim.js",
+      "app/node_modules/ng-file-upload/dist/ng-file-upload.js",
 
-      "node_modules/weaver-ui-core/app/model/abstractModel.js",
-      "node_modules/weaver-ui-core/app/model/assumedControl.js",
-      "node_modules/weaver-ui-core/app/model/user.js",
+      "app/node_modules/jasmine-promise-matchers/dist/jasmine-promise-matchers.js",
 
-      "node_modules/weaver-ui-core/app/controllers/abstractController.js",
-      "node_modules/weaver-ui-core/app/controllers/coreAdminController.js",
-      "node_modules/weaver-ui-core/app/controllers/authenticationController.js",
-      "node_modules/weaver-ui-core/app/controllers/loginController.js",
-      "node_modules/weaver-ui-core/app/controllers/registrationController.js",
-      "node_modules/weaver-ui-core/app/controllers/userController.js",
-      "node_modules/weaver-ui-core/app/controllers/errorPageController.js",
+      "app/node_modules/weaver-ui-core/app/config/coreConfig.js",
+
+      "app/node_modules/weaver-ui-core/app/components/**/*.js",
+
+      "app/node_modules/weaver-ui-core/app/core.js",
+
+      "app/node_modules/weaver-ui-core/app/**/*.js",
+
+      "tests/testSetup.js",
 
       "app/app.js",
 
