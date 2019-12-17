@@ -49,20 +49,20 @@ describe("service: RemoteProjectsService", function () {
       deferred = $q.defer();
       spyOn(WsApi, "fetch").and.returnValue(deferred.promise);
       RemoteProjectsService.refreshRemoteProjects();
-      deferred.resolve(mockRemoteProjects);
+      deferred.resolve(dataRemoteProjects);
       expect(WsApi.fetch).toHaveBeenCalledWith(apiMapping.RemoteProjects.all);
     });
     it("getRemoteProjects should get remote projects", function () {
       spyOn(ProjectRepo, "reset");
       $rootScope.$apply();
       var remoteProjects = RemoteProjectsService.getRemoteProjects();
-      expect(remoteProjects).toEqual(mockRemoteProjects);
+      expect(remoteProjects).toEqual(dataRemoteProjects);
       expect(ProjectRepo.reset).toHaveBeenCalled();
     });
     it("getByScopeId should get remote project by remote project manager id and scope id", function () {
       $rootScope.$apply();
       RemoteProjectsService.getByScopeId(1, 1934).then(function (remoteProject) {
-        expect(remoteProject).toEqual(mockRemoteProjects["1"][0]);
+        expect(remoteProject).toEqual(dataRemoteProjects["1"][0]);
       });
     });
   });

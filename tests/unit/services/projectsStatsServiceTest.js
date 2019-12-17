@@ -49,20 +49,20 @@ describe("service: ProjectsStatsService", function () {
       deferred = $q.defer();
       spyOn(WsApi, "fetch").and.returnValue(deferred.promise);
       ProjectsStatsService.refreshProjectsStats();
-      deferred.resolve(mockProjectsStats);
+      deferred.resolve(dataProjectsStats);
       expect(WsApi.fetch).toHaveBeenCalledWith(apiMapping.ProjectsStats.all);
     });
     it("getProjectsStats should get project stats", function () {
       spyOn(ProjectRepo, "reset");
       $rootScope.$apply();
       var projectsStats = ProjectsStatsService.getProjectsStats();
-      expect(projectsStats).toEqual(mockProjectsStats);
+      expect(projectsStats).toEqual(dataProjectsStats);
       expect(ProjectRepo.reset).toHaveBeenCalled();
     });
     it("getById should get project stats by id", function () {
       $rootScope.$apply();
       ProjectsStatsService.getById(1).then(function (projectStats) {
-        expect(projectStats).toEqual(mockProjectsStats[0]);
+        expect(projectStats).toEqual(dataProjectsStats[0]);
       });
     });
   });

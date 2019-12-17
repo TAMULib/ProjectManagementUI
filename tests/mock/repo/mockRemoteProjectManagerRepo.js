@@ -1,90 +1,34 @@
-var mockRemoteProjectManageres = [{
-  "id": 1,
-  "name": "Test 1",
-  "type": "VERSION_ONE",
-  "settings": {
-    "password": "password1",
-    "url": "url1",
-    "username": "username1"
-  }
-},
-{
-  "id": 2,
-  "name": "Test 2",
-  "type": "VERSION_ONE",
-  "settings": {
-    "password": "password2",
-    "url": "url2",
-    "username": "username2"
-  }
-},
-{
-  "id": 3,
-  "name": "Test 3",
-  "type": "VERSION_ONE",
-  "settings": {
-    "password": "password3",
-    "url": "url3",
-    "username": "username3"
-  }
-}
+var dataRemoteProjectManagerRepo1 = [
+  dataRemoteProjectManager1,
+  dataRemoteProjectManager2,
+  dataRemoteProjectManager3
 ];
 
-angular.module("mock.remoteProjectManagerRepo", []).service("RemoteProjectManagerRepo", function ($q) {
+var dataRemoteProjectManagerRepo2 = [
+  dataRemoteProjectManager3,
+  dataRemoteProjectManager2,
+  dataRemoteProjectManager1
+];
 
-this.scaffold = {};
+var dataRemoteProjectManagerRepo3 = [
+  dataRemoteProjectManager1,
+  dataRemoteProjectManager3,
+  dataRemoteProjectManager2
+];
 
-this.list = mockRemoteProjectManageres;
+angular.module("mock.remoteProjectManagerRepo", []).service("RemoteProjectManagerRepo", function($q) {
+  var repo = mockRepo("RemoteProjectManagerRepo", $q, mockRemoteProjectManager, dataRemoteProjectManagerRepo1);
 
-this.getAll = function () {
-  var defer = $q.defer();
-  defer.resolve(this.list);
-  return defer.promise;
-};
+  repo.scaffold = {
+    name: '',
+    type: ''
+  };
 
-this.findById = function (id) {
-  for (var i in this.list) {
-    if (this.list[i].id === id) {
-      return this.list[i];
-    }
-  }
-};
+  repo.getTypes = function () {
+    return payloadPromise($q.defer());
+  };
 
-this.getScaffold = function (defaults) {
-  if (!defaults) defaults = {};
-  return angular.copy(angular.extend(this.scaffold, defaults));
-};
+  repo.getTypeScaffolding = function (type) {};
 
-this.getTypes = function () {
-  var defer = $q.defer();
-  defer.resolve();
-  return defer.promise;
-};
-
-this.create = function (remoteProjectManager) {
-  var defer = $q.defer();
-  remoteProjectManager.id = this.list.length + 1;
-  this.list.push(remoteProjectManager);
-  defer.resolve(remoteProjectManager);
-  return defer.promise;
-};
-
-this.getValidations = function () {};
-
-this.clearValidationResults = function () {};
-
-this.ready = function () {
-  var defer = $q.defer();
-  defer.resolve();
-  return defer.promise;
-};
-
-this.getTypeScaffolding = function (type) {};
-
-this.listen = function () {};
-
-this.delete = function () {};
-
-return this;
-
+  return repo;
 });

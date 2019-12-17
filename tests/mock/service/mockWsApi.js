@@ -52,13 +52,13 @@ angular.module("mock.wsApi", []).service("WsApi", function ($q) {
 
       if (apiReq === apiMapping.ProjectsStats.all) {
         payload = {
-          "ArrayList<ProjectStats>": mockProjectsStats
+          "ArrayList<ProjectStats>": dataProjectsStats
         };
       }
 
       if (apiReq === apiMapping.RemoteProjects.all) {
         payload = {
-          "HashMap": mockRemoteProjects
+          "HashMap": dataRemoteProjects
         };
       }
     }
