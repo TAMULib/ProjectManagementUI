@@ -29,6 +29,8 @@ module.exports = function (config) {
       "node_modules/ng-file-upload/dist/ng-file-upload-shim.min.js",
       "node_modules/ng-file-upload/dist/ng-file-upload.min.js",
 
+      "node_modules/jasmine-promise-matchers/dist/jasmine-promise-matchers.js",
+
       "node_modules/ng-table/bundles/ng-table.min.js",
 
       "node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js",
