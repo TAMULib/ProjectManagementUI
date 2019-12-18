@@ -16,7 +16,7 @@ var dataRemoteProjectManagerRepo3 = [
   dataRemoteProjectManager2
 ];
 
-angular.module("mock.remoteProjectManagerRepo", []).service("RemoteProjectManagerRepo", function($q) {
+angular.module("mock.remoteProjectManagerRepo", []).service("RemoteProjectManagerRepo", function ($q) {
   var repo = mockRepo("RemoteProjectManagerRepo", $q, mockRemoteProjectManager, dataRemoteProjectManagerRepo1);
 
   repo.scaffold = {

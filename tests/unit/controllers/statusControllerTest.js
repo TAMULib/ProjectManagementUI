@@ -1,7 +1,7 @@
 describe("controller: StatusController", function () {
   var $q, $scope, $templateCache, MockedStatus, StatusRepo, WsApi, controller;
 
-  var initializeVariables = function() {
+  var initializeVariables = function () {
     inject(function (_$compile_, _$q_, _$templateCache_, _StatusRepo_, _WsApi_) {
       $compile = _$compile_;
       $q = _$q_;
@@ -14,7 +14,7 @@ describe("controller: StatusController", function () {
     });
   };
 
-  var initializeController = function(settings) {
+  var initializeController = function (settings) {
     inject(function (_$controller_, _$rootScope_) {
       $scope = _$rootScope_.$new();
 
@@ -33,12 +33,12 @@ describe("controller: StatusController", function () {
     });
   };
 
-  beforeEach(function() {
+  beforeEach(function () {
     module("core");
     module("app");
     module("templates");
-    module("mock.status", function($provide) {
-      var Status = function() {
+    module("mock.status", function ($provide) {
+      var Status = function () {
         return MockedStatus;
       };
       $provide.value("Status", Status);

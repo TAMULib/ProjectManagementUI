@@ -1,7 +1,7 @@
 describe("controller: ActiveSprintsController", function () {
   var $q, $scope, WsApi, controller;
 
-  var initializeVariables = function() {
+  var initializeVariables = function () {
     inject(function (_$q_, _WsApi_) {
       $q = _$q_;
 
@@ -9,7 +9,7 @@ describe("controller: ActiveSprintsController", function () {
     });
   };
 
-  var initializeController = function(settings) {
+  var initializeController = function (settings) {
     inject(function (_$controller_, _$sce_, _$rootScope_, _ActiveSprintsService_, _StatusRepo_) {
       $scope = _$rootScope_.$new();
 
@@ -30,7 +30,7 @@ describe("controller: ActiveSprintsController", function () {
     });
   };
 
-  beforeEach(function() {
+  beforeEach(function () {
     module("core");
     module("app");
     module("mock.activeSprintsService");
@@ -124,7 +124,7 @@ describe("controller: ActiveSprintsController", function () {
       $scope.getHtmlContent(html);
     });
 
-    it('getPanelClass should return correct value', function() {
+    it('getPanelClass should return correct value', function () {
       var featureClass = $scope.getPanelClass('Feature');
       var defectClass = $scope.getPanelClass('Defect');
       var otherClass = $scope.getPanelClass('anything else');

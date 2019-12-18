@@ -1,7 +1,7 @@
 describe("controller: UserRepoController", function () {
   var $q, $scope, MockedUser, WsApi, controller;
 
-  var initializeVariables = function() {
+  var initializeVariables = function () {
     inject(function (_$q_, _WsApi_) {
       $q = _$q_;
 
@@ -11,7 +11,7 @@ describe("controller: UserRepoController", function () {
     });
   };
 
-  var initializeController = function(settings) {
+  var initializeController = function (settings) {
     inject(function (_$controller_, _$injector_, _$location_, _$rootScope_, _$route_, _$window_, _ModalService_, _RestApi_, _StorageService_, _UserRepo_, _UserService_) {
       $scope = _$rootScope_.$new();
 
@@ -39,14 +39,14 @@ describe("controller: UserRepoController", function () {
     });
   };
 
-  beforeEach(function() {
+  beforeEach(function () {
     module("core");
     module("app");
     module("mock.modalService");
     module("mock.restApi");
     module("mock.storageService");
-    module("mock.user", function($provide) {
-      var User = function() {
+    module("mock.user", function ($provide) {
+      var User = function () {
         return MockedUser;
       };
       $provide.value("User", User);
@@ -114,7 +114,7 @@ describe("controller: UserRepoController", function () {
     it("updateRole should update a users role", function () {
       var originalUser2 = angular.copy(dataUser2);
       dataUser2.role = "ROLE_NEW";
-      dataUser2.save = function() {};
+      dataUser2.save = function () {};
 
       spyOn(dataUser2, "save");
 
@@ -125,7 +125,7 @@ describe("controller: UserRepoController", function () {
       expect(dataUser2.save).toHaveBeenCalled();
 
       dataUser2.role = "ROLE_ANNOTATOR";
-      dataUser2.save = function() {};
+      dataUser2.save = function () {};
 
       spyOn(dataUser2, "save");
 
@@ -135,7 +135,7 @@ describe("controller: UserRepoController", function () {
       expect(dataUser2.save).toHaveBeenCalled();
 
       dataUser2.role = "ROLE_USER";
-      dataUser2.save = function() {};
+      dataUser2.save = function () {};
 
       spyOn(dataUser2, "save");
 

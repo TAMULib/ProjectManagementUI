@@ -1,7 +1,7 @@
 describe("directive: remoteProjectManagerForm", function () {
   var $compile, $q, $scope, directive, element, formSettings, formModel;
 
-  var initializeVariables = function() {
+  var initializeVariables = function () {
     inject(function (_$q_, _$compile_) {
       $q = _$q_;
       $compile = _$compile_;
@@ -35,7 +35,7 @@ describe("directive: remoteProjectManagerForm", function () {
     });
   };
 
-  var initializeDirective = function(settings) {
+  var initializeDirective = function (settings) {
     inject(function (_$rootScope_) {
       $scope = _$rootScope_.$new();
 
@@ -52,7 +52,7 @@ describe("directive: remoteProjectManagerForm", function () {
     });
   };
 
-  beforeEach(function() {
+  beforeEach(function () {
     module("core");
     module("app");
     module("templates");

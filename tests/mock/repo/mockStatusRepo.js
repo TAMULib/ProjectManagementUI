@@ -16,7 +16,7 @@ var dataStatusRepo3 = [
   dataStatus2
 ];
 
-angular.module("mock.statusRepo", []).service("StatusRepo", function($q) {
+angular.module("mock.statusRepo", []).service("StatusRepo", function ($q) {
   var repo = mockRepo("StatusRepo", $q, mockStatus, dataStatusRepo1);
 
   this.scaffold = {

@@ -46,7 +46,7 @@ var dataProject3 = {
   scopeId: "scope 3"
 };
 
-var mockProject = function($q) {
+var mockProject = function ($q) {
   var model = mockModel("Project", $q, dataProject1);
 
   return model;

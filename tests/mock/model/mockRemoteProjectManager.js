@@ -31,7 +31,7 @@ var dataRemoteProjectManager3 = {
   type: "VERSION_ONE"
 };
 
-var mockRemoteProjectManager = function($q) {
+var mockRemoteProjectManager = function ($q) {
   var model = mockModel("RemoteProjectManager", $q, dataRemoteProjectManager1);
 
   return model;

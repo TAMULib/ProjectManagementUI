@@ -1,7 +1,7 @@
 describe("controller: ProjectController", function () {
   var $compile, $q, $scope, $templateCache, $templateRequest, MockedProject, MockedRemoteProjectManager, MockedUser, WsApi, controller;
 
-  var initializeVariables = function() {
+  var initializeVariables = function () {
     inject(function (_$compile_, _$q_, _$templateCache_, _$templateRequest_, _ProjectRepo_, _WsApi_) {
       $compile = _$compile_;
       $q = _$q_;
@@ -17,7 +17,7 @@ describe("controller: ProjectController", function () {
     });
   };
 
-  var initializeController = function(settings) {
+  var initializeController = function (settings) {
     inject(function (_$controller_, _$rootScope_, _ModalService_, _Project_, _RemoteProjectManagerRepo_, _RemoteProjectsService_, _UserService_) {
       $scope = _$rootScope_.$new();
 
@@ -43,27 +43,27 @@ describe("controller: ProjectController", function () {
     });
   };
 
-  beforeEach(function() {
+  beforeEach(function () {
     module("core");
     module("app");
     module("templates");
-    module("mock.project", function($provide) {
-      var Project = function() {
+    module("mock.project", function ($provide) {
+      var Project = function () {
         return MockedProject;
       };
       $provide.value("Project", Project);
     });
     module("mock.projectRepo");
-    module("mock.remoteProjectManager", function($provide) {
-      var RemoteProjectManager = function() {
+    module("mock.remoteProjectManager", function ($provide) {
+      var RemoteProjectManager = function () {
         return MockedRemoteProjectManager;
       };
       $provide.value("RemoteProjectManager", RemoteProjectManager);
     });
     module("mock.remoteProjectManagerRepo");
     module("mock.remoteProjectService");
-    module("mock.user", function($provide) {
-      var User = function() {
+    module("mock.user", function ($provide) {
+      var User = function () {
         return MockedUser;
       };
       $provide.value("User", User);

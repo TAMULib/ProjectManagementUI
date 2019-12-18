@@ -23,7 +23,7 @@ var dataStatus3 = {
   ]
 };
 
-var mockStatus = function($q) {
+var mockStatus = function ($q) {
   var model = mockModel("Status", $q, dataStatus1);
 
   return model;

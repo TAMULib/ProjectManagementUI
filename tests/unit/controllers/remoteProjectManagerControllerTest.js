@@ -1,7 +1,7 @@
 describe("controller: RemoteProjectManagerController", function () {
   var $compile, $q, $scope, $templateCache, MockedRemoteProjectManager, RemoteProjectManagerRepo, WsApi, controller;
 
-  var initializeVariables = function() {
+  var initializeVariables = function () {
     inject(function (_$compile_, _$q_, _$templateCache_, _RemoteProjectManagerRepo_, _WsApi_) {
       $compile = _$compile_;
       $q = _$q_;
@@ -14,7 +14,7 @@ describe("controller: RemoteProjectManagerController", function () {
     });
   };
 
-  var initializeController = function(settings) {
+  var initializeController = function (settings) {
     inject(function (_$controller_, _$filter_, _$rootScope_, _ModalService_, _RemoteProjectManager_) {
       $scope = _$rootScope_.$new();
 
@@ -36,12 +36,12 @@ describe("controller: RemoteProjectManagerController", function () {
     });
   };
 
-  beforeEach(function() {
+  beforeEach(function () {
     module("core");
     module("app");
     module("templates");
-    module("mock.remoteProjectManager", function($provide) {
-      var RemoteProjectManager = function() {
+    module("mock.remoteProjectManager", function ($provide) {
+      var RemoteProjectManager = function () {
         return MockedRemoteProjectManager;
       };
       $provide.value("RemoteProjectManager", RemoteProjectManager);
