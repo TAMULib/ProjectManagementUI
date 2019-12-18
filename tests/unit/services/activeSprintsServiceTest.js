@@ -1,55 +1,83 @@
 describe("service: ActiveSprintsService", function () {
+  var $q, $rootScope, $scope, WsApi, service;
 
-  var ActiveSprintsService;
+  var initializeVariables = function (settings) {
+    inject(function (_$q_, _$rootScope_, _WsApi_) {
+      $q = _$q_;
+      $rootScope = _$rootScope_;
+
+      WsApi = _WsApi_;
+    });
+  };
+
+  var initializeService = function (settings) {
+    inject(function ($injector, _ActiveSprintsService_) {
+      $scope = $rootScope.$new();
+
+      service = _ActiveSprintsService_;
+
+      // ensure that the isReady() is called.
+      if (!$scope.$$phase) {
+        $scope.$digest();
+      }
+    });
+  };
 
   beforeEach(function () {
     module("core");
     module("app");
     module("mock.wsApi");
-    inject(function (_$rootScope_, _$q_, _WsApi_, _ActiveSprintsService_) {
-      $rootScope = _$rootScope_;
-      $q = _$q_;
-      WsApi = _WsApi_;
-      ActiveSprintsService = _ActiveSprintsService_;
+
+    initializeVariables();
+    initializeService();
+  });
+
+  describe("Is the service", function () {
+    it("defined", function () {
+      expect(service).toBeDefined();
     });
   });
 
-  describe("Is the service defined", function () {
-    it("should be defined", function () {
-      expect(ActiveSprintsService).toBeDefined();
-    });
+  describe("Is the service method", function () {
+    var methods = [
+      "getActiveSprints",
+      "refreshActiveSprints"
+    ];
+
+    for (var i in methods) {
+      it(methods[i] + " defined", function () {
+        expect(service[methods[i]]).toBeDefined();
+        expect(typeof service[methods[i]]).toEqual("function");
+      });
+    }
   });
 
-  describe("Are the service methods defined", function () {
-    it("refreshActiveSprints should be defined", function () {
-      expect(ActiveSprintsService.refreshActiveSprints).toBeDefined();
-      expect(typeof ActiveSprintsService.refreshActiveSprints).toEqual("function");
-    });
-    it("getActiveSprints should be defined", function () {
-      expect(ActiveSprintsService.getActiveSprints).toBeDefined();
-      expect(typeof ActiveSprintsService.getActiveSprints).toEqual("function");
-    });
+  describe("Is the service property", function () {
+    var properties = [
+      "updated"
+    ];
+
+    for (var i in properties) {
+      it(properties[i] + " defined", function () {
+        expect(service[properties[i]]).toBeDefined();
+        expect(typeof service[properties[i]]).toEqual("object");
+      });
+    }
   });
 
-  describe("Are the service properties defined", function () {
-    it("updated should be defined", function () {
-      expect(ActiveSprintsService.updated).toBeDefined();
-      expect(typeof ActiveSprintsService.updated).toEqual("object");
+  describe("Does the service method", function () {
+    it("getActiveSprints get active sprints", function () {
+      $rootScope.$apply();
+      var activeSprints = service.getActiveSprints();
+      expect(activeSprints).toEqual(mockActiveSprints);
     });
-  });
 
-  describe("Do the service methods work as expected", function () {
-    it("refreshActiveSprints should fetch active sprints", function () {
+    it("refreshActiveSprints fetch active sprints", function () {
       deferred = $q.defer();
       spyOn(WsApi, "fetch").and.returnValue(deferred.promise);
-      ActiveSprintsService.refreshActiveSprints();
+      service.refreshActiveSprints();
       deferred.resolve(mockActiveSprints);
       expect(WsApi.fetch).toHaveBeenCalledWith(apiMapping.ActiveSprints.all);
-    });
-    it("getActiveSprints should get active sprints", function () {
-      $rootScope.$apply();
-      var activeSprints = ActiveSprintsService.getActiveSprints();
-      expect(activeSprints).toEqual(mockActiveSprints);
     });
   });
 

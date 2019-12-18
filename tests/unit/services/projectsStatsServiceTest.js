@@ -1,69 +1,92 @@
 describe("service: ProjectsStatsService", function () {
+  var $q, $rootScope, $scope, ProjectRepo, WsApi, service;
 
-  var ProjectsStatsService;
+  var initializeVariables = function (settings) {
+    inject(function (_$q_, _$rootScope_, _ProjectRepo_, _WsApi_) {
+      $q = _$q_;
+      $rootScope = _$rootScope_;
+
+      ProjectRepo = _ProjectRepo_;
+      WsApi = _WsApi_;
+    });
+  };
+
+  var initializeService = function (settings) {
+    inject(function ($injector, _ProjectsStatsService_) {
+      $scope = $rootScope.$new();
+
+      service = _ProjectsStatsService_;
+
+      // ensure that the isReady() is called.
+      if (!$scope.$$phase) {
+        $scope.$digest();
+      }
+    });
+  };
 
   beforeEach(function () {
     module("core");
     module("app");
-    module("mock.wsApi");
     module("mock.projectRepo");
-    inject(function (_$rootScope_, _$q_, _WsApi_, _ProjectRepo_, _ProjectsStatsService_) {
-      $rootScope = _$rootScope_;
-      $q = _$q_;
-      WsApi = _WsApi_;
-      ProjectRepo = _ProjectRepo_;
-      ProjectsStatsService = _ProjectsStatsService_;
+    module("mock.wsApi");
+
+    initializeVariables();
+    initializeService();
+  });
+
+  describe("Is the service", function () {
+    it("defined", function () {
+      expect(service).toBeDefined();
     });
   });
 
-  describe("Is the service defined", function () {
-    it("should be defined", function () {
-      expect(ProjectsStatsService).toBeDefined();
-    });
+  describe("Is the service method", function () {
+    var methods = [
+      "getById",
+      "getProjectsStats",
+      "refreshProjectsStats"
+    ];
+
+    for (var i in methods) {
+      it(methods[i] + " defined", function () {
+        expect(service[methods[i]]).toBeDefined();
+        expect(typeof service[methods[i]]).toEqual("function");
+      });
+    }
   });
 
-  describe("Are the service methods defined", function () {
-    it("refreshProjectsStats should be defined", function () {
-      expect(ProjectsStatsService.refreshProjectsStats).toBeDefined();
-      expect(typeof ProjectsStatsService.refreshProjectsStats).toEqual("function");
-    });
-    it("getProjectsStats should be defined", function () {
-      expect(ProjectsStatsService.getProjectsStats).toBeDefined();
-      expect(typeof ProjectsStatsService.getProjectsStats).toEqual("function");
-    });
-    it("getById should be defined", function () {
-      expect(ProjectsStatsService.getById).toBeDefined();
-      expect(typeof ProjectsStatsService.getById).toEqual("function");
-    });
+  describe("Is the service property", function () {
+    var properties = [
+      "ready"
+    ];
+
+    for (var i in properties) {
+      it(properties[i] + " defined", function () {
+        expect(service[properties[i]]).toBeDefined();
+        expect(typeof service[properties[i]]).toEqual("object");
+      });
+    }
   });
 
-  describe("Are the service properties defined", function () {
-    it("ready should be defined", function () {
-      expect(ProjectsStatsService.ready).toBeDefined();
-      expect(typeof ProjectsStatsService.ready).toEqual("object");
-    });
-  });
-
-  describe("Do the service methods work as expected", function () {
-    it("refreshProjectsStats should fetch project stats", function () {
-      deferred = $q.defer();
-      spyOn(WsApi, "fetch").and.returnValue(deferred.promise);
-      ProjectsStatsService.refreshProjectsStats();
-      deferred.resolve(dataProjectsStats);
-      expect(WsApi.fetch).toHaveBeenCalledWith(apiMapping.ProjectsStats.all);
-    });
-    it("getProjectsStats should get project stats", function () {
-      spyOn(ProjectRepo, "reset");
+  describe("Do the service method", function () {
+    it("getById get project stats by id", function () {
       $rootScope.$apply();
-      var projectsStats = ProjectsStatsService.getProjectsStats();
-      expect(projectsStats).toEqual(dataProjectsStats);
-      expect(ProjectRepo.reset).toHaveBeenCalled();
-    });
-    it("getById should get project stats by id", function () {
-      $rootScope.$apply();
-      ProjectsStatsService.getById(1).then(function (projectStats) {
+      service.getById(1).then(function (projectStats) {
         expect(projectStats).toEqual(dataProjectsStats[0]);
       });
+    });
+
+    it("getProjectsStats get project stats", function () {
+      var projectsStats = service.getProjectsStats();
+      expect(projectsStats).toEqual(dataProjectsStats);
+    });
+
+    it("refreshProjectsStats fetch project stats", function () {
+      deferred = $q.defer();
+      spyOn(WsApi, "fetch").and.returnValue(deferred.promise);
+      service.refreshProjectsStats();
+      deferred.resolve(dataProjectsStats);
+      expect(WsApi.fetch).toHaveBeenCalledWith(apiMapping.ProjectsStats.all);
     });
   });
 
