@@ -84,8 +84,8 @@ describe("controller: StatusController", function () {
     }
   });
 
-  describe("Do the scope methods work as expected", function () {
-    it("resetStatusForms should reset Status forms", function () {
+  describe("Does the scope method", function () {
+    it("resetStatusForms reset Status forms", function () {
       var modal = angular.element($templateCache.get("views/modals/addStatusModal.html"));
       modal = $compile(modal)($scope);
 
@@ -100,7 +100,7 @@ describe("controller: StatusController", function () {
       expect(form.$dirty).toEqual(false);
     });
 
-    it("createStatus should create a new Status", function () {
+    it("createStatus create a new Status", function () {
       var newStatus = new mockStatus($q);
       newStatus.mock({
         id: 5,
@@ -117,7 +117,7 @@ describe("controller: StatusController", function () {
       expect(StatusRepo.findById(newStatus.id)).toEqual(newStatus);
     });
 
-    it("resetCreateStatus should call resetCreateStatus() and clear out the fields", function () {
+    it("resetCreateStatus call resetCreateStatus() and clear out the fields", function () {
       var newStatus = new mockStatus($q);
       newStatus.mock({
         id: 5,
@@ -144,7 +144,7 @@ describe("controller: StatusController", function () {
       expect($scope.statusToCreate.mapping).toEqual([""]);
     });
 
-    it("editStatus should set the statusToEdit and open the modal", function () {
+    it("editStatus set the statusToEdit and open the modal", function () {
       var status = new mockStatus($q);
 
       spyOn($scope, "openModal");
@@ -154,7 +154,7 @@ describe("controller: StatusController", function () {
       expect($scope.openModal).toHaveBeenCalled();
     });
 
-    it("updateStatus should call dirty and save on the Status, and then call cancelEditStatus", function () {
+    it("updateStatus call dirty and save on the Status, and then call cancelEditStatus", function () {
       var status = new mockStatus($q);
 
       spyOn($scope, "cancelEditStatus");
@@ -177,7 +177,7 @@ describe("controller: StatusController", function () {
       expect(status.save).toHaveBeenCalled();
     });
 
-    it("cancelEditStatus should clear out statusToEdit and call resetStatusForms", function () {
+    it("cancelEditStatus clear out statusToEdit and call resetStatusForms", function () {
       spyOn($scope, "resetStatusForms");
       $scope.statusToEdit = new mockStatus($q);
       $scope.cancelEditStatus();
@@ -186,7 +186,7 @@ describe("controller: StatusController", function () {
       expect($scope.resetStatusForms).toHaveBeenCalled();
     });
 
-    it("confirmDeleteStatus should set the statusToDelete and open the modal", function () {
+    it("confirmDeleteStatus set the statusToDelete and open the modal", function () {
       var status = new mockStatus($q);
 
       spyOn($scope, "openModal");
@@ -196,7 +196,7 @@ describe("controller: StatusController", function () {
       expect($scope.statusToDelete).toEqual(status);
     });
 
-    it("cancelDeleteStatus should clear statusToDelete and close the modal", function () {
+    it("cancelDeleteStatus clear statusToDelete and close the modal", function () {
       var status = new mockStatus($q);
 
       spyOn($scope, "closeModal");
@@ -207,7 +207,7 @@ describe("controller: StatusController", function () {
       expect($scope.statusToDelete).toEqual({});
     });
 
-    it("deleteStatus should call the repo delete method and then call cancelDeleteStatus when successful", function () {
+    it("deleteStatus call the repo delete method and then call cancelDeleteStatus when successful", function () {
       var status = new mockStatus($q);
       $scope.statusToDelete = status;
       deferred = $q.defer();

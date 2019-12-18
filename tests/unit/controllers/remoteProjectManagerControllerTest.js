@@ -86,8 +86,8 @@ describe("controller: RemoteProjectManagerController", function () {
     }
   });
 
-  describe("Do the scope methods work as expected", function () {
-    it("resetRemoteProjectManagerForms should reset Remote Project Manager forms", function () {
+  describe("Does the scope method", function () {
+    it("resetRemoteProjectManagerForms reset Remote Project Manager forms", function () {
 
       var modal = angular.element($templateCache.get("views/modals/addRemoteProjectManagerModal.html"));
       modal = $compile(modal)($scope);
@@ -103,7 +103,7 @@ describe("controller: RemoteProjectManagerController", function () {
       expect(form.$dirty).toEqual(false);
     });
 
-    it("createRemoteProjectManager should create a new Remote Project Manager", function () {
+    it("createRemoteProjectManager create a new Remote Project Manager", function () {
       var newRemoteProjectManager = {
         "id": 4,
         "name": "Test 4",
@@ -120,7 +120,7 @@ describe("controller: RemoteProjectManagerController", function () {
       expect(RemoteProjectManagerRepo.findById(newRemoteProjectManager.id)).toEqual(newRemoteProjectManager);
     });
 
-    it("resetCreateRemoteProjectManager should call resetRemoteProjectManagerForms() and clear out the fields", function () {
+    it("resetCreateRemoteProjectManager call resetRemoteProjectManagerForms() and clear out the fields", function () {
       var newRemoteProjectManager = {
         "id": 4,
         "name": "Test 4",
@@ -151,7 +151,7 @@ describe("controller: RemoteProjectManagerController", function () {
       expect($scope.resetRemoteProjectManagerForms).toHaveBeenCalled();
     });
 
-    it("editRemoteProjectManager should set the remoteProjectManagerToEdit and open the modal", function () {
+    it("editRemoteProjectManager set the remoteProjectManagerToEdit and open the modal", function () {
       var remoteProjectManager = new mockRemoteProjectManager($q);
 
       spyOn($scope, "openModal");
@@ -161,7 +161,7 @@ describe("controller: RemoteProjectManagerController", function () {
       expect($scope.openModal).toHaveBeenCalled();
     });
 
-    it("updateRemoteProjectManager should call dirty and save on the Remote Project Manager, and then call cancelEditRemoteProjectManager", function () {
+    it("updateRemoteProjectManager call dirty and save on the Remote Project Manager, and then call cancelEditRemoteProjectManager", function () {
       var remoteProjectManager = new mockRemoteProjectManager($q);
 
       spyOn($scope, "cancelEditRemoteProjectManager");
@@ -184,7 +184,7 @@ describe("controller: RemoteProjectManagerController", function () {
       expect(remoteProjectManager.save).toHaveBeenCalled();
     });
 
-    it("cancelEditRemoteProjectManager should clear out remoteProjectManagerToEdit and call resetRemoteProjectManagerForms", function () {
+    it("cancelEditRemoteProjectManager clear out remoteProjectManagerToEdit and call resetRemoteProjectManagerForms", function () {
       var remoteProjectManager = new mockRemoteProjectManager($q);
 
       spyOn(remoteProjectManager, "refresh");
@@ -197,7 +197,7 @@ describe("controller: RemoteProjectManagerController", function () {
       expect($scope.resetRemoteProjectManagerForms).toHaveBeenCalled();
     });
 
-    it("confirmDeleteRemoteProjectManager should set the remoteProjectManagerToDelete and open the modal", function () {
+    it("confirmDeleteRemoteProjectManager set the remoteProjectManagerToDelete and open the modal", function () {
       var remoteProjectManager = new mockRemoteProjectManager($q);
 
       spyOn($scope, "openModal");
@@ -207,7 +207,7 @@ describe("controller: RemoteProjectManagerController", function () {
       expect($scope.remoteProjectManagerToDelete).toEqual(remoteProjectManager);
     });
 
-    it("cancelDeleteRemoteProjectManager should clear remoteProjectManagerToDelete and close the modal", function () {
+    it("cancelDeleteRemoteProjectManager clear remoteProjectManagerToDelete and close the modal", function () {
       var remoteProjectManager = new mockRemoteProjectManager($q);
 
       spyOn($scope, "closeModal");
@@ -218,7 +218,7 @@ describe("controller: RemoteProjectManagerController", function () {
       expect($scope.remoteProjectManagerToDelete).toEqual({});
     });
 
-    it("deleteRemoteProjectManager should call the repo delete method and then call cancelDeleteRemoteProjectManager when successful", function () {
+    it("deleteRemoteProjectManager call the repo delete method and then call cancelDeleteRemoteProjectManager when successful", function () {
       var remoteProjectManager = new mockRemoteProjectManager($q);
 
       $scope.remoteProjectManagerToDelete = remoteProjectManager;
@@ -239,7 +239,7 @@ describe("controller: RemoteProjectManagerController", function () {
       expect($scope.cancelDeleteRemoteProjectManager).toHaveBeenCalled();
     });
 
-    it("typeSettings should return appropriate scaffold", function () {
+    it("typeSettings return appropriate scaffold", function () {
       var scaffold = [{
         type: "text",
         key: "url",

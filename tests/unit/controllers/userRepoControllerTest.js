@@ -84,8 +84,8 @@ describe("controller: UserRepoController", function () {
     }
   });
 
-  describe("Do the scope methods work as expected", function () {
-    it("allowableRoles should return a list of allowed roles", function () {
+  describe("Does the scope method", function () {
+    it("allowableRoles return a list of allowed roles", function () {
       var roles;
 
       roles = $scope.allowableRoles();
@@ -106,7 +106,7 @@ describe("controller: UserRepoController", function () {
       expect($scope.allowableRoles).not.toBeDefined();
     });
 
-    it("updateRole should update a users role", function () {
+    it("updateRole update a users role", function () {
       var originalUser2 = angular.copy(dataUser2);
       dataUser2.role = "ROLE_NEW";
       dataUser2.save = function () {};

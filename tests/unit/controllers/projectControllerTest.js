@@ -107,8 +107,8 @@ describe("controller: ProjectController", function () {
     }
   });
 
-  describe("Do the scope methods work as expected", function () {
-    it("resetProjectForms should reset project forms", function () {
+  describe("Does the scope method", function () {
+    it("resetProjectForms reset project forms", function () {
       var modal = angular.element($templateCache.get("views/modals/addProjectModal.html"));
       modal = $compile(modal)($scope);
 
@@ -123,7 +123,7 @@ describe("controller: ProjectController", function () {
       expect(form.$dirty).toEqual(false);
     });
 
-    it("createProject should create a new project", function () {
+    it("createProject create a new project", function () {
       var newProject = new mockProject($q);
 
       newProject.mock({
@@ -137,7 +137,7 @@ describe("controller: ProjectController", function () {
       expect(ProjectRepo.findById(newProject.id)).toEqual(newProject);
     });
 
-    it("resetCreateProject should call resetProjectForms() and clear out the name field", function () {
+    it("resetCreateProject call resetProjectForms() and clear out the name field", function () {
       spyOn($scope, "resetProjectForms");
 
       $scope.projectToCreate = new mockProject($q);
@@ -157,7 +157,7 @@ describe("controller: ProjectController", function () {
       expect($scope.resetProjectForms).toHaveBeenCalled();
     });
 
-    it("editProject should set the projectToEdit and open the modal", function () {
+    it("editProject set the projectToEdit and open the modal", function () {
       spyOn($scope, "openModal");
       $scope.editProject(dataProjectRepo1[0]);
 
@@ -165,7 +165,7 @@ describe("controller: ProjectController", function () {
       expect($scope.openModal).toHaveBeenCalled();
     });
 
-    it("updateProject should call dirty and save on the Project, and then call cancelEditProject", function () {
+    it("updateProject call dirty and save on the Project, and then call cancelEditProject", function () {
       var project = new mockProject($q);
 
       spyOn($scope, "cancelEditProject");
@@ -182,7 +182,7 @@ describe("controller: ProjectController", function () {
       expect(project.save).toHaveBeenCalled();
     });
 
-    it("cancelEditProject should clear out projectToEdit and call resetProjectForms", function () {
+    it("cancelEditProject clear out projectToEdit and call resetProjectForms", function () {
       var project = new mockProject($q);
 
       spyOn($scope, "resetProjectForms");
@@ -193,7 +193,7 @@ describe("controller: ProjectController", function () {
       expect($scope.resetProjectForms).toHaveBeenCalled();
     });
 
-    it("confirmDeleteProject should set the projectToDelete and open the modal", function () {
+    it("confirmDeleteProject set the projectToDelete and open the modal", function () {
       spyOn($scope, "openModal");
       $scope.confirmDeleteProject(dataProjectRepo1[0]);
 
@@ -201,7 +201,7 @@ describe("controller: ProjectController", function () {
       expect($scope.projectToDelete).toEqual(dataProjectRepo1[0]);
     });
 
-    it("cancelDeleteProject should clear projectToDelete and close the modal", function () {
+    it("cancelDeleteProject clear projectToDelete and close the modal", function () {
       spyOn($scope, "closeModal");
       $scope.projectToDelete = dataProjectRepo1[0];
       $scope.cancelDeleteProject();
@@ -210,7 +210,7 @@ describe("controller: ProjectController", function () {
       expect($scope.projectToDelete).toEqual({});
     });
 
-    it("deleteProject should call the repo delete method and then call cancelDeleteProject when successful", function () {
+    it("deleteProject call the repo delete method and then call cancelDeleteProject when successful", function () {
       var project = new mockProject($q);
 
       $scope.projectToDelete = project;

@@ -71,18 +71,18 @@ describe("controller: ActiveSprintsController", function () {
     }
   });
 
-  describe("Do the scope methods work as expected", function () {
-    it("select should set session storage to selected index", function () {
+  describe("Does the scope method", function () {
+    it("select set session storage to selected index", function () {
       $scope.select(0);
       expect(Number(sessionStorage.selected)).toEqual(0);
     });
 
-    it("getSprintEstimateTotal should get sprint total estimate", function () {
+    it("getSprintEstimateTotal get sprint total estimate", function () {
       var total = $scope.getSprintEstimateTotal($scope.activeSprints[0]);
       expect(total).toEqual(8.5);
     });
 
-    it("getStatusEstimateTotal should get status total estimate", function () {
+    it("getStatusEstimateTotal get status total estimate", function () {
       $scope.select(0);
       var total = $scope.getStatusEstimateTotal({
         "id": 4,
@@ -92,7 +92,7 @@ describe("controller: ActiveSprintsController", function () {
       expect(total).toEqual(8);
     });
 
-    it("getAvatarUrl should get the member avatar url", function () {
+    it("getAvatarUrl get the member avatar url", function () {
       var avatarUrl = $scope.getAvatarUrl({
         "id": "6616",
         "name": "Ryan Laddusaw",
@@ -101,12 +101,12 @@ describe("controller: ActiveSprintsController", function () {
       expect(avatarUrl).toEqual("http://localhost:9001/images/no_avatar.png");
     });
 
-    it("getHtmlContent should get trusted content", function () {
+    it("getHtmlContent get trusted content", function () {
       var html = "<span>Hello, World!</span>";
       $scope.getHtmlContent(html);
     });
 
-    it('getPanelClass should return correct value', function () {
+    it('getPanelClass return correct value', function () {
       var featureClass = $scope.getPanelClass('Feature');
       var defectClass = $scope.getPanelClass('Defect');
       var otherClass = $scope.getPanelClass('anything else');
@@ -115,7 +115,7 @@ describe("controller: ActiveSprintsController", function () {
       expect(otherClass).toEqual('panel-default');
     });
 
-    it("getSelectedSprint should get selected sprint", function () {
+    it("getSelectedSprint get selected sprint", function () {
       $scope.select(0);
       var selectedSprint = $scope.getSelectedSprint();
       expect(selectedSprint).toEqual($scope.activeSprints[0]);
