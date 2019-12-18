@@ -41,52 +41,34 @@ describe("controller: ActiveSprintsController", function () {
     initializeController();
   });
 
-  describe("Is the controller defined", function () {
-    it("should be defined", function () {
-      expect(controller).toBeDefined();
-    });
+  describe("Is the controller", function () {
+    var roles = [ "ROLE_ADMIN", "ROLE_MANAGER", "ROLE_USER", "ROLE_ANONYMOUS" ];
+    for (var i in roles) {
+      it("defined for " + roles[i], function () {
+        initializeController({ role: roles[i] });
+        expect(controller).toBeDefined();
+      });
+    }
   });
 
-  describe("Are the scope methods defined", function () {
-    it("select should be defined", function () {
-      expect($scope.select).toBeDefined();
-      expect(typeof $scope.select).toEqual("function");
-    });
+  describe("Is the scope method", function () {
+    var methods = [
+      "select",
+      "kanbanHeader",
+      "getSprintEstimateTotal",
+      "getStatusEstimateTotal",
+      "getAvatarUrl",
+      "getHtmlContent",
+      "getPanelClass",
+      "getSelectedSprint"
+    ];
 
-    it("kanbanHeader should be defined", function () {
-      expect($scope.kanbanHeader).toBeDefined();
-      expect(typeof $scope.kanbanHeader).toEqual("function");
-    });
-
-    it("getSprintEstimateTotal should be defined", function () {
-      expect($scope.getSprintEstimateTotal).toBeDefined();
-      expect(typeof $scope.getSprintEstimateTotal).toEqual("function");
-    });
-
-    it("getStatusEstimateTotal should be defined", function () {
-      expect($scope.getStatusEstimateTotal).toBeDefined();
-      expect(typeof $scope.getStatusEstimateTotal).toEqual("function");
-    });
-
-    it("getAvatarUrl should be defined", function () {
-      expect($scope.getAvatarUrl).toBeDefined();
-      expect(typeof $scope.getAvatarUrl).toEqual("function");
-    });
-
-    it("getHtmlContent should be defined", function () {
-      expect($scope.getHtmlContent).toBeDefined();
-      expect(typeof $scope.getHtmlContent).toEqual("function");
-    });
-
-    it('getPanelClass should be defined', function () {
-      expect($scope.getPanelClass).toBeDefined();
-      expect(typeof $scope.getPanelClass).toEqual('function');
-    });
-
-    it("getSelectedSprint should be defined", function () {
-      expect($scope.getSelectedSprint).toBeDefined();
-      expect(typeof $scope.getSelectedSprint).toEqual("function");
-    });
+    for (var i in methods) {
+      it(methods[i] + " defined", function () {
+        expect($scope[methods[i]]).toBeDefined();
+        expect(typeof $scope[methods[i]]).toEqual("function");
+      });
+    }
   });
 
   describe("Do the scope methods work as expected", function () {

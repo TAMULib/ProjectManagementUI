@@ -12,25 +12,25 @@ describe("directive: remoteProjectManagerForm", function () {
       };
 
       formSettings = [{
-        "type": "text",
-        "key": "url",
-        "gloss": "URL",
-        "visible": true
+        type: "text",
+        key: "url",
+        gloss: "URL",
+        visible: true
       }, {
-        "type": "text",
-        "key": "username",
-        "gloss": "Username",
-        "visible": false
+        type: "text",
+        key: "username",
+        gloss: "Username",
+        visible: false
       }, {
-        "type": "password",
-        "key": "password",
-        "gloss": "Password",
-        "visible": false
+        type: "password",
+        key: "password",
+        gloss: "Password",
+        visible: false
       }, {
-        "type": "password",
-        "key": "token",
-        "gloss": "Token",
-        "visible": false
+        type: "password",
+        key: "token",
+        gloss: "Token",
+        visible: false
       }];
     });
   };

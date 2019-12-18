@@ -76,57 +76,35 @@ describe("controller: ProjectController", function () {
     initializeController();
   });
 
-  describe("Is the controller defined", function () {
-    it("should be defined", function () {
-      expect(controller).toBeDefined();
-    });
+  describe("Is the controller", function () {
+    var roles = [ "ROLE_ADMIN", "ROLE_MANAGER", "ROLE_USER", "ROLE_ANONYMOUS" ];
+    for (var i in roles) {
+      it("defined for " + roles[i], function () {
+        initializeController({ role: roles[i] });
+        expect(controller).toBeDefined();
+      });
+    }
   });
 
-  describe("Are the scope methods defined", function () {
-    it("resetProjectForms should be defined", function () {
-      expect($scope.resetProjectForms).toBeDefined();
-      expect(typeof $scope.resetProjectForms).toEqual("function");
-    });
+  describe("Is the scope method", function () {
+    var methods = [
+      "resetProjectForms",
+      "createProject",
+      "resetCreateProject",
+      "editProject",
+      "updateProject",
+      "cancelEditProject",
+      "confirmDeleteProject",
+      "cancelDeleteProject",
+      "deleteProject"
+    ];
 
-    it("createProject should be defined", function () {
-      expect($scope.createProject).toBeDefined();
-      expect(typeof $scope.createProject).toEqual("function");
-    });
-
-    it("resetCreateProject should be defined", function () {
-      expect($scope.resetCreateProject).toBeDefined();
-      expect(typeof $scope.resetCreateProject).toEqual("function");
-    });
-
-    it("editProject should be defined", function () {
-      expect($scope.editProject).toBeDefined();
-      expect(typeof $scope.editProject).toEqual("function");
-    });
-
-    it("updateProject should be defined", function () {
-      expect($scope.updateProject).toBeDefined();
-      expect(typeof $scope.updateProject).toEqual("function");
-    });
-
-    it("cancelEditProject should be defined", function () {
-      expect($scope.cancelEditProject).toBeDefined();
-      expect(typeof $scope.cancelEditProject).toEqual("function");
-    });
-
-    it("confirmDeleteProject should be defined", function () {
-      expect($scope.confirmDeleteProject).toBeDefined();
-      expect(typeof $scope.confirmDeleteProject).toEqual("function");
-    });
-
-    it("cancelDeleteProject should be defined", function () {
-      expect($scope.cancelDeleteProject).toBeDefined();
-      expect(typeof $scope.cancelDeleteProject).toEqual("function");
-    });
-
-    it("deleteProject should be defined", function () {
-      expect($scope.deleteProject).toBeDefined();
-      expect(typeof $scope.deleteProject).toEqual("function");
-    });
+    for (var i in methods) {
+      it(methods[i] + " defined", function () {
+        expect($scope[methods[i]]).toBeDefined();
+        expect(typeof $scope[methods[i]]).toEqual("function");
+      });
+    }
   });
 
   describe("Do the scope methods work as expected", function () {

@@ -51,67 +51,37 @@ describe("controller: StatusController", function () {
     initializeController();
   });
 
-  describe("Is the controller defined", function () {
-    it("should be defined", function () {
-      expect(controller).toBeDefined();
-    });
+  describe("Is the controller", function () {
+    var roles = [ "ROLE_ADMIN", "ROLE_MANAGER", "ROLE_USER", "ROLE_ANONYMOUS" ];
+    for (var i in roles) {
+      it("defined for " + roles[i], function () {
+        initializeController({ role: roles[i] });
+        expect(controller).toBeDefined();
+      });
+    }
   });
 
-  describe("Are the scope methods defined", function () {
-    it("resetStatusForms should be defined", function () {
-      expect($scope.resetStatusForms).toBeDefined();
-      expect(typeof $scope.resetStatusForms).toEqual("function");
-    });
+  describe("Is the scope method", function () {
+    var methods = [
+      "resetStatusForms",
+      "createStatus",
+      "resetCreateStatus",
+      "editStatus",
+      "updateStatus",
+      "addMatch",
+      "removeMatch",
+      "cancelEditStatus",
+      "confirmDeleteStatus",
+      "cancelDeleteStatus",
+      "deleteStatus"
+    ];
 
-    it("createStatus should be defined", function () {
-      expect($scope.createStatus).toBeDefined();
-      expect(typeof $scope.createStatus).toEqual("function");
-    });
-
-    it("resetCreateStatus should be defined", function () {
-      expect($scope.resetCreateStatus).toBeDefined();
-      expect(typeof $scope.resetCreateStatus).toEqual("function");
-    });
-
-    it("editStatus should be defined", function () {
-      expect($scope.editStatus).toBeDefined();
-      expect(typeof $scope.editStatus).toEqual("function");
-    });
-
-    it("updateStatus should be defined", function () {
-      expect($scope.updateStatus).toBeDefined();
-      expect(typeof $scope.updateStatus).toEqual("function");
-    });
-
-    it("addMatch should be defined", function () {
-      expect($scope.addMatch).toBeDefined();
-      expect(typeof $scope.addMatch).toEqual("function");
-    });
-
-    it("removeMatch should be defined", function () {
-      expect($scope.removeMatch).toBeDefined();
-      expect(typeof $scope.removeMatch).toEqual("function");
-    });
-
-    it("cancelEditStatus should be defined", function () {
-      expect($scope.cancelEditStatus).toBeDefined();
-      expect(typeof $scope.cancelEditStatus).toEqual("function");
-    });
-
-    it("confirmDeleteStatus should be defined", function () {
-      expect($scope.confirmDeleteStatus).toBeDefined();
-      expect(typeof $scope.confirmDeleteStatus).toEqual("function");
-    });
-
-    it("cancelDeleteStatus should be defined", function () {
-      expect($scope.cancelDeleteStatus).toBeDefined();
-      expect(typeof $scope.cancelDeleteStatus).toEqual("function");
-    });
-
-    it("deleteStatus should be defined", function () {
-      expect($scope.deleteStatus).toBeDefined();
-      expect(typeof $scope.deleteStatus).toEqual("function");
-    });
+    for (var i in methods) {
+      it(methods[i] + " defined", function () {
+        expect($scope[methods[i]]).toBeDefined();
+        expect(typeof $scope[methods[i]]).toEqual("function");
+      });
+    }
   });
 
   describe("Do the scope methods work as expected", function () {

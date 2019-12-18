@@ -54,62 +54,36 @@ describe("controller: RemoteProjectManagerController", function () {
     initializeController();
   });
 
-  describe("Is the controller defined", function () {
-    it("should be defined", function () {
-      expect(controller).toBeDefined();
-    });
+  describe("Is the controller", function () {
+    var roles = [ "ROLE_ADMIN", "ROLE_MANAGER", "ROLE_USER", "ROLE_ANONYMOUS" ];
+    for (var i in roles) {
+      it("defined for " + roles[i], function () {
+        initializeController({ role: roles[i] });
+        expect(controller).toBeDefined();
+      });
+    }
   });
 
-  describe("Are the scope methods defined", function () {
-    it("resetRemoteProjectManagerForms should be defined", function () {
-      expect($scope.resetRemoteProjectManagerForms).toBeDefined();
-      expect(typeof $scope.resetRemoteProjectManagerForms).toEqual("function");
-    });
+  describe("Is the scope method", function () {
+    var methods = [
+      "resetRemoteProjectManagerForms",
+      "createRemoteProjectManager",
+      "resetCreateRemoteProjectManager",
+      "editRemoteProjectManager",
+      "updateRemoteProjectManager",
+      "cancelEditRemoteProjectManager",
+      "confirmDeleteRemoteProjectManager",
+      "cancelDeleteRemoteProjectManager",
+      "deleteRemoteProjectManager",
+      "typeSettings"
+    ];
 
-    it("createRemoteProjectManager should be defined", function () {
-      expect($scope.createRemoteProjectManager).toBeDefined();
-      expect(typeof $scope.createRemoteProjectManager).toEqual("function");
-    });
-
-    it("resetCreateRemoteProjectManager should be defined", function () {
-      expect($scope.resetCreateRemoteProjectManager).toBeDefined();
-      expect(typeof $scope.resetCreateRemoteProjectManager).toEqual("function");
-    });
-
-    it("editRemoteProjectManager should be defined", function () {
-      expect($scope.editRemoteProjectManager).toBeDefined();
-      expect(typeof $scope.editRemoteProjectManager).toEqual("function");
-    });
-
-    it("updateRemoteProjectManager should be defined", function () {
-      expect($scope.updateRemoteProjectManager).toBeDefined();
-      expect(typeof $scope.updateRemoteProjectManager).toEqual("function");
-    });
-
-    it("cancelEditRemoteProjectManager should be defined", function () {
-      expect($scope.cancelEditRemoteProjectManager).toBeDefined();
-      expect(typeof $scope.cancelEditRemoteProjectManager).toEqual("function");
-    });
-
-    it("confirmDeleteRemoteProjectManager should be defined", function () {
-      expect($scope.confirmDeleteRemoteProjectManager).toBeDefined();
-      expect(typeof $scope.confirmDeleteRemoteProjectManager).toEqual("function");
-    });
-
-    it("cancelDeleteRemoteProjectManager should be defined", function () {
-      expect($scope.cancelDeleteRemoteProjectManager).toBeDefined();
-      expect(typeof $scope.cancelDeleteRemoteProjectManager).toEqual("function");
-    });
-
-    it("deleteRemoteProjectManager should be defined", function () {
-      expect($scope.deleteRemoteProjectManager).toBeDefined();
-      expect(typeof $scope.deleteRemoteProjectManager).toEqual("function");
-    });
-
-    it("typeSettings should be defined", function () {
-      expect($scope.typeSettings).toBeDefined();
-      expect(typeof $scope.typeSettings).toEqual("function");
-    });
+    for (var i in methods) {
+      it(methods[i] + " defined", function () {
+        expect($scope[methods[i]]).toBeDefined();
+        expect(typeof $scope[methods[i]]).toEqual("function");
+      });
+    }
   });
 
   describe("Do the scope methods work as expected", function () {
