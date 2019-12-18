@@ -1,23 +1,36 @@
-describe("repo: StatusRepo", function () {
+describe("service: StatusRepo", function () {
+  var $q, $rootScope, $scope, WsApi, repo;
 
-  var StatusRepo;
+  var initializeVariables = function (settings) {
+    inject(function (_$q_, _$rootScope_, _WsApi_) {
+      $q = _$q_;
+      $rootScope = _$rootScope_;
+
+      WsApi = _WsApi_;
+    });
+  };
+
+  var initializeRepo = function (settings) {
+    inject(function ($injector, _StatusRepo_) {
+      $scope = $rootScope.$new();
+
+      repo = _StatusRepo_;
+    });
+  };
 
   beforeEach(function () {
     module("core");
     module("app");
     module("mock.wsApi");
-    inject(function (_$rootScope_, _$q_, _WsApi_, _StatusRepo_) {
-      $rootScope = _$rootScope_;
-      $q = _$q_;
-      WsApi = _WsApi_;
-      StatusRepo = _StatusRepo_;
-    });
+
+    initializeVariables();
+    initializeRepo();
   });
 
-  // describe("Is the repo defined", function () {
-  //   it("should be defined", function () {
-  //     expect(StatusRepo).toBeDefined();
-  //   });
-  // });
+  describe("Is the repo", function () {
+    it("defined", function () {
+      expect(repo).toBeDefined();
+    });
+  });
 
 });

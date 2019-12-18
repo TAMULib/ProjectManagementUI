@@ -1,23 +1,36 @@
-describe("repo: ProjectRepo", function () {
+describe("service: ProjectRepo", function () {
+  var $q, $rootScope, $scope, WsApi, repo;
 
-  var ProjectRepo;
+  var initializeVariables = function (settings) {
+    inject(function (_$q_, _$rootScope_, _WsApi_) {
+      $q = _$q_;
+      $rootScope = _$rootScope_;
+
+      WsApi = _WsApi_;
+    });
+  };
+
+  var initializeRepo = function (settings) {
+    inject(function ($injector, _ProjectRepo_) {
+      $scope = $rootScope.$new();
+
+      repo = _ProjectRepo_;
+    });
+  };
 
   beforeEach(function () {
     module("core");
     module("app");
     module("mock.wsApi");
-    inject(function (_$rootScope_, _$q_, _WsApi_, _ProjectRepo_) {
-      $rootScope = _$rootScope_;
-      $q = _$q_;
-      WsApi = _WsApi_;
-      ProjectRepo = _ProjectRepo_;
-    });
+
+    initializeVariables();
+    initializeRepo();
   });
 
-  // describe("Is the repo defined", function () {
-  //   it("should be defined", function () {
-  //     expect(ProjectRepo).toBeDefined();
-  //   });
-  // });
+  describe("Is the repo", function () {
+    it("defined", function () {
+      expect(repo).toBeDefined();
+    });
+  });
 
 });
