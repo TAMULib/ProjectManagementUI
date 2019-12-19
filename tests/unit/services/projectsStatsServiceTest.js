@@ -47,11 +47,15 @@ describe("service: ProjectsStatsService", function () {
       "refreshProjectsStats"
     ];
 
+    var serviceMethodExists = function (method) {
+      return function() {
+        expect(service[method]).toBeDefined();
+        expect(typeof service[method]).toEqual("function");
+      };
+    };
+
     for (var i in methods) {
-      it(methods[i] + " defined", function () {
-        expect(service[methods[i]]).toBeDefined();
-        expect(typeof service[methods[i]]).toEqual("function");
-      });
+      it(methods[i] + " defined", serviceMethodExists(methods[i]));
     }
   });
 
@@ -60,11 +64,15 @@ describe("service: ProjectsStatsService", function () {
       "ready"
     ];
 
+    var servicePropertyExists = function (property) {
+      return function() {
+        expect(service[property]).toBeDefined();
+        expect(typeof service[property]).toEqual("object");
+      };
+    };
+
     for (var i in properties) {
-      it(properties[i] + " defined", function () {
-        expect(service[properties[i]]).toBeDefined();
-        expect(typeof service[properties[i]]).toEqual("object");
-      });
+      it(properties[i] + " defined", servicePropertyExists(properties[i]));
     }
   });
 
