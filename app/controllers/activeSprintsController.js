@@ -57,6 +57,16 @@ app.controller('ActiveSprintsController', function ($controller, $sce, $scope, A
         return $scope.activeSprints.length > 0 ? $scope.activeSprints[sessionStorage.selected] : undefined;
     };
 
+    $scope.getPanelClass = function (type) {
+        var panelClass = 'panel-default';
+        if (type === 'Feature') {
+            panelClass = 'panel-primary';
+        } else if (type === 'Defect') {
+            panelClass = 'panel-danger';
+        }
+        return panelClass;
+    };
+
     ActiveSprintsService.updated.then(null, null, function () {
         if ($scope.activeSprints.length > 0) {
             while (sessionStorage.selected >= $scope.activeSprints.length) {
