@@ -1,113 +1,134 @@
-describe('controller: ActiveSprintsController', function () {
+describe("controller: ActiveSprintsController", function () {
+  var $q, $scope, WsApi, controller;
 
-    var scope, controller;
+  var initializeVariables = function () {
+    inject(function (_$q_, _WsApi_) {
+      $q = _$q_;
 
-    beforeEach(function () {
-        module('core');
-        module('app');
-        module('mock.activeSprintsService');
-        module('mock.statusRepo');
-        inject(function ($controller, $sce, $rootScope, _ActiveSprintsService_, _StatusRepo_) {
-            scope = $rootScope.$new();
-            controller = $controller('ActiveSprintsController', {
-                $scope: scope,
-                $sce: $sce,
-                ActiveSprintsService: _ActiveSprintsService_,
-                StatusRepo: _StatusRepo_
-            });
-        });
+      WsApi = _WsApi_;
+    });
+  };
+
+  var initializeController = function (settings) {
+    inject(function (_$controller_, _$sce_, _$rootScope_, _ActiveSprintsService_, _StatusRepo_) {
+      $scope = _$rootScope_.$new();
+
+      sessionStorage.role = settings && settings.role ? settings.role : "ROLE_ADMIN";
+      sessionStorage.token = settings && settings.token ? settings.token : "faketoken";
+
+      controller = _$controller_("ActiveSprintsController", {
+        $scope: $scope,
+        $sce: _$sce_,
+        ActiveSprintsService: _ActiveSprintsService_,
+        StatusRepo: _StatusRepo_
+      });
+
+      // ensure that the isReady() is called.
+      if (!$scope.$$phase) {
+        $scope.$digest();
+      }
+    });
+  };
+
+  beforeEach(function () {
+    module("core");
+    module("app");
+    module("mock.activeSprintsService");
+    module("mock.statusRepo");
+
+    installPromiseMatchers();
+    initializeVariables();
+    initializeController();
+  });
+
+  describe("Is the controller", function () {
+    var roles = [ "ROLE_ADMIN", "ROLE_MANAGER", "ROLE_USER", "ROLE_ANONYMOUS" ];
+
+    var controllerExists = function (setting) {
+      return function() {
+        initializeController(setting);
+        expect(controller).toBeDefined();
+      };
+    };
+
+    for (var i in roles) {
+      it("defined for " + roles[i], controllerExists({ role: roles[i] }));
+    }
+  });
+
+  describe("Is the scope method", function () {
+    var methods = [
+      "select",
+      "kanbanHeader",
+      "getSprintEstimateTotal",
+      "getStatusEstimateTotal",
+      "getAvatarUrl",
+      "getHtmlContent",
+      "getPanelClass",
+      "getSelectedSprint"
+    ];
+
+    var scopeMethodExists = function (method) {
+      return function() {
+        expect($scope[method]).toBeDefined();
+        expect(typeof $scope[method]).toEqual("function");
+      };
+    };
+
+    for (var i in methods) {
+      it(methods[i] + " defined", scopeMethodExists(methods[i]));
+    }
+  });
+
+  describe("Does the scope method", function () {
+    it("select set session storage to selected index", function () {
+      $scope.select(0);
+      expect(Number(sessionStorage.selected)).toEqual(0);
     });
 
-    describe('Is the controller defined', function () {
-        it('should be defined', function () {
-            expect(controller).toBeDefined();
-        });
+    it("getSprintEstimateTotal get sprint total estimate", function () {
+      var total = $scope.getSprintEstimateTotal($scope.activeSprints[0]);
+      expect(total).toEqual(8.5);
     });
 
-    describe('Are the scope methods defined', function () {
-        it('select should be defined', function () {
-            expect(scope.select).toBeDefined();
-            expect(typeof scope.select).toEqual('function');
-        });
-        it('kanbanHeader should be defined', function () {
-            expect(scope.kanbanHeader).toBeDefined();
-            expect(typeof scope.kanbanHeader).toEqual('function');
-        });
-        it('getSprintEstimateTotal should be defined', function () {
-            expect(scope.getSprintEstimateTotal).toBeDefined();
-            expect(typeof scope.getSprintEstimateTotal).toEqual('function');
-        });
-        it('getStatusEstimateTotal should be defined', function () {
-            expect(scope.getStatusEstimateTotal).toBeDefined();
-            expect(typeof scope.getStatusEstimateTotal).toEqual('function');
-        });
-        it('getAvatarUrl should be defined', function () {
-            expect(scope.getAvatarUrl).toBeDefined();
-            expect(typeof scope.getAvatarUrl).toEqual('function');
-        });
-        it('getHtmlContent should be defined', function () {
-            expect(scope.getHtmlContent).toBeDefined();
-            expect(typeof scope.getHtmlContent).toEqual('function');
-        });
-        it('getSelectedSprint should be defined', function () {
-            expect(scope.getSelectedSprint).toBeDefined();
-            expect(typeof scope.getSelectedSprint).toEqual('function');
-        });
-        it('getPanelClass should be defined', function () {
-            expect(scope.getPanelClass).toBeDefined();
-            expect(typeof scope.getPanelClass).toEqual('function');
-        });
+    it("getStatusEstimateTotal get status total estimate", function () {
+      $scope.select(0);
+      var total = $scope.getStatusEstimateTotal({
+        "id": 4,
+        "identifier": "Accepted",
+        "mapping": ["Accepted"]
+      });
+      expect(total).toEqual(8);
     });
 
-    describe('Do the scope methods work as expected', function () {
-        it('select should set session storage to selected index', function () {
-            scope.select(0);
-            expect(Number(sessionStorage.selected)).toEqual(0);
-        });
-
-        it('getSprintEstimateTotal should get sprint total estimate', function () {
-            var total = scope.getSprintEstimateTotal(scope.activeSprints[0]);
-            expect(total).toEqual(8.5);
-        });
-
-        it('getStatusEstimateTotal should get status total estimate', function () {
-            scope.select(0);
-            var total = scope.getStatusEstimateTotal({
-                "id": 4,
-                "identifier": "Accepted",
-                "mapping": ["Accepted"]
-            });
-            expect(total).toEqual(8);
-        });
-
-        it('getAvatarUrl should get the member avatar url', function () {
-            var avatarUrl = scope.getAvatarUrl({
-                "id": "6616",
-                "name": "Ryan Laddusaw",
-                "avatar": "no_avatar.png"
-            });
-            expect(avatarUrl).toEqual('http://localhost:9001/images/no_avatar.png');
-        });
-
-        it('getHtmlContent should get trusted content', function () {
-            var html = '<span>Hello, World!</span>';
-            scope.getHtmlContent(html);
-        });
-
-        it('getSelectedSprint should get selected sprint', function () {
-            scope.select(0);
-            var selectedSprint = scope.getSelectedSprint();
-            expect(selectedSprint).toEqual(scope.activeSprints[0]);
-        });
-
-        it('getPanelClass should return correct value', function() {
-            var featureClass = scope.getPanelClass('Feature');
-            var defectClass = scope.getPanelClass('Defect');
-            var otherClass = scope.getPanelClass('anything else');
-            expect(featureClass).toEqual('panel-primary');
-            expect(defectClass).toEqual('panel-danger');
-            expect(otherClass).toEqual('panel-default');
-        });
+    it("getAvatarUrl get the member avatar url", function () {
+      var avatarUrl = $scope.getAvatarUrl({
+        "id": "6616",
+        "name": "Ryan Laddusaw",
+        "avatar": "no_avatar.png"
+      });
+      expect(avatarUrl).toEqual("http://localhost:9001/images/no_avatar.png");
     });
+
+    it("getHtmlContent get trusted content", function () {
+      var html = "<span>Hello, World!</span>";
+      $scope.getHtmlContent(html);
+    });
+
+    it('getPanelClass return correct value', function () {
+      var featureClass = $scope.getPanelClass('Feature');
+      var defectClass = $scope.getPanelClass('Defect');
+      var otherClass = $scope.getPanelClass('anything else');
+      expect(featureClass).toEqual('panel-primary');
+      expect(defectClass).toEqual('panel-danger');
+      expect(otherClass).toEqual('panel-default');
+    });
+
+    it("getSelectedSprint get selected sprint", function () {
+      $scope.select(0);
+      var selectedSprint = $scope.getSelectedSprint();
+      expect(selectedSprint).toEqual($scope.activeSprints[0]);
+    });
+  });
 
 });
