@@ -1,141 +1,115 @@
 module.exports = function (config) {
-    config.set({
+  config.set({
 
-        preprocessors: {
-            "app/**/*.js": "coverage",
-            '**/*.html': ['ng-html2js']
-        },
+    preprocessors: {
+      "app/!(node_modules)/**/*.js": "coverage",
+      "app/views/**/*.html": ["ng-html2js"]
+    },
 
-        reporters: ['progress', 'coverage'],
+    reporters: ["progress", "coverage"],
 
-        basePath: './',
+    basePath: "./",
 
-        files: [
+    files: [
+      "app/config/appConfig.js",
+      "app/config/apiMapping.js",
 
-            'node_modules/jquery/dist/jquery.min.js',
-            'node_modules/bootstrap/dist/js/bootstrap.min.js',
+      "app/node_modules/jquery/dist/jquery.js",
+      "app/node_modules/bootstrap/dist/js/bootstrap.js",
 
-            'node_modules/sockjs-client/dist/sockjs.min.js',
-            'node_modules/stompjs/lib/stomp.min.js',
+      "app/node_modules/sockjs-client/dist/sockjs.js",
+      "app/node_modules/stompjs/lib/stomp.js",
 
-            'node_modules/angular/angular.min.js',
+      "app/node_modules/angular/angular.js",
 
-            'node_modules/angular-route/angular-route.min.js',
-            'node_modules/angular-loader/angular-loader.min.js',
-            'node_modules/angular-sanitize/angular-sanitize.min.js',
-            'node_modules/angular-messages/angular-messages.min.js',
-            'node_modules/angular-mocks/angular-mocks.js',
+      "app/node_modules/angular-sanitize/angular-sanitize.js",
+      "app/node_modules/angular-route/angular-route.js",
+      "app/node_modules/angular-loader/angular-loader.js",
+      "app/node_modules/angular-messages/angular-messages.js",
+      "app/node_modules/angular-mocks/angular-mocks.js",
 
-            'node_modules/ng-file-upload/dist/ng-file-upload-shim.min.js',
-            'node_modules/ng-file-upload/dist/ng-file-upload.min.js',
+      "app/node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js",
 
-            'node_modules/ng-table/bundles/ng-table.min.js',
+      "app/node_modules/ng-table/bundles/ng-table.js",
 
-            'node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js',
+      "app/node_modules/ng-file-upload/dist/ng-file-upload-shim.js",
+      "app/node_modules/ng-file-upload/dist/ng-file-upload.js",
 
+      "app/node_modules/jasmine-promise-matchers/dist/jasmine-promise-matchers.js",
 
-            'node_modules/weaver-ui-core/app/config/coreConfig.js',
+      "app/node_modules/weaver-ui-core/app/config/coreConfig.js",
 
-            'node_modules/weaver-ui-core/app/components/version/version.js',
-            'node_modules/weaver-ui-core/app/components/version/version-directive.js',
-            'node_modules/weaver-ui-core/app/components/version/interpolate-filter.js',
+      "app/node_modules/weaver-ui-core/app/components/**/*.js",
 
-            'app/config/appConfig.js',
-            'app/config/apiMapping.js',
+      "app/node_modules/weaver-ui-core/app/core.js",
 
-            'node_modules/weaver-ui-core/app/core.js',
+      "app/node_modules/weaver-ui-core/app/**/*.js",
 
-            'node_modules/weaver-ui-core/app/setup.js',
-            'node_modules/weaver-ui-core/app/config/coreRuntime.js',
-            'node_modules/weaver-ui-core/app/config/coreAngularConfig.js',
-            'node_modules/weaver-ui-core/app/config/logging.js',
+      "tests/testSetup.js",
 
-            'node_modules/weaver-ui-core/app/constants/apiResponseActions.js',
-            'node_modules/weaver-ui-core/app/constants/httpMethodVerbs.js',
+      "app/app.js",
 
-            'node_modules/weaver-ui-core/app/directives/headerDirective.js',
-            'node_modules/weaver-ui-core/app/directives/footerDirective.js',
-            'node_modules/weaver-ui-core/app/directives/userDirective.js',
-            'node_modules/weaver-ui-core/app/directives/modalDirective.js',
-            'node_modules/weaver-ui-core/app/directives/alertDirective.js',
-            'node_modules/weaver-ui-core/app/directives/accordionDirective.js',
-            'node_modules/weaver-ui-core/app/directives/tabsDirective.js',
+      //"app/components/**/*.js",
 
-            'node_modules/weaver-ui-core/app/directives/tooltipDirective.js',
-            'node_modules/weaver-ui-core/app/directives/validationMessageDirective.js',
-            'node_modules/weaver-ui-core/app/directives/validatedInputDirective.js',
-            'node_modules/weaver-ui-core/app/directives/validatedSelectDirective.js',
-            'node_modules/weaver-ui-core/app/directives/validatedTextAreaDirective.js',
+      "app/config/runTime.js",
 
-            'node_modules/weaver-ui-core/app/services/accessControlService.js',
-            'node_modules/weaver-ui-core/app/services/wsService.js',
-            'node_modules/weaver-ui-core/app/services/wsApi.js',
-            'node_modules/weaver-ui-core/app/services/restApi.js',
-            'node_modules/weaver-ui-core/app/services/authService.js',
-            'node_modules/weaver-ui-core/app/services/storageService.js',
-            'node_modules/weaver-ui-core/app/services/utilityService.js',
-            'node_modules/weaver-ui-core/app/services/alertService.js',
-            'node_modules/weaver-ui-core/app/services/validationStore.js',
-            'node_modules/weaver-ui-core/app/services/userService.js',
-            'node_modules/weaver-ui-core/app/services/modalService.js',
-            'node_modules/weaver-ui-core/app/services/modelCache.js',
-            'node_modules/weaver-ui-core/app/services/modelUpdateService.js',
+      "app/controllers/**/*.js",
 
-            'node_modules/weaver-ui-core/app/repo/abstractRepo.js',
+      "app/directives/**/*.js",
 
-            'node_modules/weaver-ui-core/app/model/abstractModel.js',
-            'node_modules/weaver-ui-core/app/model/assumedControl.js',
-            'node_modules/weaver-ui-core/app/model/user.js',
+      //"app/filters/**/*.js",
 
-            'node_modules/weaver-ui-core/app/controllers/abstractController.js',
-            'node_modules/weaver-ui-core/app/controllers/coreAdminController.js',
-            'node_modules/weaver-ui-core/app/controllers/authenticationController.js',
-            'node_modules/weaver-ui-core/app/controllers/loginController.js',
-            'node_modules/weaver-ui-core/app/controllers/registrationController.js',
-            'node_modules/weaver-ui-core/app/controllers/userController.js',
-            'node_modules/weaver-ui-core/app/controllers/errorPageController.js',
+      "app/model/**/*.js",
 
-            'app/app.js',
+      "app/repo/**/*.js",
 
-            'app/config/runTime.js',
+      "app/services/**/*.js",
 
-            'app/controllers/**/*.js',
+      "app/views/**/*.html",
 
-            'app/directives/**/*.js',
+      "tests/core/**/*.js",
 
-            'app/services/**/*.js',
+      "tests/mock/**/*.js",
 
-            'app/model/**/*.js',
+      "tests/unit/**/*.js"
+    ],
 
-            'app/repo/**/*.js',
+    autoWatch: true,
 
-            'app/views/**/*.html',
+    frameworks: ["jasmine"],
 
-            'tests/mocks/**/*.js',
+    browsers: ["Firefox", "Chrome", "ChromeHeadless", "ChromeHeadlessNoSandbox"],
 
-            'tests/unit/**/*.js'
+    customLaunchers: {
+      ChromeHeadlessNoSandbox: {
+        base: "ChromeHeadless",
+        flags: ["--no-sandbox"]
+      }
+    },
 
-        ],
+    plugins: [
+      "karma-chrome-launcher",
+      "karma-coverage",
+      "karma-firefox-launcher",
+      "karma-jasmine",
+      "karma-junit-reporter",
+      "karma-ng-html2js-preprocessor"
+    ],
 
-        autoWatch: true,
+    junitReporter: {
+      outputFile: "test_out/unit.xml",
+      suite: "unit"
+    },
 
-        frameworks: ['jasmine'],
+    ngHtml2JsPreprocessor: {
+      stripPrefix: "app/",
+      moduleName: "templates"
+    },
 
-        browsers: ['ChromeHeadless', 'Firefox'],
+    coverageReporter: {
+      type: "lcov",
+      dir: "coverage/"
+    }
 
-        plugins: [
-            'karma-chrome-launcher',
-            'karma-coverage',
-            'karma-firefox-launcher',
-            'karma-jasmine',
-            'karma-junit-reporter',
-            'karma-ng-html2js-preprocessor'
-        ],
-
-        coverageReporter: {
-            type: "lcov",
-            dir: "coverage/"
-        }
-
-    });
+  });
 };

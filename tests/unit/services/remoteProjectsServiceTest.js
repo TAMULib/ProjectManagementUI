@@ -1,70 +1,101 @@
-describe('service: RemoteProjectsService', function () {
+describe("service: RemoteProjectsService", function () {
+  var $q, $rootScope, $scope, ProjectRepo, WsApi, service;
 
-    var RemoteProjectsService;
+  var initializeVariables = function (settings) {
+    inject(function (_$q_, _$rootScope_, _ProjectRepo_, _WsApi_) {
+      $q = _$q_;
+      $rootScope = _$rootScope_;
 
-    beforeEach(function () {
-        module('core');
-        module('app');
-        module('mock.wsApi');
-        module('mock.projectRepo');
-        inject(function (_$rootScope_, _$q_, _WsApi_, _ProjectRepo_, _RemoteProjectsService_) {
-            $rootScope = _$rootScope_;
-            $q = _$q_;
-            WsApi = _WsApi_;
-            ProjectRepo = _ProjectRepo_;
-            RemoteProjectsService = _RemoteProjectsService_;
-        });
+      ProjectRepo = _ProjectRepo_;
+      WsApi = _WsApi_;
+    });
+  };
+
+  var initializeService = function (settings) {
+    inject(function ($injector, _RemoteProjectsService_) {
+      $scope = $rootScope.$new();
+
+      service = _RemoteProjectsService_;
+
+      // ensure that the isReady() is called.
+      if (!$scope.$$phase) {
+        $scope.$digest();
+      }
+    });
+  };
+
+  beforeEach(function () {
+    module("core");
+    module("app");
+    module("mock.projectRepo");
+    module("mock.wsApi");
+
+    initializeVariables();
+    initializeService();
+  });
+
+  describe("Is the service", function () {
+    it("defined", function () {
+      expect(service).toBeDefined();
+    });
+  });
+
+  describe("Is the service method", function () {
+    var methods = [
+      "getByScopeId",
+      "getRemoteProjects",
+      "refreshRemoteProjects"
+    ];
+
+    var serviceMethodExists = function (method) {
+      return function() {
+        expect(service[method]).toBeDefined();
+        expect(typeof service[method]).toEqual("function");
+      };
+    };
+
+    for (var i in methods) {
+      it(methods[i] + " defined", serviceMethodExists(methods[i]));
+    }
+  });
+
+  describe("Is the service property", function () {
+    var properties = [
+      "ready"
+    ];
+
+    var servicePropertyExists = function (property) {
+      return function() {
+        expect(service[property]).toBeDefined();
+        expect(typeof service[property]).toEqual("object");
+      };
+    };
+
+    for (var i in properties) {
+      it(properties[i] + " defined", servicePropertyExists(properties[i]));
+    }
+  });
+
+  describe("Does the service method", function () {
+    it("getByScopeId get remote project by remote project manager id and scope id", function () {
+      $rootScope.$apply();
+      service.getByScopeId(1, 1934).then(function (remoteProject) {
+        expect(remoteProject).toEqual(dataRemoteProjects["1"][0]);
+      });
     });
 
-    describe('Is the service defined', function () {
-        it('should be defined', function () {
-            expect(RemoteProjectsService).toBeDefined();
-        });
+    it("getRemoteProjects get remote projects", function () {
+      var remoteProjects = service.getRemoteProjects();
+      expect(remoteProjects).toEqual(dataRemoteProjects);
     });
 
-    describe('Are the service methods defined', function () {
-        it('refreshRemoteProjects should be defined', function () {
-            expect(RemoteProjectsService.refreshRemoteProjects).toBeDefined();
-            expect(typeof RemoteProjectsService.refreshRemoteProjects).toEqual('function');
-        });
-        it('getRemoteProjects should be defined', function () {
-            expect(RemoteProjectsService.getRemoteProjects).toBeDefined();
-            expect(typeof RemoteProjectsService.getRemoteProjects).toEqual('function');
-        });
-        it('getByScopeId should be defined', function () {
-            expect(RemoteProjectsService.getByScopeId).toBeDefined();
-            expect(typeof RemoteProjectsService.getByScopeId).toEqual('function');
-        });
+    it("refreshRemoteProjects fetch remote projects", function () {
+      deferred = $q.defer();
+      spyOn(WsApi, "fetch").and.returnValue(deferred.promise);
+      service.refreshRemoteProjects();
+      deferred.resolve(dataRemoteProjects);
+      expect(WsApi.fetch).toHaveBeenCalledWith(apiMapping.RemoteProjects.all);
     });
-
-    describe('Are the service properties defined', function () {
-        it('ready should be defined', function () {
-            expect(RemoteProjectsService.ready).toBeDefined();
-            expect(typeof RemoteProjectsService.ready).toEqual('object');
-        });
-    });
-
-    describe('Do the service methods work as expected', function () {
-        it('refreshRemoteProjects should fetch remote projects', function () {
-            deferred = $q.defer();
-            spyOn(WsApi, 'fetch').and.returnValue(deferred.promise);
-            RemoteProjectsService.refreshRemoteProjects();
-            deferred.resolve(mockRemoteProjects);
-            expect(WsApi.fetch).toHaveBeenCalledWith(apiMapping.RemoteProjects.all);
-        });
-        it('getRemoteProjects should get remote projects', function () {
-            spyOn(ProjectRepo, 'reset');
-            $rootScope.$apply();
-            var remoteProjects = RemoteProjectsService.getRemoteProjects();
-            expect(remoteProjects).toEqual(mockRemoteProjects);
-            expect(ProjectRepo.reset).toHaveBeenCalled();
-        });
-        it('getByScopeId should get remote project by remote project manager id and scope id', function () {
-            $rootScope.$apply();
-            RemoteProjectsService.getByScopeId(1, 1934).then(function (remoteProject) {
-                expect(remoteProject).toEqual(mockRemoteProjects['1'][0]);
-            });
-        });
-    });
+  });
 
 });
