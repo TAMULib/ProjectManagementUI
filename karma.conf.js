@@ -37,29 +37,65 @@ module.exports = function (config) {
 
       "app/node_modules/jasmine-promise-matchers/dist/jasmine-promise-matchers.js",
 
-      "app/node_modules/weaver-ui-core/app/config/coreConfig.js",
+      'node_modules/@wvr/core/app/config/coreConfig.js',
 
-      "app/node_modules/weaver-ui-core/app/components/**/*.js",
+      'node_modules/@wvr/core/app/components/version/version.js',
+      'node_modules/@wvr/core/app/components/version/version-directive.js',
+      'node_modules/@wvr/core/app/components/version/interpolate-filter.js',
 
       "app/node_modules/weaver-ui-core/app/core.js",
 
-      "app/node_modules/weaver-ui-core/app/**/*.js",
+      'node_modules/@wvr/core/app/core.js',
 
-      "tests/testSetup.js",
+      'node_modules/@wvr/core/app/setup.js',
+      'node_modules/@wvr/core/app/config/coreRuntime.js',
+      'node_modules/@wvr/core/app/config/coreAngularConfig.js',
+      'node_modules/@wvr/core/app/config/logging.js',
 
-      "app/app.js",
+      'node_modules/@wvr/core/app/constants/apiResponseActions.js',
+      'node_modules/@wvr/core/app/constants/httpMethodVerbs.js',
 
-      //"app/components/**/*.js",
+      'node_modules/@wvr/core/app/directives/headerDirective.js',
+      'node_modules/@wvr/core/app/directives/footerDirective.js',
+      'node_modules/@wvr/core/app/directives/userDirective.js',
+      'node_modules/@wvr/core/app/directives/modalDirective.js',
+      'node_modules/@wvr/core/app/directives/alertDirective.js',
+      'node_modules/@wvr/core/app/directives/accordionDirective.js',
+      'node_modules/@wvr/core/app/directives/tabsDirective.js',
 
-      "app/config/runTime.js",
+      'node_modules/@wvr/core/app/directives/tooltipDirective.js',
+      'node_modules/@wvr/core/app/directives/validationMessageDirective.js',
+      'node_modules/@wvr/core/app/directives/validatedInputDirective.js',
+      'node_modules/@wvr/core/app/directives/validatedSelectDirective.js',
+      'node_modules/@wvr/core/app/directives/validatedTextAreaDirective.js',
 
-      "app/controllers/**/*.js",
+      'node_modules/@wvr/core/app/services/accessControlService.js',
+      'node_modules/@wvr/core/app/services/wsService.js',
+      'node_modules/@wvr/core/app/services/wsApi.js',
+      'node_modules/@wvr/core/app/services/restApi.js',
+      'node_modules/@wvr/core/app/services/authService.js',
+      'node_modules/@wvr/core/app/services/storageService.js',
+      'node_modules/@wvr/core/app/services/utilityService.js',
+      'node_modules/@wvr/core/app/services/alertService.js',
+      'node_modules/@wvr/core/app/services/validationStore.js',
+      'node_modules/@wvr/core/app/services/userService.js',
+      'node_modules/@wvr/core/app/services/modalService.js',
+      'node_modules/@wvr/core/app/services/modelCache.js',
+      'node_modules/@wvr/core/app/services/modelUpdateService.js',
 
-      "app/directives/**/*.js",
+      'node_modules/@wvr/core/app/repo/abstractRepo.js',
 
-      //"app/filters/**/*.js",
+      'node_modules/@wvr/core/app/model/abstractModel.js',
+      'node_modules/@wvr/core/app/model/assumedControl.js',
+      'node_modules/@wvr/core/app/model/user.js',
 
-      "app/model/**/*.js",
+      'node_modules/@wvr/core/app/controllers/abstractController.js',
+      'node_modules/@wvr/core/app/controllers/coreAdminController.js',
+      'node_modules/@wvr/core/app/controllers/authenticationController.js',
+      'node_modules/@wvr/core/app/controllers/loginController.js',
+      'node_modules/@wvr/core/app/controllers/registrationController.js',
+      'node_modules/@wvr/core/app/controllers/userController.js',
+      'node_modules/@wvr/core/app/controllers/errorPageController.js',
 
       "app/repo/**/*.js",
 
