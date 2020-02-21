@@ -42,6 +42,7 @@ module.exports = function (config) {
 
             'app/config/appConfig.js',
             'app/config/apiMapping.js',
+            "app/node_modules/@wvr/core/app/core.js",
 
             'node_modules/@wvr/core/app/core.js',
 
