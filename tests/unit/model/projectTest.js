@@ -1,23 +1,34 @@
-describe('model: Project', function () {
+describe("model: Project", function () {
+  var $rootScope, $scope, WsApi, model;
 
-    var Project;
+  var initializeVariables = function (settings) {
+    inject(function (_$rootScope_, _WsApi_) {
+      $rootScope = _$rootScope_;
 
-    beforeEach(function () {
-        module('core');
-        module('app');
-        module('mock.wsApi');
-        inject(function (_$rootScope_, _$q_, _WsApi_, _Project_) {
-            $rootScope = _$rootScope_;
-            $q = _$q_;
-            WsApi = _WsApi_;
-            Project = _Project_;
-        });
+      WsApi = _WsApi_;
     });
+  };
 
-    // describe('Is the model defined', function () {
-    //     it('should be defined', function () {
-    //         expect(Project).toBeDefined();
-    //     });
-    // });
+  var initializeModel = function (settings) {
+    inject(function (_Project_) {
+      $scope = $rootScope.$new();
 
+      model = angular.extend(new _Project_(), dataProject1);
+    });
+  };
+
+  beforeEach(function () {
+    module("core");
+    module("app");
+    module("mock.wsApi");
+
+    initializeVariables();
+    initializeModel();
+  });
+
+  describe("Is the model", function () {
+    it("defined", function () {
+      expect(model).toBeDefined();
+    });
+  });
 });

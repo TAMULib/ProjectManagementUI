@@ -50,7 +50,7 @@
                   <div class="panel-heading">{{status.identifier}}</div>
                   <div class="panel-body">
 
-                    <div ng-repeat="card in getSelectedSprint().cards | filter:{'status': status.identifier}" class="panel kanban-card" ng-class="{'panel-primary': card.type === 'Feature', 'panel-danger': card.type === 'Defect'}">
+                    <div ng-repeat="card in getSelectedSprint().cards | filter:{'status': status.identifier}" class="panel kanban-card" ng-class="getPanelClass(card.type)">
                       <div class="panel-heading">
                         <span>{{card.number}}</span>
                         <span ng-repeat="assignee in card.assignees">
