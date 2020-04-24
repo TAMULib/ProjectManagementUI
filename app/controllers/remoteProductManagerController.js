@@ -1,82 +1,82 @@
-app.controller('RemoteProjectManagerController', function ($controller, $scope, ApiResponseActions, RemoteProjectManagerRepo) {
+app.controller('RemoteProductManagerController', function ($controller, $scope, ApiResponseActions, RemoteProductManagerRepo) {
 
     angular.extend(this, $controller('AbstractController', {
         $scope: $scope
     }));
 
-    $scope.remoteProjectManagers = RemoteProjectManagerRepo.getAll();
+    $scope.remoteProductManagers = RemoteProductManagerRepo.getAll();
 
-    $scope.remoteProjectManagerToCreate = RemoteProjectManagerRepo.getScaffold();
+    $scope.remoteProductManagerToCreate = RemoteProductManagerRepo.getScaffold();
 
-    $scope.remoteProjectManagerToEdit = {};
-    $scope.remoteProjectManagerToDelete = {};
+    $scope.remoteProductManagerToEdit = {};
+    $scope.remoteProductManagerToDelete = {};
 
-    RemoteProjectManagerRepo.getTypes().then(function (types) {
+    RemoteProductManagerRepo.getTypes().then(function (types) {
         $scope.serviceTypes = types;
-        $scope.resetRemoteProjectManagerForms();
+        $scope.resetRemoteProductManagerForms();
     });
 
-    $scope.remoteProjectManagerForms = {
-        validations: RemoteProjectManagerRepo.getValidations(),
-        getResults: RemoteProjectManagerRepo.getValidationResults
+    $scope.remoteProductManagerForms = {
+        validations: RemoteProductManagerRepo.getValidations(),
+        getResults: RemoteProductManagerRepo.getValidationResults
     };
 
-    $scope.resetRemoteProjectManagerForms = function () {
-        RemoteProjectManagerRepo.clearValidationResults();
-        for (var key in $scope.remoteProjectManagerForms) {
-            if ($scope.remoteProjectManagerForms[key] !== undefined && !$scope.remoteProjectManagerForms[key].$pristine && $scope.remoteProjectManagerForms[key].$setPristine) {
-                $scope.remoteProjectManagerForms[key].$setPristine();
+    $scope.resetRemoteProductManagerForms = function () {
+        RemoteProductManagerRepo.clearValidationResults();
+        for (var key in $scope.remoteProductManagerForms) {
+            if ($scope.remoteProductManagerForms[key] !== undefined && !$scope.remoteProductManagerForms[key].$pristine && $scope.remoteProductManagerForms[key].$setPristine) {
+                $scope.remoteProductManagerForms[key].$setPristine();
             }
         }
         $scope.closeModal();
     };
 
-    $scope.createRemoteProjectManager = function () {
-        RemoteProjectManagerRepo.create($scope.remoteProjectManagerToCreate).then(function (res) {
+    $scope.createRemoteProductManager = function () {
+        RemoteProductManagerRepo.create($scope.remoteProductManagerToCreate).then(function (res) {
             if (angular.fromJson(res.body).meta.status === 'SUCCESS') {
-                $scope.resetCreateRemoteProjectManager();
+                $scope.resetCreateRemoteProductManager();
             }
         });
     };
 
-    $scope.resetCreateRemoteProjectManager = function () {
-        $scope.remoteProjectManagerToCreate = RemoteProjectManagerRepo.getScaffold();
-        $scope.resetRemoteProjectManagerForms();
+    $scope.resetCreateRemoteProductManager = function () {
+        $scope.remoteProductManagerToCreate = RemoteProductManagerRepo.getScaffold();
+        $scope.resetRemoteProductManagerForms();
     };
 
-    $scope.editRemoteProjectManager = function (remoteProjectManager) {
-        $scope.remoteProjectManagerToEdit = angular.copy(remoteProjectManager);
-        $scope.openModal('#editRemoteProjectManagerModal');
+    $scope.editRemoteProductManager = function (remoteProductManager) {
+        $scope.remoteProductManagerToEdit = angular.copy(remoteProductManager);
+        $scope.openModal('#editRemoteProductManagerModal');
     };
 
-    $scope.updateRemoteProjectManager = function () {
-        $scope.remoteProjectManagerToEdit.dirty(true);
-        $scope.remoteProjectManagerToEdit.save().then(function (res) {
+    $scope.updateRemoteProductManager = function () {
+        $scope.remoteProductManagerToEdit.dirty(true);
+        $scope.remoteProductManagerToEdit.save().then(function (res) {
             if (angular.fromJson(res.body).meta.status === "SUCCESS") {
-                $scope.cancelEditRemoteProjectManager();
+                $scope.cancelEditRemoteProductManager();
             }
         });
     };
 
-    $scope.cancelEditRemoteProjectManager = function () {
-        $scope.remoteProjectManagerToEdit.refresh();
-        $scope.resetRemoteProjectManagerForms();
+    $scope.cancelEditRemoteProductManager = function () {
+        $scope.remoteProductManagerToEdit.refresh();
+        $scope.resetRemoteProductManagerForms();
     };
 
-    $scope.confirmDeleteRemoteProjectManager = function (remoteProjectManager) {
-        $scope.remoteProjectManagerToDelete = remoteProjectManager;
-        $scope.openModal('#deleteRemoteProjectManagerModal');
+    $scope.confirmDeleteRemoteProductManager = function (remoteProductManager) {
+        $scope.remoteProductManagerToDelete = remoteProductManager;
+        $scope.openModal('#deleteRemoteProductManagerModal');
     };
 
-    $scope.cancelDeleteRemoteProjectManager = function () {
-        $scope.remoteProjectManagerToDelete = {};
+    $scope.cancelDeleteRemoteProductManager = function () {
+        $scope.remoteProductManagerToDelete = {};
         $scope.closeModal();
     };
 
-    $scope.deleteRemoteProjectManager = function (remoteProjectManager) {
-        RemoteProjectManagerRepo.delete(remoteProjectManager).then(function (res) {
+    $scope.deleteRemoteProductManager = function (remoteProductManager) {
+        RemoteProductManagerRepo.delete(remoteProductManager).then(function (res) {
             if (angular.fromJson(res.body).meta.status === 'SUCCESS') {
-                $scope.cancelDeleteRemoteProjectManager();
+                $scope.cancelDeleteRemoteProductManager();
             }
         });
     };
@@ -90,11 +90,11 @@ app.controller('RemoteProjectManagerController', function ($controller, $scope, 
         return [];
     };
 
-    RemoteProjectManagerRepo.listen([ApiResponseActions.CREATE, ApiResponseActions.DELETE, ApiResponseActions.UPDATE], function () {
-        $scope.remoteProjectManagers.length = 0;
-        var remoteProjectManagers = RemoteProjectManagerRepo.getAll();
-        for (var i in remoteProjectManagers) {
-            $scope.remoteProjectManagers.push(remoteProjectManagers[i]);
+    RemoteProductManagerRepo.listen([ApiResponseActions.CREATE, ApiResponseActions.DELETE, ApiResponseActions.UPDATE], function () {
+        $scope.remoteProductManagers.length = 0;
+        var remoteProductManagers = RemoteProductManagerRepo.getAll();
+        for (var i in remoteProductManagers) {
+            $scope.remoteProductManagers.push(remoteProductManagers[i]);
         }
     });
 

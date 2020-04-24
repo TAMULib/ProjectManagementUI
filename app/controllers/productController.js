@@ -1,104 +1,104 @@
-app.controller('ProjectController', function ($controller, $scope, ApiResponseActions, ProjectRepo, RemoteProjectManagerRepo, RemoteProjectsService) {
+app.controller('ProductController', function ($controller, $scope, ApiResponseActions, ProductRepo, RemoteProductManagerRepo, RemoteProductsService) {
 
     angular.extend(this, $controller('AbstractController', {
         $scope: $scope
     }));
 
-    $scope.projects = ProjectRepo.getAll();
+    $scope.products = ProductRepo.getAll();
 
-    $scope.projectToCreate = ProjectRepo.getScaffold();
+    $scope.productToCreate = ProductRepo.getScaffold();
 
-    $scope.projectToDelete = {};
+    $scope.productToDelete = {};
 
-    $scope.projectForms = {
-        validations: ProjectRepo.getValidations(),
-        getResults: ProjectRepo.getValidationResults
+    $scope.productForms = {
+        validations: ProductRepo.getValidations(),
+        getResults: ProductRepo.getValidationResults
     };
 
-    $scope.resetProjectForms = function () {
-        ProjectRepo.clearValidationResults();
-        for (var key in $scope.projectForms) {
-            if ($scope.projectForms[key] !== undefined && !$scope.projectForms[key].$pristine && $scope.projectForms[key].$setPristine) {
-                $scope.projectForms[key].$setPristine();
+    $scope.resetProductForms = function () {
+        ProductRepo.clearValidationResults();
+        for (var key in $scope.productForms) {
+            if ($scope.productForms[key] !== undefined && !$scope.productForms[key].$pristine && $scope.productForms[key].$setPristine) {
+                $scope.productForms[key].$setPristine();
             }
         }
         $scope.closeModal();
     };
 
-    $scope.resetProjectForms();
+    $scope.resetProductForms();
 
-    $scope.createProject = function () {
-        ProjectRepo.create($scope.projectToCreate).then(function (res) {
+    $scope.createProduct = function () {
+        ProductRepo.create($scope.productToCreate).then(function (res) {
             if (angular.fromJson(res.body).meta.status === 'SUCCESS') {
-                $scope.resetCreateProject();
+                $scope.resetCreateProduct();
             }
         });
     };
 
-    $scope.resetCreateProject = function () {
-        angular.extend($scope.projectToCreate, ProjectRepo.getScaffold());
-        $scope.resetProjectForms();
+    $scope.resetCreateProduct = function () {
+        angular.extend($scope.productToCreate, ProductRepo.getScaffold());
+        $scope.resetProductForms();
     };
 
-    $scope.editProject = function (project) {
-        $scope.projectToEdit = project;
-        $scope.openModal('#editProjectModal');
+    $scope.editProduct = function (product) {
+        $scope.productToEdit = product;
+        $scope.openModal('#editProductModal');
     };
 
-    $scope.updateProject = function () {
-        $scope.projectToEdit.dirty(true);
-        $scope.projectToEdit.save().then(function () {
-            $scope.cancelEditProject();
+    $scope.updateProduct = function () {
+        $scope.productToEdit.dirty(true);
+        $scope.productToEdit.save().then(function () {
+            $scope.cancelEditProduct();
         });
     };
 
-    $scope.cancelEditProject = function () {
-        $scope.projectToEdit.refresh();
-        $scope.projectToEdit = {};
-        $scope.resetProjectForms();
+    $scope.cancelEditProduct = function () {
+        $scope.productToEdit.refresh();
+        $scope.productToEdit = {};
+        $scope.resetProductForms();
     };
 
-    $scope.confirmDeleteProject = function (project) {
-        $scope.projectToDelete = project;
-        $scope.openModal('#deleteProjectModal');
+    $scope.confirmDeleteProduct = function (product) {
+        $scope.productToDelete = product;
+        $scope.openModal('#deleteProductModal');
     };
 
-    $scope.cancelDeleteProject = function () {
-        $scope.projectToDelete = {};
+    $scope.cancelDeleteProduct = function () {
+        $scope.productToDelete = {};
         $scope.closeModal();
     };
 
-    $scope.deleteProject = function (project) {
-        ProjectRepo.delete(project).then(function (res) {
+    $scope.deleteProduct = function (product) {
+        ProductRepo.delete(product).then(function (res) {
             if (angular.fromJson(res.body).meta.status === "SUCCESS") {
-                $scope.cancelDeleteProject();
+                $scope.cancelDeleteProduct();
             }
         });
     };
 
     if ($scope.isManager() || $scope.isAdmin()) {
-        $scope.remoteProjectManagers = RemoteProjectManagerRepo.getAll();
+        $scope.remoteProductManagers = RemoteProductManagerRepo.getAll();
 
-        $scope.remoteProjects = RemoteProjectsService.getRemoteProjects();
+        $scope.remoteProducts = RemoteProductsService.getRemoteProducts();
 
-        $scope.getRemoteProjectManagerRemoteProjects = function (remoteProjectManagerId) {
-            return $scope.remoteProjects[remoteProjectManagerId];
+        $scope.getRemoteProductManagerRemoteProducts = function (remoteProductManagerId) {
+            return $scope.remoteProducts[remoteProductManagerId];
         };
 
-        RemoteProjectManagerRepo.listen([ApiResponseActions.CREATE, ApiResponseActions.DELETE, ApiResponseActions.UPDATE], function () {
-            $scope.remoteProjectManagers.length = 0;
-            var remoteProjectManagers = RemoteProjectManagerRepo.getAll();
-            for (var i in remoteProjectManagers) {
-                $scope.remoteProjectManagers.push(remoteProjectManagers[i]);
+        RemoteProductManagerRepo.listen([ApiResponseActions.CREATE, ApiResponseActions.DELETE, ApiResponseActions.UPDATE], function () {
+            $scope.remoteProductManagers.length = 0;
+            var remoteProductManagers = RemoteProductManagerRepo.getAll();
+            for (var i in remoteProductManagers) {
+                $scope.remoteProductManagers.push(remoteProductManagers[i]);
             }
         });
     }
 
-    ProjectRepo.listen([ApiResponseActions.CREATE, ApiResponseActions.DELETE, ApiResponseActions.UPDATE], function () {
-        $scope.projects.length = 0;
-        var projects = ProjectRepo.getAll();
-        for (var i in projects) {
-            $scope.projects.push(projects[i]);
+    ProductRepo.listen([ApiResponseActions.CREATE, ApiResponseActions.DELETE, ApiResponseActions.UPDATE], function () {
+        $scope.products.length = 0;
+        var products = ProductRepo.getAll();
+        for (var i in products) {
+            $scope.products.push(products[i]);
         }
     });
 

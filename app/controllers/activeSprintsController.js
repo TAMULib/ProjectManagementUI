@@ -19,7 +19,7 @@ app.controller('ActiveSprintsController', function ($controller, $sce, $scope, A
     };
 
     $scope.kanbanHeader = function () {
-        return $scope.getSelectedSprint() ? $scope.getSelectedSprint().project + ": " + $scope.getSelectedSprint().name : "Select Sprint Above";
+        return $scope.getSelectedSprint() ? $scope.getSelectedSprint().product + ": " + $scope.getSelectedSprint().name : "Select Sprint Above";
     };
 
     $scope.getSprintEstimateTotal = function (sprint) {

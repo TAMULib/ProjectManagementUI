@@ -1,23 +1,23 @@
-var dataRemoteProjectManagerRepo1 = [
-  dataRemoteProjectManager1,
-  dataRemoteProjectManager2,
-  dataRemoteProjectManager3
+var dataRemoteProductManagerRepo1 = [
+  dataRemoteProductManager1,
+  dataRemoteProductManager2,
+  dataRemoteProductManager3
 ];
 
-var dataRemoteProjectManagerRepo2 = [
-  dataRemoteProjectManager3,
-  dataRemoteProjectManager2,
-  dataRemoteProjectManager1
+var dataRemoteProductManagerRepo2 = [
+  dataRemoteProductManager3,
+  dataRemoteProductManager2,
+  dataRemoteProductManager1
 ];
 
-var dataRemoteProjectManagerRepo3 = [
-  dataRemoteProjectManager1,
-  dataRemoteProjectManager3,
-  dataRemoteProjectManager2
+var dataRemoteProductManagerRepo3 = [
+  dataRemoteProductManager1,
+  dataRemoteProductManager3,
+  dataRemoteProductManager2
 ];
 
-angular.module("mock.remoteProjectManagerRepo", []).service("RemoteProjectManagerRepo", function ($q) {
-  var repo = mockRepo("RemoteProjectManagerRepo", $q, mockRemoteProjectManager, dataRemoteProjectManagerRepo1);
+angular.module("mock.remoteProductManagerRepo", []).service("RemoteProductManagerRepo", function ($q) {
+  var repo = mockRepo("RemoteProductManagerRepo", $q, mockRemoteProductManager, dataRemoteProductManagerRepo1);
 
   repo.scaffold = {
     name: '',

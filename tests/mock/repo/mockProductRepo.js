@@ -1,23 +1,23 @@
-var dataProjectRepo1 = [
-  dataProject1,
-  dataProject2,
-  dataProject3
+var dataProductRepo1 = [
+  dataProduct1,
+  dataProduct2,
+  dataProduct3
 ];
 
-var dataProjectRepo2 = [
-  dataProject3,
-  dataProject2,
-  dataProject1
+var dataProductRepo2 = [
+  dataProduct3,
+  dataProduct2,
+  dataProduct1
 ];
 
-var dataProjectRepo3 = [
-  dataProject1,
-  dataProject3,
-  dataProject2
+var dataProductRepo3 = [
+  dataProduct1,
+  dataProduct3,
+  dataProduct2
 ];
 
-angular.module("mock.projectRepo", []).service("ProjectRepo", function ($q) {
-  var repo = mockRepo("ProjectRepo", $q, mockProject, dataProjectRepo1);
+angular.module("mock.productRepo", []).service("ProductRepo", function ($q) {
+  var repo = mockRepo("ProductRepo", $q, mockProduct, dataProductRepo1);
 
   repo.scaffold = {
     name: ''
@@ -27,7 +27,7 @@ angular.module("mock.projectRepo", []).service("ProjectRepo", function ($q) {
     name: {
       required: {
         type: "required",
-        message: "A Project requires a name",
+        message: "A Product requires a name",
         property: "name",
         value: true
       }

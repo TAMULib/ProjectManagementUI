@@ -1,21 +1,21 @@
-describe("service: RemoteProjectsService", function () {
-  var $q, $rootScope, $scope, ProjectRepo, WsApi, service;
+describe("service: RemoteProductsService", function () {
+  var $q, $rootScope, $scope, ProductRepo, WsApi, service;
 
   var initializeVariables = function (settings) {
-    inject(function (_$q_, _$rootScope_, _ProjectRepo_, _WsApi_) {
+    inject(function (_$q_, _$rootScope_, _ProductRepo_, _WsApi_) {
       $q = _$q_;
       $rootScope = _$rootScope_;
 
-      ProjectRepo = _ProjectRepo_;
+      ProductRepo = _ProductRepo_;
       WsApi = _WsApi_;
     });
   };
 
   var initializeService = function (settings) {
-    inject(function ($injector, _RemoteProjectsService_) {
+    inject(function ($injector, _RemoteProductsService_) {
       $scope = $rootScope.$new();
 
-      service = _RemoteProjectsService_;
+      service = _RemoteProductsService_;
 
       // ensure that the isReady() is called.
       if (!$scope.$$phase) {
@@ -27,7 +27,7 @@ describe("service: RemoteProjectsService", function () {
   beforeEach(function () {
     module("core");
     module("app");
-    module("mock.projectRepo");
+    module("mock.productRepo");
     module("mock.wsApi");
 
     initializeVariables();
@@ -43,8 +43,8 @@ describe("service: RemoteProjectsService", function () {
   describe("Is the service method", function () {
     var methods = [
       "getByScopeId",
-      "getRemoteProjects",
-      "refreshRemoteProjects"
+      "getRemoteProducts",
+      "refreshRemoteProducts"
     ];
 
     var serviceMethodExists = function (method) {
@@ -77,24 +77,24 @@ describe("service: RemoteProjectsService", function () {
   });
 
   describe("Does the service method", function () {
-    it("getByScopeId get remote project by remote project manager id and scope id", function () {
+    it("getByScopeId get remote product by remote product manager id and scope id", function () {
       $rootScope.$apply();
-      service.getByScopeId(1, 1934).then(function (remoteProject) {
-        expect(remoteProject).toEqual(dataRemoteProjects["1"][0]);
+      service.getByScopeId(1, 1934).then(function (remoteProduct) {
+        expect(remoteProduct).toEqual(dataRemoteProducts["1"][0]);
       });
     });
 
-    it("getRemoteProjects get remote projects", function () {
-      var remoteProjects = service.getRemoteProjects();
-      expect(remoteProjects).toEqual(dataRemoteProjects);
+    it("getRemoteProducts get remote products", function () {
+      var remoteProducts = service.getRemoteProducts();
+      expect(remoteProducts).toEqual(dataRemoteProducts);
     });
 
-    it("refreshRemoteProjects fetch remote projects", function () {
+    it("refreshRemoteProducts fetch remote products", function () {
       deferred = $q.defer();
       spyOn(WsApi, "fetch").and.returnValue(deferred.promise);
-      service.refreshRemoteProjects();
-      deferred.resolve(dataRemoteProjects);
-      expect(WsApi.fetch).toHaveBeenCalledWith(apiMapping.RemoteProjects.all);
+      service.refreshRemoteProducts();
+      deferred.resolve(dataRemoteProducts);
+      expect(WsApi.fetch).toHaveBeenCalledWith(apiMapping.RemoteProducts.all);
     });
   });
 

@@ -1,6 +1,6 @@
-app.directive('remoteProjectManagerForm', function () {
+app.directive('remoteProductManagerForm', function () {
     return {
-        templateUrl: 'views/directives/remoteProjectManagerForm.html',
+        templateUrl: 'views/directives/remoteProductManagerForm.html',
         restrict: 'E',
         replace: false,
         scope: {

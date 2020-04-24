@@ -1,4 +1,4 @@
-var dataProjectsStats = [{
+var dataProductsStats = [{
   id: 1,
   name: "Legacy DSpace",
   requestCount: 22,
@@ -184,7 +184,7 @@ var dataProjectsStats = [{
   backlogItemCount: 0
 }, {
   id: 24,
-  name: "Legacy Projects",
+  name: "Legacy Products",
   requestCount: 0,
   issueCount: 0,
   featureCount: 0,
@@ -448,7 +448,7 @@ var dataProjectsStats = [{
   backlogItemCount: 0
 }, {
   id: 57,
-  name: "Project Management Service",
+  name: "Product Management Service",
   requestCount: 0,
   issueCount: 0,
   featureCount: 17,
@@ -456,28 +456,28 @@ var dataProjectsStats = [{
   backlogItemCount: 18
 }];
 
-angular.module("mock.projectsStatsService", []).service("ProjectsStatsService", function ($q) {
+angular.module("mock.productsStatsService", []).service("ProductsStatsService", function ($q) {
   var service = mockService($q);
 
-  var projectsStats = dataProjectsStats;
+  var productsStats = dataProductsStats;
 
-  service.dataProjectsStats = function (toMock) {
+  service.dataProductsStats = function (toMock) {
     if (typeof toMock === "object") {
-      projectsStats = toMock;
+      productsStats = toMock;
     } else {
-      projectsStats = dataProjectsStats;
+      productsStats = dataProductsStats;
     }
   };
 
-  service.getProjectsStats = function () {
-    return projectsStats;
+  service.getProductsStats = function () {
+    return productsStats;
   };
 
   service.getById = function (id) {
     return $q(function (resolve, reject) {
-      for (var i in projectsStats) {
-        if (projectsStats[i].id == id) {
-          resolve(projectsStats[i]);
+      for (var i in productsStats) {
+        if (productsStats[i].id == id) {
+          resolve(productsStats[i]);
         }
       }
       reject(undefined);

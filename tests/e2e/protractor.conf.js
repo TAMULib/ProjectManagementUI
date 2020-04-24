@@ -1,6 +1,6 @@
 exports.config = {
   seleniumAddress: "http://localhost:4444/wd/hub",
-  baseUrl: "http://localhost/projects/",
+  baseUrl: "http://localhost/products/",
   specs: [
     "index-spec.js",
     "auth-spec.js",

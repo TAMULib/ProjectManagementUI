@@ -1,28 +1,28 @@
-app.model("Project", function Project(ProjectsStatsService, RemoteProjectsService) {
-    return function Project() {
+app.model("Product", function Product(ProductsStatsService, RemoteProductsService) {
+    return function Product() {
 
-        var project = this;
+        var product = this;
 
-        project.before(function () {
-            if (project.remoteProjectManager && project.scopeId) {
-                ProjectsStatsService.getById(project.id).then(function (projectStats) {
-                    angular.extend(project, {
-                        stats: projectStats
+        product.before(function () {
+            if (product.remoteProductManager && product.scopeId) {
+                ProductsStatsService.getById(product.id).then(function (productStats) {
+                    angular.extend(product, {
+                        stats: productStats
                     });
                 });
             }
         });
 
-        project.before(function () {
-            if (project.remoteProjectManager && project.scopeId) {
-                RemoteProjectsService.getByScopeId(project.remoteProjectManager.id, project.scopeId).then(function (remoteProject) {
-                    angular.extend(project, {
-                        remoteProject: remoteProject
+        product.before(function () {
+            if (product.remoteProductManager && product.scopeId) {
+                RemoteProductsService.getByScopeId(product.remoteProductManager.id, product.scopeId).then(function (remoteProduct) {
+                    angular.extend(product, {
+                        remoteProduct: remoteProduct
                     });
                 });
             }
         });
 
-        return project;
+        return product;
     };
 });

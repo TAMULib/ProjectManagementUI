@@ -1,38 +1,38 @@
 <div class="modal-header {{attr.modalHeaderClass}}">
-  <button type="button" class="close modal-close" aria-label="Close" ng-click="cancelEditProject()">
+  <button type="button" class="close modal-close" aria-label="Close" ng-click="cancelEditProduct()">
     <span aria-hidden="true">&times;</span>
   </button>
-  <h4 class="modal-title">Edit Project</h4>
+  <h4 class="modal-title">Edit Product</h4>
 </div>
 
-<form name="projectForms.edit" ng-submit="updateProject()" novalidate>
+<form name="productForms.edit" ng-submit="updateProduct()" novalidate>
 
-  <validationmessage results="projectForms.getResults()"></validationmessage>
+  <validationmessage results="productForms.getResults()"></validationmessage>
 
   <div class="modal-body">
-    <validatedinput model="projectToEdit" property="name" label="Name" placeholder="Name of the Project" form="projectForms.edit" validations="projectForms.validations" results="projectForms.getResults()"
+    <validatedinput model="productToEdit" property="name" label="Name" placeholder="Name of the Product" form="productForms.edit" validations="productForms.validations" results="productForms.getResults()"
       autocomplete="off">
     </validatedinput>
 
     <div class="form-group">
-      <label for="remoteProjectManager">Associate Remote Project Manager</label>
-      <select class="form-control" ng-model="projectToEdit.remoteProjectManager" name="remoteProjectManager">
-        <option value="" ng-selected="projectToEdit.remoteProjectManager === undefined">None</option>
-        <option value="" ng-repeat="remoteProjectManager in remoteProjectManagers" ng-value="remoteProjectManager" ng-selected="projectToEdit.remoteProjectManager.id === remoteProjectManager.id">{{remoteProjectManager.name}}</option>
+      <label for="remoteProductManager">Associate Remote Product Manager</label>
+      <select class="form-control" ng-model="productToEdit.remoteProductManager" name="remoteProductManager">
+        <option value="" ng-selected="productToEdit.remoteProductManager === undefined">None</option>
+        <option value="" ng-repeat="remoteProductManager in remoteProductManagers" ng-value="remoteProductManager" ng-selected="productToEdit.remoteProductManager.id === remoteProductManager.id">{{remoteProductManager.name}}</option>
       </select>
     </div>
 
-    <div class="form-group" ng-if="projectToEdit.remoteProjectManager">
-      <label for="remoteProjectManager">Associate Version Project</label>
-      <select class="form-control" ng-options="remoteProjectManager.id as remoteProjectManager.name for remoteProjectManager in getRemoteProjectManagerRemoteProjects(projectToEdit.remoteProjectManager.id) | orderBy:'name'"
-        ng-model="projectToEdit.scopeId" name="remoteProjectManager">
+    <div class="form-group" ng-if="productToEdit.remoteProductManager">
+      <label for="remoteProductManager">Associate Version Product</label>
+      <select class="form-control" ng-options="remoteProductManager.id as remoteProductManager.name for remoteProductManager in getRemoteProductManagerRemoteProducts(productToEdit.remoteProductManager.id) | orderBy:'name'"
+        ng-model="productToEdit.scopeId" name="remoteProductManager">
         <option value="" selected>None</option>
       </select>
     </div>
 
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-default" ng-click="cancelEditProject()">Cancel</button>
-    <button type="submit" class="btn btn-success" ng-disabled="!projectForms.edit.$dirty||projectForms.edit.$invalid">Update</button>
+    <button type="button" class="btn btn-default" ng-click="cancelEditProduct()">Cancel</button>
+    <button type="submit" class="btn btn-success" ng-disabled="!productForms.edit.$dirty||productForms.edit.$invalid">Update</button>
   </div>
 </form>

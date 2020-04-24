@@ -1,48 +1,48 @@
-app.service('ProjectsStatsService', function ($q, ProjectRepo, WsApi) {
+app.service('ProductsStatsService', function ($q, ProductRepo, WsApi) {
 
-    var projectsStats = [];
+    var productsStats = [];
 
     var defer = $q.defer();
 
     var process = function (response) {
         var apiRes = angular.fromJson(response.body);
         if (apiRes.meta.status === 'SUCCESS') {
-            angular.extend(projectsStats, apiRes.payload['ArrayList<ProjectStats>']);
+            angular.extend(productsStats, apiRes.payload['ArrayList<ProductStats>']);
             defer.resolve();
-            ProjectRepo.reset();
+            ProductRepo.reset();
         } else {
             console.error(apiRes.meta);
-            throw "Unable to retrieve remote projects";
+            throw "Unable to retrieve remote products";
         }
     };
 
-    WsApi.listen(apiMapping.ProjectsStats.listen).then(null, null, function (response) {
+    WsApi.listen(apiMapping.ProductsStats.listen).then(null, null, function (response) {
         process(response);
     });
 
-    this.refreshProjectsStats = function () {
-        WsApi.fetch(apiMapping.ProjectsStats.all).then(function (response) {
+    this.refreshProductsStats = function () {
+        WsApi.fetch(apiMapping.ProductsStats.all).then(function (response) {
             process(response);
         });
     };
 
-    this.getProjectsStats = function () {
-        return projectsStats;
+    this.getProductsStats = function () {
+        return productsStats;
     };
 
     this.getById = function (id) {
         return $q(function (resolve, reject) {
             this.ready.then(function () {
-                for (var i in projectsStats) {
-                    if (projectsStats[i].id == id) {
-                        resolve(projectsStats[i]);
+                for (var i in productsStats) {
+                    if (productsStats[i].id == id) {
+                        resolve(productsStats[i]);
                     }
                 }
             });
         }.bind(this));
     };
 
-    this.refreshProjectsStats();
+    this.refreshProductsStats();
 
     this.ready = defer.promise;
 

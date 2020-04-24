@@ -1,7 +1,7 @@
 app.config(function ($routeProvider) {
     $routeProvider.
     when('/management', {
-        redirectTo: '/management/projects'
+        redirectTo: '/management/products'
     }).
     when('/management/:tab', {
         templateUrl: 'views/management.html',

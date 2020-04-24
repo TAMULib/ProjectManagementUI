@@ -1,9 +1,9 @@
-var dataProject1 = {
+var dataProduct1 = {
   id: 1,
-  name: "Project 1",
-  remoteProjectManager: {
+  name: "Product 1",
+  remoteProductManager: {
     id: 1,
-    name: "Remote Project Manager 1",
+    name: "Remote Product Manager 1",
     settings: {
       password: "password1",
       url: "url1",
@@ -14,12 +14,12 @@ var dataProject1 = {
   scopeId: "scope 1"
 };
 
-var dataProject2 = {
+var dataProduct2 = {
   id: 2,
-  name: "Project 2",
-  remoteProjectManager: {
+  name: "Product 2",
+  remoteProductManager: {
     id: 1,
-    name: "Remote Project Manager 1",
+    name: "Remote Product Manager 1",
     settings: {
       password: "password1",
       url: "url1",
@@ -30,12 +30,12 @@ var dataProject2 = {
   scopeId: "scope 2"
 };
 
-var dataProject3 = {
+var dataProduct3 = {
   id: 3,
-  name: "Project 3",
-  remoteProjectManager: {
+  name: "Product 3",
+  remoteProductManager: {
     id: 1,
-    name: "Remote Project Manager 1",
+    name: "Remote Product Manager 1",
     settings: {
       password: "password1",
       url: "url1",
@@ -46,10 +46,10 @@ var dataProject3 = {
   scopeId: "scope 3"
 };
 
-var mockProject = function ($q) {
-  var model = mockModel("Project", $q, dataProject1);
+var mockProduct = function ($q) {
+  var model = mockModel("Product", $q, dataProduct1);
 
   return model;
 };
 
-angular.module("mock.project", []).service("Project", mockProject);
+angular.module("mock.product", []).service("Product", mockProduct);

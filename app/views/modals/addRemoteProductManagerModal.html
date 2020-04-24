@@ -1,24 +1,24 @@
 <div class="modal-header {{attr.modalHeaderClass}}">
-  <button type="button" class="close modal-close" aria-label="Close" ng-click="resetCreateRemoteProjectManager()">
+  <button type="button" class="close modal-close" aria-label="Close" ng-click="resetCreateRemoteProductManager()">
     <span aria-hidden="true">&times;</span>
   </button>
-  <h4 class="modal-title">Create Remote Project Manager</h4>
+  <h4 class="modal-title">Create Remote Product Manager</h4>
 </div>
 
-<form name="remoteProjectManagerForms.create" ng-submit="createRemoteProjectManager()" novalidate class="remoteProjectManager-forms-create">
+<form name="remoteProductManagerForms.create" ng-submit="createRemoteProductManager()" novalidate class="remoteProductManager-forms-create">
 
-  <validationmessage results="remoteProjectManagerForms.getResults()"></validationmessage>
+  <validationmessage results="remoteProductManagerForms.getResults()"></validationmessage>
 
   <div class="modal-body">
-    <validatedinput id="create-name" model="remoteProjectManagerToCreate" property="name" label="Name" placeholder="Name of the Remote Project Manager" form="remoteProjectManagerForms.create" validations="remoteProjectManagerForms.validations" results="remoteProjectManagerForms.getResults()"></validatedinput>
+    <validatedinput id="create-name" model="remoteProductManagerToCreate" property="name" label="Name" placeholder="Name of the Remote Product Manager" form="remoteProductManagerForms.create" validations="remoteProductManagerForms.validations" results="remoteProductManagerForms.getResults()"></validatedinput>
 
-    <validatedselect id="create-type" options="serviceTypes" optionvalue="value" optionproperty="gloss" model="remoteProjectManagerToCreate" property="type" label="Type" form="remoteProjectManagerForms.create" validations="remoteProjectManagerForms.validations" results="remoteProjectManagerForms.getResults()"></validatedselect>
+    <validatedselect id="create-type" options="serviceTypes" optionvalue="value" optionproperty="gloss" model="remoteProductManagerToCreate" property="type" label="Type" form="remoteProductManagerForms.create" validations="remoteProductManagerForms.validations" results="remoteProductManagerForms.getResults()"></validatedselect>
 
-    <remote-project-manager-form ng-if="remoteProjectManagerToCreate.type" management-settings="typeSettings(remoteProjectManagerToCreate.type)" model="remoteProjectManagerToCreate"></remote-project-manager-form>
+    <remote-product-manager-form ng-if="remoteProductManagerToCreate.type" management-settings="typeSettings(remoteProductManagerToCreate.type)" model="remoteProductManagerToCreate"></remote-product-manager-form>
   </div>
 
   <div class="modal-footer">
-    <button type="button" class="btn btn-default" ng-click="resetCreateRemoteProjectManager()">Cancel</button>
-    <button type="submit" class="btn btn-success" ng-disabled="remoteProjectManagerForms.create.$invalid">Create</button>
+    <button type="button" class="btn btn-default" ng-click="resetCreateRemoteProductManager()">Cancel</button>
+    <button type="submit" class="btn btn-success" ng-disabled="remoteProductManagerForms.create.$invalid">Create</button>
   </div>
 </form>

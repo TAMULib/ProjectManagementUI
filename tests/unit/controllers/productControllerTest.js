@@ -1,38 +1,38 @@
-describe("controller: ProjectController", function () {
-  var $compile, $q, $scope, $templateCache, $templateRequest, MockedProject, MockedRemoteProjectManager, MockedUser, WsApi, controller;
+describe("controller: ProductController", function () {
+  var $compile, $q, $scope, $templateCache, $templateRequest, MockedProduct, MockedRemoteProductManager, MockedUser, WsApi, controller;
 
   var initializeVariables = function () {
-    inject(function (_$compile_, _$q_, _$templateCache_, _$templateRequest_, _ProjectRepo_, _WsApi_) {
+    inject(function (_$compile_, _$q_, _$templateCache_, _$templateRequest_, _ProductRepo_, _WsApi_) {
       $compile = _$compile_;
       $q = _$q_;
       $templateCache = _$templateCache_;
       $templateRequest = _$templateRequest_;
 
       MockedUser = new mockUser($q);
-      MockedProject = new mockProject($q);
-      MockedRemoteProjectManager = new mockRemoteProjectManager($q);
+      MockedProduct = new mockProduct($q);
+      MockedRemoteProductManager = new mockRemoteProductManager($q);
 
-      ProjectRepo = _ProjectRepo_;
+      ProductRepo = _ProductRepo_;
       WsApi = _WsApi_;
     });
   };
 
   var initializeController = function (settings) {
-    inject(function (_$controller_, _$rootScope_, _ModalService_, _Project_, _RemoteProjectManagerRepo_, _RemoteProjectsService_, _UserService_) {
+    inject(function (_$controller_, _$rootScope_, _ModalService_, _Product_, _RemoteProductManagerRepo_, _RemoteProductsService_, _UserService_) {
       $scope = _$rootScope_.$new();
 
       sessionStorage.role = settings && settings.role ? settings.role : "ROLE_ADMIN";
       sessionStorage.token = settings && settings.token ? settings.token : "faketoken";
 
-      controller = _$controller_("ProjectController", {
+      controller = _$controller_("ProductController", {
         $scope: $scope,
         $compile: $compile,
         $templateRequest: $templateRequest,
         ModalService: _ModalService_,
-        Project: _Project_,
-        ProjectRepo: ProjectRepo,
-        RemoteProjectManagerRepo: _RemoteProjectManagerRepo_,
-        RemoteProjectsService: _RemoteProjectsService_,
+        Product: _Product_,
+        ProductRepo: ProductRepo,
+        RemoteProductManagerRepo: _RemoteProductManagerRepo_,
+        RemoteProductsService: _RemoteProductsService_,
         UserService: _UserService_
       });
 
@@ -47,21 +47,21 @@ describe("controller: ProjectController", function () {
     module("core");
     module("app");
     module("templates");
-    module("mock.project", function ($provide) {
-      var Project = function () {
-        return MockedProject;
+    module("mock.product", function ($provide) {
+      var Product = function () {
+        return MockedProduct;
       };
-      $provide.value("Project", Project);
+      $provide.value("Product", Product);
     });
-    module("mock.projectRepo");
-    module("mock.remoteProjectManager", function ($provide) {
-      var RemoteProjectManager = function () {
-        return MockedRemoteProjectManager;
+    module("mock.productRepo");
+    module("mock.remoteProductManager", function ($provide) {
+      var RemoteProductManager = function () {
+        return MockedRemoteProductManager;
       };
-      $provide.value("RemoteProjectManager", RemoteProjectManager);
+      $provide.value("RemoteProductManager", RemoteProductManager);
     });
-    module("mock.remoteProjectManagerRepo");
-    module("mock.remoteProjectService");
+    module("mock.remoteProductManagerRepo");
+    module("mock.remoteProductService");
     module("mock.user", function ($provide) {
       var User = function () {
         return MockedUser;
@@ -93,15 +93,15 @@ describe("controller: ProjectController", function () {
 
   describe("Is the scope method", function () {
     var methods = [
-      "resetProjectForms",
-      "createProject",
-      "resetCreateProject",
-      "editProject",
-      "updateProject",
-      "cancelEditProject",
-      "confirmDeleteProject",
-      "cancelDeleteProject",
-      "deleteProject"
+      "resetProductForms",
+      "createProduct",
+      "resetCreateProduct",
+      "editProduct",
+      "updateProduct",
+      "cancelEditProduct",
+      "confirmDeleteProduct",
+      "cancelDeleteProduct",
+      "deleteProduct"
     ];
 
     var scopeMethodExists = function (method) {
@@ -117,116 +117,116 @@ describe("controller: ProjectController", function () {
   });
 
   describe("Does the scope method", function () {
-    it("resetProjectForms reset project forms", function () {
-      var modal = angular.element($templateCache.get("views/modals/addProjectModal.html"));
+    it("resetProductForms reset product forms", function () {
+      var modal = angular.element($templateCache.get("views/modals/addProductModal.html"));
       modal = $compile(modal)($scope);
 
-      var form = $scope.projectForms.create;
+      var form = $scope.productForms.create;
       form.$setDirty();
 
       expect(form.$dirty).toEqual(true);
 
-      $scope.resetProjectForms();
+      $scope.resetProductForms();
 
       expect(form.$pristine).toEqual(true);
       expect(form.$dirty).toEqual(false);
     });
 
-    it("createProject create a new project", function () {
-      var newProject = new mockProject($q);
+    it("createProduct create a new product", function () {
+      var newProduct = new mockProduct($q);
 
-      newProject.mock({
-        id: dataProjectRepo1.length + 1,
-        name: "Mock Project 4"
+      newProduct.mock({
+        id: dataProductRepo1.length + 1,
+        name: "Mock Product 4"
       });
 
-      $scope.projectToCreate = newProject;
-      $scope.createProject();
+      $scope.productToCreate = newProduct;
+      $scope.createProduct();
 
-      expect(ProjectRepo.findById(newProject.id)).toEqual(newProject);
+      expect(ProductRepo.findById(newProduct.id)).toEqual(newProduct);
     });
 
-    it("resetCreateProject call resetProjectForms() and clear out the name field", function () {
-      spyOn($scope, "resetProjectForms");
+    it("resetCreateProduct call resetProductForms() and clear out the name field", function () {
+      spyOn($scope, "resetProductForms");
 
-      $scope.projectToCreate = new mockProject($q);
-      $scope.projectToCreate.mock({
-        id: dataProjectRepo1.length + 1,
-        name: "Mock Project 4"
+      $scope.productToCreate = new mockProduct($q);
+      $scope.productToCreate.mock({
+        id: dataProductRepo1.length + 1,
+        name: "Mock Product 4"
       });
 
-      var modal = angular.element($templateCache.get("views/modals/addProjectModal.html"));
+      var modal = angular.element($templateCache.get("views/modals/addProductModal.html"));
       modal = $compile(modal)($scope);
 
-      var form = $scope.projectForms.create;
+      var form = $scope.productForms.create;
       form.$setDirty();
-      $scope.resetCreateProject();
+      $scope.resetCreateProduct();
 
-      expect($scope.projectToCreate.name).toEqual("");
-      expect($scope.resetProjectForms).toHaveBeenCalled();
+      expect($scope.productToCreate.name).toEqual("");
+      expect($scope.resetProductForms).toHaveBeenCalled();
     });
 
-    it("editProject set the projectToEdit and open the modal", function () {
+    it("editProduct set the productToEdit and open the modal", function () {
       spyOn($scope, "openModal");
-      $scope.editProject(dataProjectRepo1[0]);
+      $scope.editProduct(dataProductRepo1[0]);
 
-      expect($scope.projectToEdit).toEqual(dataProjectRepo1[0]);
+      expect($scope.productToEdit).toEqual(dataProductRepo1[0]);
       expect($scope.openModal).toHaveBeenCalled();
     });
 
-    it("updateProject call dirty and save on the Project, and then call cancelEditProject", function () {
-      var project = new mockProject($q);
+    it("updateProduct call dirty and save on the Product, and then call cancelEditProduct", function () {
+      var product = new mockProduct($q);
 
-      spyOn($scope, "cancelEditProject");
-      spyOn(project, "dirty");
+      spyOn($scope, "cancelEditProduct");
+      spyOn(product, "dirty");
       deferred = $q.defer();
-      spyOn(project, "save").and.returnValue(deferred.promise);
-      $scope.projectToEdit = project;
-      $scope.updateProject();
+      spyOn(product, "save").and.returnValue(deferred.promise);
+      $scope.productToEdit = product;
+      $scope.updateProduct();
       deferred.resolve();
       $scope.$apply();
 
-      expect($scope.cancelEditProject).toHaveBeenCalled();
-      expect(project.dirty).toHaveBeenCalledWith(true);
-      expect(project.save).toHaveBeenCalled();
+      expect($scope.cancelEditProduct).toHaveBeenCalled();
+      expect(product.dirty).toHaveBeenCalledWith(true);
+      expect(product.save).toHaveBeenCalled();
     });
 
-    it("cancelEditProject clear out projectToEdit and call resetProjectForms", function () {
-      var project = new mockProject($q);
+    it("cancelEditProduct clear out productToEdit and call resetProductForms", function () {
+      var product = new mockProduct($q);
 
-      spyOn($scope, "resetProjectForms");
-      $scope.projectToEdit = project;
-      $scope.cancelEditProject();
+      spyOn($scope, "resetProductForms");
+      $scope.productToEdit = product;
+      $scope.cancelEditProduct();
 
-      expect($scope.projectToEdit).toEqual({});
-      expect($scope.resetProjectForms).toHaveBeenCalled();
+      expect($scope.productToEdit).toEqual({});
+      expect($scope.resetProductForms).toHaveBeenCalled();
     });
 
-    it("confirmDeleteProject set the projectToDelete and open the modal", function () {
+    it("confirmDeleteProduct set the productToDelete and open the modal", function () {
       spyOn($scope, "openModal");
-      $scope.confirmDeleteProject(dataProjectRepo1[0]);
+      $scope.confirmDeleteProduct(dataProductRepo1[0]);
 
       expect($scope.openModal).toHaveBeenCalled();
-      expect($scope.projectToDelete).toEqual(dataProjectRepo1[0]);
+      expect($scope.productToDelete).toEqual(dataProductRepo1[0]);
     });
 
-    it("cancelDeleteProject clear projectToDelete and close the modal", function () {
+    it("cancelDeleteProduct clear productToDelete and close the modal", function () {
       spyOn($scope, "closeModal");
-      $scope.projectToDelete = dataProjectRepo1[0];
-      $scope.cancelDeleteProject();
+      $scope.productToDelete = dataProductRepo1[0];
+      $scope.cancelDeleteProduct();
 
       expect($scope.closeModal).toHaveBeenCalled();
-      expect($scope.projectToDelete).toEqual({});
+      expect($scope.productToDelete).toEqual({});
     });
 
-    it("deleteProject call the repo delete method and then call cancelDeleteProject when successful", function () {
-      var project = new mockProject($q);
+    it("deleteProduct call the repo delete method and then call cancelDeleteProduct when successful", function () {
+      var product = new mockProduct($q);
 
-      $scope.projectToDelete = project;
+      $scope.productToDelete = product;
       deferred = $q.defer();
-      spyOn(ProjectRepo, "delete").and.returnValue(deferred.promise);
-      spyOn($scope, "cancelDeleteProject");
-      $scope.deleteProject(project);
+      spyOn(ProductRepo, "delete").and.returnValue(deferred.promise);
+      spyOn($scope, "cancelDeleteProduct");
+      $scope.deleteProduct(product);
       deferred.resolve({
         body: angular.toJson({
           meta: {
@@ -236,8 +236,8 @@ describe("controller: ProjectController", function () {
       });
       $scope.$apply();
 
-      expect(ProjectRepo.delete).toHaveBeenCalledWith(project);
-      expect($scope.cancelDeleteProject).toHaveBeenCalled();
+      expect(ProductRepo.delete).toHaveBeenCalledWith(product);
+      expect($scope.cancelDeleteProduct).toHaveBeenCalled();
     });
 
   });

@@ -1,36 +1,36 @@
 // CONVENTION: must match model name, case sensitive
 var apiMapping = {
-    Project: {
+    Product: {
         validations: true,
         lazy: true,
-        channel: '/channel/projects',
+        channel: '/channel/products',
         all: {
             'endpoint': '/private/queue',
-            'controller': 'projects',
+            'controller': 'products',
             'method': '',
             'httpMethod': 'GET'
         },
         create: {
             'endpoint': '/private/queue',
-            'controller': 'projects',
+            'controller': 'products',
             'method': '',
             'httpMethod': 'POST'
         },
         update: {
             'endpoint': '/private/queue',
-            'controller': 'projects',
+            'controller': 'products',
             'method': '',
             'httpMethod': 'PUT'
         },
         remove: {
             'endpoint': '/private/queue',
-            'controller': 'projects',
+            'controller': 'products',
             'method': '',
             'httpMethod': 'DELETE'
         },
         listen: {
             'endpoint': '/channel',
-            'controller': 'projects'
+            'controller': 'products'
         }
     },
     User: {
@@ -55,47 +55,47 @@ var apiMapping = {
             'method': 'update'
         }
     },
-    RemoteProjectManager: {
+    RemoteProductManager: {
         validations: true,
         lazy: true,
-        channel: '/channel/remote-project-manager',
+        channel: '/channel/remote-product-manager',
         all: {
             'endpoint': '/private/queue',
-            'controller': 'remote-project-manager',
+            'controller': 'remote-product-manager',
             'method': '',
             'httpMethod': 'GET'
         },
         create: {
             'endpoint': '/private/queue',
-            'controller': 'remote-project-manager',
+            'controller': 'remote-product-manager',
             'method': '',
             'httpMethod': 'POST'
         },
         update: {
             'endpoint': '/private/queue',
-            'controller': 'remote-project-manager',
+            'controller': 'remote-product-manager',
             'method': '',
             'httpMethod': 'PUT'
         },
         remove: {
             'endpoint': '/private/queue',
-            'controller': 'remote-project-manager',
+            'controller': 'remote-product-manager',
             'method': '',
             'httpMethod': 'DELETE'
         },
         listen: {
             'endpoint': '/channel',
-            'controller': 'remote-project-manager'
+            'controller': 'remote-product-manager'
         },
         types: {
             'endpoint': '/channel',
-            'controller': 'remote-project-manager',
+            'controller': 'remote-product-manager',
             'method': 'types/',
             'httpMethod': 'GET'
         },
         scaffolding: {
             'endpoint': '/channel',
-            'controller': 'remote-project-manager',
+            'controller': 'remote-product-manager',
             'method': 'scaffolding/:type/',
             'httpMethod': 'GET'
         }
@@ -133,24 +133,24 @@ var apiMapping = {
             'controller': 'status'
         }
     },
-    RemoteProjects: {
+    RemoteProducts: {
         all: {
             'endpoint': '/private/queue',
-            'controller': 'projects/remote'
+            'controller': 'products/remote'
         },
         listen: {
             'endpoint': '/channel',
-            'controller': 'projects/remote'
+            'controller': 'products/remote'
         }
     },
-    ProjectsStats: {
+    ProductsStats: {
         all: {
             'endpoint': '/private/queue',
-            'controller': 'projects/stats'
+            'controller': 'products/stats'
         },
         listen: {
             'endpoint': '/channel',
-            'controller': 'projects/stats'
+            'controller': 'products/stats'
         }
     },
     ActiveSprints: {

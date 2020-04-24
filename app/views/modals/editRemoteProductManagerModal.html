@@ -1,24 +1,24 @@
 <div class="modal-header {{attr.modalHeaderClass}}">
-  <button type="button" class="close modal-close" aria-label="Close" ng-click="cancelEditRemoteProjectManager()">
+  <button type="button" class="close modal-close" aria-label="Close" ng-click="cancelEditRemoteProductManager()">
     <span aria-hidden="true">&times;</span>
   </button>
-  <h4 class="modal-title">Edit Remote Project Manager</h4>
+  <h4 class="modal-title">Edit Remote Product Manager</h4>
 </div>
 
-<form name="remoteProjectManagerForms.edit" ng-submit="updateRemoteProjectManager()" novalidate>
+<form name="remoteProductManagerForms.edit" ng-submit="updateRemoteProductManager()" novalidate>
 
-  <validationmessage results="remoteProjectManagerForms.getResults()"></validationmessage>
+  <validationmessage results="remoteProductManagerForms.getResults()"></validationmessage>
 
   <div class="modal-body">
-    <validatedinput id="edit-name" model="remoteProjectManagerToEdit" property="name" label="Name" placeholder="Name of the Remote Project Manager" form="remoteProjectManagerForms.edit" validations="remoteProjectManagerForms.validations" results="remoteProjectManagerForms.getResults()"></validatedinput>
+    <validatedinput id="edit-name" model="remoteProductManagerToEdit" property="name" label="Name" placeholder="Name of the Remote Product Manager" form="remoteProductManagerForms.edit" validations="remoteProductManagerForms.validations" results="remoteProductManagerForms.getResults()"></validatedinput>
 
-    <validatedselect id="edit-type" options="serviceTypes" optionvalue="value" optionproperty="gloss" model="remoteProjectManagerToEdit" property="type" label="Type" form="remoteProjectManagerForms.edit" validations="remoteProjectManagerForms.validations" results="remoteProjectManagerForms.getResults()"></validatedselect>
+    <validatedselect id="edit-type" options="serviceTypes" optionvalue="value" optionproperty="gloss" model="remoteProductManagerToEdit" property="type" label="Type" form="remoteProductManagerForms.edit" validations="remoteProductManagerForms.validations" results="remoteProductManagerForms.getResults()"></validatedselect>
 
-    <remote-project-manager-form ng-if="remoteProjectManagerToEdit.type" management-settings="typeSettings(remoteProjectManagerToEdit.type)" model="remoteProjectManagerToEdit"></remote-project-manager-form>
+    <remote-product-manager-form ng-if="remoteProductManagerToEdit.type" management-settings="typeSettings(remoteProductManagerToEdit.type)" model="remoteProductManagerToEdit"></remote-product-manager-form>
   </div>
 
   <div class="modal-footer">
-    <button type="button" class="btn btn-default" ng-click="cancelEditRemoteProjectManager()">Cancel</button>
-    <button type="submit" class="btn btn-success" ng-disabled="!remoteProjectManagerForms.edit.$dirty||remoteProjectManagerForms.edit.$invalid">Update</button>
+    <button type="button" class="btn btn-default" ng-click="cancelEditRemoteProductManager()">Cancel</button>
+    <button type="submit" class="btn btn-success" ng-disabled="!remoteProductManagerForms.edit.$dirty||remoteProductManagerForms.edit.$invalid">Update</button>
   </div>
 </form>

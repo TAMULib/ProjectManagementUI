@@ -1,4 +1,4 @@
-describe("service: RemoteProjectManagerRepo", function () {
+describe("service: RemoteProductManagerRepo", function () {
   var $q, $rootScope, $scope, MockedUser, WsApi, repo;
 
   var initializeVariables = function (settings) {
@@ -12,10 +12,10 @@ describe("service: RemoteProjectManagerRepo", function () {
   };
 
   var initializeRepo = function (settings) {
-    inject(function ($injector, _RemoteProjectManagerRepo_) {
+    inject(function ($injector, _RemoteProductManagerRepo_) {
       $scope = $rootScope.$new();
 
-      repo = _RemoteProjectManagerRepo_;
+      repo = _RemoteProductManagerRepo_;
     });
   };
 

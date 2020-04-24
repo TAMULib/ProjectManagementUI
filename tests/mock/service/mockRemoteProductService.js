@@ -1,4 +1,4 @@
-var dataRemoteProjects = {
+var dataRemoteProducts = {
   1: [{
     id: 1934,
     name: "Legacy DSpace",
@@ -185,7 +185,7 @@ var dataRemoteProjects = {
     backlogItemCount: 0
   }, {
     id: 5524,
-    name: "Legacy Projects",
+    name: "Legacy Products",
     requestCount: 0,
     issueCount: 0,
     featureCount: 0,
@@ -449,7 +449,7 @@ var dataRemoteProjects = {
     backlogItemCount: 0
   }, {
     id: 7948,
-    name: "Project Management Service",
+    name: "Product Management Service",
     requestCount: 0,
     issueCount: 0,
     featureCount: 17,
@@ -458,18 +458,18 @@ var dataRemoteProjects = {
   }]
 };
 
-angular.module("mock.remoteProjectService", []).service("RemoteProjectsService", function ($q) {
+angular.module("mock.remoteProductService", []).service("RemoteProductsService", function ($q) {
   var service = mockService($q);
 
-  service.getRemoteProjects = function () {
-    return dataRemoteProjects;
+  service.getRemoteProducts = function () {
+    return dataRemoteProducts;
   };
 
-  service.getByScopeId = function (remoteProjectManagerId, scopeId) {
+  service.getByScopeId = function (remoteProductManagerId, scopeId) {
     return $q(function (resolve, reject) {
-      for (var i in dataRemoteProjects[remoteProjectManagerId]) {
-        if (dataRemoteProjects[remoteProjectManagerId][i].id === scopeId) {
-          resolve(dataRemoteProjects[remoteProjectManagerId][i]);
+      for (var i in dataRemoteProducts[remoteProductManagerId]) {
+        if (dataRemoteProducts[remoteProductManagerId][i].id === scopeId) {
+          resolve(dataRemoteProducts[remoteProductManagerId][i]);
         }
       }
       reject(undefined);
