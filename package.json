@@ -1,9 +1,9 @@
 {
-  "name": "project-management",
+  "name": "product-management",
   "private": false,
   "version": "0.2.0",
-  "description": "A UI for managing projects",
-  "repository": "https://github.com/TAMULib/ProjectManagementUI.git",
+  "description": "A UI for managing products",
+  "repository": "https://github.com/TAMULib/ProductManagementUI.git",
   "license": "MIT",
   "scripts": {
     "pretest": "npm install",
@@ -16,8 +16,8 @@
     "preprotractor": "npm run update-webdriver",
     "protractor": "protractor e2e-tests/protractor.conf.js",
     "stop": "wvr server --stop",
-    "start": "wvr server -b /projects --prod --uid project-management-webserver",
-    "start:dev": "wvr server -b /projects --uid project-management-webserver"
+    "start": "wvr server -b /products --prod --uid product-management-webserver",
+    "start:dev": "wvr server -b /products --uid product-management-webserver"
   },
   "dependencies": {
     "ng-file-upload": "12.2.13",

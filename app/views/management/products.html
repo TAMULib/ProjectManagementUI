@@ -1,0 +1,29 @@
+<div class="management-table" ng-controller="ProductController">
+
+  <button class="btn btn-default view-action-button" ng-click="openModal('#addProductModal')">Add a Product</button>
+  <hr />
+
+  <table class="table table-bordered table-striped product-table">
+    <tr>
+      <th>Product</th>
+      <th>Remote Product Manager</th>
+      <th>Remote Product</th>
+      <th>Scope Id</th>
+      <th class="actions-column text-center">Actions</th>
+    </tr>
+    <tr ng-repeat="product in products | orderBy: 'name'">
+      <td title="'Product'">{{product.name}}</td>
+      <td title="'Remote Product Manager'">{{product.remoteProductManager.name}}</td>
+      <td title="'Remote Product'">{{product.remoteProduct.name}}</td>
+      <td title="'Scope Id'">{{product.scopeId}}</td>
+      <td class="actions-column text-center" title="'Actions'">
+        <span class="glyphicon glyphicon-pencil" title="edit" ng-click="editProduct(product)"></span>
+        <span class="glyphicon glyphicon-trash" title="delete" ng-click="confirmDeleteProduct(product)"></span>
+      </td>
+    </tr>
+  </table>
+
+  <modal modal-id="addProductModal" modal-view="views/modals/addProductModal.html" modal-header-class="modal-header-primary" wvr-modal-backdrop="static"></modal>
+  <modal modal-id="deleteProductModal" modal-view="views/modals/deleteProductModal.html" modal-header-class="modal-header-danger" wvr-modal-backdrop="static"></modal>
+  <modal modal-id="editProductModal" modal-view="views/modals/editProductModal.html" modal-header-class="modal-header-primary" wvr-modal-backdrop="static"></modal>
+</div>

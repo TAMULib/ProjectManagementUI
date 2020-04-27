@@ -1,7 +1,7 @@
 var mockActiveSprints = [{
   id: "7820",
   name: "Sprint 3",
-  project: "chronam",
+  product: "chronam",
   cards: [{
     id: 7802,
     number: "B-03351",

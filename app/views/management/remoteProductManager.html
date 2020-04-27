@@ -1,0 +1,32 @@
+<div class="management-table" ng-controller="RemoteProductManagerController">
+
+  <button class="btn btn-default view-action-button" ng-click="openModal('#addRemoteProductManagerModal')">Add a Remote Product Manager</button>
+  <hr />
+
+  <table class="table table-bordered table-striped remoteProductManager-table">
+    <tr>
+      <th>Remote Product Manager</th>
+      <th>Settings</th>
+      <th class="actions-column text-center">Actions</th>
+    </tr>
+    <tr ng-repeat="remoteProductManager in remoteProductManagers">
+      <td title="'Remote Product Manager'">{{remoteProductManager.name}}</td>
+      <td title="'Settings'">
+        <ul class="list-unstyled">
+          <li ng-repeat="setting in typeSettings(remoteProductManager.type) | filter:{visible:true}">
+            <label>{{setting.gloss}}:</label>
+            <span>&nbsp;{{remoteProductManager.settings[setting.key]}}</span>
+          </li>
+        </ul>
+      </td>
+      <td class="actions-column text-center" title="'Actions'">
+        <span class="glyphicon glyphicon-pencil" title="edit" ng-click="editRemoteProductManager(remoteProductManager)"></span>
+        <span class="glyphicon glyphicon-trash" title="delete" ng-click="confirmDeleteRemoteProductManager(remoteProductManager)"></span>
+      </td>
+    </tr>
+  </table>
+
+  <modal modal-id="addRemoteProductManagerModal" modal-view="views/modals/addRemoteProductManagerModal.html" modal-header-class="modal-header-primary" wvr-modal-backdrop="static"></modal>
+  <modal modal-id="deleteRemoteProductManagerModal" modal-view="views/modals/deleteRemoteProductManagerModal.html" modal-header-class="modal-header-danger" wvr-modal-backdrop="static"></modal>
+  <modal modal-id="editRemoteProductManagerModal" modal-view="views/modals/editRemoteProductManagerModal.html" modal-header-class="modal-header-primary" wvr-modal-backdrop="static"></modal>
+</div>

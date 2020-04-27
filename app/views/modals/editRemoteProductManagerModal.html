@@ -1,0 +1,24 @@
+<div class="modal-header {{attr.modalHeaderClass}}">
+  <button type="button" class="close modal-close" aria-label="Close" ng-click="cancelEditRemoteProductManager()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <h4 class="modal-title">Edit Remote Product Manager</h4>
+</div>
+
+<form name="remoteProductManagerForms.edit" ng-submit="updateRemoteProductManager()" novalidate>
+
+  <validationmessage results="remoteProductManagerForms.getResults()"></validationmessage>
+
+  <div class="modal-body">
+    <validatedinput id="edit-name" model="remoteProductManagerToEdit" property="name" label="Name" placeholder="Name of the Remote Product Manager" form="remoteProductManagerForms.edit" validations="remoteProductManagerForms.validations" results="remoteProductManagerForms.getResults()"></validatedinput>
+
+    <validatedselect id="edit-type" options="serviceTypes" optionvalue="value" optionproperty="gloss" model="remoteProductManagerToEdit" property="type" label="Type" form="remoteProductManagerForms.edit" validations="remoteProductManagerForms.validations" results="remoteProductManagerForms.getResults()"></validatedselect>
+
+    <remote-product-manager-form ng-if="remoteProductManagerToEdit.type" management-settings="typeSettings(remoteProductManagerToEdit.type)" model="remoteProductManagerToEdit"></remote-product-manager-form>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="cancelEditRemoteProductManager()">Cancel</button>
+    <button type="submit" class="btn btn-success" ng-disabled="!remoteProductManagerForms.edit.$dirty||remoteProductManagerForms.edit.$invalid">Update</button>
+  </div>
+</form>
