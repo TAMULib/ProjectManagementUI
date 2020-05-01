@@ -1,5 +1,8 @@
 <div class="management-table" ng-controller="InternalRequestController">
 
+  <button class="btn btn-default view-action-button" ng-click="openModal('#addInternalRequestModal')">Add an Internal Request</button>
+  <hr>
+
   <table class="table table-bordered table-striped internalRequest-table">
     <tr>
       <th>Title</th>
@@ -19,6 +22,7 @@
     </tr>
   </table>
 
+  <modal modal-id="addInternalRequestModal" modal-view="views/modals/addInternalRequestModal.html" modal-header-class="modal-header-primary" wvr-modal-backdrop="static"></modal>
   <modal modal-id="pushInternalRequestModal" modal-view="views/modals/pushInternalRequestModal.html" modal-header-class="modal-header-primary" wvr-modal-backdrop="static"></modal>
   <modal modal-id="editInternalRequestModal" modal-view="views/modals/editInternalRequestModal.html" modal-header-class="modal-header-primary" wvr-modal-backdrop="static"></modal>
   <modal modal-id="deleteInternalRequestModal" modal-view="views/modals/deleteInternalRequestModal.html" modal-header-class="modal-header-danger" wvr-modal-backdrop="static"></modal>

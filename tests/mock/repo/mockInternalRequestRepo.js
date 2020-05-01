@@ -19,10 +19,10 @@ var dataInternalRequestRepo3 = [
 angular.module("mock.internalRequestRepo", []).service("InternalRequestRepo", function ($q) {
   var repo = mockRepo("InternalRequestRepo", $q, mockInternalRequest, dataInternalRequestRepo1);
 
-  this.scaffold = {
-    title: "",
-    description: "",
-    createdOn: ""
+  repo.scaffold = {
+    title: '',
+    description: '',
+    createdOn: null
   };
 
   return repo;

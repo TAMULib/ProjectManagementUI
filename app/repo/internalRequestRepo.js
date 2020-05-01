@@ -4,7 +4,7 @@ app.repo("InternalRequestRepo", function InternalRequestRepo() {
   internalRequestRepo.scaffold = {
     title: '',
     description: '',
-    timestamp: null
+    createdOn: null
   };
 
   return internalRequestRepo;

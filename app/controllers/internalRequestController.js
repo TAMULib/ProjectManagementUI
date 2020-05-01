@@ -6,6 +6,8 @@ app.controller('InternalRequestController', function ($controller, $scope, ApiRe
 
   $scope.internalRequests = InternalRequestRepo.getAll();
 
+
+  $scope.internalRequestToCreate = InternalRequestRepo.getScaffold();
   $scope.internalRequestToEdit = {};
   $scope.internalRequestToDelete = {};
 
@@ -30,6 +32,21 @@ app.controller('InternalRequestController', function ($controller, $scope, ApiRe
 
     $scope.getRemoteProductManagerRemoteProducts = function (remoteProductManagerId) {
       return RemoteProductManagerRepo.findById(remoteProductManagerId);
+    };
+
+    $scope.createInternalRequest = function () {
+      $scope.internalRequestToCreate.createdOn = new Date().getTime();
+
+      InternalRequestRepo.create($scope.internalRequestToCreate).then(function (res) {
+        if (angular.fromJson(res.body).meta.status === 'SUCCESS') {
+          $scope.resetCreateInternalRequest();
+        }
+      });
+    };
+
+    $scope.resetCreateInternalRequest = function () {
+      angular.extend($scope.internalRequestToCreate, InternalRequestRepo.getScaffold());
+      $scope.resetInternalRequestForms();
     };
 
     $scope.pushInternalRequest = function (internalRequest) {

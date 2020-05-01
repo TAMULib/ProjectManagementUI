@@ -90,11 +90,13 @@ describe("controller: InternalRequestController", function () {
       "cancelEditInternalRequest",
       "cancelPushFeatureRequest",
       "confirmDeleteInternalRequest",
+      "createInternalRequest",
       "deleteInternalRequest",
       "editInternalRequest",
       "getRemoteProductManagerRemoteProducts",
       "pushFeatureRequest",
       "pushInternalRequest",
+      "resetCreateInternalRequest",
       "resetInternalRequestForms",
       "updateInternalRequest"
     ];
@@ -109,8 +111,6 @@ describe("controller: InternalRequestController", function () {
     for (var i in methods) {
       it(methods[i] + " defined", scopeMethodExists(methods[i]));
     }
-
-    //initializeController({role: "ROLE_MANAGER"});
   });
 
   describe("Does the scope method", function () {
@@ -163,6 +163,21 @@ describe("controller: InternalRequestController", function () {
 
       expect($scope.openModal).toHaveBeenCalled();
       expect($scope.internalRequestToDelete).toEqual(internalRequest);
+    });
+
+    it("createInternalRequest create a new Internal Requst", function () {
+      var internalRequest = new mockInternalRequest($q);
+      var id = dataInternalRequestRepo1.length + 1;
+
+      internalRequest.mock({
+        id: id,
+        name: "Mock Internal Request " + id
+      });
+
+      $scope.internalRequestToCreate = internalRequest;
+      $scope.createInternalRequest();
+
+      expect(InternalRequestRepo.findById(id)).toEqual(internalRequest);
     });
 
     it("deleteInternalRequest call the repo delete method and then call cancelDeleteInternalRequest when successful", function () {
@@ -228,6 +243,35 @@ describe("controller: InternalRequestController", function () {
       expect($scope.featureRequestToPush.productId).toBe(null);
       expect($scope.featureRequestToPush.scopeId).toBe(null);
       expect($scope.openModal).toHaveBeenCalled();
+    });
+
+    it("resetCreateInternalRequest call resetInternalRequestForms() and clear out the properties", function () {
+      var internalRequest = new mockInternalRequest($q);
+      var id = dataInternalRequestRepo1.length + 1;
+
+      internalRequest.mock({
+        id: id,
+        name: "Mock Internal Request " + id
+      });
+
+      $scope.internalRequestToCreate = internalRequest;
+
+      var modal = angular.element($templateCache.get("views/modals/addInternalRequestModal.html"));
+      modal = $compile(modal)($scope);
+
+      var form = $scope.internalRequestForms.create;
+      form.$setDirty();
+
+      expect(form.$dirty).toEqual(true);
+
+      spyOn($scope, "resetInternalRequestForms");
+
+      $scope.resetCreateInternalRequest();
+
+      expect($scope.internalRequestToCreate.title).toEqual("");
+      expect($scope.internalRequestToCreate.description).toEqual("");
+      expect($scope.internalRequestToCreate.createdOn).toBe(null);
+      expect($scope.resetInternalRequestForms).toHaveBeenCalled();
     });
 
     it("resetInternalRequestForms should close modals and reset InternalRequest forms", function () {

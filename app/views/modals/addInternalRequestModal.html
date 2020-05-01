@@ -1,0 +1,42 @@
+<div class="modal-header {{attr.modalHeaderClass}}">
+  <button type="button" class="close modal-close" aria-label="Close" ng-click="resetCreateInternalRequest()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <h4 class="modal-title">Create Internal Request</h4>
+</div>
+
+<form name="internalRequestForms.create" ng-submit="createInternalRequest()" novalidate class="internalRequest-forms-create">
+
+  <validationmessage results="internalRequestForms.getResults()"></validationmessage>
+
+  <div class="modal-body">
+    <validatedinput
+      id="internalRequestTitle"
+      model="internalRequestToCreate"
+      property="title"
+      placeholder="Title of the Internal Request"
+      label="Title"
+      form="internalRequest.create"
+      validations="internalRequestForms.validations"
+      results="internalRequestForms.getResults()"
+      autocomplete="off">
+    </validatedinput>
+
+    <validatedinput
+      id="internalRequestDescription"
+      model="internalRequestToCreate"
+      property="description"
+      placeholder="Description of the Internal Request"
+      label="Description"
+      form="internalRequest.create"
+      validations="internalRequestForms.validations"
+      results="internalRequestForms.getResults()"
+      autocomplete="off">
+    </validatedinput>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="resetCreateInternalRequest()">Cancel</button>
+    <button type="submit" class="btn btn-success" ng-disabled="internalRequestForms.create.$invalid">Create</button>
+  </div>
+</form>
