@@ -1,0 +1,23 @@
+.clickable:hover {
+  cursor: pointer;
+}
+
+.remote-product-panel {
+  margin-top: 20px;
+
+  .panel-heading {
+    min-height: 54px;
+
+    label {
+      margin-top: 5px;
+    }
+
+    .form-group {
+      margin-top: 20px;
+    }
+  }
+
+  ul {
+    margin-bottom: 0;
+  }
+}
