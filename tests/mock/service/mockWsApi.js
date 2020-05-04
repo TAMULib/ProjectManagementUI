@@ -1,6 +1,6 @@
 angular.module("mock.wsApi", []).service("WsApi", function ($q) {
   var service = mockService($q);
-  var mapping;
+  var mapping = apiMapping;
   var fetchResponse;
 
   service.mockFetchResponse = function (data) {
@@ -44,22 +44,32 @@ angular.module("mock.wsApi", []).service("WsApi", function ($q) {
           return failurePromise($q.defer(), fetchResponse.payload, fetchResponse.messageStatus, fetchResponse.httpStatus);
       }
     } else {
-      if (apiReq === apiMapping.ActiveSprints.all) {
+      if (apiReq === mapping.ActiveSprints.all) {
         payload = {
           "ArrayList<Sprint>": mockActiveSprints
         };
       }
 
-      if (apiReq === apiMapping.ProductsStats.all) {
+      if (apiReq === mapping.ProductsStats.all) {
         payload = {
           "ArrayList<ProductStats>": dataProductsStats
         };
       }
 
-      if (apiReq === apiMapping.RemoteProducts.all) {
+      if (apiReq === mapping.RemoteProducts.all) {
         payload = {
           "HashMap": dataRemoteProducts
         };
+      }
+
+      if (apiReq.controller === mapping.FeatureRequest.push.controller) {
+        if (apiReq.method === 'push/1') {
+          payload = {
+            "InternalRequest": dataInternalRequest1
+          };
+        } else if (apiReq.method === 'push/0') {
+          return rejectPromise($q.defer());
+        }
       }
     }
 

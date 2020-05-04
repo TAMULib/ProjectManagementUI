@@ -61,7 +61,7 @@ describe("controller: ProductController", function () {
       $provide.value("RemoteProductManager", RemoteProductManager);
     });
     module("mock.remoteProductManagerRepo");
-    module("mock.remoteProductService");
+    module("mock.remoteProductsService");
     module("mock.user", function ($provide) {
       var User = function () {
         return MockedUser;
