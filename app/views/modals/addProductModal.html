@@ -31,7 +31,7 @@
         </div>
         <div class="form-group" ng-if="remoteProductInfoToAdd.remoteProductManager">
           <label for="scopeId">Associate Remote Product</label>
-          <select name="scopeId" class="form-control" ng-model="remoteProductInfoToAdd.scopeId" ng-options="remoteProductManager.id as remoteProductManager.name for remoteProductManager in getRemoteProductManagerRemoteProducts(remoteProductInfoToAdd.remoteProductManager.id) | orderBy:'name'">
+          <select name="scopeId" class="form-control" ng-model="remoteProductInfoToAdd.scopeId" ng-options="remoteProductManager.id as remoteProductManager.name for remoteProductManager in getRemoteProductManagerRemoteProducts(remoteProductInfoToAdd.remoteProductManager.id) | orderBy:'name' | availableRemoteProduct : productToCreate.remoteProducts">
             <option value="" selected>None</option>
           </select>
         </div>
