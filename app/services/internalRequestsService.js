@@ -2,18 +2,17 @@ app.service('InternalRequestsService', function ($q, InternalRequestRepo, WsApi)
   var internalRequestsService = this;
 
   internalRequestsService.pushFeatureRequest = function(featureRequest) {
-    var push = angular.copy(apiMapping.FeatureRequest.push);
-
-    angular.extend(push, {
-      'data': {
+    var options = {
+      data: featureRequest.scopeId,
+      pathValues: {
+        requestId: featureRequest.id,
         productId: featureRequest.productId,
-        scopeId: featureRequest.scopeId
-      },
-      'method': apiMapping.FeatureRequest.push.method + '/' + featureRequest.id
-    });
+        rpmId: featureRequest.rpmId,
+      }
+    };
 
     return $q(function (resolve, reject) {
-      WsApi.fetch(push).then(function (response) {
+      WsApi.fetch(apiMapping.FeatureRequest.push, options).then(function (response) {
         var apiRes = angular.fromJson(response.body);
 
         if (apiRes.meta.status === 'SUCCESS') {

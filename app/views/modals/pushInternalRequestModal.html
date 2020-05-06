@@ -37,16 +37,15 @@
     </validatedinput>
 
     <div class="form-group">
-      <label for="productId">Associate Remote Product Manager</label>
-      <select class="form-control" ng-options="remoteProductManager.id as remoteProductManager.name for remoteProductManager in remoteProductManagers" ng-model="featureRequestToPush.productId" name="productId">
+      <label for="productId">Associate Product</label>
+      <select name="productId" class="form-control" ng-model="featureRequestToPush.productId" ng-options="product.id as product.name for product in products" ng-change="refreshProductRemoteProducts()">
         <option value="" selected>None</option>
       </select>
     </div>
 
     <div class="form-group" ng-if="featureRequestToPush.productId">
-      <label for="scopeId">Associate Version Product</label>
-      <select class="form-control" ng-options="projectScope.id as projectScope.name for projectScope in getRemoteProductManagerRemoteProducts(featureRequestToPush.productId) | orderBy:'name'"
-        ng-model="featureRequestToPush.scopeId" name="scopeId">
+      <label for="scopeId">Associate Remote Product</label>
+      <select name="scopeId" class="form-control" ng-model="featureRequestToPush.scopeId" ng-options="remoteProduct.id as remoteProduct.name for remoteProduct in remoteProductsByProduct">
         <option value="" selected>None</option>
       </select>
     </div>
@@ -54,6 +53,6 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-default" ng-click="cancelPushFeatureRequest()">Cancel</button>
-    <button type="submit" class="btn btn-success" ng-disabled="!internalRequestForms.push.$dirty || internalRequestForms.push.$invalid">Push</button>
+    <button type="submit" class="btn btn-success" ng-disabled="!internalRequestForms.push.$dirty || internalRequestForms.push.$invalid || !featureRequestToPush.scopeId">Push</button>
   </div>
 </form>

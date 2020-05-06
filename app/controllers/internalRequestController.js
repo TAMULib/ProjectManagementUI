@@ -1,11 +1,10 @@
-app.controller('InternalRequestController', function ($controller, $scope, ApiResponseActions, InternalRequestRepo, InternalRequestsService, RemoteProductManagerRepo, RemoteProductsService) {
+app.controller('InternalRequestController', function ($controller, $scope, ApiResponseActions, InternalRequestRepo, InternalRequestsService, ProductRepo, RemoteProductsByProductIdService, ProductsService) {
 
   angular.extend(this, $controller('AbstractController', {
     $scope: $scope
   }));
 
   $scope.internalRequests = InternalRequestRepo.getAll();
-
 
   $scope.internalRequestToCreate = InternalRequestRepo.getScaffold();
   $scope.internalRequestToEdit = {};
@@ -28,10 +27,11 @@ app.controller('InternalRequestController', function ($controller, $scope, ApiRe
   $scope.resetInternalRequestForms();
 
   if ($scope.isManager() || $scope.isAdmin()) {
-    $scope.remoteProductManagers = RemoteProductManagerRepo.getAll();
+    $scope.remoteProductsByProduct = RemoteProductsByProductIdService.remoteProducts();
+    $scope.products = ProductsService.getProducts();
 
-    $scope.getRemoteProductManagerRemoteProducts = function (remoteProductManagerId) {
-      return RemoteProductManagerRepo.findById(remoteProductManagerId);
+    $scope.refreshProductRemoteProducts = function () {
+      RemoteProductsByProductIdService.refreshRemoteProductsByProductId($scope.featureRequestToPush.productId);
     };
 
     $scope.createInternalRequest = function () {
@@ -54,6 +54,7 @@ app.controller('InternalRequestController', function ($controller, $scope, ApiRe
         id: internalRequest.id,
         title: internalRequest.title,
         description: internalRequest.description,
+        rpmId: null,
         productId: null,
         scopeId: null
       };
@@ -62,6 +63,19 @@ app.controller('InternalRequestController', function ($controller, $scope, ApiRe
     };
 
     $scope.pushFeatureRequest = function () {
+      for (var key in $scope.products) {
+        if ($scope.products[key].id == $scope.featureRequestToPush.productId) {
+          for (var k in $scope.products[key].remoteProducts) {
+            if ($scope.products[key].remoteProducts[k].scopeId == $scope.featureRequestToPush.scopeId) {
+              $scope.featureRequestToPush.rpmId = $scope.products[key].remoteProducts[k].remoteProductManager.id;
+              break;
+            }
+          }
+
+          break;
+        }
+      }
+
       InternalRequestsService.pushFeatureRequest($scope.featureRequestToPush).then(function (res) {
         if (angular.fromJson(res.body).meta.status === "SUCCESS") {
           $scope.cancelPushFeatureRequest();
@@ -109,13 +123,13 @@ app.controller('InternalRequestController', function ($controller, $scope, ApiRe
       });
     };
 
-    RemoteProductManagerRepo.listen([ApiResponseActions.CREATE, ApiResponseActions.DELETE, ApiResponseActions.UPDATE], function () {
-      var remoteProductManagers = RemoteProductManagerRepo.getAll();
+    ProductRepo.listen([ApiResponseActions.CREATE, ApiResponseActions.DELETE, ApiResponseActions.UPDATE], function () {
+      var products = ProductRepo.getAll();
 
-      $scope.remoteProductManagers.length = 0;
+      $scope.products.length = 0;
 
-      for (var i in remoteProductManagers) {
-        $scope.remoteProductManagers.push(remoteProductManagers[i]);
+      for (var i in products) {
+        $scope.products.push(products[i]);
       }
     });
   }
