@@ -15,7 +15,7 @@
     "update-webdriver": "webdriver-manager update",
     "preprotractor": "npm run update-webdriver",
     "protractor": "protractor e2e-tests/protractor.conf.js",
-    "stop": "wvr server --stop",
+    "stop": "wvr server --stop --uid product-management-webserver",
     "start": "wvr server -b /products --prod --uid product-management-webserver",
     "start:dev": "wvr server -b /products --uid product-management-webserver"
   },
