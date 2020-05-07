@@ -49,38 +49,38 @@ var apiMapping = {
     channel: '/channel/internal/request',
     all: {
       'endpoint': '/private/queue',
-      'controller': 'internal',
-      'method': 'request',
+      'controller': 'internal/request',
+      'method': '',
       'httpMethod': 'GET'
     },
     create: {
       'endpoint': '/private/queue',
-      'controller': 'internal',
-      'method': 'request',
+      'controller': 'internal/request',
+      'method': '',
       'httpMethod': 'POST'
     },
     update: {
       'endpoint': '/private/queue',
-      'controller': 'internal',
-      'method': 'request',
+      'controller': 'internal/request',
+      'method': '',
       'httpMethod': 'PUT'
     },
     submitFeatureProposal: {
       'endpoint': '/private/queue',
-      'controller': 'internal',
-      'method': 'request',
+      'controller': 'internal/request',
+      'method': '',
       'httpMethod': 'PUT'
     },
     remove: {
       'endpoint': '/private/queue',
-      'controller': 'internal',
-      'method': 'request',
+      'controller': 'internal/request',
+      'method': '',
       'httpMethod': 'DELETE'
     },
     listen: {
       'endpoint': '/channel',
-      'controller': 'internal',
-      'method': 'request'
+      'controller': 'internal/request',
+      'method': ''
     }
   },
   User: {
