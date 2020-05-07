@@ -39,7 +39,7 @@ var apiMapping = {
     push: {
       'endpoint': '/private/queue',
       'controller': 'internal/request',
-      'method': 'push',
+      'method': 'push/:requestId/:productId/:rpmId',
       'httpMethod': 'PUT'
     },
   },
@@ -49,37 +49,38 @@ var apiMapping = {
     channel: '/channel/internal/request',
     all: {
       'endpoint': '/private/queue',
-      'controller': 'internal/request',
-      'method': '',
+      'controller': 'internal',
+      'method': 'request',
       'httpMethod': 'GET'
     },
     create: {
       'endpoint': '/private/queue',
-      'controller': 'internal/request',
-      'method': '',
+      'controller': 'internal',
+      'method': 'request',
       'httpMethod': 'POST'
     },
     update: {
       'endpoint': '/private/queue',
-      'controller': 'internal/request',
-      'method': '',
+      'controller': 'internal',
+      'method': 'request',
       'httpMethod': 'PUT'
     },
     submitFeatureProposal: {
       'endpoint': '/private/queue',
-      'controller': 'internal/request',
-      'method': '',
+      'controller': 'internal',
+      'method': 'request',
       'httpMethod': 'PUT'
     },
     remove: {
       'endpoint': '/private/queue',
-      'controller': 'internal/request',
-      'method': '',
+      'controller': 'internal',
+      'method': 'request',
       'httpMethod': 'DELETE'
     },
     listen: {
       'endpoint': '/channel',
-      'controller': 'internal/request'
+      'controller': 'internal',
+      'method': 'request'
     }
   },
   User: {
@@ -183,9 +184,16 @@ var apiMapping = {
     }
   },
   RemoteProducts: {
+    lazy: true,
     all: {
       'endpoint': '/private/queue',
       'controller': 'products/remote'
+    },
+    byProduct: {
+      'endpoint': '/private/queue',
+      'controller': 'products',
+      'method': 'remote-products/:productId',
+      'httpMethod': 'GET'
     },
     listen: {
       'endpoint': '/channel',
