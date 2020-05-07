@@ -28,6 +28,46 @@
       </select>
     </div>
 
+    <validatedinput
+      model="productToCreate"
+      property="devUrl"
+      label="Development Deployment Location"
+      placeholder="URL of Deployment"
+      form="productForms.create"
+      validations="productForms.validations"
+      results="productRepo.getResults()">
+    </validatedinput>
+
+    <validatedinput
+      model="productToCreate"
+      property="preUrl"
+      label="Pre-Production Deployment Location"
+      placeholder="URL of Deployment"
+      form="productForms.create"
+      validations="productForms.validations"
+      results="productRepo.getResults()">
+    </validatedinput>
+
+    <validatedinput
+      model="productToCreate"
+      property="productionUrl"
+      label="Production Deployment Location"
+      placeholder="URL of Deployment"
+      form="productForms.create"
+      validations="productForms.validations"
+      results="productRepo.getResults()">
+    </validatedinput>
+
+    <validatedinput
+      model="productToCreate"
+      property="wikiUrl"
+      label="Product Wiki Page"
+      placeholder="URL of Wiki Page"
+      form="productForms.create"
+      validations="productForms.validations"
+      results="productRepo.getResults()">
+    </validatedinput>
+
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-default" ng-click="resetCreateProduct()">Cancel</button>

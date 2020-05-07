@@ -30,6 +30,50 @@
       </select>
     </div>
 
+    <validatedinput 
+      model="productToEdit"
+      property="devUrl"
+      label="Development Deployment Location"
+      placeholder="URL of Deployment"
+      form="productForms.edit"
+      validations="productForms.validations"
+      results="productForms.getResults()"
+      autocomplete="off">
+    </validatedinput>
+
+    <validatedinput 
+      model="productToEdit"
+      property="preUrl"
+      label="Pre-Production Deployment Location"
+      placeholder="URL of Deployment"
+      form="productForms.edit"
+      validations="productForms.validations"
+      results="productForms.getResults()"
+      autocomplete="off">
+    </validatedinput>
+
+    <validatedinput 
+      model="productToEdit"
+      property="productionUrl"
+      label="Production Deployment Location"
+      placeholder="URL of Deployment"
+      form="productForms.edit"
+      validations="productForms.validations"
+      results="productForms.getResults()"
+      autocomplete="off">
+    </validatedinput>
+
+    <validatedinput 
+      model="productToEdit"
+      property="wikiUrl"
+      label="Product Wiki Page"
+      placeholder="URL of Wiki Page"
+      form="productForms.edit"
+      validations="productForms.validations"
+      results="productForms.getResults()"
+      autocomplete="off">
+    </validatedinput>
+
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-default" ng-click="cancelEditProduct()">Cancel</button>
