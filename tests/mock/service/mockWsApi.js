@@ -25,7 +25,7 @@ angular.module("mock.wsApi", []).service("WsApi", function ($q) {
     }
   };
 
-  service.fetch = function (apiReq, parameters) {
+  service.fetch = function (apiReq, options) {
     var payload = {};
 
     if (fetchResponse) {
@@ -63,13 +63,31 @@ angular.module("mock.wsApi", []).service("WsApi", function ($q) {
       }
 
       if (apiReq.controller === mapping.FeatureRequest.push.controller) {
-        if (apiReq.method === 'push/1') {
-          payload = {
-            "InternalRequest": dataInternalRequest1
-          };
-        } else if (apiReq.method === 'push/0') {
-          return rejectPromise($q.defer());
+        if (apiReq.method === 'push/:requestId/:productId/:rpmId') {
+          var requestId = Number(options.pathValues.requestId);
+          var productId = Number(options.pathValues.productId);
+          var rpmId = Number(options.pathValues.rpmId);
+          var scopeId = typeof options.data === "string" ? options.data : "";
+
+          if (requestId > 0 && productId > 0 && rpmId > 0 && scopeId !== "") {
+            for (var key in dataInternalRequestRepo1) {
+              if (dataInternalRequestRepo1[key].id == requestId)  {
+                payload = {
+                  "FeatureRequest": {
+                    id: requestId,
+                    projectId: productId,
+                    rpmId: rpmId,
+                    scopeId: options.data
+                  }
+                };
+
+                return payloadPromise($q.defer(), payload);
+              }
+            }
+          }
         }
+
+        return rejectPromise($q.defer());
       }
     }
 

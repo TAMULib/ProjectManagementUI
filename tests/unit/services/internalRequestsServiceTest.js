@@ -60,9 +60,8 @@ describe("service: InternalRequestsService", function () {
 
   describe("Do the service method", function () {
     it("pushFeatureRequest should push a FeatureRequest", function () {
-      var featureRequest = dataFeatureRequest1;
+      var featureRequest = new mockFeatureRequest($q);
       var response;
-      featureRequest.id = dataInternalRequest1.id;
 
       service.pushFeatureRequest(featureRequest).then(function () {
         response = true;
@@ -75,10 +74,58 @@ describe("service: InternalRequestsService", function () {
       expect(response).toBe(true);
     });
 
-    it("pushFeatureRequest should not push an invalid FeatureRequest", function () {
-      var featureRequest = dataFeatureRequest1;
+    it("pushFeatureRequest should not push an invalid FeatureRequest id", function () {
+      var featureRequest = new mockFeatureRequest($q);
       var response;
-      featureRequest.id = 0;
+      featureRequest.id = undefined;
+
+      service.pushFeatureRequest(featureRequest).then(function () {
+        response = true;
+      }).catch(function () {
+        response = false;
+      });
+
+      $scope.$digest();
+
+      expect(response).toBe(false);
+    });
+
+    it("pushFeatureRequest should not push an invalid FeatureRequest productId", function () {
+      var featureRequest = new mockFeatureRequest($q);
+      var response;
+      featureRequest.productId = undefined;
+
+      service.pushFeatureRequest(featureRequest).then(function () {
+        response = true;
+      }).catch(function () {
+        response = false;
+      });
+
+      $scope.$digest();
+
+      expect(response).toBe(false);
+    });
+
+    it("pushFeatureRequest should not push an invalid FeatureRequest rpmId", function () {
+      var featureRequest = new mockFeatureRequest($q);
+      var response;
+      featureRequest.rpmId = undefined;
+
+      service.pushFeatureRequest(featureRequest).then(function () {
+        response = true;
+      }).catch(function () {
+        response = false;
+      });
+
+      $scope.$digest();
+
+      expect(response).toBe(false);
+    });
+
+    it("pushFeatureRequest should not push an invalid FeatureRequest scopeId", function () {
+      var featureRequest = new mockFeatureRequest($q);
+      var response;
+      featureRequest.scopeId = undefined;
 
       service.pushFeatureRequest(featureRequest).then(function () {
         response = true;

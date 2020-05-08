@@ -7,6 +7,7 @@
 
 <form name="internalRequestForms.create" ng-submit="createInternalRequest()" novalidate class="internalRequest-forms-create">
 
+  <alerts seconds="60" channels="internal/request" types="WARNING,ERROR" exclusive></alerts>
   <validationmessage results="internalRequestForms.getResults()"></validationmessage>
 
   <div class="modal-body">

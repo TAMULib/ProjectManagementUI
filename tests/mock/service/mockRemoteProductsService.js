@@ -476,6 +476,10 @@ angular.module("mock.remoteProductsService", []).service("RemoteProductsService"
     });
   };
 
+  service.refreshRemoteProducts = function () {
+    return messagePromise();
+  };
+
   service.ready = $q.defer().promise;
 
   return service;

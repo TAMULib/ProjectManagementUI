@@ -1,8 +1,8 @@
 describe("controller: InternalRequestController", function () {
-  var $q, $scope, $templateCache, MockedInternalRequest, InternalRequestRepo, InternalRequestsService, RemoteProductManagerRepo, WsApi, controller;
+  var $q, $scope, $templateCache, MockedInternalRequest, InternalRequestRepo, InternalRequestsService, ProductRepo, ProductsService, RemoteProductsByProductIdService, WsApi, controller;
 
   var initializeVariables = function () {
-    inject(function (_$compile_, _$q_, _$templateCache_, _InternalRequestRepo_, _InternalRequestsService_, _RemoteProductManagerRepo_, _WsApi_) {
+    inject(function (_$compile_, _$q_, _$templateCache_, _InternalRequestRepo_, _InternalRequestsService_, _ProductRepo_, _ProductsService_, _RemoteProductsByProductIdService_, _RemoteProductManagerRepo_, _WsApi_) {
       $compile = _$compile_;
       $q = _$q_;
       $templateCache = _$templateCache_;
@@ -11,14 +11,16 @@ describe("controller: InternalRequestController", function () {
 
       InternalRequestRepo = _InternalRequestRepo_;
       InternalRequestsService = _InternalRequestsService_;
-      RemoteProductManagerRepo = _RemoteProductManagerRepo_;
+      ProductRepo = _ProductRepo_;
+      ProductsService = _ProductsService_;
+      RemoteProductsByProductIdService = _RemoteProductsByProductIdService_;
 
       WsApi = _WsApi_;
     });
   };
 
   var initializeController = function (settings) {
-    inject(function (_$controller_, _$rootScope_, _InternalRequestsService_, _ModalService_, _RemoteProductsService_, _UserService_) {
+    inject(function (_$controller_, _$rootScope_, _ModalService_, _UserService_) {
       $scope = _$rootScope_.$new();
 
       sessionStorage.role = settings && settings.role ? settings.role : "ROLE_ADMIN";
@@ -27,10 +29,11 @@ describe("controller: InternalRequestController", function () {
       controller = _$controller_("InternalRequestController", {
         $scope: $scope,
         InternalRequestRepo: InternalRequestRepo,
-        InternalRequestsService: _InternalRequestsService_,
+        InternalRequestsService: InternalRequestsService,
         ModalService: _ModalService_,
-        RemoteProductManagerRepo: RemoteProductManagerRepo,
-        RemoteProductsService: _RemoteProductsService_,
+        ProductRepo: ProductRepo,
+        ProductsService: ProductsService,
+        RemoteProductsByProductIdService: RemoteProductsByProductIdService,
         UserService: _UserService_
       });
 
@@ -54,7 +57,7 @@ describe("controller: InternalRequestController", function () {
     module("mock.internalRequestRepo");
     module("mock.internalRequestsService");
     module("mock.remoteProductManagerRepo");
-    module("mock.remoteProductsService");
+    module("mock.remoteProductsByProductIdService");
     module("mock.user", function ($provide) {
       var User = function () {
         return MockedUser;
@@ -93,9 +96,9 @@ describe("controller: InternalRequestController", function () {
       "createInternalRequest",
       "deleteInternalRequest",
       "editInternalRequest",
-      "getRemoteProductManagerRemoteProducts",
       "pushFeatureRequest",
       "pushInternalRequest",
+      "refreshProductRemoteProducts",
       "resetCreateInternalRequest",
       "resetInternalRequestForms",
       "updateInternalRequest"
@@ -174,10 +177,14 @@ describe("controller: InternalRequestController", function () {
         name: "Mock Internal Request " + id
       });
 
+      spyOn($scope, "resetCreateInternalRequest");
+
       $scope.internalRequestToCreate = internalRequest;
       $scope.createInternalRequest();
+      $scope.$digest();
 
       expect(InternalRequestRepo.findById(id)).toEqual(internalRequest);
+      expect($scope.resetCreateInternalRequest).toHaveBeenCalled();
     });
 
     it("deleteInternalRequest call the repo delete method and then call cancelDeleteInternalRequest when successful", function () {
@@ -206,19 +213,16 @@ describe("controller: InternalRequestController", function () {
       expect($scope.openModal).toHaveBeenCalled();
     });
 
-    it("getRemoteProductManagerRemoteProducts return the requested Remote Products", function () {
-      var response;
-      var productManagerId = dataRemoteProductManager2.id;
-
-      response = $scope.getRemoteProductManagerRemoteProducts(productManagerId);
-
-      expect(response.id).toEqual(productManagerId);
-    });
-
     it("pushFeatureRequest push a FeatureRequest", function () {
-      var featureRequest = dataFeatureRequest1;
+      var featureRequest = new mockFeatureRequest($q);
 
       $scope.featureRequestToPush = featureRequest;
+      $scope.products = [
+        new mockProduct($q),
+        new mockProduct($q)
+      ];
+
+      $scope.products[0].mock(dataProduct2);
 
       spyOn(InternalRequestsService, "pushFeatureRequest").and.callThrough();
       spyOn($scope, "cancelPushFeatureRequest");
@@ -241,8 +245,20 @@ describe("controller: InternalRequestController", function () {
       expect($scope.featureRequestToPush.title).toEqual(internalRequest.title);
       expect($scope.featureRequestToPush.description).toEqual(internalRequest.description);
       expect($scope.featureRequestToPush.productId).toBe(null);
+      expect($scope.featureRequestToPush.rpmId).toBe(null);
       expect($scope.featureRequestToPush.scopeId).toBe(null);
       expect($scope.openModal).toHaveBeenCalled();
+    });
+
+    it("refreshProductRemoteProducts call refreshRemoteProductsByProductId()", function () {
+      var featureRequest = new mockFeatureRequest($q);
+      $scope.featureRequestToPush = featureRequest;
+
+      spyOn(RemoteProductsByProductIdService, "refreshRemoteProductsByProductId");
+
+      $scope.refreshProductRemoteProducts();
+
+      expect(RemoteProductsByProductIdService.refreshRemoteProductsByProductId).toHaveBeenCalled();
     });
 
     it("resetCreateInternalRequest call resetInternalRequestForms() and clear out the properties", function () {
