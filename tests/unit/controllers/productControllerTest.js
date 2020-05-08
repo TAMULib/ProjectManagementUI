@@ -93,15 +93,20 @@ describe("controller: ProductController", function () {
 
   describe("Is the scope method", function () {
     var methods = [
-      "resetProductForms",
-      "createProduct",
-      "resetCreateProduct",
-      "editProduct",
-      "updateProduct",
+      "addRemoteProductInfo",
+      "cancelDeleteProduct",
       "cancelEditProduct",
       "confirmDeleteProduct",
-      "cancelDeleteProduct",
-      "deleteProduct"
+      "createProduct",
+      "deleteProduct",
+      "editProduct",
+      "getRemoteProductByRemoteProductInfo",
+      "getRemoteProductManagerRemoteProducts",
+      "openAddRemoteProductInfo",
+      "removeRemoteProductInfo",
+      "resetCreateProduct",
+      "resetProductForms",
+      "updateProduct"
     ];
 
     var scopeMethodExists = function (method) {
@@ -117,19 +122,43 @@ describe("controller: ProductController", function () {
   });
 
   describe("Does the scope method", function () {
-    it("resetProductForms reset product forms", function () {
-      var modal = angular.element($templateCache.get("views/modals/addProductModal.html"));
-      modal = $compile(modal)($scope);
+    it("addRemoteProductInfo should push changes and close info", function () {
+      var remoteProducts = [
+        dataRemoteProducts[1],
+        dataRemoteProducts[2],
+        dataRemoteProducts[3],
+      ];
+      var remoteProduct = dataRemoteProducts[1];
 
-      var form = $scope.productForms.create;
-      form.$setDirty();
+      $scope.remoteProductInfoChanged = null;
 
-      expect(form.$dirty).toEqual(true);
+      spyOn(remoteProducts, "push");
+      spyOn($scope, "remoteProductInfoChanged");
 
-      $scope.resetProductForms();
+      $scope.addRemoteProductInfo(remoteProducts, remoteProduct);
 
-      expect(form.$pristine).toEqual(true);
-      expect(form.$dirty).toEqual(false);
+      expect($scope.remoteProductInfoChanged).toEqual(true);
+      expect(remoteProducts.push).toHaveBeenCalled();
+    });
+
+    it("cancelEditProduct clear out productToEdit and call resetProductForms", function () {
+      var product = new mockProduct($q);
+
+      spyOn($scope, "resetProductForms");
+      $scope.productToEdit = product;
+      $scope.cancelEditProduct();
+
+      expect($scope.productToEdit).toEqual({});
+      expect($scope.resetProductForms).toHaveBeenCalled();
+    });
+
+    it("cancelDeleteProduct clear productToDelete and close the modal", function () {
+      spyOn($scope, "closeModal");
+      $scope.productToDelete = dataProductRepo1[0];
+      $scope.cancelDeleteProduct();
+
+      expect($scope.closeModal).toHaveBeenCalled();
+      expect($scope.productToDelete).toEqual({});
     });
 
     it("createProduct create a new product", function () {
@@ -140,10 +169,80 @@ describe("controller: ProductController", function () {
         name: "Mock Product 4"
       });
 
+      spyOn($scope, "resetCreateProduct");
+
       $scope.productToCreate = newProduct;
       $scope.createProduct();
+      $scope.$digest();
 
       expect(ProductRepo.findById(newProduct.id)).toEqual(newProduct);
+      expect($scope.resetCreateProduct).toHaveBeenCalled();
+    });
+
+    it("confirmDeleteProduct set the productToDelete and open the modal", function () {
+      spyOn($scope, "openModal");
+      $scope.confirmDeleteProduct(dataProductRepo1[0]);
+
+      expect($scope.openModal).toHaveBeenCalled();
+      expect($scope.productToDelete).toEqual(dataProductRepo1[0]);
+    });
+
+    it("deleteProduct call the repo delete method and then call cancelDeleteProduct when successful", function () {
+      var product = new mockProduct($q);
+
+      $scope.productToDelete = product;
+      deferred = $q.defer();
+      spyOn(ProductRepo, "delete").and.returnValue(deferred.promise);
+      spyOn($scope, "cancelDeleteProduct");
+      $scope.deleteProduct(product);
+      deferred.resolve({
+        body: angular.toJson({
+          meta: {
+            status: "SUCCESS"
+          }
+        })
+      });
+      $scope.$apply();
+
+      expect(ProductRepo.delete).toHaveBeenCalledWith(product);
+      expect($scope.cancelDeleteProduct).toHaveBeenCalled();
+    });
+
+    it("editProduct set the productToEdit and open the modal", function () {
+      spyOn($scope, "openModal");
+
+      $scope.editProduct(dataProductRepo1[0]);
+
+      expect($scope.productToEdit).toEqual(dataProductRepo1[0]);
+      expect($scope.openModal).toHaveBeenCalled();
+    });
+
+    it("getRemoteProductManagerRemoteProducts should return the remote product by id", function () {
+      var response;
+
+      response = $scope.getRemoteProductManagerRemoteProducts(2);
+
+      expect(response).toEqual(dataRemoteProducts[2]);
+    });
+
+    it("getRemoteProductByRemoteProductInfo should return the remote product by scope id", function () {
+      var response;
+      var remoteProductInfo = {
+        scopeId: "3783",
+        remoteProductManager: new mockRemoteProductManager($q)
+      };
+
+      response = $scope.getRemoteProductByRemoteProductInfo(remoteProductInfo);
+
+      expect(response).toEqual(dataRemoteProducts[3]);
+    });
+
+    it("openAddRemoteProductInfo should assign addingRemoteProductInfo to true", function () {
+      $scope.addingRemoteProductInfo = null;
+
+      $scope.openAddRemoteProductInfo();
+
+      expect($scope.addingRemoteProductInfo).toEqual(true);
     });
 
     it("resetCreateProduct call resetProductForms() and clear out the name field", function () {
@@ -166,12 +265,37 @@ describe("controller: ProductController", function () {
       expect($scope.resetProductForms).toHaveBeenCalled();
     });
 
-    it("editProduct set the productToEdit and open the modal", function () {
-      spyOn($scope, "openModal");
-      $scope.editProduct(dataProductRepo1[0]);
+    it("resetProductForms reset product forms", function () {
+      var modal = angular.element($templateCache.get("views/modals/addProductModal.html"));
+      modal = $compile(modal)($scope);
 
-      expect($scope.productToEdit).toEqual(dataProductRepo1[0]);
-      expect($scope.openModal).toHaveBeenCalled();
+      var form = $scope.productForms.create;
+      form.$setDirty();
+
+      expect(form.$dirty).toEqual(true);
+
+      $scope.resetProductForms();
+
+      expect(form.$pristine).toEqual(true);
+      expect(form.$dirty).toEqual(false);
+    });
+
+    it("removeRemoteProductInfo should remove product info", function () {
+      var remoteProducts = [
+        dataRemoteProducts[1],
+        dataRemoteProducts[2],
+        dataRemoteProducts[3],
+      ];
+      var remoteProduct = dataRemoteProducts[1];
+
+      $scope.remoteProductInfoChanged = null;
+
+      spyOn(remoteProducts, "splice");
+
+      $scope.removeRemoteProductInfo(remoteProducts, remoteProduct);
+
+      expect($scope.remoteProductInfoChanged).toEqual(true);
+      expect(remoteProducts.splice).toHaveBeenCalled();
     });
 
     it("updateProduct call dirty and save on the Product, and then call cancelEditProduct", function () {
@@ -189,55 +313,6 @@ describe("controller: ProductController", function () {
       expect($scope.cancelEditProduct).toHaveBeenCalled();
       expect(product.dirty).toHaveBeenCalledWith(true);
       expect(product.save).toHaveBeenCalled();
-    });
-
-    it("cancelEditProduct clear out productToEdit and call resetProductForms", function () {
-      var product = new mockProduct($q);
-
-      spyOn($scope, "resetProductForms");
-      $scope.productToEdit = product;
-      $scope.cancelEditProduct();
-
-      expect($scope.productToEdit).toEqual({});
-      expect($scope.resetProductForms).toHaveBeenCalled();
-    });
-
-    it("confirmDeleteProduct set the productToDelete and open the modal", function () {
-      spyOn($scope, "openModal");
-      $scope.confirmDeleteProduct(dataProductRepo1[0]);
-
-      expect($scope.openModal).toHaveBeenCalled();
-      expect($scope.productToDelete).toEqual(dataProductRepo1[0]);
-    });
-
-    it("cancelDeleteProduct clear productToDelete and close the modal", function () {
-      spyOn($scope, "closeModal");
-      $scope.productToDelete = dataProductRepo1[0];
-      $scope.cancelDeleteProduct();
-
-      expect($scope.closeModal).toHaveBeenCalled();
-      expect($scope.productToDelete).toEqual({});
-    });
-
-    it("deleteProduct call the repo delete method and then call cancelDeleteProduct when successful", function () {
-      var product = new mockProduct($q);
-
-      $scope.productToDelete = product;
-      deferred = $q.defer();
-      spyOn(ProductRepo, "delete").and.returnValue(deferred.promise);
-      spyOn($scope, "cancelDeleteProduct");
-      $scope.deleteProduct(product);
-      deferred.resolve({
-        body: angular.toJson({
-          meta: {
-            status: "SUCCESS"
-          }
-        })
-      });
-      $scope.$apply();
-
-      expect(ProductRepo.delete).toHaveBeenCalledWith(product);
-      expect($scope.cancelDeleteProduct).toHaveBeenCalled();
     });
 
   });
