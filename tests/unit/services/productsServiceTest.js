@@ -44,6 +44,7 @@ describe("service: ProductsService", function () {
     var methods = [
       "getById",
       "getProducts",
+      "getRemoteProducts",
       "getRemoteProductInfo",
       "refreshProducts",
       "refreshRemoteProducts"
@@ -61,26 +62,44 @@ describe("service: ProductsService", function () {
     }
   });
 
+  describe("Is the service property", function () {
+    var properties = [
+      "ready"
+    ];
+
+    var servicePropertyExists = function (property) {
+      return function() {
+        expect(service[property]).toBeDefined();
+        expect(typeof service[property]).toEqual("object");
+      };
+    };
+
+    for (var i in properties) {
+      it(properties[i] + " defined", servicePropertyExists(properties[i]));
+    }
+  });
+
   describe("Do the service method", function () {
     it("getById should return a product by the given id", function () {
-      var response;
-      var id = 1;
-
-      // @todo
-      //response = service.getById(id);
-      //$scope.$digest();
-
-      //expect(response.id).toBe(id);
+      service.getById(1).then(function (product) {
+        expect(product).toEqual(dataRemoteProducts["1"][0]);
+      });
+      $scope.$digest();
     });
 
     it("getProducts should return all products", function () {
+      var response = service.getProducts();
+      expect(response).toEqual(dataProductRepo1);
+    });
+
+    it("getRemoteProducts should return all remote products for a given product", function () {
       var response;
 
-      // @todo
-      //response = service.getProducts();
-      //$scope.$digest();
+      // @todo needs to be a test that checks when remote products has products assigned:
+      //service.refreshRemoteProducts(1);
 
-      //expect(response).toBe();
+      response = service.getRemoteProducts();
+      expect(response).toEqual({});
     });
 
     it("getRemoteProductInfo should return all remote product info for a given product", function () {
