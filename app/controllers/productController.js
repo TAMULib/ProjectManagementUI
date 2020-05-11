@@ -1,12 +1,10 @@
-app.controller('ProductController', function ($controller, $scope, ApiResponseActions, ProductRepo, ProductsStatsService, RemoteProductManagerRepo, RemoteProductsService) {
+app.controller('ProductController', function ($controller, $scope, ApiResponseActions, ProductRepo, RemoteProductManagerRepo, RemoteProductsService) {
 
     angular.extend(this, $controller('AbstractController', {
         $scope: $scope
     }));
 
     $scope.products = ProductRepo.getAll();
-
-    $scope.productStats = ProductsStatsService.getProductsStats();
 
     $scope.productToCreate = ProductRepo.getScaffold();
 
