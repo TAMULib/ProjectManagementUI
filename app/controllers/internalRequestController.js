@@ -92,6 +92,10 @@ app.controller('InternalRequestController', function ($controller, $scope, ApiRe
         scopeId: null
       };
 
+      if ($scope.remoteProductsLoading !== true) {
+        ProductsService.refreshProducts();
+      }
+
       $scope.openModal('#pushInternalRequestModal');
     };
 
