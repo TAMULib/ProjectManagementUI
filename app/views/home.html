@@ -97,13 +97,13 @@
               <th>Request Count</th>
               <th>Issue Count</th>
             </tr>
-            <tr ng-repeat="product in products | orderBy: '-stats.backlogItemCount'">
-              <td title="'Product'">{{product.name}}</td>
-              <td title="'Total Backlog Items'">{{product.stats.backlogItemCount}}</td>
-              <td title="'Feature Count'">{{product.stats.featureCount}}</td>
-              <td title="'Defect Count'">{{product.stats.defectCount}}</td>
-              <td title="'Request Count'">{{product.stats.requestCount}}</td>
-              <td title="'Issue Count'">{{product.stats.issueCount}}</td>
+            <tr ng-repeat="stats in productStats | orderBy: '-stats.backlogItemCount'">
+              <td title="'Product'">{{stats.name}}</td>
+              <td title="'Total Backlog Items'">{{stats.backlogItemCount}}</td>
+              <td title="'Feature Count'">{{stats.featureCount}}</td>
+              <td title="'Defect Count'">{{stats.defectCount}}</td>
+              <td title="'Request Count'">{{stats.requestCount}}</td>
+              <td title="'Issue Count'">{{stats.issueCount}}</td>
             </tr>
           </table>
 
