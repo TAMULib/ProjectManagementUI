@@ -119,9 +119,13 @@ app.controller('ProductController', function ($controller, $scope, ApiResponseAc
         };
 
         $scope.getRemoteProductByRemoteProductInfo = function(remoteProductInfo) {
-            return $scope.remoteProducts[remoteProductInfo.remoteProductManager.id].filter(function(rp) {
-                return rp.id === remoteProductInfo.scopeId;
-            })[0];
+          if (angular.isDefined(remoteProductInfo.remoteProductManager.id)) {
+            if (angular.isDefined($scope.remoteProducts[remoteProductInfo.remoteProductManager.id])) {
+              return $scope.remoteProducts[remoteProductInfo.remoteProductManager.id].filter(function(rp) {
+                  return rp.id === remoteProductInfo.scopeId;
+              })[0];
+            }
+          }
         };
 
         RemoteProductManagerRepo.listen([ApiResponseActions.CREATE, ApiResponseActions.DELETE, ApiResponseActions.UPDATE], function () {
