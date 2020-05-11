@@ -32,7 +32,7 @@ var mockProductsService = function ($q, $timeout) {
   };
 
   service.refreshProducts = function () {
-    return messagePromise();
+    return messagePromise($q.defer());
   };
 
   service.refreshRemoteProducts = function (productId) {

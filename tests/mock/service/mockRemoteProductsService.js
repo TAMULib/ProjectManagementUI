@@ -477,7 +477,7 @@ angular.module("mock.remoteProductsService", []).service("RemoteProductsService"
   };
 
   service.refreshRemoteProducts = function () {
-    return messagePromise();
+    return messagePromise($q.defer());
   };
 
   service.ready = $q.defer().promise;
