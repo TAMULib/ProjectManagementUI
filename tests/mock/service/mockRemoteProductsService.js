@@ -458,7 +458,7 @@ var dataRemoteProducts = {
   }]
 };
 
-angular.module("mock.remoteProductService", []).service("RemoteProductsService", function ($q) {
+angular.module("mock.remoteProductsService", []).service("RemoteProductsService", function ($q) {
   var service = mockService($q);
 
   service.getRemoteProducts = function () {
@@ -474,6 +474,10 @@ angular.module("mock.remoteProductService", []).service("RemoteProductsService",
       }
       reject(undefined);
     });
+  };
+
+  service.refreshRemoteProducts = function () {
+    return messagePromise();
   };
 
   service.ready = $q.defer().promise;

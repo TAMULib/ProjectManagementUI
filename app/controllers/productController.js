@@ -10,9 +10,25 @@ app.controller('ProductController', function ($controller, $scope, ApiResponseAc
 
     $scope.productToDelete = {};
 
+    $scope.addingRemoteProductInfo = false;
+    $scope.remoteProductInfoChanged = false;
+
+    $scope.remoteProductInfoToAdd = {
+        remoteProductManager: null,
+        scopeId: null
+    };
+
     $scope.productForms = {
         validations: ProductRepo.getValidations(),
         getResults: ProductRepo.getValidationResults
+    };
+
+    $scope.closeAddRemoteProductInfo = function() {
+        $scope.addingRemoteProductInfo = false;
+        $scope.remoteProductInfoToAdd = {
+            remoteProductManager: null,
+            scopeId: null
+        };
     };
 
     $scope.resetProductForms = function () {
@@ -22,6 +38,8 @@ app.controller('ProductController', function ($controller, $scope, ApiResponseAc
                 $scope.productForms[key].$setPristine();
             }
         }
+        $scope.closeAddRemoteProductInfo();
+        $scope.remoteProductInfoChanged = false;
         $scope.closeModal();
     };
 
@@ -76,6 +94,21 @@ app.controller('ProductController', function ($controller, $scope, ApiResponseAc
         });
     };
 
+    $scope.openAddRemoteProductInfo = function() {
+        $scope.addingRemoteProductInfo = true;
+    };
+
+    $scope.addRemoteProductInfo = function(remoteProducts, remoteProduct) {
+        remoteProducts.push(remoteProduct);
+        $scope.remoteProductInfoChanged = true;
+        $scope.closeAddRemoteProductInfo();
+    };
+
+    $scope.removeRemoteProductInfo = function(remoteProducts, remoteProduct) {
+        remoteProducts.splice(remoteProducts.indexOf(remoteProduct), 1);
+        $scope.remoteProductInfoChanged = true;
+    };
+
     if ($scope.isManager() || $scope.isAdmin()) {
         $scope.remoteProductManagers = RemoteProductManagerRepo.getAll();
 
@@ -83,6 +116,12 @@ app.controller('ProductController', function ($controller, $scope, ApiResponseAc
 
         $scope.getRemoteProductManagerRemoteProducts = function (remoteProductManagerId) {
             return $scope.remoteProducts[remoteProductManagerId];
+        };
+
+        $scope.getRemoteProductByRemoteProductInfo = function(remoteProductInfo) {
+            return $scope.remoteProducts[remoteProductInfo.remoteProductManager.id].filter(function(rp) {
+                return rp.id === remoteProductInfo.scopeId;
+            })[0];
         };
 
         RemoteProductManagerRepo.listen([ApiResponseActions.CREATE, ApiResponseActions.DELETE, ApiResponseActions.UPDATE], function () {

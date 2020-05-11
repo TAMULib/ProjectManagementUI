@@ -1,0 +1,59 @@
+<div class="modal-header {{attr.modalHeaderClass}}">
+  <button type="button" class="close modal-close" aria-label="Close" ng-click="cancelPushFeatureRequest()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <h4 class="modal-title">Push Internal Request (Feature Request)</h4>
+</div>
+
+<form name="internalRequestForms.push" ng-submit="pushFeatureRequest()" novalidate>
+
+  <alerts seconds="60" channels="internal/request/push,products" types="WARNING,ERROR" exclusive></alerts>
+  <validationmessage results="internalRequestForms.getResults()"></validationmessage>
+
+  <div class="modal-body">
+    <validatedinput
+      id="featureRequestTitle"
+      model="featureRequestToPush"
+      property="title"
+      placeholder="Title of the Feature Request"
+      label="Title"
+      disabled="'true'"
+      form="internalRequest.push"
+      validations="internalRequestForms.validations"
+      results="internalRequestForms.getResults()"
+      autocomplete="off">
+    </validatedinput>
+
+    <validatedinput
+      id="featureRequestDescription"
+      model="featureRequestToPush"
+      property="description"
+      placeholder="Description of the Feature Request"
+      label="Description"
+      disabled="'true'"
+      form="internalRequest.push"
+      validations="internalRequestForms.validations"
+      results="internalRequestForms.getResults()"e
+      autocomplete="off">
+    </validatedinput>
+
+    <div class="form-group">
+      <label for="productId">Associate Product</label>
+      <select name="productId" class="form-control" ng-model="featureRequestToPush.productId" ng-options="product.id as product.name for product in products | orderBy:'name'" ng-change="selectRemoteProducts()" ng-disabled="remoteProductsLoading">
+        <option value="" selected>None</option>
+      </select>
+    </div>
+
+    <div class="form-group" ng-if="featureRequestToPush.productId">
+      <label for="scopeId">Associate Remote Product</label>
+      <select name="scopeId" class="form-control" ng-model="featureRequestToPush.scopeId" ng-options="remoteProduct.id as remoteProduct.name for remoteProduct in remoteProducts" ng-disabled="remoteProductsLoading">
+        <option value="" selected>None</option>
+      </select>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="cancelPushFeatureRequest()">Cancel</button>
+    <button type="submit" class="btn btn-success" ng-disabled="!internalRequestForms.push.$dirty || internalRequestForms.push.$invalid || !featureRequestToPush.scopeId">Push</button>
+  </div>
+</form>

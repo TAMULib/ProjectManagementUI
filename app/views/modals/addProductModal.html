@@ -13,16 +13,41 @@
     <validatedinput model="productToCreate" property="name" label="Name" placeholder="Name of the Product" form="productForms.create" validations="productForms.validations" results="productRepo.getResults()">
     </validatedinput>
 
-    <div class="form-group">
-      <label for="remoteProductManager">Associate Remote Product Manager</label>
-      <select class="form-control" ng-options="remoteProductManager.name for remoteProductManager in remoteProductManagers" ng-model="productToCreate.remoteProductManager" name="remoteProductManager">
-        <option value="" selected>None</option>
-      </select>
+    <div class="panel panel-default remote-product-panel">
+      <div class="panel-heading">
+        <div>
+          <label>Remote Products</label>
+          <div ng-if="addingRemoteProductInfo" class="btn-group pull-right" role="group">
+            <button ng-click="addRemoteProductInfo(productToCreate.remoteProducts, remoteProductInfoToAdd)" ng-disabled="remoteProductInfoToAdd.scopeId === null" class="btn btn-success" type="button">Add</button>
+            <button ng-click="closeAddRemoteProductInfo()" class="btn btn-default" type="button">Cancel</button>
+          </div>
+          <div ng-if="!addingRemoteProductInfo" class="btn btn-default pull-right" ng-click="openAddRemoteProductInfo()">Add</div>
+        </div>
+        <div class="form-group" ng-if="addingRemoteProductInfo">
+          <label for="remoteProductManager">Associate Remote Product Manager</label>
+          <select name="remoteProductManager" class="form-control" ng-model="remoteProductInfoToAdd.remoteProductManager" ng-options="remoteProductManager.name for remoteProductManager in remoteProductManagers | orderBy:'name'">
+            <option value="" selected>None</option>
+          </select>
+        </div>
+        <div class="form-group" ng-if="remoteProductInfoToAdd.remoteProductManager">
+          <label for="scopeId">Associate Remote Product</label>
+          <select name="scopeId" class="form-control" ng-model="remoteProductInfoToAdd.scopeId" ng-options="remoteProductManager.id as remoteProductManager.name for remoteProductManager in getRemoteProductManagerRemoteProducts(remoteProductInfoToAdd.remoteProductManager.id) | orderBy:'name' | availableRemoteProduct : productToCreate.remoteProducts">
+            <option value="" selected>None</option>
+          </select>
+        </div>
+      </div>
+      <div class="panel-body">
+        <ul class="list-group">
+          <li class="list-group-item" ng-repeat="remoteProduct in productToCreate.remoteProducts track by remoteProduct.scopeId" ng-model="productToCreate.remoteProducts">{{getRemoteProductByRemoteProductInfo(remoteProduct).name}}
+            <span class="glyphicon glyphicon-trash clickable pull-right" title="Remote Remote Product" ng-click="removeRemoteProductInfo(productToCreate.remoteProducts, remoteProduct)"></span>
+          </li>
+        </ul>
+      </div>
     </div>
 
-    <div class="form-group" ng-if="productToCreate.remoteProductManager">
+    <div class="form-group" ng-if="remoteProductInfoToAdd.remoteProductManager">
       <label for="remoteProductManager">Associate Version Product</label>
-      <select class="form-control" ng-options="remoteProductManager.id as remoteProductManager.name for remoteProductManager in getRemoteProductManagerRemoteProducts(productToCreate.remoteProductManager.id) | orderBy:'name'"
+      <select class="form-control" ng-options="remoteProductManager.id as remoteProductManager.name for remoteProductManager in getRemoteProductManagerRemoteProducts(remoteProductInfoToAdd.remoteProductManager.id) | orderBy:'name'"
         ng-model="productToCreate.scopeId" name="remoteProductManager">
         <option value="" selected>None</option>
       </select>
@@ -67,7 +92,6 @@
       validations="productForms.validations"
       results="productRepo.getResults()">
     </validatedinput>
-
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-default" ng-click="resetCreateProduct()">Cancel</button>
