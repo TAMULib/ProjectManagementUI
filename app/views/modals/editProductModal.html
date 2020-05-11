@@ -45,6 +45,58 @@
         </ul>
       </div>
     </div>
+
+    <div class="form-group" ng-if="remoteProductInfoToAdd.remoteProductManager">
+      <label for="remoteProductManager">Associate Version Product</label>
+      <select class="form-control" ng-options="remoteProductManager.id as remoteProductManager.name for remoteProductManager in getRemoteProductManagerRemoteProducts(remoteProductInfoToAdd.remoteProductManager.id) | orderBy:'name'"
+        ng-model="productToEdit.scopeId" name="remoteProductManager">
+        <option value="" selected>None</option>
+      </select>
+    </div>
+
+    <validatedinput
+      model="productToEdit"
+      property="devUrl"
+      label="Development Deployment Location"
+      placeholder="URL of Deployment"
+      form="productForms.edit"
+      validations="productForms.validations"
+      results="productForms.getResults()"
+      autocomplete="off">
+    </validatedinput>
+
+    <validatedinput
+      model="productToEdit"
+      property="preUrl"
+      label="Pre-Production Deployment Location"
+      placeholder="URL of Deployment"
+      form="productForms.edit"
+      validations="productForms.validations"
+      results="productForms.getResults()"
+      autocomplete="off">
+    </validatedinput>
+
+    <validatedinput
+      model="productToEdit"
+      property="productionUrl"
+      label="Production Deployment Location"
+      placeholder="URL of Deployment"
+      form="productForms.edit"
+      validations="productForms.validations"
+      results="productForms.getResults()"
+      autocomplete="off">
+    </validatedinput>
+
+    <validatedinput
+      model="productToEdit"
+      property="wikiUrl"
+      label="Product Wiki Page"
+      placeholder="URL of Wiki Page"
+      form="productForms.edit"
+      validations="productForms.validations"
+      results="productForms.getResults()"
+      autocomplete="off">
+    </validatedinput>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-default" ng-click="cancelEditProduct()">Cancel</button>
