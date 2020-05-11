@@ -43,9 +43,10 @@ describe("service: ProductsService", function () {
   describe("Is the service method", function () {
     var methods = [
       "getById",
-      "getProductRemoteProducts",
       "getProducts",
-      "refreshProducts"
+      "getRemoteProductInfo",
+      "refreshProducts",
+      "refreshRemoteProducts"
     ];
 
     var serviceMethodExists = function (method) {
@@ -82,15 +83,32 @@ describe("service: ProductsService", function () {
       //expect(response).toBe();
     });
 
-    it("getProductRemoteProducts should return all remote products for a given product", function () {
+    it("getRemoteProductInfo should return all remote product info for a given product", function () {
       var response;
-      var id = 1;
 
-       // @todo
+      // @todo
       //response = service.getById(id);
       //$scope.$digest();
 
       //expect(response.id).toBe(id);
+    });
+
+    it("refreshProducts should refresh products", function () {
+      var response;
+
+      // @todo
+      //response = service.refreshProducts();
+      //$scope.$digest();
+
+      //expect(response.id).toBe(id);
+    });
+
+    it("refreshRemoteProducts should refresh remote products", function () {
+      var response;
+
+      // @todo
+      //response = service.refreshRemoteProducts(id);
+      //$scope.$digest();
     });
   });
 

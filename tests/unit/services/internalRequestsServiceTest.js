@@ -2,7 +2,7 @@ describe("service: InternalRequestsService", function () {
   var $q, $rootScope, $scope, InternalRequestRepo, WsApi, service;
 
   var initializeVariables = function (settings) {
-    inject(function (_$q_, _$rootScope_, _InternalRequestRepo_, _WsApi_) {
+    inject(function (_$q_, _$rootScope_, _$timeout_, _InternalRequestRepo_, _WsApi_) {
       $q = _$q_;
       $rootScope = _$rootScope_;
 

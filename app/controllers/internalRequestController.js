@@ -1,4 +1,4 @@
-app.controller('InternalRequestController', function ($controller, $scope, ApiResponseActions, InternalRequestRepo, InternalRequestsService, ProductRepo, RemoteProductsByProductIdService, ProductsService) {
+app.controller('InternalRequestController', function ($controller, $scope, ApiResponseActions, InternalRequestRepo, InternalRequestsService, ProductRepo, ProductsService, WsApi) {
 
   angular.extend(this, $controller('AbstractController', {
     $scope: $scope
@@ -11,6 +11,10 @@ app.controller('InternalRequestController', function ($controller, $scope, ApiRe
   $scope.internalRequestToDelete = {};
 
   $scope.featureRequestToPush = {};
+
+  $scope.products = [];
+  $scope.remoteProducts = {};
+  $scope.remoteProductsLoading = false;
 
   $scope.resetInternalRequestForms = function () {
     InternalRequestRepo.clearValidationResults();
@@ -27,11 +31,40 @@ app.controller('InternalRequestController', function ($controller, $scope, ApiRe
   $scope.resetInternalRequestForms();
 
   if ($scope.isManager() || $scope.isAdmin()) {
-    $scope.remoteProductsByProduct = RemoteProductsByProductIdService.remoteProducts();
-    $scope.products = ProductsService.getProducts();
+    $scope.selectRemoteProducts = function () {
+      if ($scope.remoteProductsLoading === false) {
+        $scope.remoteProducts = {};
 
-    $scope.refreshProductRemoteProducts = function () {
-      RemoteProductsByProductIdService.refreshRemoteProductsByProductId($scope.featureRequestToPush.productId);
+        if (angular.isDefined($scope.featureRequestToPush.productId) && $scope.featureRequestToPush.productId !== null) {
+          var productId = $scope.featureRequestToPush.productId;
+          var remoteProducts = ProductsService.getRemoteProducts();
+
+          if (angular.isDefined(remoteProducts[productId])) {
+            angular.extend($scope.remoteProducts, remoteProducts[productId]);
+          } else {
+            $scope.refreshRemoteProducts(productId);
+          }
+        }
+      }
+    };
+
+    $scope.refreshRemoteProducts = function (productId) {
+      if ($scope.remoteProductsLoading === false) {
+        $scope.remoteProductsLoading = true;
+        $scope.remoteProducts = {};
+
+        ProductsService.refreshRemoteProducts(productId).then(null, null, function (res) {
+          remoteProducts = ProductsService.getRemoteProducts();
+
+          if (angular.isDefined(remoteProducts[productId])) {
+            angular.extend($scope.remoteProducts, remoteProducts[productId]);
+          }
+
+          $scope.remoteProductsLoading = false;
+        }).catch(function() {
+          $scope.remoteProductsLoading = false;
+        });
+      }
     };
 
     $scope.createInternalRequest = function () {
@@ -123,13 +156,21 @@ app.controller('InternalRequestController', function ($controller, $scope, ApiRe
       });
     };
 
-    ProductRepo.listen([ApiResponseActions.CREATE, ApiResponseActions.DELETE, ApiResponseActions.UPDATE], function () {
-      var products = ProductRepo.getAll();
+    ProductsService.ready.then(null, null, function () {
+      $scope.products = ProductsService.getProducts();
+    });
 
-      $scope.products.length = 0;
+    WsApi.listen(apiMapping.Product.listen).then(null, null, function (res) {
+      var productId = angular.isDefined($scope.featureRequestToPush.productId) ? $scope.featureRequestToPush.productId : null;
 
-      for (var i in products) {
-        $scope.products.push(products[i]);
+      ProductsService.refreshProducts();
+
+      if ($scope.remoteProductsLoading === false && productId !== null) {
+        var apiRes = angular.fromJson(res.body);
+
+        if (apiRes.meta.status === 'SUCCESS') {
+          $scope.refreshRemoteProducts(productId);
+        }
       }
     });
   }
