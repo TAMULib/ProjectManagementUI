@@ -461,22 +461,11 @@ var dataRemoteProducts = {
 angular.module("mock.remoteProductsService", []).service("RemoteProductsService", function ($q) {
   var service = mockService($q);
 
-  service.getRemoteProducts = function () {
+  service.getRemoteProductInfo = function () {
     return dataRemoteProducts;
   };
 
-  service.getByScopeId = function (remoteProductManagerId, scopeId) {
-    return $q(function (resolve, reject) {
-      for (var i in dataRemoteProducts[remoteProductManagerId]) {
-        if (dataRemoteProducts[remoteProductManagerId][i].id === scopeId) {
-          resolve(dataRemoteProducts[remoteProductManagerId][i]);
-        }
-      }
-      reject(undefined);
-    });
-  };
-
-  service.refreshRemoteProducts = function () {
+  service.refreshRemoteProductInfo = function () {
     return messagePromise($q.defer());
   };
 

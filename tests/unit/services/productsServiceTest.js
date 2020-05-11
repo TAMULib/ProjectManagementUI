@@ -42,7 +42,6 @@ describe("service: ProductsService", function () {
 
   describe("Is the service method", function () {
     var methods = [
-      "getById",
       "getProducts",
       "getRemoteProducts",
       "getRemoteProductInfo",
@@ -80,13 +79,6 @@ describe("service: ProductsService", function () {
   });
 
   describe("Do the service method", function () {
-    it("getById should return a product by the given id", function () {
-      service.getById(1).then(function (product) {
-        expect(product).toEqual(dataRemoteProducts["1"][0]);
-      });
-      $scope.$digest();
-    });
-
     it("getProducts should return all products", function () {
       var response = service.getProducts();
       expect(response).toEqual(dataProductRepo1);

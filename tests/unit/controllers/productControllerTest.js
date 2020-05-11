@@ -123,7 +123,7 @@ describe("controller: ProductController", function () {
 
   describe("Does the scope method", function () {
     it("addRemoteProductInfo should push changes and close info", function () {
-      var remoteProducts = [
+      var remoteProductInfo = [
         dataRemoteProducts[1],
         dataRemoteProducts[2],
         dataRemoteProducts[3],
@@ -132,13 +132,13 @@ describe("controller: ProductController", function () {
 
       $scope.remoteProductInfoChanged = null;
 
-      spyOn(remoteProducts, "push");
+      spyOn(remoteProductInfo, "push");
       spyOn($scope, "remoteProductInfoChanged");
 
-      $scope.addRemoteProductInfo(remoteProducts, remoteProduct);
+      $scope.addRemoteProductInfo(remoteProductInfo, remoteProduct);
 
       expect($scope.remoteProductInfoChanged).toEqual(true);
-      expect(remoteProducts.push).toHaveBeenCalled();
+      expect(remoteProductInfo.push).toHaveBeenCalled();
     });
 
     it("cancelEditProduct clear out productToEdit and call resetProductForms", function () {
@@ -281,7 +281,7 @@ describe("controller: ProductController", function () {
     });
 
     it("removeRemoteProductInfo should remove product info", function () {
-      var remoteProducts = [
+      var remoteProductInfo = [
         dataRemoteProducts[1],
         dataRemoteProducts[2],
         dataRemoteProducts[3],
@@ -290,12 +290,12 @@ describe("controller: ProductController", function () {
 
       $scope.remoteProductInfoChanged = null;
 
-      spyOn(remoteProducts, "splice");
+      spyOn(remoteProductInfo, "splice");
 
-      $scope.removeRemoteProductInfo(remoteProducts, remoteProduct);
+      $scope.removeRemoteProductInfo(remoteProductInfo, remoteProduct);
 
       expect($scope.remoteProductInfoChanged).toEqual(true);
-      expect(remoteProducts.splice).toHaveBeenCalled();
+      expect(remoteProductInfo.splice).toHaveBeenCalled();
     });
 
     it("updateProduct call dirty and save on the Product, and then call cancelEditProduct", function () {
