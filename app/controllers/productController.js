@@ -98,30 +98,34 @@ app.controller('ProductController', function ($controller, $scope, ApiResponseAc
         $scope.addingRemoteProductInfo = true;
     };
 
-    $scope.addRemoteProductInfo = function(remoteProducts, remoteProduct) {
-        remoteProducts.push(remoteProduct);
+    $scope.addRemoteProductInfo = function(remoteProductInfo, remoteProduct) {
+        remoteProductInfo.push(remoteProduct);
         $scope.remoteProductInfoChanged = true;
         $scope.closeAddRemoteProductInfo();
     };
 
-    $scope.removeRemoteProductInfo = function(remoteProducts, remoteProduct) {
-        remoteProducts.splice(remoteProducts.indexOf(remoteProduct), 1);
+    $scope.removeRemoteProductInfo = function(remoteProductInfo, remoteProduct) {
+        remoteProductInfo.splice(remoteProductInfo.indexOf(remoteProduct), 1);
         $scope.remoteProductInfoChanged = true;
     };
 
     if ($scope.isManager() || $scope.isAdmin()) {
         $scope.remoteProductManagers = RemoteProductManagerRepo.getAll();
 
-        $scope.remoteProducts = RemoteProductsService.getRemoteProducts();
+        $scope.remoteProductInfo = RemoteProductsService.getRemoteProductInfo();
 
         $scope.getRemoteProductManagerRemoteProducts = function (remoteProductManagerId) {
-            return $scope.remoteProducts[remoteProductManagerId];
+            return $scope.remoteProductInfo[remoteProductManagerId];
         };
 
         $scope.getRemoteProductByRemoteProductInfo = function(remoteProductInfo) {
-            return $scope.remoteProducts[remoteProductInfo.remoteProductManager.id].filter(function(rp) {
-                return rp.id === remoteProductInfo.scopeId;
-            })[0];
+          if (angular.isDefined(remoteProductInfo.remoteProductManager.id)) {
+            if (angular.isDefined($scope.remoteProductInfo[remoteProductInfo.remoteProductManager.id])) {
+              return $scope.remoteProductInfo[remoteProductInfo.remoteProductManager.id].filter(function(rp) {
+                  return rp.id === remoteProductInfo.scopeId;
+              })[0];
+            }
+          }
         };
 
         RemoteProductManagerRepo.listen([ApiResponseActions.CREATE, ApiResponseActions.DELETE, ApiResponseActions.UPDATE], function () {

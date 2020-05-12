@@ -42,9 +42,8 @@ describe("service: RemoteProductsService", function () {
 
   describe("Is the service method", function () {
     var methods = [
-      "getByScopeId",
-      "getRemoteProducts",
-      "refreshRemoteProducts"
+      "getRemoteProductInfo",
+      "refreshRemoteProductInfo"
     ];
 
     var serviceMethodExists = function (method) {
@@ -77,22 +76,15 @@ describe("service: RemoteProductsService", function () {
   });
 
   describe("Does the service method", function () {
-    it("getByScopeId get remote product by remote product manager id and scope id", function () {
-      $rootScope.$apply();
-      service.getByScopeId(1, 1934).then(function (remoteProduct) {
-        expect(remoteProduct).toEqual(dataRemoteProducts["1"][0]);
-      });
-    });
-
-    it("getRemoteProducts get remote products", function () {
-      var remoteProducts = service.getRemoteProducts();
+    it("getRemoteProductInfo get remote products", function () {
+      var remoteProducts = service.getRemoteProductInfo();
       expect(remoteProducts).toEqual(dataRemoteProducts);
     });
 
-    it("refreshRemoteProducts fetch remote products", function () {
+    it("refreshRemoteProductInfo fetch remote products", function () {
       deferred = $q.defer();
       spyOn(WsApi, "fetch").and.returnValue(deferred.promise);
-      service.refreshRemoteProducts();
+      service.refreshRemoteProductInfo();
       deferred.resolve(dataRemoteProducts);
       expect(WsApi.fetch).toHaveBeenCalledWith(apiMapping.RemoteProducts.all);
     });

@@ -18,7 +18,7 @@
         <div>
           <label>Remote Products</label>
           <div ng-if="addingRemoteProductInfo" class="btn-group pull-right" role="group">
-            <button ng-click="addRemoteProductInfo(productToCreate.remoteProducts, remoteProductInfoToAdd)" ng-disabled="remoteProductInfoToAdd.scopeId === null" class="btn btn-success" type="button">Add</button>
+            <button ng-click="addRemoteProductInfo(productToCreate.remoteProductInfo, remoteProductInfoToAdd)" ng-disabled="remoteProductInfoToAdd.scopeId === null" class="btn btn-success" type="button">Add</button>
             <button ng-click="closeAddRemoteProductInfo()" class="btn btn-default" type="button">Cancel</button>
           </div>
           <div ng-if="!addingRemoteProductInfo" class="btn btn-default pull-right" ng-click="openAddRemoteProductInfo()">Add</div>
@@ -31,26 +31,18 @@
         </div>
         <div class="form-group" ng-if="remoteProductInfoToAdd.remoteProductManager">
           <label for="scopeId">Associate Remote Product</label>
-          <select name="scopeId" class="form-control" ng-model="remoteProductInfoToAdd.scopeId" ng-options="remoteProductManager.id as remoteProductManager.name for remoteProductManager in getRemoteProductManagerRemoteProducts(remoteProductInfoToAdd.remoteProductManager.id) | orderBy:'name' | availableRemoteProduct : productToCreate.remoteProducts">
+          <select name="scopeId" class="form-control" ng-model="remoteProductInfoToAdd.scopeId" ng-options="remoteProductManager.id as remoteProductManager.name for remoteProductManager in getRemoteProductManagerRemoteProducts(remoteProductInfoToAdd.remoteProductManager.id) | orderBy:'name' | availableRemoteProduct : productToCreate.remoteProductInfo">
             <option value="" selected>None</option>
           </select>
         </div>
       </div>
       <div class="panel-body">
         <ul class="list-group">
-          <li class="list-group-item" ng-repeat="remoteProduct in productToCreate.remoteProducts track by remoteProduct.scopeId" ng-model="productToCreate.remoteProducts">{{getRemoteProductByRemoteProductInfo(remoteProduct).name}}
-            <span class="glyphicon glyphicon-trash clickable pull-right" title="Remote Remote Product" ng-click="removeRemoteProductInfo(productToCreate.remoteProducts, remoteProduct)"></span>
+          <li class="list-group-item" ng-repeat="remoteProduct in productToCreate.remoteProductInfo track by remoteProduct.scopeId" ng-model="productToCreate.remoteProductInfo">{{getRemoteProductByRemoteProductInfo(remoteProduct).name}}
+            <span class="glyphicon glyphicon-trash clickable pull-right" title="Remote Remote Product" ng-click="removeRemoteProductInfo(productToCreate.remoteProductInfo, remoteProduct)"></span>
           </li>
         </ul>
       </div>
-    </div>
-
-    <div class="form-group" ng-if="remoteProductInfoToAdd.remoteProductManager">
-      <label for="remoteProductManager">Associate Version Product</label>
-      <select class="form-control" ng-options="remoteProductManager.id as remoteProductManager.name for remoteProductManager in getRemoteProductManagerRemoteProducts(remoteProductInfoToAdd.remoteProductManager.id) | orderBy:'name'"
-        ng-model="productToCreate.scopeId" name="remoteProductManager">
-        <option value="" selected>None</option>
-      </select>
     </div>
 
     <validatedinput

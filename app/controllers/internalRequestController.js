@@ -92,6 +92,10 @@ app.controller('InternalRequestController', function ($controller, $scope, ApiRe
         scopeId: null
       };
 
+      if ($scope.remoteProductsLoading !== true) {
+        ProductsService.refreshProducts();
+      }
+
       $scope.openModal('#pushInternalRequestModal');
     };
 
@@ -110,9 +114,7 @@ app.controller('InternalRequestController', function ($controller, $scope, ApiRe
       }
 
       InternalRequestsService.pushFeatureRequest($scope.featureRequestToPush).then(function (res) {
-        if (angular.fromJson(res.body).meta.status === "SUCCESS") {
-          $scope.cancelPushFeatureRequest();
-        }
+        $scope.cancelPushFeatureRequest();
       });
     };
 

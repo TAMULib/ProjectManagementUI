@@ -78,21 +78,9 @@ app.service('ProductsService', function ($q, ProductRepo, WsApi) {
   service.getRemoteProductInfo = function (productId) {
     for (var i in products) {
       if (products[i].id == productId) {
-        return products[i].remoteProducts;
+        return products[i].remoteProductInfo;
       }
     }
-  };
-
-  service.getById = function (id) {
-    return $q(function (resolve, reject) {
-      service.ready.then(function () {
-        for (var i in products) {
-          if (products[i].id == id) {
-            resolve(products[i]);
-          }
-        }
-      });
-    }.bind(service));
   };
 
   service.refreshProducts();

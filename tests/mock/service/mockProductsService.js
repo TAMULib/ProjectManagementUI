@@ -4,17 +4,6 @@ var mockProductsService = function ($q, $timeout) {
   var products = {};
   var remoteProducts = {};
 
-  service.getById = function (id) {
-    return $q(function (resolve, reject) {
-      for (var i in dataProductRepo1) {
-        if (dataProductRepo1[i].id === scopeId) {
-          resolve(dataProductRepo1[i]);
-        }
-      }
-      reject(undefined);
-    });
-  }
-
   service.getProducts = function () {
     return products;
   };
@@ -22,7 +11,7 @@ var mockProductsService = function ($q, $timeout) {
   service.getRemoteProductInfo = function (productId) {
     for (var i in products) {
       if (products[i].id == productId) {
-        return products[i];
+        return products[i].remoteProductInfo;
       }
     }
   };
@@ -32,7 +21,7 @@ var mockProductsService = function ($q, $timeout) {
   };
 
   service.refreshProducts = function () {
-    return messagePromise();
+    return messagePromise($q.defer());
   };
 
   service.refreshRemoteProducts = function (productId) {

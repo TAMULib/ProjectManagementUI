@@ -20,7 +20,8 @@ angular.module("mock.productRepo", []).service("ProductRepo", function ($q) {
   var repo = mockRepo("ProductRepo", $q, mockProduct, dataProductRepo1);
 
   repo.scaffold = {
-    name: ''
+    name: '',
+    remoteProductInfo: []
   };
 
   repo.mockValidations({
