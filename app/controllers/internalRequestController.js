@@ -115,6 +115,8 @@ app.controller('InternalRequestController', function ($controller, $scope, ApiRe
 
       InternalRequestsService.pushFeatureRequest($scope.featureRequestToPush).then(function (res) {
         $scope.cancelPushFeatureRequest();
+      }).catch(function() {
+        $scope.cancelPushFeatureRequest();
       });
     };
 
