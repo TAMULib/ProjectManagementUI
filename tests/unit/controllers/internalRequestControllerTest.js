@@ -1,5 +1,5 @@
 describe("controller: InternalRequestController", function () {
-  var $q, $scope, $templateCache, $timeout, MockedInternalRequest, InternalRequestRepo, InternalRequestsService, ProductRepo, ProductsService, WsApi, controller;
+  var $compile, $q, $scope, $templateCache, $timeout, MockedInternalRequest, InternalRequestRepo, InternalRequestsService, ProductRepo, ProductsService, WsApi, controller;
 
   var initializeVariables = function () {
     inject(function (_$compile_, _$q_, _$templateCache_, _$timeout_, _InternalRequestRepo_, _InternalRequestsService_, _ProductRepo_, _ProductsService_, _RemoteProductManagerRepo_, _WsApi_) {

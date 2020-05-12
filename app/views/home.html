@@ -9,6 +9,9 @@
       <li role="presentation">
         <a href="#products" data-toggle="tab">Products</a>
       </li>
+      <li role="presentation">
+        <a href="#internal" data-toggle="tab">Internal Requests</a>
+      </li>
     </ul>
     <br/>
     <div class="tab-content clearfix">
@@ -104,6 +107,21 @@
               <td title="'Defect Count'">{{product.stats.defectCount}}</td>
               <td title="'Request Count'">{{product.stats.requestCount}}</td>
               <td title="'Issue Count'">{{product.stats.issueCount}}</td>
+            </tr>
+          </table>
+
+        </div>
+      </div>
+
+      <div class="tab-pane" id="internal" ng-controller="InternalStatsController">
+        <div class="row">
+
+          <table class="table table-bordered table-striped product-table">
+            <tr>
+              <th>Internal Requests</th>
+            </tr>
+            <tr>
+              <td title="'Count'">{{stats.internalCount}}</td>
             </tr>
           </table>
 

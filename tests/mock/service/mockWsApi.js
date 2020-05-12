@@ -89,9 +89,14 @@ angular.module("mock.wsApi", []).service("WsApi", function ($q) {
               }
             }
           }
-        }
 
-        return rejectPromise($q.defer());
+          return rejectPromise($q.defer());
+        }
+        else if (apiReq.method === 'stats') {
+          payload = {
+            "InternalStats": dataInternalStats1
+          };
+        }
       }
     }
 
