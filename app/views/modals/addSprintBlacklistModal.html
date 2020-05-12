@@ -1,0 +1,28 @@
+<div class="modal-header {{attr.modalHeaderClass}}">
+  <button type="button" class="close modal-close" aria-label="Close" ng-click="resetCreateSprintBlacklist()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <h4 class="modal-title">Create Sprint Blacklist</h4>
+</div>
+
+<form name="sprintBlacklistForms.create" ng-submit="createSprintBlacklist()" novalidate class="sprint-blacklist-forms-create">
+
+  <alerts seconds="60" channels="sprint-blacklist" types="WARNING,ERROR" exclusive></alerts>
+  <validationmessage results="sprintBlacklistForms.getResults()"></validationmessage>
+
+  <div class="modal-body">
+
+    <div class="form-group">
+      <label for="remoteProductManager">Associate Remote Product Manager</label>
+      <select name="remoteProductManager" class="form-control" ng-model="sprintBlacklistToCreate.remoteProductInfo" ng-options="activeSprint.name for activeSprint in activeSprints | orderBy:'name'">
+        <option value="" selected>None</option>
+      </select>
+    </div>
+    {{activeSprints}}
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="resetCreateSprintBlacklist()">Cancel</button>
+    <button type="submit" class="btn btn-success" ng-disabled="sprintBlacklistForms.create.$invalid">Create</button>
+  </div>
+</form>

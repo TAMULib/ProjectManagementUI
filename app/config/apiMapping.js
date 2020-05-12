@@ -150,6 +150,39 @@ var apiMapping = {
       'httpMethod': 'GET'
     }
   },
+  SprintBlacklist: {
+    validations: true,
+    lazy: true,
+    channel: '/channel/sprint-blacklist',
+    all: {
+      'endpoint': '/private/queue',
+      'controller': 'sprint-blacklist',
+      'method': '',
+      'httpMethod': 'GET'
+    },
+    create: {
+      'endpoint': '/private/queue',
+      'controller': 'sprint-blacklist',
+      'method': '',
+      'httpMethod': 'POST'
+    },
+    update: {
+      'endpoint': '/private/queue',
+      'controller': 'sprint-blacklist',
+      'method': '',
+      'httpMethod': 'PUT'
+    },
+    remove: {
+      'endpoint': '/private/queue',
+      'controller': 'sprint-blacklist',
+      'method': '',
+      'httpMethod': 'DELETE'
+    },
+    listen: {
+      'endpoint': '/channel',
+      'controller': 'sprint-blacklist'
+    }
+  },
   Status: {
     validations: true,
     lazy: true,

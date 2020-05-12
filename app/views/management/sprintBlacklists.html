@@ -1,0 +1,23 @@
+<div class="management-table" ng-controller="SprintBlacklistController">
+
+  <button class="btn btn-default view-action-button" ng-click="openModal('#addSprintBlacklistModal')">Blacklist a Sprint</button>
+  <hr />
+
+  <table class="table table-bordered table-striped sprint-blacklist-table">
+    <tr>
+      <th>Scope Id</th>
+      <th>Remote Product Manager</th>
+      <th class="actions-column text-center">Actions</th>
+    </tr>
+    <tr ng-repeat="blacklist in sprintBlacklists">
+      <td title="'Scope Id'">{{blacklist.remoteProductInfo.scopeId}}</td>
+      <td title="'Remote Product Manager'">{{blacklist.remoteProductInfo.remoteProductManager.name}}</td>
+      <td class="actions-column text-center" title="'Actions'">
+        <span class="glyphicon glyphicon-trash" title="delete" ng-click="confirmDeleteSprintBlacklist(blacklist)"></span>
+      </td>
+    </tr>
+  </table>
+
+  <modal modal-id="addSprintBlacklistModal" modal-view="views/modals/addSprintBlacklistModal.html" modal-header-class="modal-header-primary" wvr-modal-backdrop="static"></modal>
+  <modal modal-id="deleteSprintBlacklistModal" modal-view="views/modals/deleteSprintBlacklistModal.html" modal-header-class="modal-header-danger" wvr-modal-backdrop="static"></modal>
+</div>

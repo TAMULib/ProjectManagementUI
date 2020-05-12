@@ -1,0 +1,16 @@
+<form name="sprintBlacklistForms.create" ng-submit="confirmDeleteSprintBlacklist(sprintBlacklistToDelete)" novalidate>
+  <div class="modal-header {{attr.modalHeaderClass}}">
+    <button type="button" class="close modal-close" aria-label="Close" ng-click="cancelDeleteSprintBlacklist()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <h4 class="modal-title">Confirm Removal</h4>
+  </div>
+  <div class="modal-body">
+    <h3>Are you sure you want to remove the blacklist with scope id:</h3>
+    <p>{{sprintBlacklistToDelete.remoteProductInfo.scopeId}}</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="cancelDeleteSprintBlacklist()">Cancel</button>
+    <button type="submit" class="btn btn-danger">Confirm</button>
+  </div>
+</form>
