@@ -102,9 +102,9 @@ app.controller('InternalRequestController', function ($controller, $scope, ApiRe
     $scope.pushFeatureRequest = function () {
       for (var key in $scope.products) {
         if ($scope.products[key].id == $scope.featureRequestToPush.productId) {
-          for (var k in $scope.products[key].remoteProducts) {
-            if ($scope.products[key].remoteProducts[k].scopeId == $scope.featureRequestToPush.scopeId) {
-              $scope.featureRequestToPush.rpmId = $scope.products[key].remoteProducts[k].remoteProductManager.id;
+          for (var k in $scope.products[key].remoteProductInfo) {
+            if ($scope.products[key].remoteProductInfo[k].scopeId == $scope.featureRequestToPush.scopeId) {
+              $scope.featureRequestToPush.rpmId = $scope.products[key].remoteProductInfo[k].remoteProductManager.id;
               break;
             }
           }
