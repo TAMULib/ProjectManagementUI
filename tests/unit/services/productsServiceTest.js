@@ -43,8 +43,10 @@ describe("service: ProductsService", function () {
   describe("Is the service method", function () {
     var methods = [
       "getProducts",
+      "getProductsLoading",
       "getRemoteProducts",
       "getRemoteProductInfo",
+      "getRemoteProductsLoading",
       "refreshProducts",
       "refreshRemoteProducts"
     ];
@@ -84,14 +86,20 @@ describe("service: ProductsService", function () {
       expect(response).toEqual(dataProductRepo1);
     });
 
+    it("getProductsLoading should return the current loading status for projects", function () {
+      var response = service.getProductsLoading();
+      expect(response).toEqual(false);
+    });
+
     it("getRemoteProducts should return all remote products for a given product", function () {
-      var response;
+      // @todo
+      //var response = service.getRemoteProducts();
+      //expect(response).toEqual(dataRemoteProducts);
+    });
 
-      // @todo needs to be a test that checks when remote products has products assigned:
-      //service.refreshRemoteProducts(1);
-
-      response = service.getRemoteProducts();
-      expect(response).toEqual({});
+    it("getRemoteProductsLoading should return the current loading status for all remote products", function () {
+      var response = service.getRemoteProductsLoading();
+      expect(response).toBeDefined();
     });
 
     it("getRemoteProductInfo should return all remote product info for a given product", function () {

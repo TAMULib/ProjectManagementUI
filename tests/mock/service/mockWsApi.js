@@ -28,6 +28,10 @@ angular.module("mock.wsApi", []).service("WsApi", function ($q) {
   service.fetch = function (apiReq, options) {
     var payload = {};
 
+    if (angular.isUndefined(apiReq)) {
+      return rejectPromise($q.defer());
+    }
+
     if (fetchResponse) {
       switch (fetchResponse.type) {
         case "message":

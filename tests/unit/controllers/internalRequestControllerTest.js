@@ -1,12 +1,11 @@
 describe("controller: InternalRequestController", function () {
-  var $q, $scope, $templateCache, $timeout, MockedInternalRequest, InternalRequestRepo, InternalRequestsService, ProductRepo, ProductsService, WsApi, controller;
+  var $q, $scope, $templateCache, MockedInternalRequest, InternalRequestRepo, InternalRequestsService, ProductRepo, ProductsService, WsApi, controller;
 
   var initializeVariables = function () {
-    inject(function (_$compile_, _$q_, _$templateCache_, _$timeout_, _InternalRequestRepo_, _InternalRequestsService_, _ProductRepo_, _ProductsService_, _RemoteProductManagerRepo_, _WsApi_) {
+    inject(function (_$compile_, _$q_, _$templateCache_, _InternalRequestRepo_, _InternalRequestsService_, _ProductRepo_, _ProductsService_, _RemoteProductManagerRepo_, _WsApi_) {
       $compile = _$compile_;
       $q = _$q_;
       $templateCache = _$templateCache_;
-      $timeout = _$timeout_;
 
       MockedInternalRequest = new mockInternalRequest($q);
 
@@ -250,36 +249,43 @@ describe("controller: InternalRequestController", function () {
       expect($scope.openModal).toHaveBeenCalled();
     });
 
-    it("refreshRemoteProducts call refreshRemoteProducts() and toggle remoteProductsLoading", function () {
+    it("refreshRemoteProducts should call the service refresh for a given product id", function () {
       var featureRequest = new mockFeatureRequest($q);
-      $scope.remoteProductsLoading = false;
-      $scope.remoteProducts = { removeThis: "" };
+      $scope.remoteProducts = {};
+      $scope.remoteProducts[featureRequest.productId] = {};
+      $scope.remoteProductsLoading = {};
+      $scope.remoteProductsLoading[featureRequest.productId] = false;
 
-      spyOn(ProductsService, "refreshRemoteProducts").and.callThrough();
+      spyOn(ProductsService, "refreshRemoteProducts");
 
       $scope.refreshRemoteProducts(featureRequest.productId);
-
-      expect($scope.remoteProductsLoading).toBe(true);
-
-      $timeout.flush();
-
       expect(ProductsService.refreshRemoteProducts).toHaveBeenCalledWith(featureRequest.productId);
-      expect($scope.remoteProducts.removeThis).not.toBeDefined();
-      expect($scope.remoteProductsLoading).toBe(false);
     });
 
-    it("refreshRemoteProducts should do nothing when remoteProductsLoading is true", function () {
+    it("refreshRemoteProducts should not call the service refresh for a given product id when remoteProductsLoading for that product id", function () {
       var featureRequest = new mockFeatureRequest($q);
-      $scope.featureRequestToPush = featureRequest;
-      $scope.remoteProductsLoading = true;
-      $scope.remoteProducts = { removeThis: "" };
+      $scope.remoteProducts = {};
+      $scope.remoteProducts[featureRequest.productId] = {};
+      $scope.remoteProductsLoading = {};
+      $scope.remoteProductsLoading[featureRequest.productId] = true;
+
+      spyOn(ProductsService, "refreshRemoteProducts");
+
+      $scope.refreshRemoteProducts(featureRequest.productId);
+      expect(ProductsService.refreshRemoteProducts).not.toHaveBeenCalled();
+    });
+
+    it("refreshRemoteProducts should not call the service refresh when there is no given product id", function () {
+      var featureRequest = new mockFeatureRequest($q);
+      $scope.remoteProducts = {};
+      $scope.remoteProducts[featureRequest.productId] = {};
+      $scope.remoteProductsLoading = {};
+      $scope.remoteProductsLoading[featureRequest.productId] = false;
 
       spyOn(ProductsService, "refreshRemoteProducts");
 
       $scope.refreshRemoteProducts();
-
       expect(ProductsService.refreshRemoteProducts).not.toHaveBeenCalled();
-      expect($scope.remoteProducts.removeThis).toBeDefined();
     });
 
     it("resetCreateInternalRequest call resetInternalRequestForms() and clear out the properties", function () {
@@ -329,36 +335,35 @@ describe("controller: InternalRequestController", function () {
       expect($scope.closeModal).toHaveBeenCalled();
     });
 
-    it("selectRemoteProducts select a remote product, set loading boolean, and refresh if needed", function () {
-      var featureRequest = new mockFeatureRequest($q);
-
-      $scope.remoteProducts = { removeThis: "" };
-
-      $scope.featureRequestToPush = featureRequest;
-      $scope.remoteProductsLoading = false;
+    it("selectRemoteProducts select should call refresh for a given product id", function () {
+      $scope.featureRequestToPush = new mockFeatureRequest($q);
+      $scope.remoteProducts = {};
 
       spyOn($scope, "refreshRemoteProducts");
 
       $scope.selectRemoteProducts();
-
       expect($scope.refreshRemoteProducts).toHaveBeenCalled();
-      expect($scope.remoteProducts.removeThis).not.toBeDefined();
     });
 
-    it("selectRemoteProducts does nothing when remoteProductsLoading is true", function () {
-      var featureRequest = new mockFeatureRequest($q);
-
-      $scope.remoteProducts = { removeThis: "" };
-
-      $scope.featureRequestToPush = featureRequest;
-      $scope.remoteProductsLoading = true;
+    it("selectRemoteProducts select should not call refresh for a given product id if already loaded", function () {
+      $scope.featureRequestToPush = new mockFeatureRequest($q);
+      $scope.remoteProducts = {};
+      $scope.remoteProducts[$scope.featureRequestToPush.productId] = {};
 
       spyOn($scope, "refreshRemoteProducts");
 
       $scope.selectRemoteProducts();
-
       expect($scope.refreshRemoteProducts).not.toHaveBeenCalled();
-      expect($scope.remoteProducts.removeThis).toBeDefined();
+    });
+
+    it("selectRemoteProducts should not call refresh if no product id is available", function () {
+      $scope.featureRequestToPush = {};
+      $scope.remoteProducts = {};
+
+      spyOn($scope, "refreshRemoteProducts");
+
+      $scope.selectRemoteProducts();
+      expect($scope.refreshRemoteProducts).not.toHaveBeenCalled();
     });
 
     it("updateInternalRequest call dirty and save on the InternalRequest, and then call cancelEditInternalRequest", function () {
