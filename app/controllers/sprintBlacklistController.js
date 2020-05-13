@@ -22,7 +22,6 @@ app.controller('SprintBlacklistController', function ($controller, $scope, Activ
         var activeSprints = ActiveSprintsService.getActiveSprints();
         var sprints = [];
         for (var i = 0; i < activeSprints.length; i++) {
-            console.log(activeSprints[i])
             var rpi = {};
             rpi.name = activeSprints[i].name;
             rpi.scopeId = activeSprints[i].id;
@@ -45,7 +44,6 @@ app.controller('SprintBlacklistController', function ($controller, $scope, Activ
     $scope.resetSprintBlacklistForms();
 
     $scope.createSprintBlacklist = function () {
-        console.log($scope.sprintBlacklistToCreate)
         var rpi = $scope.sprintBlacklistToCreate.remoteProductInfo;
         var blacklist = {
             remoteProductInfo: {
@@ -53,7 +51,6 @@ app.controller('SprintBlacklistController', function ($controller, $scope, Activ
                 remoteProductManager: RemoteProductManagerRepo.findById(rpi.productId)
             }
         };
-        console.log(blacklist)
         SprintBlacklistRepo.create(blacklist).then(function (res) {
             if (angular.fromJson(res.body).meta.status === 'SUCCESS') {
                 $scope.resetCreateSprintBlacklist();
@@ -74,6 +71,14 @@ app.controller('SprintBlacklistController', function ($controller, $scope, Activ
     $scope.cancelDeleteSprintBlacklist = function () {
         $scope.sprintBlacklistToDelete = {};
         $scope.closeModal();
+    };
+
+    $scope.deleteSprintBlacklist = function (blacklist) {
+        SprintBlacklistRepo.delete(blacklist).then(function (res) {
+            if (angular.fromJson(res.body).meta.status === 'SUCCESS') {
+                $scope.cancelDeleteSprintBlacklist();
+            }
+        });
     };
 
     SprintBlacklistRepo.listen([ApiResponseActions.CREATE, ApiResponseActions.DELETE, ApiResponseActions.UPDATE], function () {
