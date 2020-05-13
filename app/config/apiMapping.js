@@ -42,6 +42,16 @@ var apiMapping = {
       'method': 'push/:requestId/:productId/:rpmId',
       'httpMethod': 'PUT'
     },
+    stats: {
+      'endpoint': '/private/queue',
+      'controller': 'internal/request',
+      'method': 'stats',
+      'httpMethod': 'GET'
+    },
+    listen: {
+      'endpoint': '/channel',
+      'controller': 'internal/request'
+    }
   },
   InternalRequest: {
     validations: true,

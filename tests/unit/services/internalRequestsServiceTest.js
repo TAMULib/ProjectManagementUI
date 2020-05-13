@@ -137,7 +137,6 @@ describe("service: InternalRequestsService", function () {
 
       expect(response).toBe(false);
     });
-
   });
 
 });
