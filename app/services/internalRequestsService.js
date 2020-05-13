@@ -1,7 +1,7 @@
-app.service('InternalRequestsService', function ($q, InternalRequestRepo, WsApi) {
-  var internalRequestsService = this;
+app.service('InternalRequestsService', function ($q, WsApi) {
+  var service = this;
 
-  internalRequestsService.pushFeatureRequest = function(featureRequest) {
+  service.pushFeatureRequest = function(featureRequest) {
     var options = {
       data: featureRequest.scopeId,
       pathValues: {
