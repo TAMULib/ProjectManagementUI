@@ -12,7 +12,7 @@ app.service('ProductsStatsService', function ($q, ProductRepo, WsApi) {
             ProductRepo.reset();
         } else {
             console.error(apiRes.meta);
-            throw "Unable to retrieve remote products";
+            throw "Unable to retrieve remote projects";
         }
     };
 

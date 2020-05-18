@@ -4,15 +4,15 @@ var mockProductsService = function ($q, $timeout) {
   var defer = $q.defer();
   var products = [];
   var productsLoading = false;
-  var remoteProducts = {};
-  var remoteProductsLoading = [];
+  var remoteProjects = {};
+  var remoteProjectsLoading = [];
 
   service.mockProductsLoading = function (loading) {
     productsLoading = loading ? true : false;
   };
 
-  service.remoteProductsLoading = function (productId, loading) {
-    remoteProductsLoading[productId] = loading ? true : false;
+  service.remoteProjectsLoading = function (productId, loading) {
+    remoteProjectsLoading[productId] = loading ? true : false;
   };
 
   service.refreshProducts = function () {
@@ -20,8 +20,8 @@ var mockProductsService = function ($q, $timeout) {
     return messagePromise($q.defer());
   };
 
-  service.refreshRemoteProducts = function (productId) {
-    remoteProductsLoading[productId] = false;
+  service.refreshRemoteProjectsForProduct = function (productId) {
+    remoteProjectsLoading[productId] = false;
 
     if (dataFeatureRequest1.id == productId) {
       return notifyPromise($timeout, $q.defer(), dataFeatureRequest1);
@@ -34,18 +34,18 @@ var mockProductsService = function ($q, $timeout) {
     return productsLoading;
   };
 
-  service.getRemoteProducts = function () {
-    return remoteProducts;
+  service.getRemoteProjects = function () {
+    return remoteProjects;
   };
 
-  service.getRemoteProductsLoading = function () {
-    return remoteProductsLoading;
+  service.getRemoteProjectsLoading = function () {
+    return remoteProjectsLoading;
   };
 
-  service.getRemoteProductInfo = function (productId) {
+  service.getRemoteProjectInfo = function (productId) {
     for (var i in products) {
       if (products[i].id == productId) {
-        return products[i].remoteProductInfo;
+        return products[i].remoteProjectInfo;
       }
     }
   };

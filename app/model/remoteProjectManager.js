@@ -1,5 +1,5 @@
-app.model("RemoteProductManager", function RemoteProductManager() {
-    return function RemoteProductManager() {
+app.model("RemoteProjectManager", function RemoteProjectManager() {
+    return function RemoteProjectManager() {
         return this;
     };
 });

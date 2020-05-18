@@ -1,4 +1,4 @@
-describe("service: RemoteProductsService", function () {
+describe("service: RemoteProjectsService", function () {
   var $q, $rootScope, $scope, ProductRepo, WsApi, service;
 
   var initializeVariables = function (settings) {
@@ -12,10 +12,10 @@ describe("service: RemoteProductsService", function () {
   };
 
   var initializeService = function (settings) {
-    inject(function ($injector, _RemoteProductsService_) {
+    inject(function ($injector, _RemoteProjectsService_) {
       $scope = $rootScope.$new();
 
-      service = _RemoteProductsService_;
+      service = _RemoteProjectsService_;
 
       // ensure that the isReady() is called.
       if (!$scope.$$phase) {
@@ -42,8 +42,8 @@ describe("service: RemoteProductsService", function () {
 
   describe("Is the service method", function () {
     var methods = [
-      "getRemoteProductInfo",
-      "refreshRemoteProductInfo"
+      "getRemoteProjectInfo",
+      "refreshRemoteProjectInfo"
     ];
 
     var serviceMethodExists = function (method) {
@@ -76,17 +76,17 @@ describe("service: RemoteProductsService", function () {
   });
 
   describe("Does the service method", function () {
-    it("getRemoteProductInfo get remote products", function () {
-      var remoteProducts = service.getRemoteProductInfo();
-      expect(remoteProducts).toEqual(dataRemoteProducts);
+    it("getRemoteProjectInfo get remote projects", function () {
+      var remoteProjects = service.getRemoteProjectInfo();
+      expect(remoteProjects).toEqual(dataRemoteProjects);
     });
 
-    it("refreshRemoteProductInfo fetch remote products", function () {
+    it("refreshRemoteProjectInfo fetch remote projects", function () {
       deferred = $q.defer();
       spyOn(WsApi, "fetch").and.returnValue(deferred.promise);
-      service.refreshRemoteProductInfo();
-      deferred.resolve(dataRemoteProducts);
-      expect(WsApi.fetch).toHaveBeenCalledWith(apiMapping.RemoteProducts.all);
+      service.refreshRemoteProjectInfo();
+      deferred.resolve(dataRemoteProjects);
+      expect(WsApi.fetch).toHaveBeenCalledWith(apiMapping.RemoteProjects.all);
     });
   });
 

@@ -1,4 +1,4 @@
-app.controller('ProductController', function ($controller, $scope, ApiResponseActions, ProductRepo, RemoteProductManagerRepo, RemoteProductsService) {
+app.controller('ProductController', function ($controller, $scope, ApiResponseActions, ProductRepo, RemoteProjectManagerRepo, RemoteProjectsService) {
 
     angular.extend(this, $controller('AbstractController', {
         $scope: $scope
@@ -10,11 +10,11 @@ app.controller('ProductController', function ($controller, $scope, ApiResponseAc
 
     $scope.productToDelete = {};
 
-    $scope.addingRemoteProductInfo = false;
-    $scope.remoteProductInfoChanged = false;
+    $scope.addingRemoteProjectInfo = false;
+    $scope.remoteProjectInfoChanged = false;
 
-    $scope.remoteProductInfoToAdd = {
-        remoteProductManager: null,
+    $scope.remoteProjectInfoToAdd = {
+        remoteProjectManager: null,
         scopeId: null
     };
 
@@ -23,10 +23,10 @@ app.controller('ProductController', function ($controller, $scope, ApiResponseAc
         getResults: ProductRepo.getValidationResults
     };
 
-    $scope.closeAddRemoteProductInfo = function() {
-        $scope.addingRemoteProductInfo = false;
-        $scope.remoteProductInfoToAdd = {
-            remoteProductManager: null,
+    $scope.closeAddRemoteProjectInfo = function() {
+        $scope.addingRemoteProjectInfo = false;
+        $scope.remoteProjectInfoToAdd = {
+            remoteProjectManager: null,
             scopeId: null
         };
     };
@@ -38,8 +38,8 @@ app.controller('ProductController', function ($controller, $scope, ApiResponseAc
                 $scope.productForms[key].$setPristine();
             }
         }
-        $scope.closeAddRemoteProductInfo();
-        $scope.remoteProductInfoChanged = false;
+        $scope.closeAddRemoteProjectInfo();
+        $scope.remoteProjectInfoChanged = false;
         $scope.closeModal();
     };
 
@@ -94,45 +94,45 @@ app.controller('ProductController', function ($controller, $scope, ApiResponseAc
         });
     };
 
-    $scope.openAddRemoteProductInfo = function() {
-        $scope.addingRemoteProductInfo = true;
+    $scope.openAddRemoteProjectInfo = function() {
+        $scope.addingRemoteProjectInfo = true;
     };
 
-    $scope.addRemoteProductInfo = function(remoteProductInfo, remoteProduct) {
-        remoteProductInfo.push(remoteProduct);
-        $scope.remoteProductInfoChanged = true;
-        $scope.closeAddRemoteProductInfo();
+    $scope.addRemoteProjectInfo = function(remoteProjectInfo, remoteProject) {
+        remoteProjectInfo.push(remoteProject);
+        $scope.remoteProjectInfoChanged = true;
+        $scope.closeAddRemoteProjectInfo();
     };
 
-    $scope.removeRemoteProductInfo = function(remoteProductInfo, remoteProduct) {
-        remoteProductInfo.splice(remoteProductInfo.indexOf(remoteProduct), 1);
-        $scope.remoteProductInfoChanged = true;
+    $scope.removeRemoteProjectInfo = function(remoteProjectInfo, remoteProject) {
+        remoteProjectInfo.splice(remoteProjectInfo.indexOf(remoteProject), 1);
+        $scope.remoteProjectInfoChanged = true;
     };
 
     if ($scope.isManager() || $scope.isAdmin()) {
-        $scope.remoteProductManagers = RemoteProductManagerRepo.getAll();
+        $scope.remoteProjectManagers = RemoteProjectManagerRepo.getAll();
 
-        $scope.remoteProductInfo = RemoteProductsService.getRemoteProductInfo();
+        $scope.remoteProjectInfo = RemoteProjectsService.getRemoteProjectInfo();
 
-        $scope.getRemoteProductManagerRemoteProducts = function (remoteProductManagerId) {
-            return $scope.remoteProductInfo[remoteProductManagerId];
+        $scope.getRemoteProjectManagerRemoteProjects = function (remoteProjectManagerId) {
+            return $scope.remoteProjectInfo[remoteProjectManagerId];
         };
 
-        $scope.getRemoteProductByRemoteProductInfo = function(remoteProductInfo) {
-          if (angular.isDefined(remoteProductInfo.remoteProductManager.id)) {
-            if (angular.isDefined($scope.remoteProductInfo[remoteProductInfo.remoteProductManager.id])) {
-              return $scope.remoteProductInfo[remoteProductInfo.remoteProductManager.id].filter(function(rp) {
-                  return rp.id === remoteProductInfo.scopeId;
+        $scope.getRemoteProjectByRemoteProjectInfo = function(remoteProjectInfo) {
+          if (angular.isDefined(remoteProjectInfo.remoteProjectManager.id)) {
+            if (angular.isDefined($scope.remoteProjectInfo[remoteProjectInfo.remoteProjectManager.id])) {
+              return $scope.remoteProjectInfo[remoteProjectInfo.remoteProjectManager.id].filter(function(rp) {
+                  return rp.id === remoteProjectInfo.scopeId;
               })[0];
             }
           }
         };
 
-        RemoteProductManagerRepo.listen([ApiResponseActions.CREATE, ApiResponseActions.DELETE, ApiResponseActions.UPDATE], function () {
-            $scope.remoteProductManagers.length = 0;
-            var remoteProductManagers = RemoteProductManagerRepo.getAll();
-            for (var i in remoteProductManagers) {
-                $scope.remoteProductManagers.push(remoteProductManagers[i]);
+        RemoteProjectManagerRepo.listen([ApiResponseActions.CREATE, ApiResponseActions.DELETE, ApiResponseActions.UPDATE], function () {
+            $scope.remoteProjectManagers.length = 0;
+            var remoteProjectManagers = RemoteProjectManagerRepo.getAll();
+            for (var i in remoteProjectManagers) {
+                $scope.remoteProjectManagers.push(remoteProjectManagers[i]);
             }
         });
     }

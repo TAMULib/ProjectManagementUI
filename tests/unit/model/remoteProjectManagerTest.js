@@ -1,4 +1,4 @@
-describe("model: RemoteProductManager", function () {
+describe("model: RemoteProjectManager", function () {
   var $rootScope, $scope, WsApi, model;
 
   var initializeVariables = function (settings) {
@@ -10,10 +10,10 @@ describe("model: RemoteProductManager", function () {
   };
 
   var initializeModel = function (settings) {
-    inject(function (_RemoteProductManager_) {
+    inject(function (_RemoteProjectManager_) {
       $scope = $rootScope.$new();
 
-      model = angular.extend(new _RemoteProductManager_(), dataRemoteProductManager1);
+      model = angular.extend(new _RemoteProjectManager_(), dataRemoteProjectManager1);
     });
   };
 

@@ -1,39 +1,39 @@
-app.service('RemoteProductsService', function ($q, ProductRepo, WsApi) {
+app.service('RemoteProjectsService', function ($q, ProductRepo, WsApi) {
 
-  var remoteProductInfo = {};
+  var remoteProjectInfo = {};
 
   var defer = $q.defer();
 
   var process = function (response) {
     var apiRes = angular.fromJson(response.body);
     if (apiRes.meta.status === 'SUCCESS') {
-      for (var key in remoteProductInfo) {
-        remoteProductInfo[key] = undefined;
+      for (var key in remoteProjectInfo) {
+        remoteProjectInfo[key] = undefined;
       }
-      angular.extend(remoteProductInfo, apiRes.payload.HashMap);
+      angular.extend(remoteProjectInfo, apiRes.payload.HashMap);
       defer.resolve();
       ProductRepo.reset();
     } else {
       console.error(apiRes.meta);
-      throw "Unable to retrieve remote product information";
+      throw "Unable to retrieve remote project information";
     }
   };
 
-  WsApi.listen(apiMapping.RemoteProducts.listen).then(null, null, function (response) {
+  WsApi.listen(apiMapping.RemoteProjects.listen).then(null, null, function (response) {
     process(response);
   });
 
-  this.refreshRemoteProductInfo = function () {
-    WsApi.fetch(apiMapping.RemoteProducts.all).then(function (response) {
+  this.refreshRemoteProjectInfo = function () {
+    WsApi.fetch(apiMapping.RemoteProjects.all).then(function (response) {
       process(response);
     });
   };
 
-  this.getRemoteProductInfo = function () {
-    return remoteProductInfo;
+  this.getRemoteProjectInfo = function () {
+    return remoteProjectInfo;
   };
 
-  this.refreshRemoteProductInfo();
+  this.refreshRemoteProjectInfo();
 
   this.ready = defer.promise;
 

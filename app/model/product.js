@@ -1,4 +1,4 @@
-app.model("Product", function Product(ProductsStatsService, RemoteProductsService) {
+app.model("Product", function Product(ProductsStatsService, RemoteProjectsService) {
   return function Product() {
     var product = this;
 

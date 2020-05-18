@@ -56,13 +56,13 @@ angular.module("mock.wsApi", []).service("WsApi", function ($q) {
         payload = {
           "ArrayList<ProductStats>": dataProductsStats
         };
-      } else if (apiReq === mapping.RemoteProducts.byProduct) {
+      } else if (apiReq === mapping.RemoteProjects.byProduct) {
         payload = {
-          "HashMap": dataRemoteProducts
+          "HashMap": dataRemoteProjects
         };
-      } else if (apiReq === mapping.RemoteProducts.all) {
+      } else if (apiReq === mapping.RemoteProjects.all) {
         payload = {
-          "HashMap": dataRemoteProducts
+          "HashMap": dataRemoteProjects
         };
       } else if (apiReq === mapping.Product.all) {
         payload = {

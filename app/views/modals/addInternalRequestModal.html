@@ -37,7 +37,7 @@
 
     <div class="form-group">
       <label for="product">Associate Product</label>
-      <select name="product" class="form-control" ng-model="internalRequestToCreate.product" ng-options="product as product.name for product in products track by product.id" ng-change="selectRemoteProducts()" ng-disabled="productsLoading">
+      <select name="product" class="form-control" ng-model="internalRequestToCreate.product" ng-options="product as product.name for product in products track by product.id" ng-change="selectRemoteProjects()" ng-disabled="productsLoading">
         <option value="" selected>None</option>
       </select>
     </div>

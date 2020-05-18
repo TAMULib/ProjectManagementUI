@@ -44,11 +44,11 @@ describe("service: ProductsService", function () {
     var methods = [
       "getProducts",
       "getProductsLoading",
-      "getRemoteProducts",
-      "getRemoteProductInfo",
-      "getRemoteProductsLoading",
+      "getRemoteProjects",
+      "getRemoteProjectInfo",
+      "getRemoteProjectsLoading",
       "refreshProducts",
-      "refreshRemoteProducts"
+      "refreshRemoteProjectsForProduct"
     ];
 
     var serviceMethodExists = function (method) {
@@ -91,18 +91,18 @@ describe("service: ProductsService", function () {
       expect(response).toEqual(false);
     });
 
-    it("getRemoteProducts should return all remote products for a given product", function () {
+    it("getRemoteProjects should return all remote projects for a given product", function () {
       // @todo
-      //var response = service.getRemoteProducts();
-      //expect(response).toEqual(dataRemoteProducts);
+      //var response = service.getRemoteProjects();
+      //expect(response).toEqual(dataRemoteProjects);
     });
 
-    it("getRemoteProductsLoading should return the current loading status for all remote products", function () {
-      var response = service.getRemoteProductsLoading();
+    it("getRemoteProjectsLoading should return the current loading status for all remote projects", function () {
+      var response = service.getRemoteProjectsLoading();
       expect(response).toBeDefined();
     });
 
-    it("getRemoteProductInfo should return all remote product info for a given product", function () {
+    it("getRemoteProjectInfo should return all remote project info for a given product", function () {
       var response;
 
       // @todo
@@ -122,11 +122,11 @@ describe("service: ProductsService", function () {
       //expect(response.id).toBe(id);
     });
 
-    it("refreshRemoteProducts should refresh remote products", function () {
+    it("refreshRemoteProjectsForProduct should refresh remote projects", function () {
       var response;
 
       // @todo
-      //response = service.refreshRemoteProducts(id);
+      //response = service.refreshRemoteProjectsForProduct(id);
       //$scope.$digest();
     });
   });

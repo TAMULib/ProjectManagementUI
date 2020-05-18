@@ -17,29 +17,29 @@
       <div class="panel-heading">
         <div>
           <label>Remote Products</label>
-          <div ng-if="addingRemoteProductInfo" class="btn-group pull-right" role="group">
-            <button ng-click="addRemoteProductInfo(productToCreate.remoteProductInfo, remoteProductInfoToAdd)" ng-disabled="remoteProductInfoToAdd.scopeId === null" class="btn btn-success" type="button">Add</button>
-            <button ng-click="closeAddRemoteProductInfo()" class="btn btn-default" type="button">Cancel</button>
+          <div ng-if="addingRemoteProjectInfo" class="btn-group pull-right" role="group">
+            <button ng-click="addRemoteProjectInfo(productToCreate.remoteProjectInfo, remoteProjectInfoToAdd)" ng-disabled="remoteProjectInfoToAdd.scopeId === null" class="btn btn-success" type="button">Add</button>
+            <button ng-click="closeAddRemoteProjectInfo()" class="btn btn-default" type="button">Cancel</button>
           </div>
-          <div ng-if="!addingRemoteProductInfo" class="btn btn-default pull-right" ng-click="openAddRemoteProductInfo()">Add</div>
+          <div ng-if="!addingRemoteProjectInfo" class="btn btn-default pull-right" ng-click="openAddRemoteProjectInfo()">Add</div>
         </div>
-        <div class="form-group" ng-if="addingRemoteProductInfo">
-          <label for="remoteProductManager">Associate Remote Product Manager</label>
-          <select name="remoteProductManager" class="form-control" ng-model="remoteProductInfoToAdd.remoteProductManager" ng-options="remoteProductManager.name for remoteProductManager in remoteProductManagers | orderBy:'name'">
+        <div class="form-group" ng-if="addingRemoteProjectInfo">
+          <label for="remoteProjectManager">Associate Remote Project Manager</label>
+          <select name="remoteProjectManager" class="form-control" ng-model="remoteProjectInfoToAdd.remoteProjectManager" ng-options="remoteProjectManager.name for remoteProjectManager in remoteProjectManagers | orderBy:'name'">
             <option value="" selected>None</option>
           </select>
         </div>
-        <div class="form-group" ng-if="remoteProductInfoToAdd.remoteProductManager">
-          <label for="scopeId">Associate Remote Product</label>
-          <select name="scopeId" class="form-control" ng-model="remoteProductInfoToAdd.scopeId" ng-options="remoteProductManager.id as remoteProductManager.name for remoteProductManager in getRemoteProductManagerRemoteProducts(remoteProductInfoToAdd.remoteProductManager.id) | orderBy:'name' | availableRemoteProduct : productToCreate.remoteProductInfo">
+        <div class="form-group" ng-if="remoteProjectInfoToAdd.remoteProjectManager">
+          <label for="scopeId">Associate Remote Project</label>
+          <select name="scopeId" class="form-control" ng-model="remoteProjectInfoToAdd.scopeId" ng-options="remoteProjectManager.id as remoteProjectManager.name for remoteProjectManager in getRemoteProjectManagerRemoteProjects(remoteProjectInfoToAdd.remoteProjectManager.id) | orderBy:'name' | availableRemoteProject : productToCreate.remoteProjectInfo">
             <option value="" selected>None</option>
           </select>
         </div>
       </div>
       <div class="panel-body">
         <ul class="list-group">
-          <li class="list-group-item" ng-repeat="remoteProduct in productToCreate.remoteProductInfo track by remoteProduct.scopeId" ng-model="productToCreate.remoteProductInfo">{{getRemoteProductByRemoteProductInfo(remoteProduct).name}}
-            <span class="glyphicon glyphicon-trash clickable pull-right" title="Remote Remote Product" ng-click="removeRemoteProductInfo(productToCreate.remoteProductInfo, remoteProduct)"></span>
+          <li class="list-group-item" ng-repeat="remoteProject in productToCreate.remoteProjectInfo track by remoteProject.scopeId" ng-model="productToCreate.remoteProjectInfo">{{getRemoteProjectByRemoteProjectInfo(remoteProject).name}}
+            <span class="glyphicon glyphicon-trash clickable pull-right" title="Remote Remote Project" ng-click="removeRemoteProjectInfo(productToCreate.remoteProjectInfo, remoteProject)"></span>
           </li>
         </ul>
       </div>

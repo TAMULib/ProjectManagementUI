@@ -27,17 +27,17 @@ app.controller('InternalRequestController', function ($controller, $scope, ApiRe
 
     $scope.resetInternalRequestForms();
 
-    $scope.selectRemoteProducts = function () {
+    $scope.selectRemoteProjects = function () {
       if ($scope.featureRequestToPush.product && $scope.featureRequestToPush.product.id) {
-        if (!$scope.remoteProducts[$scope.featureRequestToPush.product.id]) {
-          $scope.refreshRemoteProducts($scope.featureRequestToPush.product.id);
+        if (!$scope.remoteProjects[$scope.featureRequestToPush.product.id]) {
+          $scope.refreshRemoteProjectsForProduct($scope.featureRequestToPush.product.id);
         }
       }
     };
 
-    $scope.refreshRemoteProducts = function (productId) {
-      if (productId && !$scope.remoteProductsLoading[productId]) {
-        ProductsService.refreshRemoteProducts(productId);
+    $scope.refreshRemoteProjectsForProduct = function (productId) {
+      if (productId && !$scope.remoteProjectsLoading[productId]) {
+        ProductsService.refreshRemoteProjectsForProduct(productId);
       }
     };
 
@@ -88,9 +88,9 @@ app.controller('InternalRequestController', function ($controller, $scope, ApiRe
     $scope.pushFeatureRequest = function () {
       for (var key in $scope.products) {
         if ($scope.products[key].id == $scope.featureRequestToPush.product.id) {
-          for (var k in $scope.products[key].remoteProductInfo) {
-            if ($scope.products[key].remoteProductInfo[k].scopeId == $scope.featureRequestToPush.scopeId) {
-              $scope.featureRequestToPush.rpmId = $scope.products[key].remoteProductInfo[k].remoteProductManager.id;
+          for (var k in $scope.products[key].remoteProjectInfo) {
+            if ($scope.products[key].remoteProjectInfo[k].scopeId == $scope.featureRequestToPush.scopeId) {
+              $scope.featureRequestToPush.rpmId = $scope.products[key].remoteProjectInfo[k].remoteProjectManager.id;
               break;
             }
           }
@@ -154,15 +154,16 @@ app.controller('InternalRequestController', function ($controller, $scope, ApiRe
     ProductsService.ready.then(null, null, function () {
       $scope.products = ProductsService.getProducts();
       $scope.productsLoading = ProductsService.getProductsLoading();
-      $scope.remoteProducts = ProductsService.getRemoteProducts();
-      $scope.remoteProductsLoading = ProductsService.getRemoteProductsLoading();
+      $scope.remoteProjects = ProductsService.getRemoteProjects();
+      $scope.remoteProjectsLoading = ProductsService.getRemoteProjectsLoading();
     });
 
     InternalRequestRepo.listen([ApiResponseActions.CREATE, ApiResponseActions.DELETE, ApiResponseActions.UPDATE], function () {
         $scope.internalRequests.length = 0;
+
         var internalRequests = InternalRequestRepo.getAll();
         for (var i in internalRequests) {
-            $scope.internalRequests.push(internalRequests[i]);
+          $scope.internalRequests.push(internalRequests[i]);
         }
     });
   }

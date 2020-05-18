@@ -1,6 +1,6 @@
-var dataRemoteProductManager1 = {
+var dataRemoteProjectManager1 = {
   id: 1,
-  name: "Remote Product Manager 1",
+  name: "Remote Project Manager 1",
   settings: {
     password: "password1",
     url: "url1",
@@ -9,9 +9,9 @@ var dataRemoteProductManager1 = {
   type: "VERSION_ONE"
 };
 
-var dataRemoteProductManager2 = {
+var dataRemoteProjectManager2 = {
   id: 2,
-  name: "Remote Product Manager 2",
+  name: "Remote Project Manager 2",
   settings: {
     password: "password2",
     url: "url2",
@@ -20,9 +20,9 @@ var dataRemoteProductManager2 = {
   type: "VERSION_ONE"
 };
 
-var dataRemoteProductManager3 = {
+var dataRemoteProjectManager3 = {
   id: 3,
-  name: "Remote Product Manager 3",
+  name: "Remote Project Manager 3",
   settings: {
     password: "password3",
     url: "url3",
@@ -31,10 +31,10 @@ var dataRemoteProductManager3 = {
   type: "VERSION_ONE"
 };
 
-var mockRemoteProductManager = function ($q) {
-  var model = mockModel("RemoteProductManager", $q, dataRemoteProductManager1);
+var mockRemoteProjectManager = function ($q) {
+  var model = mockModel("RemoteProjectManager", $q, dataRemoteProjectManager1);
 
   return model;
 };
 
-angular.module("mock.remoteProductManager", []).service("RemoteProductManager", mockRemoteProductManager);
+angular.module("mock.remoteProjectManager", []).service("RemoteProjectManager", mockRemoteProjectManager);

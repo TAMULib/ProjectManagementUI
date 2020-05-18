@@ -1,5 +1,5 @@
 describe("controller: ProductController", function () {
-  var $compile, $q, $scope, $templateCache, $templateRequest, MockedProduct, MockedRemoteProductManager, MockedUser, WsApi, controller;
+  var $compile, $q, $scope, $templateCache, $templateRequest, MockedProduct, MockedRemoteProjectManager, MockedUser, WsApi, controller;
 
   var initializeVariables = function () {
     inject(function (_$compile_, _$q_, _$templateCache_, _$templateRequest_, _ProductRepo_, _WsApi_) {
@@ -10,7 +10,7 @@ describe("controller: ProductController", function () {
 
       MockedUser = new mockUser($q);
       MockedProduct = new mockProduct($q);
-      MockedRemoteProductManager = new mockRemoteProductManager($q);
+      MockedRemoteProjectManager = new mockRemoteProjectManager($q);
 
       ProductRepo = _ProductRepo_;
       WsApi = _WsApi_;
@@ -18,7 +18,7 @@ describe("controller: ProductController", function () {
   };
 
   var initializeController = function (settings) {
-    inject(function (_$controller_, _$rootScope_, _ModalService_, _Product_, _RemoteProductManagerRepo_, _RemoteProductsService_, _UserService_) {
+    inject(function (_$controller_, _$rootScope_, _ModalService_, _Product_, _RemoteProjectManagerRepo_, _RemoteProjectsService_, _UserService_) {
       $scope = _$rootScope_.$new();
 
       sessionStorage.role = settings && settings.role ? settings.role : "ROLE_ADMIN";
@@ -31,8 +31,8 @@ describe("controller: ProductController", function () {
         ModalService: _ModalService_,
         Product: _Product_,
         ProductRepo: ProductRepo,
-        RemoteProductManagerRepo: _RemoteProductManagerRepo_,
-        RemoteProductsService: _RemoteProductsService_,
+        RemoteProjectManagerRepo: _RemoteProjectManagerRepo_,
+        RemoteProjectsService: _RemoteProjectsService_,
         UserService: _UserService_
       });
 
@@ -54,14 +54,14 @@ describe("controller: ProductController", function () {
       $provide.value("Product", Product);
     });
     module("mock.productRepo");
-    module("mock.remoteProductManager", function ($provide) {
-      var RemoteProductManager = function () {
-        return MockedRemoteProductManager;
+    module("mock.remoteProjectManager", function ($provide) {
+      var RemoteProjectManager = function () {
+        return MockedRemoteProjectManager;
       };
-      $provide.value("RemoteProductManager", RemoteProductManager);
+      $provide.value("RemoteProjectManager", RemoteProjectManager);
     });
-    module("mock.remoteProductManagerRepo");
-    module("mock.remoteProductsService");
+    module("mock.remoteProjectManagerRepo");
+    module("mock.remoteProjectsService");
     module("mock.user", function ($provide) {
       var User = function () {
         return MockedUser;
@@ -93,17 +93,17 @@ describe("controller: ProductController", function () {
 
   describe("Is the scope method", function () {
     var methods = [
-      "addRemoteProductInfo",
+      "addRemoteProjectInfo",
       "cancelDeleteProduct",
       "cancelEditProduct",
       "confirmDeleteProduct",
       "createProduct",
       "deleteProduct",
       "editProduct",
-      "getRemoteProductByRemoteProductInfo",
-      "getRemoteProductManagerRemoteProducts",
-      "openAddRemoteProductInfo",
-      "removeRemoteProductInfo",
+      "getRemoteProjectByRemoteProjectInfo",
+      "getRemoteProjectManagerRemoteProjects",
+      "openAddRemoteProjectInfo",
+      "removeRemoteProjectInfo",
       "resetCreateProduct",
       "resetProductForms",
       "updateProduct"
@@ -122,23 +122,23 @@ describe("controller: ProductController", function () {
   });
 
   describe("Does the scope method", function () {
-    it("addRemoteProductInfo should push changes and close info", function () {
-      var remoteProductInfo = [
-        dataRemoteProducts[1],
-        dataRemoteProducts[2],
-        dataRemoteProducts[3],
+    it("addRemoteProjectInfo should push changes and close info", function () {
+      var remoteProjectInfo = [
+        dataRemoteProjects[1],
+        dataRemoteProjects[2],
+        dataRemoteProjects[3],
       ];
-      var remoteProduct = dataRemoteProducts[1];
+      var remoteProject = dataRemoteProjects[1];
 
-      $scope.remoteProductInfoChanged = null;
+      $scope.remoteProjectInfoChanged = null;
 
-      spyOn(remoteProductInfo, "push");
-      spyOn($scope, "remoteProductInfoChanged");
+      spyOn(remoteProjectInfo, "push");
+      spyOn($scope, "remoteProjectInfoChanged");
 
-      $scope.addRemoteProductInfo(remoteProductInfo, remoteProduct);
+      $scope.addRemoteProjectInfo(remoteProjectInfo, remoteProject);
 
-      expect($scope.remoteProductInfoChanged).toEqual(true);
-      expect(remoteProductInfo.push).toHaveBeenCalled();
+      expect($scope.remoteProjectInfoChanged).toEqual(true);
+      expect(remoteProjectInfo.push).toHaveBeenCalled();
     });
 
     it("cancelEditProduct clear out productToEdit and call resetProductForms", function () {
@@ -217,32 +217,32 @@ describe("controller: ProductController", function () {
       expect($scope.openModal).toHaveBeenCalled();
     });
 
-    it("getRemoteProductManagerRemoteProducts should return the remote product by id", function () {
+    it("getRemoteProjectManagerRemoteProjects should return the remote project by id", function () {
       var response;
 
-      response = $scope.getRemoteProductManagerRemoteProducts(2);
+      response = $scope.getRemoteProjectManagerRemoteProjects(2);
 
-      expect(response).toEqual(dataRemoteProducts[2]);
+      expect(response).toEqual(dataRemoteProjects[2]);
     });
 
-    it("getRemoteProductByRemoteProductInfo should return the remote product by scope id", function () {
+    it("getRemoteProjectByRemoteProjectInfo should return the remote project by scope id", function () {
       var response;
-      var remoteProductInfo = {
+      var remoteProjectInfo = {
         scopeId: "3783",
-        remoteProductManager: new mockRemoteProductManager($q)
+        remoteProjectManager: new mockRemoteProjectManager($q)
       };
 
-      response = $scope.getRemoteProductByRemoteProductInfo(remoteProductInfo);
+      response = $scope.getRemoteProjectByRemoteProjectInfo(remoteProjectInfo);
 
-      expect(response).toEqual(dataRemoteProducts[3]);
+      expect(response).toEqual(dataRemoteProjects[3]);
     });
 
-    it("openAddRemoteProductInfo should assign addingRemoteProductInfo to true", function () {
-      $scope.addingRemoteProductInfo = null;
+    it("openAddRemoteProjectInfo should assign addingRemoteProjectInfo to true", function () {
+      $scope.addingRemoteProjectInfo = null;
 
-      $scope.openAddRemoteProductInfo();
+      $scope.openAddRemoteProjectInfo();
 
-      expect($scope.addingRemoteProductInfo).toEqual(true);
+      expect($scope.addingRemoteProjectInfo).toEqual(true);
     });
 
     it("resetCreateProduct call resetProductForms() and clear out the name field", function () {
@@ -280,22 +280,22 @@ describe("controller: ProductController", function () {
       expect(form.$dirty).toEqual(false);
     });
 
-    it("removeRemoteProductInfo should remove product info", function () {
-      var remoteProductInfo = [
-        dataRemoteProducts[1],
-        dataRemoteProducts[2],
-        dataRemoteProducts[3],
+    it("removeRemoteProjectInfo should remove remote project info", function () {
+      var remoteProjectInfo = [
+        dataRemoteProjects[1],
+        dataRemoteProjects[2],
+        dataRemoteProjects[3],
       ];
-      var remoteProduct = dataRemoteProducts[1];
+      var remoteProject = dataRemoteProjects[1];
 
-      $scope.remoteProductInfoChanged = null;
+      $scope.remoteProjectInfoChanged = null;
 
-      spyOn(remoteProductInfo, "splice");
+      spyOn(remoteProjectInfo, "splice");
 
-      $scope.removeRemoteProductInfo(remoteProductInfo, remoteProduct);
+      $scope.removeRemoteProjectInfo(remoteProjectInfo, remoteProject);
 
-      expect($scope.remoteProductInfoChanged).toEqual(true);
-      expect(remoteProductInfo.splice).toHaveBeenCalled();
+      expect($scope.remoteProjectInfoChanged).toEqual(true);
+      expect(remoteProjectInfo.splice).toHaveBeenCalled();
     });
 
     it("updateProduct call dirty and save on the Product, and then call cancelEditProduct", function () {
