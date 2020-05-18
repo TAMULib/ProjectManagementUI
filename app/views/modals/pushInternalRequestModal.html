@@ -5,7 +5,7 @@
   <h4 class="modal-title">Push Internal Request (Feature Request)</h4>
 </div>
 
-<form name="internalRequestForms.push" ng-submit="pushFeatureRequest()" novalidate>
+<form ng-if="featureRequestToPush.id" name="internalRequestForms.push" ng-submit="pushFeatureRequest()" novalidate>
 
   <validationmessage results="internalRequestForms.getResults()"></validationmessage>
 
@@ -36,16 +36,16 @@
       autocomplete="off">
     </validatedinput>
 
-    <div class="form-group">
-      <label for="productId">Associate Product</label>
-      <select name="productId" class="form-control" ng-model="featureRequestToPush.productId" ng-options="product.id as product.name for product in products | orderBy:'name'" ng-change="selectRemoteProducts()" ng-disabled="productsLoading">
+    <div ng-if="products" class="form-group">
+      <label for="product">Associate Product</label>
+      <select name="product" class="form-control" ng-model="featureRequestToPush.product" ng-options="product as product.name for product in products track by product.id" ng-change="selectRemoteProducts()" disabled="disabled">
         <option value="" selected>None</option>
       </select>
     </div>
 
-    <div class="form-group" ng-if="featureRequestToPush.productId">
+    <div class="form-group" ng-if="featureRequestToPush.product.id">
       <label for="scopeId">Associate Remote Product</label>
-      <select name="scopeId" class="form-control" ng-model="featureRequestToPush.scopeId" ng-options="remoteProduct.id as remoteProduct.name for remoteProduct in remoteProducts[featureRequestToPush.productId]" ng-disabled="productsLoading || remoteProductsLoading[featureRequestToPush.productId]">
+      <select name="scopeId" class="form-control" ng-model="featureRequestToPush.scopeId" ng-options="remoteProduct.id as remoteProduct.name for remoteProduct in remoteProducts[featureRequestToPush.product.id]" ng-disabled="productsLoading || remoteProductsLoading[featureRequestToPush.product.id]">
         <option value="" selected>None</option>
       </select>
     </div>

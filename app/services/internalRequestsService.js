@@ -6,7 +6,7 @@ app.service('InternalRequestsService', function ($q, WsApi) {
       data: featureRequest.scopeId,
       pathValues: {
         requestId: featureRequest.id,
-        productId: featureRequest.productId,
+        productId: featureRequest.product ? featureRequest.product.id : null,
         rpmId: featureRequest.rpmId,
       }
     };
