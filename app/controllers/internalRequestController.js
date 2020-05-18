@@ -28,9 +28,9 @@ app.controller('InternalRequestController', function ($controller, $scope, ApiRe
     $scope.resetInternalRequestForms();
 
     $scope.selectRemoteProducts = function () {
-      if ($scope.featureRequestToPush.productId) {
-        if (!$scope.remoteProducts[$scope.featureRequestToPush.productId]) {
-          $scope.refreshRemoteProducts($scope.featureRequestToPush.productId);
+      if ($scope.featureRequestToPush.product && $scope.featureRequestToPush.product.id) {
+        if (!$scope.remoteProducts[$scope.featureRequestToPush.product.id]) {
+          $scope.refreshRemoteProducts($scope.featureRequestToPush.product.id);
         }
       }
     };
@@ -41,8 +41,20 @@ app.controller('InternalRequestController', function ($controller, $scope, ApiRe
       }
     };
 
+    $scope.addInternalRequest = function () {
+      if (!$scope.productsLoading) {
+        ProductsService.refreshProducts();
+      }
+
+      $scope.openModal('#addInternalRequestModal');
+    };
+
     $scope.createInternalRequest = function () {
       $scope.internalRequestToCreate.createdOn = new Date().getTime();
+
+      if (!$scope.productsLoading) {
+        ProductsService.refreshProducts();
+      }
 
       InternalRequestRepo.create($scope.internalRequestToCreate).then(function (res) {
         if (angular.fromJson(res.body).meta.status === 'SUCCESS') {
@@ -62,7 +74,7 @@ app.controller('InternalRequestController', function ($controller, $scope, ApiRe
         title: internalRequest.title,
         description: internalRequest.description,
         rpmId: null,
-        productId: null,
+        product: internalRequest.product,
         scopeId: null
       };
 
@@ -75,7 +87,7 @@ app.controller('InternalRequestController', function ($controller, $scope, ApiRe
 
     $scope.pushFeatureRequest = function () {
       for (var key in $scope.products) {
-        if ($scope.products[key].id == $scope.featureRequestToPush.productId) {
+        if ($scope.products[key].id == $scope.featureRequestToPush.product.id) {
           for (var k in $scope.products[key].remoteProductInfo) {
             if ($scope.products[key].remoteProductInfo[k].scopeId == $scope.featureRequestToPush.scopeId) {
               $scope.featureRequestToPush.rpmId = $scope.products[key].remoteProductInfo[k].remoteProductManager.id;
@@ -101,6 +113,11 @@ app.controller('InternalRequestController', function ($controller, $scope, ApiRe
 
     $scope.editInternalRequest = function (internalRequest) {
       $scope.internalRequestToEdit = angular.copy(internalRequest);
+
+      if (!$scope.productsLoading) {
+        ProductsService.refreshProducts();
+      }
+
       $scope.openModal('#editInternalRequestModal');
     };
 

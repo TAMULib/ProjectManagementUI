@@ -22,6 +22,7 @@ angular.module("mock.internalRequestRepo", []).service("InternalRequestRepo", fu
   repo.scaffold = {
     title: '',
     description: '',
+    product: null,
     createdOn: null
   };
 

@@ -29,6 +29,7 @@ describe("service: InternalRequestsService", function () {
     module("app");
     module("mock.internalRequest");
     module("mock.internalRequestRepo");
+    module("mock.product");
     module("mock.wsApi");
 
     initializeVariables();
@@ -60,8 +61,9 @@ describe("service: InternalRequestsService", function () {
 
   describe("Do the service method", function () {
     it("pushFeatureRequest should push a FeatureRequest", function () {
-      var featureRequest = new mockFeatureRequest($q);
       var response;
+      var featureRequest = new mockFeatureRequest($q);
+      featureRequest.product = new mockProduct($q);
 
       service.pushFeatureRequest(featureRequest).then(function () {
         response = true;
@@ -75,9 +77,10 @@ describe("service: InternalRequestsService", function () {
     });
 
     it("pushFeatureRequest should not push an invalid FeatureRequest id", function () {
-      var featureRequest = new mockFeatureRequest($q);
       var response;
+      var featureRequest = new mockFeatureRequest($q);
       featureRequest.id = undefined;
+      featureRequest.product = new mockProduct($q);
 
       service.pushFeatureRequest(featureRequest).then(function () {
         response = true;
@@ -91,9 +94,9 @@ describe("service: InternalRequestsService", function () {
     });
 
     it("pushFeatureRequest should not push an invalid FeatureRequest productId", function () {
-      var featureRequest = new mockFeatureRequest($q);
       var response;
-      featureRequest.productId = undefined;
+      var featureRequest = new mockFeatureRequest($q);
+      featureRequest.product = undefined;
 
       service.pushFeatureRequest(featureRequest).then(function () {
         response = true;
@@ -107,8 +110,9 @@ describe("service: InternalRequestsService", function () {
     });
 
     it("pushFeatureRequest should not push an invalid FeatureRequest rpmId", function () {
-      var featureRequest = new mockFeatureRequest($q);
       var response;
+      var featureRequest = new mockFeatureRequest($q);
+      featureRequest.product = new mockProduct($q);
       featureRequest.rpmId = undefined;
 
       service.pushFeatureRequest(featureRequest).then(function () {
@@ -123,8 +127,9 @@ describe("service: InternalRequestsService", function () {
     });
 
     it("pushFeatureRequest should not push an invalid FeatureRequest scopeId", function () {
-      var featureRequest = new mockFeatureRequest($q);
       var response;
+      var featureRequest = new mockFeatureRequest($q);
+      featureRequest.product = new mockProduct($q);
       featureRequest.scopeId = undefined;
 
       service.pushFeatureRequest(featureRequest).then(function () {
