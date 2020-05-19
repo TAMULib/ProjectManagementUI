@@ -31,6 +31,11 @@ app.controller('RemoteProjectManagerController', function ($controller, $scope, 
         $scope.closeModal();
     };
 
+    $scope.addRemoteProjectManager = function () {
+      $scope.resetCreateRemoteProjectManager();
+      $scope.openModal('#addRemoteProjectManagerModal');
+    };
+
     $scope.createRemoteProjectManager = function () {
         RemoteProjectManagerRepo.create($scope.remoteProjectManagerToCreate).then(function (res) {
             if (angular.fromJson(res.body).meta.status === 'SUCCESS') {
