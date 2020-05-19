@@ -201,8 +201,8 @@ var apiMapping = {
     },
     byProduct: {
       'endpoint': '/private/queue',
-      'controller': 'projects/remote',
-      'method': 'by-product/:productId',
+      'controller': 'products',
+      'method': 'remote-projects/:productId',
       'httpMethod': 'GET'
     },
     listen: {
