@@ -115,47 +115,47 @@ var apiMapping = {
       'method': 'update'
     }
   },
-  RemoteProductManager: {
+  RemoteProjectManager: {
     validations: true,
     lazy: true,
-    channel: '/channel/remote-product-manager',
+    channel: '/channel/remote-project-manager',
     all: {
       'endpoint': '/private/queue',
-      'controller': 'remote-product-manager',
+      'controller': 'remote-project-manager',
       'method': '',
       'httpMethod': 'GET'
     },
     create: {
       'endpoint': '/private/queue',
-      'controller': 'remote-product-manager',
+      'controller': 'remote-project-manager',
       'method': '',
       'httpMethod': 'POST'
     },
     update: {
       'endpoint': '/private/queue',
-      'controller': 'remote-product-manager',
+      'controller': 'remote-project-manager',
       'method': '',
       'httpMethod': 'PUT'
     },
     remove: {
       'endpoint': '/private/queue',
-      'controller': 'remote-product-manager',
+      'controller': 'remote-project-manager',
       'method': '',
       'httpMethod': 'DELETE'
     },
     listen: {
       'endpoint': '/channel',
-      'controller': 'remote-product-manager'
+      'controller': 'remote-project-manager'
     },
     types: {
       'endpoint': '/channel',
-      'controller': 'remote-product-manager',
+      'controller': 'remote-project-manager',
       'method': 'types/',
       'httpMethod': 'GET'
     },
     scaffolding: {
       'endpoint': '/channel',
-      'controller': 'remote-product-manager',
+      'controller': 'remote-project-manager',
       'method': 'scaffolding/:type/',
       'httpMethod': 'GET'
     }
@@ -193,21 +193,21 @@ var apiMapping = {
       'controller': 'status'
     }
   },
-  RemoteProducts: {
+  RemoteProjects: {
     lazy: true,
     all: {
       'endpoint': '/private/queue',
-      'controller': 'products/remote'
+      'controller': 'projects/remote'
     },
     byProduct: {
       'endpoint': '/private/queue',
       'controller': 'products',
-      'method': 'remote-products/:productId',
+      'method': 'remote-projects/:productId',
       'httpMethod': 'GET'
     },
     listen: {
       'endpoint': '/channel',
-      'controller': 'products/remote'
+      'controller': 'projects/remote'
     }
   },
   ProductsStats: {

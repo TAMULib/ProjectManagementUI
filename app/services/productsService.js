@@ -3,8 +3,8 @@ app.service('ProductsService', function ($q, ProductRepo, WsApi) {
 
   var products = [];
   var productsLoading = false;
-  var remoteProducts = {};
-  var remoteProductsLoading = [];
+  var remoteProjects = {};
+  var remoteProjectsLoading = [];
 
   var defer = $q.defer();
 
@@ -19,20 +19,20 @@ app.service('ProductsService', function ($q, ProductRepo, WsApi) {
       productsLoading = false;
 
       var toRemove = {};
-      for (var productId in remoteProducts) {
+      for (var productId in remoteProjects) {
         toRemove[productId] = productId;
       }
 
       for (var key in products) {
         toRemove[products[key].id] = undefined;
 
-        if (!remoteProductsLoading[products[key].id]) {
-          service.refreshRemoteProducts(products[key].id);
+        if (!remoteProjectsLoading[products[key].id]) {
+          service.refreshRemoteProjectsForProduct(products[key].id);
         }
       }
 
       for (var id in toRemove) {
-        remoteProducts[id] = undefined;
+        remoteProjects[id] = undefined;
       }
     } else {
       console.error(apiRes.meta);
@@ -40,22 +40,22 @@ app.service('ProductsService', function ($q, ProductRepo, WsApi) {
     }
   };
 
-  var processRemoteProduct = function (res, productId) {
+  var processRemoteProject = function (res, productId) {
     var apiRes = angular.fromJson(res.body);
 
     if (apiRes.meta.status === 'SUCCESS') {
-      if (angular.isDefined(remoteProducts[productId])) {
-        for (var key in remoteProducts[productId]) {
-          remoteProducts[productId][key] = undefined;
+      if (angular.isDefined(remoteProjects[productId])) {
+        for (var key in remoteProjects[productId]) {
+          remoteProjects[productId][key] = undefined;
         }
       } else {
-        remoteProducts[productId] = {};
+        remoteProjects[productId] = {};
       }
 
-      angular.extend(remoteProducts[productId], apiRes.payload.HashMap);
-      remoteProductsLoading[productId] = false;
+      angular.extend(remoteProjects[productId], apiRes.payload.HashMap);
+      remoteProjectsLoading[productId] = false;
     } else {
-      throw "Unable to retrieve remote products for product " + productId;
+      throw "Unable to retrieve remote projects for product " + productId;
     }
   };
 
@@ -73,7 +73,7 @@ app.service('ProductsService', function ($q, ProductRepo, WsApi) {
     }
   };
 
-  service.refreshRemoteProducts = function (productId) {
+  service.refreshRemoteProjectsForProduct = function (productId) {
     if (productsLoading === false) {
       var productFound = false;
       for (var key in products) {
@@ -90,10 +90,10 @@ app.service('ProductsService', function ($q, ProductRepo, WsApi) {
           }
         };
 
-        remoteProductsLoading[productId] = true;
+        remoteProjectsLoading[productId] = true;
 
-        WsApi.fetch(apiMapping.RemoteProducts.byProduct, options).then(function (res) {
-          processRemoteProduct(res, productId);
+        WsApi.fetch(apiMapping.RemoteProjects.byProduct, options).then(function (res) {
+          processRemoteProject(res, productId);
         });
       }
     }
@@ -107,18 +107,18 @@ app.service('ProductsService', function ($q, ProductRepo, WsApi) {
     return productsLoading;
   };
 
-  service.getRemoteProducts = function () {
-    return remoteProducts;
+  service.getRemoteProjects = function () {
+    return remoteProjects;
   };
 
-  service.getRemoteProductsLoading = function () {
-    return remoteProductsLoading;
+  service.getRemoteProjectsLoading = function () {
+    return remoteProjectsLoading;
   };
 
-  service.getRemoteProductInfo = function (productId) {
+  service.getRemoteProjectInfo = function (productId) {
     for (var i in products) {
       if (products[i].id == productId) {
-        return products[i].remoteProductInfo;
+        return products[i].remoteProjectInfo;
       }
     }
   };

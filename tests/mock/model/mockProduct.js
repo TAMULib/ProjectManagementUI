@@ -1,10 +1,10 @@
 var dataProduct1 = {
   id: 1,
   name: "Product 1",
-  remoteProductInfo: [{
-    remoteProductManager: {
+  remoteProjectInfo: [{
+    remoteProjectManager: {
       id: 1,
-      name: "Remote Product Manager 1",
+      name: "Remote Project Manager 1",
       settings: {
         password: "password1",
         url: "url1",
@@ -19,10 +19,10 @@ var dataProduct1 = {
 var dataProduct2 = {
   id: 2,
   name: "Product 2",
-  remoteProductInfo: [{
-    remoteProductManager: {
+  remoteProjectInfo: [{
+    remoteProjectManager: {
       id: 1,
-      name: "Remote Product Manager 1",
+      name: "Remote Project Manager 1",
       settings: {
         password: "password1",
         url: "url1",
@@ -37,10 +37,10 @@ var dataProduct2 = {
 var dataProduct3 = {
   id: 3,
   name: "Product 3",
-  remoteProductInfo: [{
-    remoteProductManager: {
+  remoteProjectInfo: [{
+    remoteProjectManager: {
       id: 1,
-      name: "Remote Product Manager 1",
+      name: "Remote Project Manager 1",
       settings: {
         password: "password1",
         url: "url1",

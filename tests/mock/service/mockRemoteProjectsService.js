@@ -1,4 +1,4 @@
-var dataRemoteProducts = {
+var dataRemoteProjects = {
   1: [{
     id: 1934,
     name: "Legacy DSpace",
@@ -515,14 +515,14 @@ var dataRemoteProducts = {
   }]
 };
 
-angular.module("mock.remoteProductsService", []).service("RemoteProductsService", function ($q) {
+angular.module("mock.remoteProjectsService", []).service("RemoteProjectsService", function ($q) {
   var service = mockService($q);
 
-  service.getRemoteProductInfo = function () {
-    return dataRemoteProducts;
+  service.getRemoteProjectInfo = function () {
+    return dataRemoteProjects;
   };
 
-  service.refreshRemoteProductInfo = function () {
+  service.refreshRemoteProjectInfo = function () {
     return messagePromise($q.defer());
   };
 

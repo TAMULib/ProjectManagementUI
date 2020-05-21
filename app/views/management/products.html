@@ -6,15 +6,15 @@
   <table class="table table-bordered table-striped product-table">
     <tr>
       <th>Product</th>
-      <th>Remote Product Manager</th>
-      <th>Remote Product</th>
+      <th>Remote Project Manager</th>
+      <th>Remote Project</th>
       <th>Scope Id</th>
       <th class="actions-column text-center">Actions</th>
     </tr>
     <tr ng-repeat="product in products | orderBy: 'name'">
       <td title="'Product'">{{product.name}}</td>
-      <td title="'Remote Product Manager'">{{product.remoteProductManager.name}}</td>
-      <td title="'Remote Product'">{{product.remoteProduct.name}}</td>
+      <td title="'Remote Project Manager'">{{product.remoteProjectManager.name}}</td>
+      <td title="'Remote Project'">{{product.remoteProject.name}}</td>
       <td title="'Scope Id'">{{product.scopeId}}</td>
       <td class="actions-column text-center" title="'Actions'">
         <span class="glyphicon glyphicon-pencil" title="edit" ng-click="editProduct(product)"></span>

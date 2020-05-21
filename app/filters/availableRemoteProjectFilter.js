@@ -1,4 +1,4 @@
-app.filter('availableRemoteProduct', function() {
+app.filter('availableRemoteProject', function() {
   return function(input, usedRPs) {
     if (!input) return false;
     return input.filter(function(val) {

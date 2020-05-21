@@ -1,4 +1,4 @@
-describe("directive: remoteProductManagerForm", function () {
+describe("directive: remoteProjectManagerForm", function () {
   var $compile, $q, $scope, directive, element, formSettings, formModel;
 
   var initializeVariables = function () {
@@ -39,10 +39,10 @@ describe("directive: remoteProductManagerForm", function () {
     inject(function (_$rootScope_) {
       $scope = _$rootScope_.$new();
 
-      var attr = settings && settings.attr ? settings.attr : "management-settings='settings' model='model'></remote-product-manager-form";
+      var attr = settings && settings.attr ? settings.attr : "management-settings='settings' model='model'></remote-project-manager-form";
       var body = settings && settings.body ? settings.body : "";
 
-      element = angular.element("<remote-product-manager-form " + attr + ">" + body + "</remote-product-manager-form>");
+      element = angular.element("<remote-project-manager-form " + attr + ">" + body + "</remote-project-manager-form>");
       directive = $compile(element)($scope);
 
       $scope.model = formModel;
