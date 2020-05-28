@@ -7,7 +7,10 @@
         <a href="#active-sprints" data-toggle="tab">Active Sprints</a>
       </li>
       <li role="presentation">
-        <a href="#projects" data-toggle="tab">Projects</a>
+        <a href="#products" data-toggle="tab">Products</a>
+      </li>
+      <li role="presentation">
+        <a href="#internal" data-toggle="tab">Internal Requests</a>
       </li>
     </ul>
     <br/>
@@ -22,7 +25,7 @@
                 <tr>
                   <th>Id</th>
                   <th>Name</th>
-                  <th>Project</th>
+                  <th>Product</th>
                   <th>Number of Cards</th>
                   <th>Total Points</th>
                 </tr>
@@ -31,7 +34,7 @@
                 <tr ng-repeat="sprint in activeSprints" ng-click="select($index)" class="toggle-href" ng-class="{'info': sprint.id === getSelectedSprint().id}">
                   <td>{{sprint.id}}</td>
                   <td>{{sprint.name}}</td>
-                  <td>{{sprint.project}}</td>
+                  <td>{{sprint.product}}</td>
                   <td>{{sprint.cards.length}}</td>
                   <td>{{getSprintEstimateTotal(sprint)}}</td>
                 </tr>
@@ -85,25 +88,46 @@
         </div>
       </div>
 
-      <div class="tab-pane" id="projects" ng-controller="ProjectController">
+      <div class="tab-pane" id="products" ng-controller="ProductController">
         <div class="row">
 
-          <table class="table table-bordered table-striped project-table">
+          <table class="table table-bordered table-striped product-table">
             <tr>
-              <th>Project</th>
+              <th>Product</th>
               <th>Total Backlog Items</th>
               <th>Feature Count</th>
               <th>Defect Count</th>
               <th>Request Count</th>
               <th>Issue Count</th>
+              <th>Internal Count</th>
             </tr>
-            <tr ng-repeat="project in projects | orderBy: '-stats.backlogItemCount'">
-              <td title="'Project'">{{project.name}}</td>
-              <td title="'Total Backlog Items'">{{project.stats.backlogItemCount}}</td>
-              <td title="'Feature Count'">{{project.stats.featureCount}}</td>
-              <td title="'Defect Count'">{{project.stats.defectCount}}</td>
-              <td title="'Request Count'">{{project.stats.requestCount}}</td>
-              <td title="'Issue Count'">{{project.stats.issueCount}}</td>
+            <tr ng-repeat="product in products | orderBy: '-stats.backlogItemCount'">
+              <td title="'Product'">{{product.name}}</td>
+              <td title="'Total Backlog Items'">{{product.stats.backlogItemCount}}</td>
+              <td title="'Feature Count'">{{product.stats.featureCount}}</td>
+              <td title="'Defect Count'">{{product.stats.defectCount}}</td>
+              <td title="'Request Count'">{{product.stats.requestCount}}</td>
+              <td title="'Issue Count'">{{product.stats.issueCount}}</td>
+              <td title="'Internal Count'">{{product.stats.internalCount}}</td>
+            </tr>
+          </table>
+
+        </div>
+      </div>
+
+      <div class="tab-pane" id="internal" ng-controller="InternalStatsController">
+        <div class="row">
+
+          <table class="table table-bordered table-striped product-table">
+            <tr>
+              <th>Associated with a Product</th>
+              <th>Not Associated with a Product</th>
+              <th>Total Internal Requests</th>
+            </tr>
+            <tr>
+              <td title="'Count'">{{stats.assignedCount}}</td>
+              <td title="'Count'">{{stats.unassignedCount}}</td>
+              <td title="'Count'">{{stats.totalCount}}</td>
             </tr>
           </table>
 

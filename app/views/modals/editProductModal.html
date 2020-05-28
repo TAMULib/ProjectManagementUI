@@ -1,0 +1,97 @@
+<div class="modal-header {{attr.modalHeaderClass}}">
+  <button type="button" class="close modal-close" aria-label="Close" ng-click="cancelEditProduct()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <h4 class="modal-title">Edit Product</h4>
+</div>
+
+<form name="productForms.edit" ng-submit="updateProduct()" novalidate>
+
+  <validationmessage results="productForms.getResults()"></validationmessage>
+
+  <div class="modal-body">
+    <validatedinput model="productToEdit" property="name" label="Name" placeholder="Name of the Product" form="productForms.edit" validations="productForms.validations" results="productForms.getResults()"
+      autocomplete="off">
+    </validatedinput>
+
+    <div class="panel panel-default remote-product-panel">
+      <div class="panel-heading">
+        <div>
+          <label>Remote Products</label>
+          <div ng-if="addingRemoteProjectInfo" class="btn-group pull-right" role="group">
+            <button ng-click="addRemoteProjectInfo(productToEdit.remoteProjectInfo, remoteProjectInfoToAdd)" ng-disabled="remoteProjectInfoToAdd.scopeId === null" class="btn btn-success" type="button">Add</button>
+            <button ng-click="closeAddRemoteProjectInfo()" class="btn btn-default" type="button">Cancel</button>
+          </div>
+          <div ng-if="!addingRemoteProjectInfo" class="btn btn-default pull-right" ng-click="openAddRemoteProjectInfo()">Add</div>
+        </div>
+        <div class="form-group" ng-if="addingRemoteProjectInfo">
+          <label for="remoteProjectManager">Associate Remote Project Manager</label>
+          <select name="remoteProjectManager" class="form-control" ng-model="remoteProjectInfoToAdd.remoteProjectManager" ng-options="remoteProjectManager.name for remoteProjectManager in remoteProjectManagers | orderBy:'name'">
+            <option value="" selected>None</option>
+          </select>
+        </div>
+        <div class="form-group" ng-if="remoteProjectInfoToAdd.remoteProjectManager">
+          <label for="scopeId">Associate Remote Project</label>
+          <select name="scopeId" class="form-control" ng-model="remoteProjectInfoToAdd.scopeId" ng-options="remoteProjectManager.id as remoteProjectManager.name for remoteProjectManager in getRemoteProjectManagerRemoteProjects(remoteProjectInfoToAdd.remoteProjectManager.id) | orderBy:'name' | availableRemoteProject : productToEdit.remoteProjectInfo">
+            <option value="" selected>None</option>
+          </select>
+        </div>
+      </div>
+      <div class="panel-body">
+        <ul class="list-group">
+          <li class="list-group-item" ng-repeat="remoteProject in productToEdit.remoteProjectInfo track by remoteProject.scopeId" ng-model="productToEdit.remoteProjectInfo">{{getRemoteProjectByRemoteProjectInfo(remoteProject).name}}
+            <span class="glyphicon glyphicon-trash clickable pull-right" title="Remote Remote Project" ng-click="removeRemoteProjectInfo(productToEdit.remoteProjectInfo, remoteProject)"></span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <validatedinput
+      model="productToEdit"
+      property="devUrl"
+      label="Development Deployment Location"
+      placeholder="URL of Deployment"
+      form="productForms.edit"
+      validations="productForms.validations"
+      results="productForms.getResults()"
+      autocomplete="off">
+    </validatedinput>
+
+    <validatedinput
+      model="productToEdit"
+      property="preUrl"
+      label="Pre-Production Deployment Location"
+      placeholder="URL of Deployment"
+      form="productForms.edit"
+      validations="productForms.validations"
+      results="productForms.getResults()"
+      autocomplete="off">
+    </validatedinput>
+
+    <validatedinput
+      model="productToEdit"
+      property="productionUrl"
+      label="Production Deployment Location"
+      placeholder="URL of Deployment"
+      form="productForms.edit"
+      validations="productForms.validations"
+      results="productForms.getResults()"
+      autocomplete="off">
+    </validatedinput>
+
+    <validatedinput
+      model="productToEdit"
+      property="wikiUrl"
+      label="Product Wiki Page"
+      placeholder="URL of Wiki Page"
+      form="productForms.edit"
+      validations="productForms.validations"
+      results="productForms.getResults()"
+      autocomplete="off">
+    </validatedinput>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="cancelEditProduct()">Cancel</button>
+    <button type="submit" class="btn btn-success" ng-disabled="(!remoteProjectInfoChanged && !productForms.edit.$dirty) || productForms.edit.$invalid">Update</button>
+  </div>
+</form>

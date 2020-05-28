@@ -1,4 +1,4 @@
-describe("service: ProjectRepo", function () {
+describe("service: ProductRepo", function () {
   var $q, $rootScope, $scope, WsApi, repo;
 
   var initializeVariables = function (settings) {
@@ -11,10 +11,10 @@ describe("service: ProjectRepo", function () {
   };
 
   var initializeRepo = function (settings) {
-    inject(function ($injector, _ProjectRepo_) {
+    inject(function ($injector, _ProductRepo_) {
       $scope = $rootScope.$new();
 
-      repo = _ProjectRepo_;
+      repo = _ProductRepo_;
     });
   };
 

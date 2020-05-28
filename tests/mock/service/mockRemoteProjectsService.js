@@ -6,6 +6,7 @@ var dataRemoteProjects = {
     issueCount: 41,
     featureCount: 32,
     defectCount: 0,
+    internalCount: 0,
     backlogItemCount: 32
   }, {
     id: 3781,
@@ -14,6 +15,7 @@ var dataRemoteProjects = {
     issueCount: 0,
     featureCount: 5,
     defectCount: 0,
+    internalCount: 0,
     backlogItemCount: 5
   }, {
     id: 3783,
@@ -22,6 +24,7 @@ var dataRemoteProjects = {
     issueCount: 0,
     featureCount: 12,
     defectCount: 8,
+    internalCount: 0,
     backlogItemCount: 20
   }, {
     id: 3786,
@@ -30,6 +33,7 @@ var dataRemoteProjects = {
     issueCount: 0,
     featureCount: 42,
     defectCount: 0,
+    internalCount: 0,
     backlogItemCount: 42
   }, {
     id: 3789,
@@ -38,6 +42,7 @@ var dataRemoteProjects = {
     issueCount: 0,
     featureCount: 6,
     defectCount: 0,
+    internalCount: 0,
     backlogItemCount: 6
   }, {
     id: 3798,
@@ -46,6 +51,7 @@ var dataRemoteProjects = {
     issueCount: 0,
     featureCount: 43,
     defectCount: 0,
+    internalCount: 0,
     backlogItemCount: 43
   }, {
     id: 3816,
@@ -54,6 +60,7 @@ var dataRemoteProjects = {
     issueCount: 0,
     featureCount: 4,
     defectCount: 0,
+    internalCount: 0,
     backlogItemCount: 4
   }, {
     id: 3930,
@@ -62,6 +69,7 @@ var dataRemoteProjects = {
     issueCount: 0,
     featureCount: 10,
     defectCount: 0,
+    internalCount: 0,
     backlogItemCount: 10
   }, {
     id: 3968,
@@ -70,6 +78,7 @@ var dataRemoteProjects = {
     issueCount: 0,
     featureCount: 3,
     defectCount: 0,
+    internalCount: 0,
     backlogItemCount: 3
   }, {
     id: 4114,
@@ -78,6 +87,7 @@ var dataRemoteProjects = {
     issueCount: 0,
     featureCount: 0,
     defectCount: 0,
+    internalCount: 0,
     backlogItemCount: 0
   }, {
     id: 4182,
@@ -86,6 +96,7 @@ var dataRemoteProjects = {
     issueCount: 0,
     featureCount: 38,
     defectCount: 0,
+    internalCount: 0,
     backlogItemCount: 38
   }, {
     id: 4262,
@@ -94,6 +105,7 @@ var dataRemoteProjects = {
     issueCount: 0,
     featureCount: 10,
     defectCount: 0,
+    internalCount: 0,
     backlogItemCount: 10
   }, {
     id: 4391,
@@ -102,6 +114,7 @@ var dataRemoteProjects = {
     issueCount: 0,
     featureCount: 9,
     defectCount: 0,
+    internalCount: 0,
     backlogItemCount: 9
   }, {
     id: 4557,
@@ -110,6 +123,7 @@ var dataRemoteProjects = {
     issueCount: 1,
     featureCount: 5,
     defectCount: 0,
+    internalCount: 0,
     backlogItemCount: 5
   }, {
     id: 4731,
@@ -118,6 +132,7 @@ var dataRemoteProjects = {
     issueCount: 0,
     featureCount: 13,
     defectCount: 0,
+    internalCount: 0,
     backlogItemCount: 13
   }, {
     id: 4871,
@@ -126,6 +141,7 @@ var dataRemoteProjects = {
     issueCount: 4,
     featureCount: 25,
     defectCount: 6,
+    internalCount: 0,
     backlogItemCount: 31
   }, {
     id: 4889,
@@ -134,6 +150,7 @@ var dataRemoteProjects = {
     issueCount: 1,
     featureCount: 16,
     defectCount: 3,
+    internalCount: 0,
     backlogItemCount: 19
   }, {
     id: 4912,
@@ -142,6 +159,7 @@ var dataRemoteProjects = {
     issueCount: 0,
     featureCount: 18,
     defectCount: 0,
+    internalCount: 0,
     backlogItemCount: 18
   }, {
     id: 4965,
@@ -150,6 +168,7 @@ var dataRemoteProjects = {
     issueCount: 0,
     featureCount: 0,
     defectCount: 0,
+    internalCount: 0,
     backlogItemCount: 0
   }, {
     id: 5070,
@@ -158,6 +177,7 @@ var dataRemoteProjects = {
     issueCount: 9,
     featureCount: 24,
     defectCount: 1,
+    internalCount: 0,
     backlogItemCount: 25
   }, {
     id: 5270,
@@ -166,6 +186,7 @@ var dataRemoteProjects = {
     issueCount: 11,
     featureCount: 6,
     defectCount: 2,
+    internalCount: 0,
     backlogItemCount: 8
   }, {
     id: 5342,
@@ -174,6 +195,7 @@ var dataRemoteProjects = {
     issueCount: 2,
     featureCount: 8,
     defectCount: 0,
+    internalCount: 0,
     backlogItemCount: 8
   }, {
     id: 5523,
@@ -182,14 +204,16 @@ var dataRemoteProjects = {
     issueCount: 0,
     featureCount: 0,
     defectCount: 0,
+    internalCount: 0,
     backlogItemCount: 0
   }, {
     id: 5524,
-    name: "Legacy Projects",
+    name: "Legacy Products",
     requestCount: 0,
     issueCount: 0,
     featureCount: 0,
     defectCount: 0,
+    internalCount: 0,
     backlogItemCount: 0
   }, {
     id: 5525,
@@ -198,6 +222,7 @@ var dataRemoteProjects = {
     issueCount: 2,
     featureCount: 4,
     defectCount: 1,
+    internalCount: 0,
     backlogItemCount: 5
   }, {
     id: 5798,
@@ -206,6 +231,7 @@ var dataRemoteProjects = {
     issueCount: 0,
     featureCount: 2,
     defectCount: 1,
+    internalCount: 0,
     backlogItemCount: 3
   }, {
     id: 5870,
@@ -214,6 +240,7 @@ var dataRemoteProjects = {
     issueCount: 0,
     featureCount: 8,
     defectCount: 0,
+    internalCount: 0,
     backlogItemCount: 8
   }, {
     id: 5910,
@@ -222,6 +249,7 @@ var dataRemoteProjects = {
     issueCount: 0,
     featureCount: 8,
     defectCount: 0,
+    internalCount: 0,
     backlogItemCount: 8
   }, {
     id: 5962,
@@ -230,6 +258,7 @@ var dataRemoteProjects = {
     issueCount: 0,
     featureCount: 0,
     defectCount: 0,
+    internalCount: 0,
     backlogItemCount: 0
   }, {
     id: 6004,
@@ -238,6 +267,7 @@ var dataRemoteProjects = {
     issueCount: 1,
     featureCount: 24,
     defectCount: 0,
+    internalCount: 0,
     backlogItemCount: 24
   }, {
     id: 6029,
@@ -246,6 +276,7 @@ var dataRemoteProjects = {
     issueCount: 2,
     featureCount: 2,
     defectCount: 0,
+    internalCount: 0,
     backlogItemCount: 2
   }, {
     id: 6126,
@@ -254,6 +285,7 @@ var dataRemoteProjects = {
     issueCount: 0,
     featureCount: 9,
     defectCount: 0,
+    internalCount: 0,
     backlogItemCount: 9
   }, {
     id: 6157,
@@ -262,6 +294,7 @@ var dataRemoteProjects = {
     issueCount: 0,
     featureCount: 10,
     defectCount: 0,
+    internalCount: 0,
     backlogItemCount: 10
   }, {
     id: 6368,
@@ -270,6 +303,7 @@ var dataRemoteProjects = {
     issueCount: 0,
     featureCount: 18,
     defectCount: 5,
+    internalCount: 0,
     backlogItemCount: 23
   }, {
     id: 6369,
@@ -278,6 +312,7 @@ var dataRemoteProjects = {
     issueCount: 0,
     featureCount: 0,
     defectCount: 0,
+    internalCount: 0,
     backlogItemCount: 0
   }, {
     id: 6373,
@@ -286,6 +321,7 @@ var dataRemoteProjects = {
     issueCount: 0,
     featureCount: 0,
     defectCount: 0,
+    internalCount: 0,
     backlogItemCount: 0
   }, {
     id: 6486,
@@ -294,6 +330,7 @@ var dataRemoteProjects = {
     issueCount: 0,
     featureCount: 0,
     defectCount: 0,
+    internalCount: 0,
     backlogItemCount: 0
   }, {
     id: 6487,
@@ -302,6 +339,7 @@ var dataRemoteProjects = {
     issueCount: 0,
     featureCount: 5,
     defectCount: 1,
+    internalCount: 0,
     backlogItemCount: 6
   }, {
     id: 6620,
@@ -310,6 +348,7 @@ var dataRemoteProjects = {
     issueCount: 0,
     featureCount: 0,
     defectCount: 0,
+    internalCount: 0,
     backlogItemCount: 0
   }, {
     id: 6625,
@@ -318,6 +357,7 @@ var dataRemoteProjects = {
     issueCount: 0,
     featureCount: 3,
     defectCount: 0,
+    internalCount: 0,
     backlogItemCount: 3
   }, {
     id: 6626,
@@ -326,6 +366,7 @@ var dataRemoteProjects = {
     issueCount: 0,
     featureCount: 3,
     defectCount: 0,
+    internalCount: 0,
     backlogItemCount: 3
   }, {
     id: 6627,
@@ -334,6 +375,7 @@ var dataRemoteProjects = {
     issueCount: 0,
     featureCount: 1,
     defectCount: 0,
+    internalCount: 0,
     backlogItemCount: 1
   }, {
     id: 6629,
@@ -342,6 +384,7 @@ var dataRemoteProjects = {
     issueCount: 0,
     featureCount: 1,
     defectCount: 2,
+    internalCount: 0,
     backlogItemCount: 3
   }, {
     id: 6664,
@@ -350,6 +393,7 @@ var dataRemoteProjects = {
     issueCount: 0,
     featureCount: 4,
     defectCount: 0,
+    internalCount: 0,
     backlogItemCount: 4
   }, {
     id: 6828,
@@ -358,6 +402,7 @@ var dataRemoteProjects = {
     issueCount: 0,
     featureCount: 1,
     defectCount: 0,
+    internalCount: 0,
     backlogItemCount: 1
   }, {
     id: 7001,
@@ -366,6 +411,7 @@ var dataRemoteProjects = {
     issueCount: 0,
     featureCount: 5,
     defectCount: 5,
+    internalCount: 0,
     backlogItemCount: 10
   }, {
     id: 7036,
@@ -374,6 +420,7 @@ var dataRemoteProjects = {
     issueCount: 2,
     featureCount: 5,
     defectCount: 1,
+    internalCount: 0,
     backlogItemCount: 6
   }, {
     id: 7037,
@@ -382,6 +429,7 @@ var dataRemoteProjects = {
     issueCount: 0,
     featureCount: 4,
     defectCount: 1,
+    internalCount: 0,
     backlogItemCount: 5
   }, {
     id: 7400,
@@ -390,6 +438,7 @@ var dataRemoteProjects = {
     issueCount: 0,
     featureCount: 18,
     defectCount: 1,
+    internalCount: 0,
     backlogItemCount: 19
   }, {
     id: 7509,
@@ -398,6 +447,7 @@ var dataRemoteProjects = {
     issueCount: 0,
     featureCount: 34,
     defectCount: 4,
+    internalCount: 0,
     backlogItemCount: 38
   }, {
     id: 7516,
@@ -406,6 +456,7 @@ var dataRemoteProjects = {
     issueCount: 0,
     featureCount: 0,
     defectCount: 0,
+    internalCount: 0,
     backlogItemCount: 0
   }, {
     id: 7517,
@@ -414,6 +465,7 @@ var dataRemoteProjects = {
     issueCount: 0,
     featureCount: 19,
     defectCount: 2,
+    internalCount: 0,
     backlogItemCount: 21
   }, {
     id: 7529,
@@ -422,6 +474,7 @@ var dataRemoteProjects = {
     issueCount: 0,
     featureCount: 2,
     defectCount: 1,
+    internalCount: 1,
     backlogItemCount: 3
   }, {
     id: 7797,
@@ -430,6 +483,7 @@ var dataRemoteProjects = {
     issueCount: 0,
     featureCount: 10,
     defectCount: 2,
+    internalCount: 2,
     backlogItemCount: 12
   }, {
     id: 7869,
@@ -438,6 +492,7 @@ var dataRemoteProjects = {
     issueCount: 0,
     featureCount: 11,
     defectCount: 0,
+    internalCount: 3,
     backlogItemCount: 11
   }, {
     id: 7934,
@@ -446,34 +501,29 @@ var dataRemoteProjects = {
     issueCount: 0,
     featureCount: 0,
     defectCount: 0,
+    internalCount: 4,
     backlogItemCount: 0
   }, {
     id: 7948,
-    name: "Project Management Service",
+    name: "Product Management Service",
     requestCount: 0,
     issueCount: 0,
     featureCount: 17,
     defectCount: 1,
+    internalCount: 0,
     backlogItemCount: 18
   }]
 };
 
-angular.module("mock.remoteProjectService", []).service("RemoteProjectsService", function ($q) {
+angular.module("mock.remoteProjectsService", []).service("RemoteProjectsService", function ($q) {
   var service = mockService($q);
 
-  service.getRemoteProjects = function () {
+  service.getRemoteProjectInfo = function () {
     return dataRemoteProjects;
   };
 
-  service.getByScopeId = function (remoteProjectManagerId, scopeId) {
-    return $q(function (resolve, reject) {
-      for (var i in dataRemoteProjects[remoteProjectManagerId]) {
-        if (dataRemoteProjects[remoteProjectManagerId][i].id === scopeId) {
-          resolve(dataRemoteProjects[remoteProjectManagerId][i]);
-        }
-      }
-      reject(undefined);
-    });
+  service.refreshRemoteProjectInfo = function () {
+    return messagePromise($q.defer());
   };
 
   service.ready = $q.defer().promise;

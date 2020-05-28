@@ -24,11 +24,11 @@ describe("users", function () {
     browser.wait(EC.visibilityOf($("username")), 5000);
 
     expect($("username").getText()).toEqual("Library Test4");
-  })
+  });
 
   it("synchronize", function () {
     browser.ignoreSynchronization = false;
-  })
+  });
 
   it("has access to manage users", function () {
 
@@ -43,7 +43,7 @@ describe("users", function () {
       expect(cells.count()).toEqual(6);
     });
 
-  })
+  });
 
   it("can change user role to manager", function () {
 
@@ -68,7 +68,7 @@ describe("users", function () {
       });
     });
 
-  })
+  });
 
   it("can change user role back to user", function () {
 

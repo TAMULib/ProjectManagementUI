@@ -1,21 +1,21 @@
-describe("service: ProjectsStatsService", function () {
-  var $q, $rootScope, $scope, ProjectRepo, WsApi, service;
+describe("service: ProductsStatsService", function () {
+  var $q, $rootScope, $scope, ProductRepo, WsApi, service;
 
   var initializeVariables = function (settings) {
-    inject(function (_$q_, _$rootScope_, _ProjectRepo_, _WsApi_) {
+    inject(function (_$q_, _$rootScope_, _ProductRepo_, _WsApi_) {
       $q = _$q_;
       $rootScope = _$rootScope_;
 
-      ProjectRepo = _ProjectRepo_;
+      ProductRepo = _ProductRepo_;
       WsApi = _WsApi_;
     });
   };
 
   var initializeService = function (settings) {
-    inject(function ($injector, _ProjectsStatsService_) {
+    inject(function ($injector, _ProductsStatsService_) {
       $scope = $rootScope.$new();
 
-      service = _ProjectsStatsService_;
+      service = _ProductsStatsService_;
 
       // ensure that the isReady() is called.
       if (!$scope.$$phase) {
@@ -27,7 +27,7 @@ describe("service: ProjectsStatsService", function () {
   beforeEach(function () {
     module("core");
     module("app");
-    module("mock.projectRepo");
+    module("mock.productRepo");
     module("mock.wsApi");
 
     initializeVariables();
@@ -43,8 +43,8 @@ describe("service: ProjectsStatsService", function () {
   describe("Is the service method", function () {
     var methods = [
       "getById",
-      "getProjectsStats",
-      "refreshProjectsStats"
+      "getProductsStats",
+      "refreshProductsStats"
     ];
 
     var serviceMethodExists = function (method) {
@@ -77,24 +77,24 @@ describe("service: ProjectsStatsService", function () {
   });
 
   describe("Do the service method", function () {
-    it("getById get project stats by id", function () {
+    it("getById get product stats by id", function () {
       $rootScope.$apply();
-      service.getById(1).then(function (projectStats) {
-        expect(projectStats).toEqual(dataProjectsStats[0]);
+      service.getById(1).then(function (productStats) {
+        expect(productStats).toEqual(dataProductsStats[0]);
       });
     });
 
-    it("getProjectsStats get project stats", function () {
-      var projectsStats = service.getProjectsStats();
-      expect(projectsStats).toEqual(dataProjectsStats);
+    it("getProductsStats get product stats", function () {
+      var productsStats = service.getProductsStats();
+      expect(productsStats).toEqual(dataProductsStats);
     });
 
-    it("refreshProjectsStats fetch project stats", function () {
+    it("refreshProductsStats fetch product stats", function () {
       deferred = $q.defer();
       spyOn(WsApi, "fetch").and.returnValue(deferred.promise);
-      service.refreshProjectsStats();
-      deferred.resolve(dataProjectsStats);
-      expect(WsApi.fetch).toHaveBeenCalledWith(apiMapping.ProjectsStats.all);
+      service.refreshProductsStats();
+      deferred.resolve(dataProductsStats);
+      expect(WsApi.fetch).toHaveBeenCalledWith(apiMapping.ProductsStats.all);
     });
   });
 

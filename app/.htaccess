@@ -1,6 +1,6 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteBase /projects/
+    RewriteBase /products/
     RewriteCond %{HTTP:X-Requested-With} !XMLHttpRequest$
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule . index.html [L]

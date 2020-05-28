@@ -1,6 +1,6 @@
 angular.module("mock.wsApi", []).service("WsApi", function ($q) {
   var service = mockService($q);
-  var mapping;
+  var mapping = apiMapping;
   var fetchResponse;
 
   service.mockFetchResponse = function (data) {
@@ -25,8 +25,12 @@ angular.module("mock.wsApi", []).service("WsApi", function ($q) {
     }
   };
 
-  service.fetch = function (apiReq, parameters) {
+  service.fetch = function (apiReq, options) {
     var payload = {};
+
+    if (angular.isUndefined(apiReq)) {
+      return rejectPromise($q.defer());
+    }
 
     if (fetchResponse) {
       switch (fetchResponse.type) {
@@ -44,22 +48,59 @@ angular.module("mock.wsApi", []).service("WsApi", function ($q) {
           return failurePromise($q.defer(), fetchResponse.payload, fetchResponse.messageStatus, fetchResponse.httpStatus);
       }
     } else {
-      if (apiReq === apiMapping.ActiveSprints.all) {
+      if (apiReq === mapping.ActiveSprints.all) {
         payload = {
           "ArrayList<Sprint>": mockActiveSprints
         };
-      }
-
-      if (apiReq === apiMapping.ProjectsStats.all) {
+      } else if (apiReq === mapping.ProductsStats.all) {
         payload = {
-          "ArrayList<ProjectStats>": dataProjectsStats
+          "ArrayList<ProductStats>": dataProductsStats
         };
-      }
-
-      if (apiReq === apiMapping.RemoteProjects.all) {
+      } else if (apiReq === mapping.RemoteProjects.byProduct) {
         payload = {
           "HashMap": dataRemoteProjects
         };
+      } else if (apiReq === mapping.RemoteProjects.all) {
+        payload = {
+          "HashMap": dataRemoteProjects
+        };
+      } else if (apiReq === mapping.Product.all) {
+        payload = {
+          "ArrayList<Product>": dataProductRepo1
+        };
+      }
+
+      if (apiReq.controller === mapping.FeatureRequest.push.controller) {
+        if (apiReq.method === 'push/:requestId/:productId/:rpmId') {
+          var requestId = Number(options.pathValues.requestId);
+          var productId = Number(options.pathValues.productId);
+          var rpmId = Number(options.pathValues.rpmId);
+          var scopeId = typeof options.data === "string" ? options.data : "";
+
+          if (requestId > 0 && productId > 0 && rpmId > 0 && scopeId !== "") {
+            for (var key in dataInternalRequestRepo1) {
+              if (dataInternalRequestRepo1[key].id == requestId)  {
+                payload = {
+                  "FeatureRequest": {
+                    id: requestId,
+                    projectId: productId,
+                    rpmId: rpmId,
+                    scopeId: options.data
+                  }
+                };
+
+                return payloadPromise($q.defer(), payload);
+              }
+            }
+          }
+
+          return rejectPromise($q.defer());
+        }
+        else if (apiReq.method === 'stats') {
+          payload = {
+            "InternalStats": dataInternalStats1
+          };
+        }
       }
     }
 

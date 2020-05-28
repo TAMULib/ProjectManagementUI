@@ -70,7 +70,7 @@ var dataPromise = function (defer, payload, messageStatus, httpStatus, action) {
   return defer.promise;
 };
 
-var rejectPromise = function (defer, payload, messageStatus, httpStatus) {
+var rejectPromise = function (defer, payload, messageStatus, httpStatus, action) {
   defer.reject({
     body: angular.toJson(buildPayloadPromiseBody(payload, messageStatus ? messageStatus : "INVALID", httpStatus ? httpStatus : 200, action))
   });
@@ -78,7 +78,7 @@ var rejectPromise = function (defer, payload, messageStatus, httpStatus) {
   return defer.promise;
 };
 
-var failurePromise = function (defer, payload, messageStatus, httpStatus) {
+var failurePromise = function (defer, payload, messageStatus, httpStatus, action) {
   defer.reject({
     data: buildPayloadPromiseBody(payload, messageStatus ? messageStatus : "INVALID", httpStatus ? httpStatus : 500, action)
   });

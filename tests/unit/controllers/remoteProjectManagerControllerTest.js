@@ -71,6 +71,7 @@ describe("controller: RemoteProjectManagerController", function () {
 
   describe("Is the scope method", function () {
     var methods = [
+      "addRemoteProjectManager",
       "resetRemoteProjectManagerForms",
       "createRemoteProjectManager",
       "resetCreateRemoteProjectManager",
@@ -96,6 +97,15 @@ describe("controller: RemoteProjectManagerController", function () {
   });
 
   describe("Does the scope method", function () {
+    it("addRemoteProjectManager to open the modal", function () {
+      var remoteProjectManager = new mockRemoteProjectManager($q);
+
+      spyOn($scope, "openModal");
+
+      $scope.addRemoteProjectManager();
+      expect($scope.openModal).toHaveBeenCalledWith("#addRemoteProjectManagerModal");
+    });
+
     it("resetRemoteProjectManagerForms reset Remote Project Manager forms", function () {
 
       var modal = angular.element($templateCache.get("views/modals/addRemoteProjectManagerModal.html"));

@@ -1,52 +1,40 @@
-app.service('RemoteProjectsService', function ($q, ProjectRepo, WsApi) {
+app.service('RemoteProjectsService', function ($q, ProductRepo, WsApi) {
 
-    var remoteProjects = {};
+  var remoteProjectInfo = {};
 
-    var defer = $q.defer();
+  var defer = $q.defer();
 
-    var process = function (response) {
-        var apiRes = angular.fromJson(response.body);
-        if (apiRes.meta.status === 'SUCCESS') {
-            for (var key in remoteProjects) {
-                remoteProjects[key] = undefined;
-            }
-            angular.extend(remoteProjects, apiRes.payload.HashMap);
-            defer.resolve();
-            ProjectRepo.reset();
-        } else {
-            console.error(apiRes.meta);
-            throw "Unable to retrieve remote projects";
-        }
-    };
+  var process = function (response) {
+    var apiRes = angular.fromJson(response.body);
+    if (apiRes.meta.status === 'SUCCESS') {
+      for (var key in remoteProjectInfo) {
+        remoteProjectInfo[key] = undefined;
+      }
+      angular.extend(remoteProjectInfo, apiRes.payload.HashMap);
+      defer.resolve();
+      ProductRepo.reset();
+    } else {
+      console.error(apiRes.meta);
+      throw "Unable to retrieve remote project information";
+    }
+  };
 
-    WsApi.listen(apiMapping.RemoteProjects.listen).then(null, null, function (response) {
-        process(response);
+  WsApi.listen(apiMapping.RemoteProjects.listen).then(null, null, function (response) {
+    process(response);
+  });
+
+  this.refreshRemoteProjectInfo = function () {
+    WsApi.fetch(apiMapping.RemoteProjects.all).then(function (response) {
+      process(response);
     });
+  };
 
-    this.refreshRemoteProjects = function () {
-        WsApi.fetch(apiMapping.RemoteProjects.all).then(function (response) {
-            process(response);
-        });
-    };
+  this.getRemoteProjectInfo = function () {
+    return remoteProjectInfo;
+  };
 
-    this.getRemoteProjects = function () {
-        return remoteProjects;
-    };
+  this.refreshRemoteProjectInfo();
 
-    this.getByScopeId = function (remoteProjectManagerId, scopeId) {
-        return $q(function (resolve, reject) {
-            this.ready.then(function () {
-                for (var i in remoteProjects[remoteProjectManagerId]) {
-                    if (remoteProjects[remoteProjectManagerId][i].id === scopeId) {
-                        resolve(remoteProjects[remoteProjectManagerId][i]);
-                    }
-                }
-            });
-        }.bind(this));
-    };
-
-    this.refreshRemoteProjects();
-
-    this.ready = defer.promise;
+  this.ready = defer.promise;
 
 });

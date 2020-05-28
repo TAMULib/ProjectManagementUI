@@ -1,10 +1,11 @@
-var dataProjectsStats = [{
+var dataProductsStats = [{
   id: 1,
   name: "Legacy DSpace",
   requestCount: 22,
   issueCount: 41,
   featureCount: 32,
   defectCount: 0,
+  internalCount: 0,
   backlogItemCount: 32
 }, {
   id: 2,
@@ -13,6 +14,7 @@ var dataProjectsStats = [{
   issueCount: 0,
   featureCount: 5,
   defectCount: 0,
+  internalCount: 0,
   backlogItemCount: 5
 }, {
   id: 3,
@@ -21,6 +23,7 @@ var dataProjectsStats = [{
   issueCount: 0,
   featureCount: 12,
   defectCount: 8,
+  internalCount: 0,
   backlogItemCount: 20
 }, {
   id: 4,
@@ -29,6 +32,7 @@ var dataProjectsStats = [{
   issueCount: 0,
   featureCount: 42,
   defectCount: 0,
+  internalCount: 0,
   backlogItemCount: 42
 }, {
   id: 5,
@@ -37,6 +41,7 @@ var dataProjectsStats = [{
   issueCount: 0,
   featureCount: 6,
   defectCount: 0,
+  internalCount: 0,
   backlogItemCount: 6
 }, {
   id: 6,
@@ -45,6 +50,7 @@ var dataProjectsStats = [{
   issueCount: 0,
   featureCount: 43,
   defectCount: 0,
+  internalCount: 0,
   backlogItemCount: 43
 }, {
   id: 7,
@@ -53,6 +59,7 @@ var dataProjectsStats = [{
   issueCount: 0,
   featureCount: 4,
   defectCount: 0,
+  internalCount: 0,
   backlogItemCount: 4
 }, {
   id: 8,
@@ -61,6 +68,7 @@ var dataProjectsStats = [{
   issueCount: 0,
   featureCount: 10,
   defectCount: 0,
+  internalCount: 0,
   backlogItemCount: 10
 }, {
   id: 9,
@@ -69,6 +77,7 @@ var dataProjectsStats = [{
   issueCount: 0,
   featureCount: 3,
   defectCount: 0,
+  internalCount: 0,
   backlogItemCount: 3
 }, {
   id: 10,
@@ -77,6 +86,7 @@ var dataProjectsStats = [{
   issueCount: 0,
   featureCount: 0,
   defectCount: 0,
+  internalCount: 0,
   backlogItemCount: 0
 }, {
   id: 11,
@@ -85,6 +95,7 @@ var dataProjectsStats = [{
   issueCount: 0,
   featureCount: 38,
   defectCount: 0,
+  internalCount: 0,
   backlogItemCount: 38
 }, {
   id: 12,
@@ -93,6 +104,7 @@ var dataProjectsStats = [{
   issueCount: 0,
   featureCount: 10,
   defectCount: 0,
+  internalCount: 0,
   backlogItemCount: 10
 }, {
   id: 13,
@@ -101,6 +113,7 @@ var dataProjectsStats = [{
   issueCount: 0,
   featureCount: 9,
   defectCount: 0,
+  internalCount: 0,
   backlogItemCount: 9
 }, {
   id: 14,
@@ -109,6 +122,7 @@ var dataProjectsStats = [{
   issueCount: 1,
   featureCount: 5,
   defectCount: 0,
+  internalCount: 0,
   backlogItemCount: 5
 }, {
   id: 15,
@@ -117,6 +131,7 @@ var dataProjectsStats = [{
   issueCount: 0,
   featureCount: 13,
   defectCount: 0,
+  internalCount: 0,
   backlogItemCount: 13
 }, {
   id: 16,
@@ -125,6 +140,7 @@ var dataProjectsStats = [{
   issueCount: 4,
   featureCount: 25,
   defectCount: 6,
+  internalCount: 0,
   backlogItemCount: 31
 }, {
   id: 17,
@@ -133,6 +149,7 @@ var dataProjectsStats = [{
   issueCount: 1,
   featureCount: 16,
   defectCount: 3,
+  internalCount: 0,
   backlogItemCount: 19
 }, {
   id: 18,
@@ -141,6 +158,7 @@ var dataProjectsStats = [{
   issueCount: 0,
   featureCount: 18,
   defectCount: 0,
+  internalCount: 0,
   backlogItemCount: 18
 }, {
   id: 19,
@@ -149,6 +167,7 @@ var dataProjectsStats = [{
   issueCount: 0,
   featureCount: 0,
   defectCount: 0,
+  internalCount: 0,
   backlogItemCount: 0
 }, {
   id: 20,
@@ -157,6 +176,7 @@ var dataProjectsStats = [{
   issueCount: 9,
   featureCount: 24,
   defectCount: 1,
+  internalCount: 0,
   backlogItemCount: 25
 }, {
   id: 21,
@@ -165,6 +185,7 @@ var dataProjectsStats = [{
   issueCount: 11,
   featureCount: 6,
   defectCount: 2,
+  internalCount: 0,
   backlogItemCount: 8
 }, {
   id: 22,
@@ -173,6 +194,7 @@ var dataProjectsStats = [{
   issueCount: 2,
   featureCount: 8,
   defectCount: 0,
+  internalCount: 0,
   backlogItemCount: 8
 }, {
   id: 23,
@@ -181,14 +203,16 @@ var dataProjectsStats = [{
   issueCount: 0,
   featureCount: 0,
   defectCount: 0,
+  internalCount: 0,
   backlogItemCount: 0
 }, {
   id: 24,
-  name: "Legacy Projects",
+  name: "Legacy Products",
   requestCount: 0,
   issueCount: 0,
   featureCount: 0,
   defectCount: 0,
+  internalCount: 0,
   backlogItemCount: 0
 }, {
   id: 25,
@@ -197,6 +221,7 @@ var dataProjectsStats = [{
   issueCount: 2,
   featureCount: 4,
   defectCount: 1,
+  internalCount: 0,
   backlogItemCount: 5
 }, {
   id: 26,
@@ -205,6 +230,7 @@ var dataProjectsStats = [{
   issueCount: 0,
   featureCount: 2,
   defectCount: 1,
+  internalCount: 0,
   backlogItemCount: 3
 }, {
   id: 27,
@@ -213,6 +239,7 @@ var dataProjectsStats = [{
   issueCount: 0,
   featureCount: 8,
   defectCount: 0,
+  internalCount: 0,
   backlogItemCount: 8
 }, {
   id: 28,
@@ -221,6 +248,7 @@ var dataProjectsStats = [{
   issueCount: 0,
   featureCount: 8,
   defectCount: 0,
+  internalCount: 0,
   backlogItemCount: 8
 }, {
   id: 29,
@@ -229,6 +257,7 @@ var dataProjectsStats = [{
   issueCount: 0,
   featureCount: 0,
   defectCount: 0,
+  internalCount: 0,
   backlogItemCount: 0
 }, {
   id: 30,
@@ -237,6 +266,7 @@ var dataProjectsStats = [{
   issueCount: 1,
   featureCount: 24,
   defectCount: 0,
+  internalCount: 0,
   backlogItemCount: 24
 }, {
   id: 31,
@@ -245,6 +275,7 @@ var dataProjectsStats = [{
   issueCount: 2,
   featureCount: 2,
   defectCount: 0,
+  internalCount: 0,
   backlogItemCount: 2
 }, {
   id: 32,
@@ -253,6 +284,7 @@ var dataProjectsStats = [{
   issueCount: 0,
   featureCount: 9,
   defectCount: 0,
+  internalCount: 0,
   backlogItemCount: 9
 }, {
   id: 33,
@@ -261,6 +293,7 @@ var dataProjectsStats = [{
   issueCount: 0,
   featureCount: 10,
   defectCount: 0,
+  internalCount: 0,
   backlogItemCount: 10
 }, {
   id: 34,
@@ -269,6 +302,7 @@ var dataProjectsStats = [{
   issueCount: 0,
   featureCount: 18,
   defectCount: 5,
+  internalCount: 0,
   backlogItemCount: 23
 }, {
   id: 35,
@@ -277,6 +311,7 @@ var dataProjectsStats = [{
   issueCount: 0,
   featureCount: 0,
   defectCount: 0,
+  internalCount: 0,
   backlogItemCount: 0
 }, {
   id: 36,
@@ -285,6 +320,7 @@ var dataProjectsStats = [{
   issueCount: 0,
   featureCount: 0,
   defectCount: 0,
+  internalCount: 0,
   backlogItemCount: 0
 }, {
   id: 37,
@@ -293,6 +329,7 @@ var dataProjectsStats = [{
   issueCount: 0,
   featureCount: 0,
   defectCount: 0,
+  internalCount: 0,
   backlogItemCount: 0
 }, {
   id: 38,
@@ -301,6 +338,7 @@ var dataProjectsStats = [{
   issueCount: 0,
   featureCount: 5,
   defectCount: 1,
+  internalCount: 0,
   backlogItemCount: 6
 }, {
   id: 39,
@@ -309,6 +347,7 @@ var dataProjectsStats = [{
   issueCount: 0,
   featureCount: 0,
   defectCount: 0,
+  internalCount: 0,
   backlogItemCount: 0
 }, {
   id: 40,
@@ -317,6 +356,7 @@ var dataProjectsStats = [{
   issueCount: 0,
   featureCount: 3,
   defectCount: 0,
+  internalCount: 0,
   backlogItemCount: 3
 }, {
   id: 41,
@@ -325,6 +365,7 @@ var dataProjectsStats = [{
   issueCount: 0,
   featureCount: 3,
   defectCount: 0,
+  internalCount: 0,
   backlogItemCount: 3
 }, {
   id: 42,
@@ -333,6 +374,7 @@ var dataProjectsStats = [{
   issueCount: 0,
   featureCount: 1,
   defectCount: 0,
+  internalCount: 0,
   backlogItemCount: 1
 }, {
   id: 43,
@@ -341,6 +383,7 @@ var dataProjectsStats = [{
   issueCount: 0,
   featureCount: 1,
   defectCount: 2,
+  internalCount: 0,
   backlogItemCount: 3
 }, {
   id: 44,
@@ -349,6 +392,7 @@ var dataProjectsStats = [{
   issueCount: 0,
   featureCount: 4,
   defectCount: 0,
+  internalCount: 0,
   backlogItemCount: 4
 }, {
   id: 45,
@@ -357,6 +401,7 @@ var dataProjectsStats = [{
   issueCount: 0,
   featureCount: 1,
   defectCount: 0,
+  internalCount: 0,
   backlogItemCount: 1
 }, {
   id: 46,
@@ -365,6 +410,7 @@ var dataProjectsStats = [{
   issueCount: 0,
   featureCount: 5,
   defectCount: 5,
+  internalCount: 0,
   backlogItemCount: 10
 }, {
   id: 47,
@@ -373,6 +419,7 @@ var dataProjectsStats = [{
   issueCount: 2,
   featureCount: 5,
   defectCount: 1,
+  internalCount: 0,
   backlogItemCount: 6
 }, {
   id: 48,
@@ -381,6 +428,7 @@ var dataProjectsStats = [{
   issueCount: 0,
   featureCount: 4,
   defectCount: 1,
+  internalCount: 0,
   backlogItemCount: 5
 }, {
   id: 49,
@@ -389,6 +437,7 @@ var dataProjectsStats = [{
   issueCount: 0,
   featureCount: 18,
   defectCount: 1,
+  internalCount: 0,
   backlogItemCount: 19
 }, {
   id: 50,
@@ -397,6 +446,7 @@ var dataProjectsStats = [{
   issueCount: 0,
   featureCount: 34,
   defectCount: 4,
+  internalCount: 0,
   backlogItemCount: 38
 }, {
   id: 51,
@@ -405,6 +455,7 @@ var dataProjectsStats = [{
   issueCount: 0,
   featureCount: 0,
   defectCount: 0,
+  internalCount: 0,
   backlogItemCount: 0
 }, {
   id: 52,
@@ -413,6 +464,7 @@ var dataProjectsStats = [{
   issueCount: 0,
   featureCount: 19,
   defectCount: 2,
+  internalCount: 0,
   backlogItemCount: 21
 }, {
   id: 53,
@@ -421,6 +473,7 @@ var dataProjectsStats = [{
   issueCount: 0,
   featureCount: 2,
   defectCount: 1,
+  internalCount: 0,
   backlogItemCount: 3
 }, {
   id: 54,
@@ -429,6 +482,7 @@ var dataProjectsStats = [{
   issueCount: 0,
   featureCount: 10,
   defectCount: 2,
+  internalCount: 1,
   backlogItemCount: 12
 }, {
   id: 55,
@@ -437,6 +491,7 @@ var dataProjectsStats = [{
   issueCount: 0,
   featureCount: 11,
   defectCount: 0,
+  internalCount: 2,
   backlogItemCount: 11
 }, {
   id: 56,
@@ -445,39 +500,41 @@ var dataProjectsStats = [{
   issueCount: 0,
   featureCount: 0,
   defectCount: 0,
+  internalCount: 3,
   backlogItemCount: 0
 }, {
   id: 57,
-  name: "Project Management Service",
+  name: "Product Management Service",
   requestCount: 0,
   issueCount: 0,
   featureCount: 17,
   defectCount: 1,
+  internalCount: 4,
   backlogItemCount: 18
 }];
 
-angular.module("mock.projectsStatsService", []).service("ProjectsStatsService", function ($q) {
+angular.module("mock.productsStatsService", []).service("ProductsStatsService", function ($q) {
   var service = mockService($q);
 
-  var projectsStats = dataProjectsStats;
+  var productsStats = dataProductsStats;
 
-  service.dataProjectsStats = function (toMock) {
+  service.dataProductsStats = function (toMock) {
     if (typeof toMock === "object") {
-      projectsStats = toMock;
+      productsStats = toMock;
     } else {
-      projectsStats = dataProjectsStats;
+      productsStats = dataProductsStats;
     }
   };
 
-  service.getProjectsStats = function () {
-    return projectsStats;
+  service.getProductsStats = function () {
+    return productsStats;
   };
 
   service.getById = function (id) {
     return $q(function (resolve, reject) {
-      for (var i in projectsStats) {
-        if (projectsStats[i].id == id) {
-          resolve(projectsStats[i]);
+      for (var i in productsStats) {
+        if (productsStats[i].id == id) {
+          resolve(productsStats[i]);
         }
       }
       reject(undefined);

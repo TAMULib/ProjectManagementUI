@@ -1,12 +1,12 @@
 describe("service: RemoteProjectsService", function () {
-  var $q, $rootScope, $scope, ProjectRepo, WsApi, service;
+  var $q, $rootScope, $scope, ProductRepo, WsApi, service;
 
   var initializeVariables = function (settings) {
-    inject(function (_$q_, _$rootScope_, _ProjectRepo_, _WsApi_) {
+    inject(function (_$q_, _$rootScope_, _ProductRepo_, _WsApi_) {
       $q = _$q_;
       $rootScope = _$rootScope_;
 
-      ProjectRepo = _ProjectRepo_;
+      ProductRepo = _ProductRepo_;
       WsApi = _WsApi_;
     });
   };
@@ -27,7 +27,7 @@ describe("service: RemoteProjectsService", function () {
   beforeEach(function () {
     module("core");
     module("app");
-    module("mock.projectRepo");
+    module("mock.productRepo");
     module("mock.wsApi");
 
     initializeVariables();
@@ -42,9 +42,8 @@ describe("service: RemoteProjectsService", function () {
 
   describe("Is the service method", function () {
     var methods = [
-      "getByScopeId",
-      "getRemoteProjects",
-      "refreshRemoteProjects"
+      "getRemoteProjectInfo",
+      "refreshRemoteProjectInfo"
     ];
 
     var serviceMethodExists = function (method) {
@@ -77,22 +76,15 @@ describe("service: RemoteProjectsService", function () {
   });
 
   describe("Does the service method", function () {
-    it("getByScopeId get remote project by remote project manager id and scope id", function () {
-      $rootScope.$apply();
-      service.getByScopeId(1, 1934).then(function (remoteProject) {
-        expect(remoteProject).toEqual(dataRemoteProjects["1"][0]);
-      });
-    });
-
-    it("getRemoteProjects get remote projects", function () {
-      var remoteProjects = service.getRemoteProjects();
+    it("getRemoteProjectInfo get remote projects", function () {
+      var remoteProjects = service.getRemoteProjectInfo();
       expect(remoteProjects).toEqual(dataRemoteProjects);
     });
 
-    it("refreshRemoteProjects fetch remote projects", function () {
+    it("refreshRemoteProjectInfo fetch remote projects", function () {
       deferred = $q.defer();
       spyOn(WsApi, "fetch").and.returnValue(deferred.promise);
-      service.refreshRemoteProjects();
+      service.refreshRemoteProjectInfo();
       deferred.resolve(dataRemoteProjects);
       expect(WsApi.fetch).toHaveBeenCalledWith(apiMapping.RemoteProjects.all);
     });

@@ -1,0 +1,29 @@
+<div class="management-table" ng-controller="InternalRequestController">
+
+  <button class="btn btn-default view-action-button" ng-click="addInternalRequest()">Add an Internal Request</button>
+  <hr>
+
+  <table class="table table-bordered table-striped internalRequest-table">
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Created On</th>
+      <th class="actions-column text-center">Actions</th>
+    </tr>
+    <tr ng-repeat="internalRequest in internalRequests">
+      <td title="'Title'">{{internalRequest.title}}</td>
+      <td title="'Description'">{{internalRequest.description}}</td>
+      <td title="'Created On'">{{internalRequest.createdOn | date : "medium"}}</td>
+      <td class="actions-column text-center" title="'Actions'">
+        <span class="glyphicon glyphicon-upload" title="Push" ng-click="pushInternalRequest(internalRequest)"></span>
+        <span class="glyphicon glyphicon-pencil" title="Edit" ng-click="editInternalRequest(internalRequest)"></span>
+        <span class="glyphicon glyphicon-trash" title="Delete" ng-click="confirmDeleteInternalRequest(internalRequest)"></span>
+      </td>
+    </tr>
+  </table>
+
+  <modal modal-id="addInternalRequestModal" modal-view="views/modals/addInternalRequestModal.html" modal-header-class="modal-header-primary" wvr-modal-backdrop="static"></modal>
+  <modal modal-id="pushInternalRequestModal" modal-view="views/modals/pushInternalRequestModal.html" modal-header-class="modal-header-primary" wvr-modal-backdrop="static"></modal>
+  <modal modal-id="editInternalRequestModal" modal-view="views/modals/editInternalRequestModal.html" modal-header-class="modal-header-primary" wvr-modal-backdrop="static"></modal>
+  <modal modal-id="deleteInternalRequestModal" modal-view="views/modals/deleteInternalRequestModal.html" modal-header-class="modal-header-danger" wvr-modal-backdrop="static"></modal>
+</div>

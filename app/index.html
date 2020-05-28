@@ -7,7 +7,7 @@
 <!--<![endif]-->
 
 <head>
-  <base href="/projects/">
+  <base href="/products/">
 
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,7 +15,7 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Project Management :: Texas A&amp;M Libraries</title>
+  <title>Product Management :: Texas A&amp;M Libraries</title>
 
   <link rel="shortcut icon" href="resources/images/favicon.ico" type="image/x-icon" />
 
@@ -38,7 +38,7 @@
   <!-- Content placed here will appear on every page -->
   <main>
 
-    <custom-header title="Project Management" home="/projects/" login="login()" anonymous="isAnonymous()"></custom-header>
+    <custom-header title="Product Management" home="/products/" login="login()" anonymous="isAnonymous()"></custom-header>
 
     <alerts types="WARNING, ERROR"></alerts>
     <alerts seconds="45" channels="auth/register" types="SUCCESS"></alerts>
@@ -196,29 +196,37 @@
   <script src="directives/remoteProjectManagerFormDirective.js"></script>
 
   <!-- Services -->
-  <script src="services/remoteProjectsService.js"></script>
-  <script src="services/projectsStatsService.js"></script>
   <script src="services/activeSprintsService.js"></script>
+  <script src="services/internalRequestsService.js"></script>
+  <script src="services/internalStatsService.js"></script>
+  <script src="services/productsService.js"></script>
+  <script src="services/productsStatsService.js"></script>
+  <script src="services/remoteProjectsService.js"></script>
 
   <!-- Factories -->
 
   <!-- Filters -->
+  <script src="filters/availableRemoteProjectFilter.js"></script>
 
   <!-- Repos -->
   <script src="repo/abstractAppRepo.js"></script>
-  <script src="repo/projectRepo.js"></script>
+  <script src="repo/internalRequestRepo.js"></script>
+  <script src="repo/productRepo.js"></script>
   <script src="repo/userRepo.js"></script>
   <script src="repo/remoteProjectManagerRepo.js"></script>
   <script src="repo/statusRepo.js"></script>
 
   <!-- Models -->
   <script src="model/abstractAppModel.js"></script>
-  <script src="model/project.js"></script>
+  <script src="model/internalRequest.js"></script>
+  <script src="model/product.js"></script>
   <script src="model/remoteProjectManager.js"></script>
   <script src="model/status.js"></script>
 
   <!-- Controllers -->
-  <script src="controllers/projectController.js"></script>
+  <script src="controllers/internalRequestController.js"></script>
+  <script src="controllers/internalStatsController.js"></script>
+  <script src="controllers/productController.js"></script>
   <script src="controllers/statusController.js"></script>
   <script src="controllers/userRepoController.js"></script>
   <script src="controllers/remoteProjectManagerController.js"></script>

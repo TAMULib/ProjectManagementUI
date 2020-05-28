@@ -1,4 +1,4 @@
-describe("model: Project", function () {
+describe("model: InternalRequest", function () {
   var $rootScope, $scope, WsApi, model;
 
   var initializeVariables = function (settings) {
@@ -10,10 +10,10 @@ describe("model: Project", function () {
   };
 
   var initializeModel = function (settings) {
-    inject(function (_Project_) {
+    inject(function (_InternalRequest_) {
       $scope = $rootScope.$new();
 
-      model = angular.extend(new _Project_(), dataProject1);
+      model = angular.extend(new _InternalRequest_(), dataInternalRequest1);
     });
   };
 
