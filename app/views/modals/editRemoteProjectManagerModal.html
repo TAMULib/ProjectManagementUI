@@ -14,7 +14,7 @@
 
     <validatedselect id="edit-type" options="serviceTypes" optionvalue="value" optionproperty="gloss" model="remoteProjectManagerToEdit" property="type" label="Type" form="remoteProjectManagerForms.edit" validations="remoteProjectManagerForms.validations" results="remoteProjectManagerForms.getResults()"></validatedselect>
 
-    <remote-project-manager-form ng-if="remoteProjectManagerToEdit.type" management-settings="typeSettings(remoteProjectManagerToEdit.type)" model="remoteProjectManagerToEdit"></remote-project-manager-form>
+    <remote-project-manager-form ng-if="remoteProjectManagerToEdit.type" management-type="remoteProjectManagerToEdit.type" management-settings="typeSettings(remoteProjectManagerToEdit.type)" model="remoteProjectManagerToEdit"></remote-project-manager-form>
   </div>
 
   <div class="modal-footer">

@@ -4,32 +4,59 @@ app.directive('remoteProjectManagerForm', function () {
         restrict: 'E',
         replace: false,
         scope: {
+            'managementType': '<',
             'managementSettings': '=',
             'model': '='
         },
         link: function ($scope) {
 
+            $scope.auth = {
+                useToken: false,
+                required: false
+            };
+
+            var originalType;
+
             var isAuthRequired = function () {
+                $scope.auth.useToken = false;
+                $scope.auth.required = false;
+
                 for (var i in $scope.managementSettings) {
                     var key = $scope.managementSettings[i].key;
-                    if (key === 'password' || key === 'token') {
-                        return true;
+                    if (key === 'password') {
+                        $scope.auth.required = true;
+                    }
+
+                    if (key === 'token') {
+                        $scope.auth.useToken = true;
                     }
                 }
             };
 
-            var hasToken = function () {
-                for (var key in $scope.model.settings) {
-                    var value = $scope.model.settings[key];
-                    if (key === 'token' && value !== undefined && value.length > 0) {
-                        return true;
-                    }
-                }
-            };
+            var refreshAuth = function () {
+                if (originalType === undefined || originalType == $scope.managementType) {
+                    if (originalType === undefined) {
+                        isAuthRequired();
 
-            $scope.auth = {
-                useToken: hasToken(),
-                required: isAuthRequired()
+                        originalType = $scope.managementType;
+                    }
+
+                    if ($scope.auth.required) {
+                        $scope.auth.useToken = false;
+
+                        for (var key in $scope.model.settings) {
+                            var value = $scope.model.settings[key];
+
+                            if (key === 'token' && value != undefined && value.length > 0) {
+                                $scope.auth.useToken = true;
+                            }
+                        }
+                    }
+                } else {
+                    isAuthRequired();
+
+                    originalType = $scope.managementType;
+                }
             };
 
             $scope.inputSetting = function (setting) {
@@ -53,6 +80,12 @@ app.directive('remoteProjectManagerForm', function () {
                     }
                 }
             };
+
+            refreshAuth();
+
+            $scope.$watch('managementType', function() {
+                refreshAuth();
+            });
         }
     };
 });
