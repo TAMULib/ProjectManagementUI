@@ -47,7 +47,7 @@
     "karma-jasmine": "2.0.1",
     "karma-junit-reporter": "2.0.1",
     "karma-ng-html2js-preprocessor": "1.0.0",
-    "node-sass": "4.13.0",
+    "node-sass": "4.13.1",
     "protractor": "5.4.2"
   }
 }
