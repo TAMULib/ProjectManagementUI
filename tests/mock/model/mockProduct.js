@@ -5,12 +5,9 @@ var dataProduct1 = {
     remoteProjectManager: {
       id: 1,
       name: "Remote Project Manager 1",
-      settings: {
-        password: "password1",
-        url: "url1",
-        username: "username1"
-      },
-      type: "VERSION_ONE"
+      type: "VERSION_ONE",
+      url: "url1",
+      token: "username1:password1"
     },
     scopeId: "scope 1"
   }]
@@ -23,12 +20,9 @@ var dataProduct2 = {
     remoteProjectManager: {
       id: 1,
       name: "Remote Project Manager 1",
-      settings: {
-        password: "password1",
-        url: "url1",
-        username: "username1"
-      },
-      type: "VERSION_ONE"
+      type: "VERSION_ONE",
+      url: "url2",
+      token: "username2:password2"
     },
     scopeId: "scope 2"
   }]
@@ -41,12 +35,9 @@ var dataProduct3 = {
     remoteProjectManager: {
       id: 1,
       name: "Remote Project Manager 1",
-      settings: {
-        password: "password1",
-        url: "url1",
-        username: "username1"
-      },
-      type: "VERSION_ONE"
+      type: "VERSION_ONE",
+      url: "url1",
+      token: "username1:password1"
     },
     scopeId: "scope 3"
   }]

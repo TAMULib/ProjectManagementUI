@@ -21,7 +21,9 @@ angular.module("mock.remoteProjectManagerRepo", []).service("RemoteProjectManage
 
   repo.scaffold = {
     name: '',
-    type: ''
+    type: '',
+    url: '',
+    token: ''
   };
 
   repo.getTypes = function () {
