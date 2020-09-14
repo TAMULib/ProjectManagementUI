@@ -51,6 +51,7 @@ app.controller('ProductController', function ($controller, $scope, ApiResponseAc
                 $scope.resetCreateProduct();
             }
         });
+        $scope.closeModal();
     };
 
     $scope.resetCreateProduct = function () {
@@ -68,6 +69,7 @@ app.controller('ProductController', function ($controller, $scope, ApiResponseAc
         $scope.productToEdit.save().then(function () {
             $scope.cancelEditProduct();
         });
+        $scope.closeModal();
     };
 
     $scope.cancelEditProduct = function () {
@@ -92,6 +94,7 @@ app.controller('ProductController', function ($controller, $scope, ApiResponseAc
                 $scope.cancelDeleteProduct();
             }
         });
+        $scope.closeModal();
     };
 
     $scope.openAddRemoteProjectInfo = function() {
