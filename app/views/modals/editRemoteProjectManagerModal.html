@@ -14,7 +14,9 @@
 
     <validatedselect id="edit-type" options="serviceTypes" optionvalue="value" optionproperty="gloss" model="remoteProjectManagerToEdit" property="type" label="Type" form="remoteProjectManagerForms.edit" validations="remoteProjectManagerForms.validations" results="remoteProjectManagerForms.getResults()"></validatedselect>
 
-    <remote-project-manager-form ng-if="remoteProjectManagerToEdit.type" management-type="remoteProjectManagerToEdit.type" management-settings="typeSettings(remoteProjectManagerToEdit.type)" model="remoteProjectManagerToEdit"></remote-project-manager-form>
+    <validatedinput id="edit-url" model="remoteProjectManagerToEdit" property="url" label="URL" placeholder="URL of the Remote Project Manager" form="remoteProjectManagerForms.edit" validations="remoteProjectManagerForms.validations" results="remoteProjectManagerForms.getResults()"></validatedinput>
+
+    <validatedinput id="edit-token" model="remoteProjectManagerToEdit" type="password" property="token" label="Token" placeholder="Token for the Remote Project Manager" form="remoteProjectManagerForms.edit" validations="remoteProjectManagerForms.validations" results="remoteProjectManagerForms.getResults()"></validatedinput>
   </div>
 
   <div class="modal-footer">
