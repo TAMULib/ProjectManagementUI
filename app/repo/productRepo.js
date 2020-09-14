@@ -2,7 +2,8 @@ app.repo("ProductRepo", function ProductRepo() {
 
     this.scaffold = {
         name: '',
-        remoteProjectInfo: []
+        remoteProjectInfo: [],
+        otherUrls: ['']
     };
 
     return this;

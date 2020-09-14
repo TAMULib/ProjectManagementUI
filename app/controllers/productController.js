@@ -12,6 +12,7 @@ app.controller('ProductController', function ($controller, $scope, ApiResponseAc
 
     $scope.addingRemoteProjectInfo = false;
     $scope.remoteProjectInfoChanged = false;
+    $scope.otherUrlsChanged = false;
 
     $scope.remoteProjectInfoToAdd = {
         remoteProjectManager: null,
@@ -40,6 +41,7 @@ app.controller('ProductController', function ($controller, $scope, ApiResponseAc
         }
         $scope.closeAddRemoteProjectInfo();
         $scope.remoteProjectInfoChanged = false;
+        $scope.otherUrlsChanged = false;
         $scope.closeModal();
     };
 
@@ -110,6 +112,15 @@ app.controller('ProductController', function ($controller, $scope, ApiResponseAc
     $scope.removeRemoteProjectInfo = function(remoteProjectInfo, remoteProject) {
         remoteProjectInfo.splice(remoteProjectInfo.indexOf(remoteProject), 1);
         $scope.remoteProjectInfoChanged = true;
+    };
+
+    $scope.addOtherUrl = function (product) {
+        product.otherUrls.push('');
+    };
+
+    $scope.removeOtherUrl = function (product, index) {
+        product.otherUrls.splice(index, 1);
+        $scope.otherUrlsChanged = true;
     };
 
     if ($scope.isManager() || $scope.isAdmin()) {

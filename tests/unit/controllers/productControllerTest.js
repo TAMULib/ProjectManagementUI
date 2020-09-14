@@ -315,6 +315,33 @@ describe("controller: ProductController", function () {
       expect(product.save).toHaveBeenCalled();
     });
 
+    it("addOtherUrl adds another url to the array", function () {
+      var product = new mockProduct($q);
+      product.mock({
+        otherUrls: []
+      });
+
+      spyOn(product.otherUrls, "push");
+
+      $scope.addOtherUrl(product);
+
+      expect(product.otherUrls.push).toHaveBeenCalled();
+    });
+
+    it("removeOtherUrl removes the other url at the given index", function () {
+      var product = new mockProduct($q);
+      product.mock({
+        otherUrls: [ "First url", "Second url", "Third url" ]
+      });
+
+      spyOn(product.otherUrls, "splice");
+      spyOn($scope, "otherUrlsChanged");
+      $scope.removeOtherUrl(product, 1);
+
+      expect($scope.otherUrlsChanged).toEqual(true);
+      expect(product.otherUrls.splice).toHaveBeenCalled();
+    });
+
   });
 
 });
