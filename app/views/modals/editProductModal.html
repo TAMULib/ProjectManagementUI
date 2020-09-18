@@ -89,9 +89,26 @@
       results="productForms.getResults()"
       autocomplete="off">
     </validatedinput>
+
+    <div class="form-group other-urls">
+      <label for="otherUrls">Other URLs</label>
+      <div style="margin-bottom: 4px" class="input-group" ng-repeat="url in productToEdit.otherUrls track by $index">
+        <input name="otherUrls" type="text" class="form-control" ng-model="productToEdit.otherUrls[$index]" />
+
+        <span ng-if="$last" class="input-group-addon toggle-href" ng-click="addOtherUrl(productToEdit)">
+          <span class="glyphicon glyphicon-plus"></span>
+        </span>
+
+        <span ng-if="!$last" class="input-group-addon toggle-href" ng-click="removeOtherUrl(productToEdit, $index)">
+          <span class="glyphicon glyphicon-minus"></span>
+        </span>
+
+      </div>
+
+    </div>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-default" ng-click="cancelEditProduct()">Cancel</button>
-    <button type="submit" class="btn btn-success" ng-disabled="(!remoteProjectInfoChanged && !productForms.edit.$dirty) || productForms.edit.$invalid">Update</button>
+    <button type="submit" class="btn btn-success" ng-disabled="(!otherUrlsChanged &&!remoteProjectInfoChanged && !productForms.edit.$dirty) || productForms.edit.$invalid">Update</button>
   </div>
 </form>

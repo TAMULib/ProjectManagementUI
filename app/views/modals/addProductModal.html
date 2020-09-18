@@ -84,6 +84,23 @@
       validations="productForms.validations"
       results="productRepo.getResults()">
     </validatedinput>
+
+    <div class="form-group other-urls">
+      <label for="otherUrls">Other URLs</label>
+      <div style="margin-bottom: 4px" class="input-group" ng-repeat="url in productToCreate.otherUrls track by $index">
+        <input name="otherUrls" type="text" class="form-control" ng-model="productToCreate.otherUrls[$index]" />
+
+        <span ng-if="$last" class="input-group-addon toggle-href" ng-click="addOtherUrl(productToCreate)">
+          <span class="glyphicon glyphicon-plus"></span>
+        </span>
+
+        <span ng-if="!$last" class="input-group-addon toggle-href" ng-click="removeOtherUrl(productToCreate, $index)">
+          <span class="glyphicon glyphicon-minus"></span>
+        </span>
+
+      </div>
+
+    </div>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-default" ng-click="resetCreateProduct()">Cancel</button>

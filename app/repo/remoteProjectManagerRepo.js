@@ -2,7 +2,9 @@ app.repo("RemoteProjectManagerRepo", function RemoteProjectManagerRepo($q, WsApi
 
     this.scaffold = {
         name: '',
-        type: ''
+        type: '',
+        url: '',
+        token: ''
     };
 
     this.getTypes = function () {

@@ -1,5 +1,7 @@
 <div class="management-table" ng-controller="ProductController">
 
+  <alerts seconds="45" channels="products" types="INVALID, ERROR"></alerts>
+
   <button class="btn btn-default view-action-button" ng-click="openModal('#addProductModal')">Add a Product</button>
   <hr />
 
