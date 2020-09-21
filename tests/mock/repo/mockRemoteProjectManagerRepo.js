@@ -30,7 +30,5 @@ angular.module("mock.remoteProjectManagerRepo", []).service("RemoteProjectManage
     return payloadPromise($q.defer());
   };
 
-  repo.getTypeScaffolding = function (type) {};
-
   return repo;
 });
