@@ -58,7 +58,7 @@
                         <span>{{card.number}}</span>
                         <span ng-repeat="assignee in card.assignees">
                           <span class="pull-right avatar" popover-trigger="'mouseenter'" uib-popover="{{assignee.name}}" popover-placement="auto top">
-                            <img src="{{getAvatarUrl(assignee)}}" class="img-circle" alt="Cinque Terre" width="20" height="20">
+                            <img src="{{getAvatarUrl(assignee)}}" class="img-circle" alt="{{assignee.name}}" width="20" height="20">
                           </span>
                         </span>
 
