@@ -123,6 +123,28 @@ app.controller('ProductController', function ($controller, $scope, ApiResponseAc
         $scope.otherUrlsChanged = true;
     };
 
+    $scope.distinctRemoteProjectManagers = function (remoteProjectInfo) {
+      var list = [];
+      var matched = false;
+
+      for (var i in remoteProjectInfo) {
+        matched = false;
+
+        for (var j in list) {
+          if (remoteProjectInfo[i].remoteProjectManager.id === list[j].remoteProjectManager.id) {
+            matched = true;
+            break;
+          }
+        }
+
+        if (!matched) {
+          list.push(remoteProjectInfo[i]);
+        }
+      }
+
+      return list;
+    };
+
     if ($scope.isManager() || $scope.isAdmin()) {
         $scope.remoteProjectManagers = RemoteProjectManagerRepo.getAll();
 

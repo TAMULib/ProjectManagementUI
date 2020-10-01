@@ -5,7 +5,7 @@ var dataProduct1 = {
     remoteProjectManager: {
       id: 1,
       name: "Remote Project Manager 1",
-      type: "VERSION_ONE",
+      type: "GITHUB_MILESTONE",
       url: "url1",
       token: "username1:password1"
     },
@@ -18,8 +18,8 @@ var dataProduct2 = {
   name: "Product 2",
   remoteProjectInfo: [{
     remoteProjectManager: {
-      id: 1,
-      name: "Remote Project Manager 1",
+      id: 2,
+      name: "Remote Project Manager 2",
       type: "VERSION_ONE",
       url: "url2",
       token: "username2:password2"
@@ -35,7 +35,7 @@ var dataProduct3 = {
     remoteProjectManager: {
       id: 1,
       name: "Remote Project Manager 1",
-      type: "VERSION_ONE",
+      type: "GITHUB_MILESTONE",
       url: "url1",
       token: "username1:password1"
     },

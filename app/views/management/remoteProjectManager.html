@@ -10,7 +10,10 @@
       <th class="actions-column text-center">Actions</th>
     </tr>
     <tr ng-repeat="remoteProjectManager in remoteProjectManagers">
-      <td title="'Remote Project Manager'">{{remoteProjectManager.name}}</td>
+      <td title="'Remote Project Manager'">
+        <remote-projects-icon type="{{remoteProjectManager.type}}" class="pull-right"></remote-projects-icon>
+        <span>{{remoteProjectManager.name}}</span>
+      </td>
       <td title="'URL'">{{remoteProjectManager.url}}</td>
       <td class="actions-column text-center" title="'Actions'">
         <span class="glyphicon glyphicon-pencil" title="edit" ng-click="editRemoteProjectManager(remoteProjectManager)"></span>

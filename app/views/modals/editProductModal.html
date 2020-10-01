@@ -39,8 +39,12 @@
       </div>
       <div class="panel-body">
         <ul class="list-group">
-          <li class="list-group-item" ng-repeat="remoteProject in productToEdit.remoteProjectInfo track by remoteProject.scopeId" ng-model="productToEdit.remoteProjectInfo">{{getRemoteProjectByRemoteProjectInfo(remoteProject).name}}
-            <span class="glyphicon glyphicon-trash clickable pull-right" title="Remote Remote Project" ng-click="removeRemoteProjectInfo(productToEdit.remoteProjectInfo, remoteProject)"></span>
+          <li class="list-group-item" ng-repeat="remoteProject in productToEdit.remoteProjectInfo track by remoteProject.scopeId" ng-model="productToEdit.remoteProjectInfo">
+            <span>{{getRemoteProjectByRemoteProjectInfo(remoteProject).name}}</span>
+            <span class="product-rpm-icons pull-right">
+              <remote-projects-icon type="{{remoteProject.remoteProjectManager.type}}" width="14" height="14"></remote-projects-icon>
+              <span class="glyphicon glyphicon-trash clickable pull-right" title="delete" ng-click="removeRemoteProjectInfo(productToEdit.remoteProjectInfo, remoteProject)"></span>
+            </span>
           </li>
         </ul>
       </div>
