@@ -15,9 +15,22 @@
     </tr>
     <tr ng-repeat="product in products | orderBy: 'name'">
       <td title="'Product'">{{product.name}}</td>
-      <td title="'Remote Project Manager'">{{product.remoteProjectManager.name}}</td>
-      <td title="'Remote Project'">{{product.remoteProject.name}}</td>
-      <td title="'Scope Id'">{{product.scopeId}}</td>
+      <td title="'Remote Project Manager'">
+        <div ng-repeat="rpi in distinctRemoteProjectManagers(product.remoteProjectInfo)" class="product-rpm-row">
+          <remote-projects-icon type="{{rpi.remoteProjectManager.type}}" class="pull-right"></remote-projects-icon>
+          <span>{{rpi.remoteProjectManager.name}}</span>
+        </div>
+      </td>
+      <td title="'Remote Project'">
+        <div ng-repeat="rpi in distinctRemoteProjectManagers(product.remoteProjectInfo)" class="product-rpm-row">
+          <div>{{getRemoteProjectByRemoteProjectInfo(rpi).name}}</div>
+        </div>
+      </td>
+      <td title="'Scope Id'">
+        <div ng-repeat="rpi in distinctRemoteProjectManagers(product.remoteProjectInfo)">
+          <div>{{rpi.scopeId}}</div>
+        </div>
+      </td>
       <td class="actions-column text-center" title="'Actions'">
         <span class="glyphicon glyphicon-pencil" title="edit" ng-click="editProduct(product)"></span>
         <span class="glyphicon glyphicon-trash" title="delete" ng-click="confirmDeleteProduct(product)"></span>

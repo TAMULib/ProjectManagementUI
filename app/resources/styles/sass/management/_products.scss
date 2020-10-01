@@ -2,6 +2,20 @@
   cursor: pointer;
 }
 
+.management-table {
+  .product-table {
+    .product-rpm-row {
+      clear: both;
+    }
+  }
+}
+
+.product-rpm-icons {
+  .remote-product-icon {
+    padding: 0px 3px;
+  }
+}
+
 .remote-product-panel {
   margin-top: 20px;
 
@@ -19,5 +33,10 @@
 
   ul {
     margin-bottom: 0;
+  }
+
+  .remote-product-icon {
+    top: -4px;
+    padding-right: 6px;
   }
 }

@@ -99,6 +99,7 @@ describe("controller: ProductController", function () {
       "confirmDeleteProduct",
       "createProduct",
       "deleteProduct",
+      "distinctRemoteProjectManagers",
       "editProduct",
       "getRemoteProjectByRemoteProjectInfo",
       "getRemoteProjectManagerRemoteProjects",
@@ -206,6 +207,28 @@ describe("controller: ProductController", function () {
 
       expect(ProductRepo.delete).toHaveBeenCalledWith(product);
       expect($scope.cancelDeleteProduct).toHaveBeenCalled();
+    });
+
+    it("distinctRemoteProjectManagers should return a distinct list", function () {
+      var response;
+      var rpis = [
+        {
+          scopeId: "0010",
+          remoteProjectManager: dataRemoteProjectManager1
+        },
+        {
+          scopeId: "0020",
+          remoteProjectManager: dataRemoteProjectManager2
+        },
+        {
+          scopeId: "0030",
+          remoteProjectManager: dataRemoteProjectManager1
+        }
+      ]
+
+      response = $scope.distinctRemoteProjectManagers(rpis);
+
+      expect(response.length).toEqual(2);
     });
 
     it("editProduct set the productToEdit and open the modal", function () {
