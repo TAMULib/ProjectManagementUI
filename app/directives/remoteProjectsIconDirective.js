@@ -19,7 +19,7 @@ app.directive('remoteProjectsIcon', function ($controller) {
                 $scope.tooltip = "Github Project";
             } else if ($scope.type === 'VERSION_ONE') {
                 $scope.typeIcon = 'versionone.png';
-                $scope.tooltip = "Versione One";
+                $scope.tooltip = "Version One";
             }
 
             if (angular.isUndefined($scope.width)) {
