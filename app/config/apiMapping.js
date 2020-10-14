@@ -152,12 +152,6 @@ var apiMapping = {
       'controller': 'remote-project-manager',
       'method': 'types/',
       'httpMethod': 'GET'
-    },
-    scaffolding: {
-      'endpoint': '/channel',
-      'controller': 'remote-project-manager',
-      'method': 'scaffolding/:type/',
-      'httpMethod': 'GET'
     }
   },
   Status: {

@@ -34,7 +34,10 @@
                 <tr ng-repeat="sprint in activeSprints" ng-click="select($index)" class="toggle-href" ng-class="{'info': sprint.id === getSelectedSprint().id}">
                   <td>{{sprint.id}}</td>
                   <td>{{sprint.name}}</td>
-                  <td>{{sprint.product}}</td>
+                  <td>
+                    <remote-projects-icon type="{{sprint.type}}" class="pull-right"></remote-projects-icon>
+                    <span>{{sprint.product}}</span>
+                  </td>
                   <td>{{sprint.cards.length}}</td>
                   <td>{{getSprintEstimateTotal(sprint)}}</td>
                 </tr>
@@ -58,7 +61,7 @@
                         <span>{{card.number}}</span>
                         <span ng-repeat="assignee in card.assignees">
                           <span class="pull-right avatar" popover-trigger="'mouseenter'" uib-popover="{{assignee.name}}" popover-placement="auto top">
-                            <img src="{{getAvatarUrl(assignee)}}" class="img-circle" alt="Cinque Terre" width="20" height="20">
+                            <img src="{{getAvatarUrl(assignee)}}" class="img-circle" alt="{{assignee.name}}" width="20" height="20">
                           </span>
                         </span>
 
@@ -102,7 +105,12 @@
               <th>Internal Count</th>
             </tr>
             <tr ng-repeat="product in products | orderBy: '-stats.backlogItemCount'">
-              <td title="'Product'">{{product.name}}</td>
+              <td title="'Product'">
+                <span ng-repeat="rpi in distinctRemoteProjectManagers(product.remoteProjectInfo)" class="product-rpm-icons">
+                  <remote-projects-icon type="{{rpi.remoteProjectManager.type}}" class="pull-right"></remote-projects-icon>
+                </span>
+                <span>{{product.name}}</span>
+              </td>
               <td title="'Total Backlog Items'">{{product.stats.backlogItemCount}}</td>
               <td title="'Feature Count'">{{product.stats.featureCount}}</td>
               <td title="'Defect Count'">{{product.stats.defectCount}}</td>

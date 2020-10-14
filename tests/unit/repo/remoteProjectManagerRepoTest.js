@@ -36,8 +36,7 @@ describe("service: RemoteProjectManagerRepo", function () {
 
   describe("Is the repo method", function () {
     var methods = [
-      "getTypes",
-      "getTypeScaffolding"
+      "getTypes"
     ];
 
     var repoMethodExists = function (key) {
@@ -55,13 +54,6 @@ describe("service: RemoteProjectManagerRepo", function () {
   describe("Does the repo method", function () {
     it("getTypes work as expected", function () {
       var response = repo.getTypes();
-      $scope.$digest();
-
-      // TODO
-    });
-
-    it("getTypeScaffolding work as expected", function () {
-      var response = repo.getTypeScaffolding();
       $scope.$digest();
 
       // TODO
