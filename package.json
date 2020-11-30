@@ -1,7 +1,7 @@
 {
   "name": "product-management",
   "private": false,
-  "version": "0.2.0",
+  "version": "1.0.1",
   "description": "A UI for managing products",
   "repository": "https://github.com/TAMULib/ProductManagementUI.git",
   "license": "MIT",
