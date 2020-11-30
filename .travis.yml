@@ -4,7 +4,7 @@ node_js:
   - "8"
 
 addons:
-  - chrome: stable
+  chrome: stable
 
 services:
   - xvfb
@@ -15,5 +15,6 @@ before_script:
   - sleep 1 # give server time to start
 
 script:
+  - npm install node-sass
   - npm run test-ci
   - grunt coverage
