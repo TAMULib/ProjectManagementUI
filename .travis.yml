@@ -1,10 +1,7 @@
 language: node_js
 
 node_js:
-  - "8"
-
-env:
-  SKIP_SASS_BINARY_DOWNLOAD_FOR_CI=true 
+  - "10"
 
 addons:
   chrome: stable
