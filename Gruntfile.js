@@ -4,8 +4,7 @@ module.exports = function (grunt) {
 
 	// Configurable paths
 	var build = {
-		app: 'app',
-		templates: 'src/main/resources/templates'
+		app: 'app'
 	};
 
 
@@ -58,13 +57,11 @@ module.exports = function (grunt) {
 
 					'node_modules/angular/angular.min.js',
 
-					'node_modules/angular-sanitize/angular-sanitize.min.js',
 					'node_modules/angular-route/angular-route.min.js',
 					'node_modules/angular-loader/angular-loader.min.js',
+					'node_modules/angular-sanitize/angular-sanitize.min.js',
 					'node_modules/angular-messages/angular-messages.min.js',
 					'node_modules/angular-mocks/angular-mocks.js',
-
-					'node_modules/ng-sortable/dist/ng-sortable.min.js',
 
 					'node_modules/ng-table/bundles/ng-table.min.js',
 
@@ -100,7 +97,12 @@ module.exports = function (grunt) {
 					'node_modules/@wvr/core/app/directives/userDirective.js',
 					'node_modules/@wvr/core/app/directives/modalDirective.js',
 					'node_modules/@wvr/core/app/directives/alertDirective.js',
+					'node_modules/@wvr/core/app/directives/accordionDirective.js',
+					'node_modules/@wvr/core/app/directives/tabsDirective.js',
+					'node_modules/@wvr/core/app/directives/tooltipDirective.js',
+
 					'node_modules/@wvr/core/app/directives/validationMessageDirective.js',
+					'node_modules/@wvr/core/app/directives/validatedInputDirective.js',
 					'node_modules/@wvr/core/app/directives/validatedSelectDirective.js',
 					'node_modules/@wvr/core/app/directives/validatedTextAreaDirective.js',
 
@@ -167,7 +169,7 @@ module.exports = function (grunt) {
 		},
 
 		usemin: {
-			html: '<%= build.templates %>/index.html',
+			html: '<%= build.app %>/index.html',
 			options: {
 				assetsDirs: ['<%= build.app %>/resources/scripts']
 			}
