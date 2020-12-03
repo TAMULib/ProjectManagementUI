@@ -1,7 +1,7 @@
 {
   "name": "product-management",
   "private": false,
-  "version": "0.2.0",
+  "version": "1.0.1",
   "description": "A UI for managing products",
   "repository": "https://github.com/TAMULib/ProductManagementUI.git",
   "license": "MIT",
@@ -20,9 +20,9 @@
     "start:dev": "wvr server -b /products --uid product-management-webserver"
   },
   "dependencies": {
+    "@wvr/core": "2.2.0",
     "ng-file-upload": "12.2.13",
-    "ng-table": "3.0.1",
-    "@wvr/core": "2.0.7"
+    "ng-table": "3.0.1"
   },
   "devDependencies": {
     "grunt": "1.0.3",
@@ -47,7 +47,7 @@
     "karma-jasmine": "2.0.1",
     "karma-junit-reporter": "2.0.1",
     "karma-ng-html2js-preprocessor": "1.0.0",
-    "node-sass": "4.13.0",
+    "node-sass": "5.0.0",
     "protractor": "5.4.2"
   }
 }

@@ -1,6 +1,6 @@
 var appConfig = {
 
-    'version': '1.0.0',
+    'version': '1.0.1',
 
     'allowAnonymous': true,
 
@@ -8,7 +8,7 @@ var appConfig = {
 
     // Set this to the webService if mocking AuthService
 
-    'authService': 'https://labs.library.tamu.edu/auth3',
+    'authService': 'https://labs.library.tamu.edu/authfix',
     'webService': 'http://localhost:9001',
 
     'storageType': 'session',
