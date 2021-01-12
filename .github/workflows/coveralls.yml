@@ -51,10 +51,10 @@ jobs:
           grunt coverage
           mv ./coverage/*/* ./coverage/ # move coverage data outside of the browser specific path.
 
-      - name: "To Coveralls Node (build sage-${{ github.run_number }}-${{ matrix.language_engine }})"
+      - name: "To Coveralls Node (build projectmanagementui-${{ github.action }}-${{ github.run_number }}-node
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.github_token }}
           flag-name: projectmanagementui-${{ github.action }}-${{ github.run_number }}-node
           parallel: false
-          path-to-lcov: './src/main/webapp/coverage/lcov.info'
+          path-to-lcov: './coverage/lcov.info'
