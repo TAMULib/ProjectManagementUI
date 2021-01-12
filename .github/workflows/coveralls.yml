@@ -24,8 +24,7 @@ jobs:
         with:
           path: ~/.npm
           key: ${{ runner.os }}-projectmanagementui-cache-node-${{ hashFiles('**/package.json', '**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-projectmanagementui-cache-node-${{ hashFiles('**/package.json', '**/package-lock.json') }}
+          restore-keys: ${{ runner.os }}-projectmanagementui-cache-node-${{ hashFiles('**/package.json', '**/package-lock.json') }}
 
       - name: "Setup Node"
         uses: actions/setup-node@v2
