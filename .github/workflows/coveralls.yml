@@ -54,7 +54,7 @@ jobs:
       - name: "To Coveralls Node (build sage-${{ github.run_number }}-${{ matrix.language_engine }})"
         uses: coverallsapp/github-action@master
         with:
-          github_token: ${{ secrets.github_token }}
+          github-token: ${{ secrets.github_token }}
           flag-name: projectmanagementui-${{ github.action }}-${{ github.run_number }}-node
           parallel: false
           path-to-lcov: './src/main/webapp/coverage/lcov.info'
