@@ -51,7 +51,7 @@ jobs:
           grunt coverage
           mv ./coverage/*/* ./coverage/ # move coverage data outside of the browser specific path.
 
-      - name: "To Coveralls Node (build projectmanagementui-${{ github.action }}-${{ github.run_number }}-node
+      - name: "To Coveralls Node (build projectmanagementui-${{ github.action }}-${{ github.run_number }}-node)"
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.github_token }}
