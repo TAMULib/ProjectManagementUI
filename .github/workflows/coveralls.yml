@@ -3,11 +3,10 @@ name: TAMULib ProjectManagementUI Coveralls Node
 on:
   push:
     branches:
+      - $default_branch
       - sprint*-staging
 
   pull_request:
-    branches:
-      - sprint*-staging
 
   workflow_dispatch:
 
@@ -15,25 +14,19 @@ jobs:
   coveralls:
     runs-on: ubuntu-latest
 
-
-    # Checkout Repository Code
     steps:
       - uses: actions/checkout@v2
 
-
-      # Setup Caches
-      - name: Cache Node Dependencies
+      - name: "Cache Node Dependencies"
         uses: actions/cache@v2
         env:
           cache-name: projectmanagementui-cache-node-dependencies
         with:
           path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package.json', '**/package-lock.json') }}
+          key: ${{ runner.os }}-projectmanagementui-cache-node-${{ hashFiles('**/package.json', '**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-${{ hashFiles('**/package.json', '**/package-lock.json') }}
+            ${{ runner.os }}-projectmanagementui-cache-node-${{ hashFiles('**/package.json', '**/package-lock.json') }}
 
-
-      # Setup Java and Node
       - name: "Setup Node"
         uses: actions/setup-node@v2
         with:
@@ -42,25 +35,26 @@ jobs:
       - name: "Install Node Dependencies"
         run: npm install
 
+      - name: "Starting Service for Node"
+        run: |
+          npm start > /dev/null &
+          npm run update-webdriver
+          sleep 1 # give server time to start
 
-      # Run Tests
       - name: "Running Tests for Node"
         env:
           COVERALLS_BUILD_NUMBER: projectmanagementui-${{ github.action }}-${{ github.run_number }}-node
           COVERALLS_REPO_TOKEN: ${{ secrets.coveralls_repo_token }}
           COVERALLS_PARALLEL: false
         run: |
-          npm start > /dev/null &
-          npm run update-webdriver
-          sleep 1 # give server time to start
           npm run test-ci
           grunt coverage
+          mv ./coverage/*/* ./coverage/ # move coverage data outside of the browser specific path.
 
-
-      # Initiate Coveralls Parallel
-      #- name: Coveralls (build projectmanagementui-${{ github.run_number }}-node)
-      #  uses: coverallsapp/github-action@master
-      #  with:
-      #    github_token: ${{ secrets.github_token }}
-      #    flag-name: projectmanagementui-${{ github.run_number }}-node
-      #    parallel: false
+      - name: "To Coveralls Node (build sage-${{ github.run_number }}-${{ matrix.language_engine }})"
+        uses: coverallsapp/github-action@master
+        with:
+          github_token: ${{ secrets.github_token }}
+          flag-name: projectmanagementui-${{ github.action }}-${{ github.run_number }}-node
+          parallel: false
+          path-to-lcov: './src/main/webapp/coverage/lcov.info'
