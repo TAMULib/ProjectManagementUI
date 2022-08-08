@@ -18,7 +18,7 @@ const config = {
   copy: [
     {
       from: './node_modules/bootstrap/fonts',
-      to: './resources/styles/bootstrap/dist/fonts'
+      to: './resources/fonts'
     },
     {
       from: './node_modules/@wvr/core/app/resources/images',
@@ -57,11 +57,15 @@ const config = {
     },
     {
       from: './node_modules/html5-boilerplate/dist/css/normalize.css',
-      to: './resources/styles/html5-boilerplate/dist/css/normalize.css',
+      to: './resources/styles/normalize.css',
     },
     {
-      from: './node_modules/bootstrap/dist/css/bootstrap.css',
-      to: './resources/styles/bootstrap/dist/css/bootstrap.css',
+      from: './node_modules/bootstrap/dist/css/bootstrap.min.css',
+      to: './resources/styles/bootstrap.min.css',
+    },
+    {
+      from: './node_modules/bootstrap/dist/css/bootstrap.min.css.map',
+      to: './resources/styles/bootstrap.min.css.map',
     },
   ],
   entry: {
@@ -81,6 +85,9 @@ const config = {
       './node_modules/ng-table/bundles/ng-table.js',
       './node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js',
       './node_modules/@wvr/core/app/config/coreConfig.js',
+      './node_modules/@wvr/core/app/components/version/version.js',
+      './node_modules/@wvr/core/app/components/version/version-directive.js',
+      './node_modules/@wvr/core/app/components/version/interpolate-filter.js',
       './node_modules/@wvr/core/app/core.js',
       './node_modules/@wvr/core/app/setup.js',
       './node_modules/@wvr/core/app/config/coreRuntime.js',
