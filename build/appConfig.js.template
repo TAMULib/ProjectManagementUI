@@ -8,10 +8,10 @@ var appConfig = {
 
     // Set this to the webService if mocking AuthService
 
-    'authService': 'https://labs.library.tamu.edu/authfix',
-    'webService': 'http://localhost:9001',
+    'authService': '${AUTH_SERVICE_URL}',
+    'webService': '${WEB_SERVICE_URL}',
 
-    'storageType': 'session',
+    'stompDebug': ${STOMP_DEBUG},
 
     'logging': {
         'log': true,
