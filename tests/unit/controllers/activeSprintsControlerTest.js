@@ -1,9 +1,11 @@
 describe("controller: ActiveSprintsController", function () {
-  var $q, $scope, WsApi, controller;
+  var $q, $scope, WsApi, controller, MockedUser, WsApi;
 
   var initializeVariables = function () {
     inject(function (_$q_, _WsApi_) {
       $q = _$q_;
+
+      MockedUser = new mockUser($q);
 
       WsApi = _WsApi_;
     });
@@ -35,6 +37,13 @@ describe("controller: ActiveSprintsController", function () {
     module("app");
     module("mock.activeSprintsService");
     module("mock.statusRepo");
+    module("mock.user", function ($provide) {
+      var User = function () {
+        return MockedUser;
+      };
+      $provide.value("User", User);
+    });
+    module("mock.userService");
 
     installPromiseMatchers();
     initializeVariables();
@@ -107,7 +116,7 @@ describe("controller: ActiveSprintsController", function () {
         "name": "Ryan Laddusaw",
         "avatar": "no_avatar.png"
       });
-      expect(avatarUrl).toEqual("http://localhost:9001/images/no_avatar.png");
+      expect(avatarUrl).toEqual("http://localhost:9001/products/images/no_avatar.png");
     });
 
     it("getHtmlContent get trusted content", function () {

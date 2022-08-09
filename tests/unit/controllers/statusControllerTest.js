@@ -1,5 +1,5 @@
 describe("controller: StatusController", function () {
-  var $q, $scope, $templateCache, MockedStatus, StatusRepo, WsApi, controller;
+  var $q, $scope, $templateCache, MockedStatus, StatusRepo, MockedUser, WsApi, controller;
 
   var initializeVariables = function () {
     inject(function (_$compile_, _$q_, _$templateCache_, _StatusRepo_, _WsApi_) {
@@ -8,6 +8,7 @@ describe("controller: StatusController", function () {
       $templateCache = _$templateCache_;
 
       MockedStatus = new mockStatus($q);
+      MockedUser = new mockUser($q);
 
       StatusRepo = _StatusRepo_;
       WsApi = _WsApi_;
@@ -45,6 +46,13 @@ describe("controller: StatusController", function () {
     });
     module("mock.statusRepo");
     module("mock.wsApi");
+    module("mock.user", function ($provide) {
+      var User = function () {
+        return MockedUser;
+      };
+      $provide.value("User", User);
+    });
+    module("mock.userService");
 
     installPromiseMatchers();
     initializeVariables();

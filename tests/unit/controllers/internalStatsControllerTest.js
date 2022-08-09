@@ -1,5 +1,5 @@
 describe("controller: InternalStatsController", function () {
-  var $q, $scope, InternalRequestRepo, InternalStatsService, WsApi, controller;
+  var $q, $scope, InternalRequestRepo, InternalStatsService, MockedUser, WsApi, controller;
 
   var initializeVariables = function () {
     inject(function (_$compile_, _$q_, _InternalRequestRepo_, _InternalStatsService_, _WsApi_) {
@@ -7,6 +7,8 @@ describe("controller: InternalStatsController", function () {
 
       InternalStatsService = _InternalStatsService_;
       InternalRequestRepo = _InternalRequestRepo_;
+
+      MockedUser = new mockUser($q);
 
       WsApi = _WsApi_;
     });

@@ -23,6 +23,13 @@ describe("service: RemoteProjectManagerRepo", function () {
     module("core");
     module("app");
     module("mock.wsApi");
+    module("mock.user", function ($provide) {
+      var User = function () {
+        return MockedUser;
+      };
+      $provide.value("User", User);
+    });
+    module("mock.userService");
 
     initializeVariables();
     initializeRepo();

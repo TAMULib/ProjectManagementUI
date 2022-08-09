@@ -1,11 +1,11 @@
 describe("service: InternalRequestsService", function () {
-  var $q, $rootScope, $scope, InternalRequestRepo, WsApi, service;
+  var $q, $rootScope, $scope, InternalRequestRepo, MockedUser, WsApi, service;
 
   var initializeVariables = function (settings) {
     inject(function (_$q_, _$rootScope_, _$timeout_, _InternalRequestRepo_, _WsApi_) {
       $q = _$q_;
       $rootScope = _$rootScope_;
-
+      MockedUser = new mockUser($q);
       InternalRequestRepo = _InternalRequestRepo_;
       WsApi = _WsApi_;
     });
@@ -31,6 +31,13 @@ describe("service: InternalRequestsService", function () {
     module("mock.internalRequestRepo");
     module("mock.product");
     module("mock.wsApi");
+    module("mock.user", function ($provide) {
+      var User = function () {
+        return MockedUser;
+      };
+      $provide.value("User", User);
+    });
+    module("mock.userService");
 
     initializeVariables();
     initializeService();
