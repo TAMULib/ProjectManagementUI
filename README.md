@@ -35,6 +35,6 @@ Any questions concerning Project Management UI can be directed to [helpdesk@libr
 [coverage-badge]: https://coveralls.io/repos/github/TAMULib/ProjectManagementUI/badge.svg
 [tamu-library]: http://library.tamu.edu
 [app-repo]: https://github.com/TAMULib/ProjectManagement
-[deployment-guide]: https://github.com/TAMULib/ProjectManagementUI/main/blob/main/DEPLOYING.md
-[contributors-docs]: https://github.com/TAMULib/ProjectManagementUI/blob/main/CONTRIBUTING.md
+[deployment-guide]: DEPLOYING.md
+[contributors-docs]: CONTRIBUTING.md
 [helpdesk-email]: mailto:helpdesk@library.tamu.edu
