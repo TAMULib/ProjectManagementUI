@@ -1,9 +1,12 @@
 describe("directive: remoteProjectsIcon", function () {
-  var $compile, $q, $scope, directive, element;
+  var $compile, $q, $scope, directive, element, MockedUser, WsApi;
 
   var initializeVariables = function () {
     inject(function (_$q_, _$compile_) {
       $q = _$q_;
+
+      MockedUser = new mockUser($q);
+
       $compile = _$compile_;
     });
   };
@@ -26,6 +29,13 @@ describe("directive: remoteProjectsIcon", function () {
     module("core");
     module("app");
     module("templates");
+    module("mock.user", function ($provide) {
+      var User = function () {
+        return MockedUser;
+      };
+      $provide.value("User", User);
+    });
+    module("mock.userService");
 
     installPromiseMatchers();
     initializeVariables();
