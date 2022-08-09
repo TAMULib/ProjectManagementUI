@@ -94,21 +94,6 @@ describe("controller: UserRepoController", function () {
   });
 
   describe("Does the scope method", function () {
-    // it("allowableRoles return a list of allowed roles", function () {
-    //   var roles;
-    //   roles = $scope.allowableRoles();
-    //   expect(roles).toBeDefined();
-    //   initializeController({role: "ROLE_MANAGER"});
-    //   roles = $scope.allowableRoles("ROLE_ADMIN");
-    //   expect(roles).toBeDefined();
-    //   roles = $scope.allowableRoles();
-    //   expect(roles).toBeDefined();
-    //   roles = $scope.allowableRoles("ROLE_USER");
-    //   expect(roles).toBeDefined();
-    //   initializeController({role: "ROLE_USER"});
-    //   expect($scope.allowableRoles).not.toBeDefined();
-    // });
-
     it("updateRole update a users role", function () {
       var originalUser2 = angular.copy(dataUser2);
       dataUser2.role = "ROLE_NEW";
