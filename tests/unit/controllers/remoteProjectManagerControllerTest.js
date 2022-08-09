@@ -1,5 +1,5 @@
 describe("controller: RemoteProjectManagerController", function () {
-  var $compile, $q, $scope, $templateCache, MockedRemoteProjectManager, RemoteProjectManagerRepo, WsApi, controller;
+  var $compile, $q, $scope, $templateCache, MockedRemoteProjectManager, RemoteProjectManagerRepo, MockedUser, WsApi, controller;
 
   var initializeVariables = function () {
     inject(function (_$compile_, _$q_, _$templateCache_, _RemoteProjectManagerRepo_, _WsApi_) {
@@ -8,6 +8,7 @@ describe("controller: RemoteProjectManagerController", function () {
       $templateCache = _$templateCache_;
 
       MockedRemoteProjectManager = new mockRemoteProjectManager($q);
+      MockedUser = new mockUser($q);
 
       RemoteProjectManagerRepo = _RemoteProjectManagerRepo_;
       WsApi = _WsApi_;
@@ -47,6 +48,13 @@ describe("controller: RemoteProjectManagerController", function () {
       $provide.value("RemoteProjectManager", RemoteProjectManager);
     });
     module("mock.remoteProjectManagerRepo");
+    module("mock.user", function ($provide) {
+      var User = function () {
+        return MockedUser;
+      };
+      $provide.value("User", User);
+    });
+    module("mock.userService");
     module("mock.wsApi");
 
     installPromiseMatchers();
