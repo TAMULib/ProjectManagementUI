@@ -19,7 +19,7 @@ This process is further described in the [Deployment Guide][deployment-guide].
 
 ## Additional Resources
 
-- [Contributors Documentation][contributors-docs]
+- [Contributors Documentation][contribute-guide]
 - [Deployment Documentation][deployment-guide]
 
 Please feel free to file any issues concerning Project Management UI to the issues section of the repository.
@@ -36,5 +36,5 @@ Any questions concerning Project Management UI can be directed to [helpdesk@libr
 [tamu-library]: http://library.tamu.edu
 [app-repo]: https://github.com/TAMULib/ProjectManagement
 [deployment-guide]: DEPLOYING.md
-[contributors-docs]: CONTRIBUTING.md
+[contribute-guide]: CONTRIBUTING.md
 [helpdesk-email]: mailto:helpdesk@library.tamu.edu
