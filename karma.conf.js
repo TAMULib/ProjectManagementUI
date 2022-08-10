@@ -3,7 +3,7 @@ module.exports = function (config) {
 
     preprocessors: {
       'app/**/*.js': 'coverage',
-      'app/**/*.html': ['ng-html2js']
+      'app/**/*.html': ['ng-html2js'],
     },
 
     reporters: ['progress', 'coverage', 'coveralls'],
@@ -24,10 +24,10 @@ module.exports = function (config) {
       'node_modules/angular-loader/angular-loader.js',
       'node_modules/angular-messages/angular-messages.js',
       'node_modules/angular-mocks/angular-mocks.js',
-      'node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js',
-      'node_modules/ng-table/bundles/ng-table.js',
       'node_modules/ng-file-upload/dist/ng-file-upload-shim.js',
       'node_modules/ng-file-upload/dist/ng-file-upload.js',
+      'node_modules/ng-table/bundles/ng-table.js',
+      'node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js',
       'node_modules/jasmine-promise-matchers/dist/jasmine-promise-matchers.js',
 
       'node_modules/@wvr/core/app/config/coreConfig.js',
@@ -35,35 +35,32 @@ module.exports = function (config) {
       'node_modules/@wvr/core/app/core.js',
       'node_modules/@wvr/core/app/**/*.js',
 
-      "tests/testSetup.js",
+      'tests/testSetup.js',
 
       'app/app.js',
       'app/config/runTime.js',
+      'app/components/**/*.js',
+      'app/constants/**/*.js',
       'app/controllers/**/*.js',
       'app/directives/**/*.js',
-      'app/services/**/*.js',
+      'app/filters/**/*.js',
       'app/model/**/*.js',
       'app/repo/**/*.js',
+      'app/services/**/*.js',
       'app/**/*.html',
 
       'tests/core/**/*.js',
-      'tests/mock/**/*.js',
-      'tests/unit/**/*.js'
+      'tests/mock/**/mock*.js',
+      'tests/unit/**/*Test.js',
     ],
 
-    failOnEmptyTestSuite: false,
-
     autoWatch: true,
+
+    failOnEmptyTestSuite: false,
 
     frameworks: ['jasmine'],
 
     browsers: ['ChromeHeadless'],
-
-    customLaunchers: {
-      ChromeHeadlessNoSandbox: {
-        base: 'ChromeHeadless'
-      }
-    },
 
     plugins: [
       'karma-chrome-launcher',
@@ -72,22 +69,22 @@ module.exports = function (config) {
       'karma-firefox-launcher',
       'karma-jasmine',
       'karma-junit-reporter',
-      'karma-ng-html2js-preprocessor'
+      'karma-ng-html2js-preprocessor',
     ],
 
     junitReporter: {
       outputFile: 'test_out/unit.xml',
-      suite: 'unit'
+      suite: 'unit',
     },
 
     ngHtml2JsPreprocessor: {
       stripPrefix: 'app/',
-      moduleName: 'templates'
+      moduleName: 'templates',
     },
 
     coverageReporter: {
       type: 'lcov',
-      dir: 'coverage/'
+      dir: 'coverage/',
     }
 
   });
