@@ -1,5 +1,5 @@
 <a name="readme-top"></a>
-# Contributing To Project Management UI
+# Contributing to Project Management UI
 
 Though *Project Management UI* is developed and maintained by Texas A&M University Libraries, we welcome community contributions.
 Involvement in *Project Management UI* can take many forms:
