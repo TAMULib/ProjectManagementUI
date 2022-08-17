@@ -17,7 +17,7 @@ The **development** deployment can also use `docker-compose` in the same way.
 <div align="right">(<a href="#readme-top">back to top</a>)</div>
 
 
-## Development Deployment using **Docker**
+## Development Deployment using Docker
 
 To manually use `docker` rather than `docker-compose`, run the following:
 
@@ -45,9 +45,9 @@ The host system affects the network being used and is different from **Windows**
 <div align="right">(<a href="#readme-top">back to top</a>)</div>
 
 
-## Development Deployment using **NPM**
+## Development Deployment using NPM
 
-Manual installation can be summed up by running:
+Manual deployment can be summed up by running:
 
 ```shell
 npm install
@@ -91,6 +91,7 @@ The advantage of this method of configuration is that of preserving the changes 
 There is only a small section that should be changed.
 
 The `.wvr/build-config.js` file has only a single section of interest and might look something like this:
+
 ```js
     {
       from: './build/appConfig.js.template',
@@ -98,13 +99,15 @@ The `.wvr/build-config.js` file has only a single section of interest and might 
       transform(content) {
         return content
           .toString()
-          .replace('${STOMP_DEBUG}', 'false')
+          .replace('${AUTH_STRATEGY}', 'weaverAuth')
           .replace('${AUTH_SERVICE_URL}', 'https://labs.library.tamu.edu/authfix')
-          .replace('${WEB_SERVICE_URL}', 'http://localhost:9001/products');
+          .replace('${STOMP_DEBUG}', 'false')
+          .replace('${AVALON_URL}', 'avalon-pre.library.tamu.edu:443');
       },
     },
 ```
-In the above example snippet, only the lines containing `'${STOMP_DEBUG}'`, `'${AUTH_SERVICE_URL}'`, and `'${WEB_SERVICE_URL}'` should be changed.
+
+In the above example snippet, only the lines containing `'${STOMP_DEBUG}'`, `'${AUTH_SERVICE_URL}'`, `'${WEB_SERVICE_URL}'`, and `'${AVALON_URL}'` should be changed.
 For example `'http://localhost:9001/products'` could be changed to `'http://localhost:8181/products'` (changing the port number from 9001 to 8181).
 
 Once this is done all of the steps from *Development Deployment using NPM* above can be followed.
