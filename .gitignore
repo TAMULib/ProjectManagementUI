@@ -1,18 +1,60 @@
-logs/*
+### Git ###
 !.gitkeep
-.coveralls.yml
-coverage/
-dist/
-node_modules/
-app/node_modules
-tmp
-.tmp/
+
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
 .project
-.DS_Store
+.settings
+.springBeans
+.sts4-cache
+
+
+### IntelliJ IDEA ###
 .idea
+*.iws
+*.iml
+*.ipr
+
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+
+/.nb-gradle/
+
+
+### VS Code ###
+.vscode/
+
+dump.rdb
+
+
+### OS Specific ###
+.DS_Store
+.tmp/
+
+tmp/
+
+
+### Node / NPM ###
+coverage/
+logs/
+node_modules/
+
+.npmrc
+
 npm-debug.log
-.sass-cache/
-app/resources/styles/*
-!app/resources/styles/sass/
-app/resources/scripts/*
-!app/resources/scripts/vendor/
+package-lock.json
+
+
+### Weaver ###
+dist/
+
+
+### Project Specific ###
+
