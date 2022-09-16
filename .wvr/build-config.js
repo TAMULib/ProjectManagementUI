@@ -45,7 +45,7 @@ const config = {
         return content
           .toString()
           .replace('${STOMP_DEBUG}', 'false')
-          .replace('${AUTH_SERVICE_URL}', 'https://labs.library.tamu.edu/authfix')
+          .replace('${AUTH_SERVICE_URL}', 'https://labs.library.tamu.edu/auth/2x')
           .replace('${WEB_SERVICE_URL}', 'http://localhost:9001/products');
       },
     },
