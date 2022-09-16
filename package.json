@@ -1,7 +1,7 @@
 {
   "name": "product-management",
   "private": false,
-  "version": "1.0.1",
+  "version": "1.0.2-rc.1",
   "description": "A UI for managing products",
   "repository": "https://github.com/TAMULib/ProductManagementUI.git",
   "license": "MIT",
@@ -20,7 +20,7 @@
     "start": "wvr server --port 8080"
   },
   "dependencies": {
-    "@wvr/core": "2.2.2-rc.8",
+    "@wvr/core": "2.2.2-rc.9",
     "ng-table": "3.0.1"
   },
   "devDependencies": {

@@ -15,6 +15,12 @@ const config = {
     module: false
   },
 
+  stats: {},
+
+  client: {
+    overlay: false,
+  },
+
   copy: [
     {
       from: './node_modules/bootstrap/fonts',
