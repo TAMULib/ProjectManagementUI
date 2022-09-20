@@ -1,10 +1,14 @@
 {
   "name": "product-management",
   "private": false,
-  "version": "1.0.1",
+  "version": "1.0.2-rc.1",
   "description": "A UI for managing products",
   "repository": "https://github.com/TAMULib/ProductManagementUI.git",
   "license": "MIT",
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
   "scripts": {
     "install-dev-local": "npm install --registry http://localhost:4873",
     "install-dev-docker-host": "npm install --registry http://host.docker.internal:4873",
@@ -20,7 +24,7 @@
     "start": "wvr server --port 8080"
   },
   "dependencies": {
-    "@wvr/core": "2.2.2-rc.8",
+    "@wvr/core": "2.2.2-rc.9",
     "ng-table": "3.0.1"
   },
   "devDependencies": {
