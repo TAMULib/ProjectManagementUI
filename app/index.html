@@ -37,8 +37,7 @@
 
   <!-- Content placed here will appear on every page -->
   <main>
-
-    <custom-header title="Product Management" home="/products/" login="login()" anonymous="isAnonymous()"></custom-header>
+    <tl-header page-title="Product Management"></tl-header>
 
     <alerts types="WARNING, ERROR"></alerts>
     <alerts seconds="45" channels="auth/register" types="SUCCESS"></alerts>
@@ -81,10 +80,13 @@
     </div>
   </main>
 
-  <tamufooter></tamufooter>
+  <tl-footer></tl-footer>
+  <tl-themes active-theme="tamu"></tl-themes>
 
   <script src="appConfig.js"></script>
   <script src="app.bundle.js"></script>
+
+  <script src="https://api.library.tamu.edu/tl-components/2x/tl-components.js"></script>
 
   <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
   <script>
