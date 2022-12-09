@@ -116,7 +116,7 @@ describe("controller: ActiveSprintsController", function () {
         "name": "Ryan Laddusaw",
         "avatar": "no_avatar.png"
       });
-      expect(avatarUrl).toEqual("http://localhost:9001/products/images/no_avatar.png");
+      expect(avatarUrl).toEqual("http://localhost:9000/products/images/no_avatar.png");
     });
 
     it("getHtmlContent get trusted content", function () {
