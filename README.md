@@ -28,7 +28,7 @@ Please feel free to file any issues concerning *Project Management UI* to the is
 
 Any questions concerning *Project Management UI* can be directed to helpdesk@library.tamu.edu.
 
-Copyright © 2022 Texas A&M University Libraries under the [MIT License][license].
+Copyright © 2022-2025 Texas A&M University Libraries under the [MIT license][LICENSE].
 
 <div align="right">(<a href="#readme-top">back to top</a>)</div>
 
